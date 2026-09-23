@@ -6,3 +6,10 @@ Technical: Offline-first
 Accessibility: 200%+ text scaling
 
 Features: Medication schedule, reminders, logging, symptom tracking, doctor reports, large text, high contrast, voice reminders.
+
+Team members:
+Amol Bhatia
+
+Setup Instructions: 
+
+
