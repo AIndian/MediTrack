@@ -1,0 +1,51 @@
+name: Flutter checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Install the pinned Flutter SDK
+        shell: bash
+        run: |
+          git clone --depth 1 --branch "$(cat .flutter-version)" https://github.com/flutter/flutter.git "$RUNNER_TEMP/flutter"
+          echo "$RUNNER_TEMP/flutter/bin" >> "$GITHUB_PATH"
+      - name: Format, analyze, test, enforce coverage and build web
+        run: python tool/verify.py --web
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage
+          path: |
+            coverage/lcov.info
+            reports/coverage.html
+            reports/coverage-summary.txt
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload web build
+        uses: actions/upload-artifact@v7
+        with:
+          name: meditrack-web
+          path: build/web/
+          if-no-files-found: error
+          retention-days: 14

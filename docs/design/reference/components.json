@@ -1,0 +1,578 @@
+{
+  "components": [
+    {
+      "name": "Button / Primary",
+      "family": "Buttons",
+      "variants": [
+        "default",
+        "loading",
+        "success",
+        "destructive"
+      ],
+      "anatomy": "Filled primary container, optional leading 24-unit icon, Label text",
+      "dimensions": "min-height 56; min-width 56; full width for main phone action",
+      "padding": "16 horizontal, 16 vertical, 8 icon gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Save medication, button",
+      "behavior": "Use one primary action per action group. Activate with Enter/Space. Loading retains text and reserves icon space; announce Saving. Do not submit twice."
+    },
+    {
+      "name": "Button / Secondary",
+      "family": "Buttons",
+      "variants": [
+        "default"
+      ],
+      "anatomy": "Surface container, 2-unit secondary boundary, secondary Label",
+      "dimensions": "min-height 56; min-width 56",
+      "padding": "16 horizontal, 16 vertical, 8 icon gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Edit schedule, button",
+      "behavior": "Use secondary color for boundary and text; hover/pressed use surfaceHover/surfacePressed. Pair with primary only when choices are clear."
+    },
+    {
+      "name": "Button / Text",
+      "family": "Buttons",
+      "variants": [
+        "default"
+      ],
+      "anatomy": "Primary Label on surface; underline on pointer hover",
+      "dimensions": "min-height 48; preferred 56; min-width 48",
+      "padding": "12 horizontal, 12 vertical",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Cancel, button",
+      "behavior": "No boundary is required for the visible text action; text-to-surface passes 4.5. Full padded area is tappable. Never present destructive action as an ambiguous text link."
+    },
+    {
+      "name": "Button / Icon",
+      "family": "Buttons",
+      "variants": [
+        "default"
+      ],
+      "anatomy": "24-unit icon inside 56-unit surface container, optional border",
+      "dimensions": "56x56 preferred; 48x48 minimum",
+      "padding": "16 for preferred target; at least 12 around 24-unit icon",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Back, button; Add medication, button; Close dialog, button",
+      "behavior": "Supply an explicit accessible name. Add tooltip for mouse/keyboard. Critical actions use a visible text label beside the icon. Decorative duplicate icons are hidden from screen readers."
+    },
+    {
+      "name": "Input / Text field",
+      "family": "Form inputs",
+      "variants": [
+        "empty",
+        "filled",
+        "required",
+        "error",
+        "read only"
+      ],
+      "anatomy": "Persistent label, surface field, text, 2-unit border, helper/error message",
+      "dimensions": "min-height 56; content-driven height",
+      "padding": "16 horizontal, 16 vertical; 8 label and helper gaps",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it.",
+        "error": "error border and icon plus plain-language error text; error text uses error on surface. Never clear entered data."
+      },
+      "accessibilityLabel": "Medication name, text field, required",
+      "behavior": "Use visible labels, appropriate keyboard/input type, autocomplete only where accurate, and explicit instructions. Error associates message with field and sets invalid. After an invalid Save, move focus first to a linked error summary that identifies each problem; each summary link moves focus to its invalid field. Preserve entered values."
+    },
+    {
+      "name": "Input / Dropdown",
+      "family": "Form inputs",
+      "variants": [
+        "closed",
+        "open",
+        "selected",
+        "error"
+      ],
+      "anatomy": "Persistent label, current option or prompt, chevron, border",
+      "dimensions": "min-height 56; menu rows min-height 56",
+      "padding": "16 horizontal, 16 vertical; 8 icon gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Frequency, Daily, pop-up button, collapsed",
+      "behavior": "Prefer native select/picker. Tap or Space opens; arrows move options, Enter selects, Escape closes; focus returns to trigger. Announce selected option and expanded state."
+    },
+    {
+      "name": "Input / Checkbox",
+      "family": "Form inputs",
+      "variants": [
+        "unchecked",
+        "checked",
+        "mixed"
+      ],
+      "anatomy": "24-unit outlined or filled checkbox and Label inside full-row target",
+      "dimensions": "row min-height 56; box 24x24; target min 48x48",
+      "padding": "12 horizontal, 12 vertical; 12 label gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Include symptoms, checkbox, checked",
+      "behavior": "Entire label row toggles selection; Space changes checked state. Primary fill plus onBrand checkmark. Group related options with a named legend."
+    },
+    {
+      "name": "Input / Radio",
+      "family": "Form inputs",
+      "variants": [
+        "unselected",
+        "selected"
+      ],
+      "anatomy": "24-unit radio outline/dot plus Label inside full-row target",
+      "dimensions": "row min-height 56; radio 24x24; target min 48x48",
+      "padding": "12 horizontal, 12 vertical; 12 label gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Daily, radio button, selected, 1 of 3",
+      "behavior": "One selected option per named group. Arrow keys navigate options; Space selects. Primary dot and border provide shape/state change as well as color."
+    },
+    {
+      "name": "Input / Toggle",
+      "family": "Form inputs",
+      "variants": [
+        "off",
+        "on"
+      ],
+      "anatomy": "52x32 track with 24-unit thumb, visible label and On/Off text",
+      "dimensions": "whole row min-height 56; hit area min 56x56",
+      "padding": "12 vertical, 16 horizontal; 12 label gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Spoken reminders, switch, off",
+      "behavior": "Switch has stable name; state announces on/off. Space toggles. Off uses border and surface; on uses primary track/onBrand thumb. Use only for immediate settings, never Save."
+    },
+    {
+      "name": "Card / Content",
+      "family": "Cards",
+      "variants": [
+        "static",
+        "interactive",
+        "selected"
+      ],
+      "anatomy": "Surface container, heading, supporting text, status, optional action",
+      "dimensions": "content-driven; all nested actions min 48x48",
+      "padding": "16 padding; 12 content gap; 16 action gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Static cards: no visual change. Interactive cards: surfaceHover and visible border.",
+        "pressed": "Static cards: no visual change. Interactive cards: surfacePressed.",
+        "disabled": "For static cards: not applicable. For interactive cards: common disabled treatment and announce unavailable.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Lisinopril, 10 milligrams, due at 8 AM, heading",
+      "behavior": "Noninteractive card itself is not a tab stop; expose its heading and individual actions. For a fully clickable card use one action and no nested interactive children. Keep critical dosage in Body emphasized."
+    },
+    {
+      "name": "Card / List item",
+      "family": "Cards",
+      "variants": [
+        "default",
+        "selected",
+        "unread"
+      ],
+      "anatomy": "Leading icon, title, supporting text, trailing status/chevron",
+      "dimensions": "min-height 72; content-driven at 200%",
+      "padding": "16 horizontal, 12 vertical; 12 icon gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Lisinopril, 10 milligrams, Daily at 8 AM, button",
+      "behavior": "A whole-row navigation target announces one concise name. Keep trailing status included in its name; no hidden swipe-only actions. Add visible More action when row actions are required."
+    },
+    {
+      "name": "Navigation / Bottom bar",
+      "family": "Navigation",
+      "variants": [
+        "default",
+        "selected"
+      ],
+      "anatomy": "Four labeled destinations: Today, Medicines, History, More",
+      "dimensions": "each target min 56x64; bar grows with text; system inset additional",
+      "padding": "8 vertical; 4 horizontal per destination",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Today, tab, selected, 1 of 4",
+      "behavior": "Persist labels; selected icon shape/indicator plus text weight and primary color. Use route navigation semantics appropriate to platform. Do not announce hidden inactive pages. At 200% use two lines and increase height."
+    },
+    {
+      "name": "Navigation / Top app bar",
+      "family": "Navigation",
+      "variants": [
+        "default"
+      ],
+      "anatomy": "Back/menu action, title, optional contextual action",
+      "dimensions": "min-height 72 plus safe area; grows with content",
+      "padding": "16 horizontal; 8 vertical; 8 between controls",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Back, button; Medication details, heading; More options, button",
+      "behavior": "Focus order: Back, title, contextual action, main content. Title wraps at 200%; never replaces essential title with an ellipsis. On small landscape, bar remains compact with main content scrollable."
+    },
+    {
+      "name": "Navigation / Drawer and rail",
+      "family": "Navigation",
+      "variants": [
+        "drawer closed",
+        "drawer open",
+        "rail",
+        "selected"
+      ],
+      "anatomy": "Named navigation region, account summary, labeled destination rows",
+      "dimensions": "drawer width min(320, viewport-48); item min-height 56; rail 88 or content-fit",
+      "padding": "16 container padding; 12 item gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Main navigation; Appointment summary, link",
+      "behavior": "Compact drawer opens from More/Menu; modal drawer traps focus, Escape dismisses, and restores trigger focus. Tablet rail remains persistent; selected destination has shape and text cue."
+    },
+    {
+      "name": "Feedback / Spinner",
+      "family": "Feedback",
+      "variants": [
+        "indeterminate"
+      ],
+      "anatomy": "24-unit primary arc and visible Loading text",
+      "dimensions": "indicator 24x24; surrounding loading region min-height 56",
+      "padding": "12 icon/text gap; 16 region padding",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Not applicable: passive status indicator; no keyboard focus.",
+        "pressed": "Not applicable: passive status indicator; no keyboard focus.",
+        "disabled": "Not applicable: passive status indicator; no keyboard focus.",
+        "focus": "Not applicable: passive status indicator; no keyboard focus."
+      },
+      "accessibilityLabel": "Loading medications, status",
+      "behavior": "Not interactive; no hover/pressed/disabled/focus states. Mark containing region busy; announce once politely. Keep usable navigation. Reduced motion uses a static progress icon."
+    },
+    {
+      "name": "Feedback / Progress bar",
+      "family": "Feedback",
+      "variants": [
+        "determinate",
+        "complete"
+      ],
+      "anatomy": "Primary fill, border-backed track, visible label and value",
+      "dimensions": "track min-height 8; total region min-height 48",
+      "padding": "8 label/track gap; 16 region padding",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Not applicable: passive progress display; no keyboard focus.",
+        "pressed": "Not applicable: passive progress display; no keyboard focus.",
+        "disabled": "Not applicable: passive progress display; no keyboard focus.",
+        "focus": "Not applicable: passive progress display; no keyboard focus."
+      },
+      "accessibilityLabel": "Preparing summary, progress bar, 60 percent",
+      "behavior": "Expose min=0, max=100, current value; meaningful changes announced politely, no per-frame announcements. Text percentage conveys progress without color. Not an interactive target."
+    },
+    {
+      "name": "Feedback / Snackbar or toast",
+      "family": "Feedback",
+      "variants": [
+        "information",
+        "success",
+        "warning",
+        "error"
+      ],
+      "anatomy": "Info/success surface, message, optional Undo action and Close action",
+      "dimensions": "content-driven; actions min-height 48",
+      "padding": "16 padding; 12 message/action gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Dose marked as Taken. Undo available, status; Undo, button",
+      "behavior": "Use a polite live region; no automatic focus theft. Dose Undo persists until explicit dismissal or navigation, with no automatic timeout. Dose-history correction remains permanently available after dismissal or navigation. At 200% stack actions."
+    },
+    {
+      "name": "Feedback / Dialog",
+      "family": "Feedback",
+      "variants": [
+        "confirmation",
+        "error",
+        "form"
+      ],
+      "anatomy": "Modal surface, title, plain-language consequence, Cancel and primary action",
+      "dimensions": "max-width 560; max-height viewport minus 48; content scrolls",
+      "padding": "24 padding; 16 content gap; 12 action gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Remove medication, dialog; Removing this medication will not delete past dose records.",
+      "behavior": "Name dialog from heading; place initial focus on safe action or heading. Trap Tab/Shift+Tab, Escape closes safe dialogs, return focus to trigger. Stack full-width actions at 200%; never hide Cancel."
+    },
+    {
+      "name": "List / Standard",
+      "family": "Lists",
+      "variants": [
+        "empty",
+        "populated",
+        "loading",
+        "error"
+      ],
+      "anatomy": "Named list, grouped heading, list item components",
+      "dimensions": "rows min-height 72; interactive rows min 48x48",
+      "padding": "16 horizontal, 12 vertical; optional 2-unit meaningful separators",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Morning medications, list, 3 items",
+      "behavior": "Use semantic list/list item structure. Passive rows are not tab stops; links/buttons are. Virtualized lists must preserve order/count for screen readers. Content wraps and expands."
+    },
+    {
+      "name": "List / Expandable",
+      "family": "Lists",
+      "variants": [
+        "collapsed",
+        "expanded"
+      ],
+      "anatomy": "Heading button, summary, chevron, controlled detail region",
+      "dimensions": "header min-height 56; details content-driven",
+      "padding": "16 horizontal, 16 vertical; 12 detail gap",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "October 6, 3 doses, collapsed, button",
+      "behavior": "Enter/Space toggles; announce expanded state and controlled region relationship. Open content follows trigger in reading order. Keep selection independent from expansion."
+    },
+    {
+      "name": "Icon / Library",
+      "family": "Icons",
+      "variants": [
+        "outline",
+        "selected",
+        "decorative"
+      ],
+      "anatomy": "Consistent 24x24 outlined icon with 2-unit stroke; fill/shape cue for selected state",
+      "dimensions": "24x24 glyph; interactive wrapper 56x56 preferred, 48x48 minimum",
+      "padding": "16 around glyph at preferred target",
+      "states": {
+        "default": "Use documented foreground/background/border pair; show a persistent descriptive text label.",
+        "hover": "Pointer/external mouse only: surfaceHover, or primaryHover for filled primary. Keep text unchanged and preserve the visible boundary.",
+        "pressed": "surfacePressed, or primaryPressed for filled primary. Maintain label and icon; release returns to default. No press-only information.",
+        "disabled": "muted text on disabledSurface with border; explain the reason in adjacent helper text where needed. Announce disabled and exclude from action activation; avoid making required help inaccessible.",
+        "focus": "3-unit focus ring with 3-unit surface-colored offset. Persist during external-keyboard navigation. Do not clip ring; no focus indication on touch-only focus unless the platform provides it."
+      },
+      "accessibilityLabel": "Name by action, such as Add medication, never Plus icon",
+      "behavior": "Use platform system symbols where possible. Hide decorative icons; meaningful noninteractive icons have text equivalent. Do not rely on color, pill shape, or image recognition to identify medication."
+    }
+  ],
+  "icons": [
+    {
+      "name": "home",
+      "description": "Today schedule",
+      "accessibleLabel": "Today, tab"
+    },
+    {
+      "name": "pill",
+      "description": "Medication list or record",
+      "accessibleLabel": "Medicines, tab"
+    },
+    {
+      "name": "clock",
+      "description": "Time or dose history",
+      "accessibleLabel": "History, tab"
+    },
+    {
+      "name": "more",
+      "description": "Additional navigation",
+      "accessibleLabel": "More, tab"
+    },
+    {
+      "name": "plus",
+      "description": "Create a record",
+      "accessibleLabel": "Add medication, button"
+    },
+    {
+      "name": "arrow-left",
+      "description": "Return to previous view",
+      "accessibleLabel": "Back, button"
+    },
+    {
+      "name": "check-circle",
+      "description": "Dose taken",
+      "accessibleLabel": "Taken"
+    },
+    {
+      "name": "clock-alert",
+      "description": "Dose due",
+      "accessibleLabel": "Due"
+    },
+    {
+      "name": "minus-circle",
+      "description": "Dose skipped",
+      "accessibleLabel": "Skipped"
+    },
+    {
+      "name": "alert-triangle",
+      "description": "Dose missed or warning",
+      "accessibleLabel": "Missed"
+    },
+    {
+      "name": "bell",
+      "description": "Reminder settings",
+      "accessibleLabel": "Reminder settings, button"
+    },
+    {
+      "name": "volume",
+      "description": "Spoken reminders",
+      "accessibleLabel": "Spoken reminders, switch"
+    },
+    {
+      "name": "calendar",
+      "description": "Appointment date or export",
+      "accessibleLabel": "Choose appointment date, button"
+    },
+    {
+      "name": "clipboard",
+      "description": "Appointment summary",
+      "accessibleLabel": "Appointment summary, button"
+    },
+    {
+      "name": "heart",
+      "description": "Symptom entry",
+      "accessibleLabel": "Add symptom, button"
+    },
+    {
+      "name": "users",
+      "description": "Caregiver access",
+      "accessibleLabel": "Caregiver access, button"
+    },
+    {
+      "name": "cloud-off",
+      "description": "Offline status",
+      "accessibleLabel": "Offline. Changes are saved on this device."
+    },
+    {
+      "name": "sync",
+      "description": "Pending synchronization",
+      "accessibleLabel": "Changes waiting to sync"
+    },
+    {
+      "name": "edit",
+      "description": "Modify existing record",
+      "accessibleLabel": "Edit medication, button"
+    },
+    {
+      "name": "trash",
+      "description": "Remove record",
+      "accessibleLabel": "Remove medication, button"
+    },
+    {
+      "name": "chevron-down",
+      "description": "Expand section",
+      "accessibleLabel": "Section name, collapsed, button"
+    },
+    {
+      "name": "close",
+      "description": "Dismiss transient view",
+      "accessibleLabel": "Close, button"
+    },
+    {
+      "name": "info",
+      "description": "Additional explanation",
+      "accessibleLabel": "Information"
+    },
+    {
+      "name": "refill",
+      "description": "Supply and refill information",
+      "accessibleLabel": "Refill information, button"
+    },
+    {
+      "name": "settings",
+      "description": "Preferences",
+      "accessibleLabel": "Settings, button"
+    },
+    {
+      "name": "moon",
+      "description": "Dark appearance",
+      "accessibleLabel": "Dark mode, switch"
+    }
+  ],
+  "variantAxes": [
+    "Theme: Light / Dark",
+    "State: Default / Hover / Pressed / Disabled / Focus",
+    "Size: Preferred56 / Minimum48",
+    "TextScale: 100 / 200",
+    "Platform: iOS / Android"
+  ],
+  "figmaHandoff": "Create native Figma component sets and variables from these specifications; this JSON is not a Figma library."
+}

@@ -1,0 +1,333 @@
+MediTrack
+Requirements, Accessibility & Technical Architecture
+Group 1 • Week 2 Requirements Deliverable
+Prepared by
+Amol Bhatia
+Caleb Afunyah
+Eugene Masamuna
+Version 1.0  |  September 30, 2026
+
+Document Overview
+This document updates the MediTrack proposal into requirements for design and development. It keeps the project focused: medication schedules, reminders, dose logging, symptom tracking, appointment summaries, offline operation, and a senior-friendly interface. The refinement meeting added mre specificity around reminder content, reversible dose status, caregiver permissions, refill information, and accessibility testing.
+
+Contents
+
+Section 1: User Research Summary
+MediTrack is designed primarily for adults age 65 and older, especially people who may have limited technical experience, reduced vision, reduced dexterity, or difficulty navigating dense interfaces.
+1.1 Personas
+Margaret Ellis — Age 74
+Robert Kim — Age 69
+Patricia Johnson — Age 81
+Linda Martinez — Age 52
+1.2 User Journey Maps
+The journey maps focus on the three workflows which determine whether a senior user should use MediTrack independently: setting up a medication, responding to a reminder, and preparing information for an appointment. MediTrack can be utilized by a 3rd-party and have the seniors act as a dependent
+Journey A — Add a Medication and Schedule
+Journey B — Receive a Reminder and Record a Dose
+
+
+
+
+Journey C — Record Symptoms and Prepare for an Appointment
+
+1.3 Competitive Analysis
+
+
+
+Section 2: User Stories and Requirements
+2.1 Prioritized User Stories
+Must-Have
+Should-Have
+Nice-to-Have
+
+2.2 Functional Requirements
+1. The app must let a user add, edit, archive, and remove a medication record.
+2. Each medication must support name, strength/dosage, instructions, and one or more scheduled times.
+3. The Today view must sort scheduled doses by time and show a clear status for each dose.
+4. The app must create local reminders that do not require an active internet connection.
+5. Reminder content must include the medication name, strength/dosage, and relevant instructions entered by the user.
+6. A user must be able to record a scheduled dose as Taken or Skipped. Overdue doses may be displayed as Missed based on the configured rule.
+7. After a dose-status change, the app must provide immediate Undo and allow the record to be corrected later from history.
+8. Medication details, schedule, reminders, dose logging, symptom entry, and recent history must remain available offline.
+9. Changes made offline must be queued and synchronized when connectivity returns without blocking local use.
+10. Users must be able to record symptoms or side effects with severity, date/time, and optional notes.
+11. Users must be able to record refill information for medication and configure a low-supply reminder.
+12. The app must generate an appointment summary for a selected date range.
+13. The appointment summary should include medication list, dose history/adherence, symptoms or side effects, allergies, refill information, and recent medication changes when those fields are available.
+14. Users must be able to enable or disable spoken medication reminders.
+15. Visual reminder information must remain available when voice reminders are disabled or unavailable.
+16. Caregiver access must require user approval and must be limited to the permissions granted by the user.
+17. A caregiver must not be able to change medication schedules unless the user has explicitly granted that permission.
+18. The app must warn the user when notification permission is disabled or when reminders cannot be scheduled.
+19. Before exporting or sharing health information, the app must show what information will be shared and require confirmation.
+20. If calendar integration is implemented, it must be opt-in and must request only the permissions needed for that feature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2.3 Non-Functional Requirements
+
+
+Section 3: Accessibility Plan
+Accessibility is treated as a design constraint. MediTrack must satisfy WCAG 2.1 Level AA for applicable web and cross-platform interactions, while directly reducing risk for older adults.
+3.1 Simplified WCAG 2.1 AA Mapping
+
+WCAG reference values used above: 4.5:1 normal-text contrast, 3:1 large-text contrast, 3:1 non-text contrast, keyboard operability, reflow, and 200% text resizing.
+3.2 Platform-Specific Accessibility
+
+3.3 Testing Strategy
+
+
+Section 4: Technical Architecture
+The goal is to use one primary language, keep the API REST-based.
+4.1 Architecture Overview
+
+4.2 Technology Stack
+
+4.3 Data Flow and Offline State
+The user performs an action, such as marking a dose Taken.
+The app validates the action and writes it to local storage first.
+The interface updates immediately, the user does not wait for the network.
+If the device is offline, the change is marked Sync.
+When connectivity returns, the sync service sends queued changes to the REST API.
+The server stores the update and the local record is marked Synced.
+If a conflict is detected, the app preserves the local record and flags the item for review instead of silently overwriting it.
+4.4 Basic REST API
+
+Example request
+
+4.5 Basic Database Schema
+
+
+4.6 Development Approach
+
+
+Section 5: Requirements Refinement Meeting Documentation
+5.1 Meeting Details
+
+5.2 Mock-User Feedback Considered
+The most consistent feedback was not about adding more screens. It was about making the core medication workflow more forgiving. Users wanted reminders that identify exactly what is due, visible Taken/Missed status, a way to correct accidental taps, useful offline behavior, larger and more readable controls, high contrast, optional voice support, appointment-ready summaries, refill information, and caregiver access that does not remove control from the medication user.
+
+5.3 Decisions Made
+1. Medication reminders will include strength/dosage and relevant instructions instead of a generic “time to take medication” message.
+2. Dose status will remain reversible: users get immediate Undo and can correct an entry later from history.
+3. Offline access is a core behavior, not a fallback. Reminders, schedule, essential medication information, dose logging, and symptom entry must continue without a connection.
+4. Appointment summaries will include symptoms/side effects, allergies, refill information, and recent medication changes where those fields are available.
+5. Caregiver access will be user-controlled. Schedule changes are not allowed unless the medication user explicitly grants that permission.
+6. Accessibility checks will be attached to the stories they affect, so large text, contrast, keyboard access, screen-reader support, and touch-target sizing are verified during development.
+5.4 Prioritization Rationale
+
+
+Section 6: Risk Assessment
+6.1 Technical Risks
+6.2 Team Risks
+
+6.3 Schedule Risks and Contingency Plan
+
+6.4 Risk-Based Delivery Order
+If time becomes limited, the team should prioritize the requirements that reduce medication confusion and accessibility barriers first. A practical delivery order is:
+1. Medication data + Today schedule
+2. Specific local reminders
+3. Taken/Skipped/Missed status + Undo/correction
+4. Offline persistence
+5. 200% text, contrast, keyboard/screen-reader support
+6. Symptoms + appointment summary
+7. Voice and refill enhancements
+8. Caregiver and calendar integrations
+
+
+Section | Topic | What it covers
+1 | User Research Summary | Personas, journey maps, and competitive analysis
+2 | User Stories and Requirements | Prioritized stories, functional requirements, and quality targets
+3 | Accessibility Plan | WCAG 2.1 AA mapping, platform implementation, and testing
+4 | Technical Architecture | Simple cross-platform stack, API, offline data flow, and database schema
+5 | Requirements Refinement Meeting | Meeting record, mock-user feedback, decisions, and prioritization rationale
+6 | Risk Assessment | Technical, team, and schedule risks with mitigations
+Attribute | Profile
+Occupation | Retired elementary school teacher
+Technical skill | Basic to moderate
+Goals and motivations | Stay independent, avoid missed or double doses, quickly confirm what is left for the day.
+Pain points and frustrations | Small text, crowded screens, uncertainty about whether a dose was already taken.
+Accessibility needs | Low vision: 200%+ text scaling, high contrast, large controls, screen-reader-friendly labels.
+Representative quote | “I do not need a complicated health app. I need it to clearly tell me what to take and whether I already took it.”
+Attribute | Profile
+Occupation | Retired automotive technician
+Technical skill | Low
+Goals and motivations | Respond to reminders in as few steps as possible and keep using the app when internet service is unreliable.
+Pain points and frustrations | Too many menus, tiny buttons, repeated typing, fear of changing the wrong setting.
+Accessibility needs | Reduced dexterity: large touch targets, minimal precision gestures, clear confirmation and undo.
+Representative quote | “Give me one big Taken button. I should not have to go through three screens.”
+Attribute | Profile
+Occupation | Retired accountant
+Technical skill | Very basic
+Goals and motivations | Hear what medication is due, read the same information on screen, and bring a clear summary to appointments.
+Pain points and frustrations | Easy-to-miss notifications, technical wording, nested navigation.
+Accessibility needs | Reduced vision: voice reminders, large text, high contrast, consistent navigation, predictable screen-reader order.
+Representative quote | “When the reminder goes off, I want it to tell me exactly which medicine it is and what I am supposed to do.”
+Attribute | Profile
+Occupation | Human resources manager and family caregiver
+Technical skill | High
+Goals and motivations | Support her father without taking over his routine, know when an important dose is missed, help prepare for appointments.
+Pain points and frustrations | Uncertainty about missed doses, incomplete medication lists, concern about overstepping privacy.
+Accessibility needs | No specific accommodation required, needs transparent permission boundaries and clear caregiver role limits.
+Representative quote | “I want enough information to help when something is missed, but he should stay in control of his own medication schedule.”
+Step | User action | Likely pain point | Design opportunity
+1. Start | Choose Add Medication. | The entry point may not be easiest UI  | Keep a large Add Medication action on the main medication screen.
+2. Enter details | Enter name, strength/dosage, and instructions. | Typing and medication terminology and remembering may be difficult. | Use large fields, plain labels, optional autocomplete, and examples. Can utilize AI to autogenerate the most likely dosing/name
+3. Set schedule | Choose frequency and time. | Custom schedules can become confusing quickly. | Offer simple presets such as Daily, Twice Daily, and Custom.
+4. Review | Check a plain-language summary. | A schedule error may not be noticed before saving. | Show a review screen that repeats name, dose, instructions, and times.
+5. Save | Confirm the medication. | User may not know whether the action succeeded. | Show a clear saved message and the new item immediately in the schedule.
+6. Continue offline | Use schedule and reminders without internet. | User may assume reminders require connectivity. | Schedule reminders locally and show offline status without blocking use.
+Step | User action | Likely pain point | Design opportunity
+1. Reminder | Notification appears at the scheduled time. | A generic reminder may not identify the medication clearly. | Include medication name, strength/dosage, and relevant instructions.
+2. Decide | User chooses Taken or Skipped. | Small or similar controls can cause accidental taps. | Use large, separated controls with text labels.
+3. Confirm | App records the status. | User may wonder whether the tap registered. | Update status immediately and announce it visually and to screen readers.
+4. Correct | User notices a mistake. | A wrong status can become misleading later. | Provide immediate Undo and allow later correction from history.
+5. Missed dose | No status is recorded in the expected window. | Caregiver may need awareness, but privacy still matters. | Only send caregiver alerts when the user has authorized them.
+Step | User action | Likely pain point | Design opportunity
+1. Record | Add symptom or side effect. | User may forget timing or severity by the appointment. | Automatically timestamp entries and use a simple severity scale.
+2. Review | Look back at symptoms and dose history. | Long chronological lists are hard to scan. | Group by date and use clear labels with filters.
+3. Build summary | Choose a date range. | Users may not know which information a provider needs. | Provide a standard appointment summary containing medications, adherence, symptoms/side effects, allergies, refill information, and recent medication changes where available.
+4. Share | Export or share the summary. | Health information can be shared accidentally. | Show exactly what will be shared and require explicit confirmation.
+Application | What it does well | Weakness / tradeoff | Accessibility approach | MediTrack response
+Medisafe
+https://medisafe.com/ | Medication reminders, dose tracking, caregiver support, and dependent profiles. | Caregiver options are useful, but different roles can create permission complexity. | Official caregiver guidance distinguishes who receives missed-dose alerts from a profile that can actively manage medications. | Use a simple permission model: viewing by default schedule changes require authorization.
+MyTherapy
+https://www.mytherapyapp.com/ | Medication reminders, documentation, refill reminders, symptoms, and doctor-oriented reporting. | Its broader scope introduces more concepts than MediTrack needs for the minimum senior workflow. | Public accessibility information documents VoiceOver and TalkBack support and structured reading order. | Keep the same strong assistive-technology mindset while using a narrower, lower-complexity navigation model.
+Apple Health — Medications | Scheduled reminders, follow-up reminders, Taken/Skipped logging, history, and health-data sharing inside the Apple ecosystem. | Not cross-platform for Windows, some medication schedule behavior depends on supported OS versions. | Apple provides system features such as VoiceOver, Larger Text, contrast controls, and differentiation without color. | Provide the same core medication clarity across iOS, Android, Windows, and web, with 200%+ scaling treated as an explicit product requirement.
+# | User story | Acceptance criteria
+1 | As a user, I want to add and edit my medications so that my medication list stays accurate. | I can save a medication with name, strength/dosage, instructions, and schedule, then edit it later.
+2 | As a user, I want to see today’s medication schedule so that I know what is due next. | Today’s medications appear in time order with Due, Taken, Skipped, or Missed status.
+3 | As a user, I want specific medication reminders so that I know exactly what I am supposed to take. | A reminder shows the medication name, strength/dosage, and relevant instructions at the scheduled time.
+4 | As a user, I want to mark a dose Taken or Skipped and correct mistakes so that my history stays accurate. | Status changes immediately. Undo option appears right away and history can be corrected later.
+5 | As a user, I want core medication features to work offline so that I am not dependent on internet access. | Schedule, reminders, medication details, dose logging, and symptom entry work without a connection.
+6 | As a low-vision user, I want text to scale to at least 200% so that I can read the app comfortably. | Critical screens remain readable and usable at 200% text size without clipped text or blocked controls.
+7 | As a senior user, I want large, high-contrast controls so that important actions are easy to see and press. | Primary controls meet the platform target size, remain distinct at high contrast, and never rely on color alone.
+# | User story | Acceptance criteria
+8 | As a user, I want to record symptoms or side effects to discuss them at appointments. | I can save a symptom/side effect, severity, date/time, and optional note.
+9 | As a user, I want an appointment summary so that I can quickly review important information with my doctor. | Summarize medication list, adherence, symptoms/side effects, allergies, refill, and recent medication changes.
+10 | As a user with reduced vision, I want spoken reminders so that I can hear which medication is due. | Voice reminders can be enabled or disabled and repeat the same essential information shown visually.
+11 | As a user, I want refill information so that I can notice when medication supply is running low. | I can record refill information and see a reminder when the configured threshold is reached.
+# | User story | Acceptance criteria
+12 | As a user, I want to share selected information with a caregiver so that I can receive help without giving up control. | Caregiver access is permission-based. Schedule changes are blocked unless the user allows them.
+13 | As a user, I want medication times available in my calendar so that they fit into my daily routine. | Supported schedules can be exported or synchronized to a selected calendar after the user approves access.
+Area | Requirement / target | How it will be checked
+Performance | Today and medication-detail screens should load from local storage within 2 seconds on supported devices. | Time the main flows during manual and automated testing.
+Responsiveness | A Taken/Skipped action should update the visible status within 1 second. | Interaction test with local storage enabled.
+API response | Normal API requests should return within 2 seconds under the team’s test environment. | Log response time during integration tests.
+Offline reliability | Core offline workflows must remain usable with network disabled. | Run the core journey test with network disabled.
+Sync behavior | Queued offline changes should begin syncing within 30 seconds after connectivity. | Reconnect during test and confirm queued changes synchronize.
+Security | All network traffic that carries user data must use encryption and HTTPS/TLS credentials and tokens must not be stored in plain text. | Configuration review and security checklist.
+Privacy | Collect only data needed for the defined functions, sharing must be explicit and permission-based. | Requirements review and caregiver/share-flow tests.
+Accessibility | Applicable interfaces must meet WCAG 2.1 Level AA, including keyboard access, contrast, labels, reflow, and 200% text resizing. | Automated + manual accessibility test matrix.
+Cross-platform consistency | Medication names, status terms, reminder meaning, and core workflows must remain consistent across mobile, web, and Windows. | Run the same acceptance scenarios on each platform.
+Maintainability | Shared models, validation, and API code should be reused where practical instead of copied into separate platform implementations. | Code review and project-structure check.
+Accessibility area | Mapped stories | Simplified requirement | Implementation strategy | Beyond minimum compliance
+Readable text and reflow | 2, 3, 5, 6, 9 | Text must enlarge to 200% without losing content or functionality; layouts must reflow rather than overlap. | Use relative text sizing, flexible containers, wrapping labels, vertical stacking at large text sizes, and avoid fixed-height text boxes. | Primary medication screens will also be tested at 250% text where practical, not only the 200% AA baseline.
+Contrast and status meaning | 2, 3, 4, 7 | Normal text must meet 4.5:1 contrast; large text 3:1; controls and meaningful graphics 3:1. Information cannot depend on color alone. | Every medication status uses a word + icon + optional color. Check contrast tokens before components are approved. | Aim for 7:1 contrast on critical medication names, dose text, and primary status labels when it does not harm readability.
+Keyboard and focus | 2, 4, 8, 9, 12 | Web and desktop functions must be reachable by keyboard, with visible focus and no keyboard traps. | Use semantic buttons/inputs, logical tab order, skip link on web, and focus restoration after dialogs. | Add optional shortcuts only for common actions and never make a shortcut the only way to complete a task.
+Screen-reader support | 2, 3, 4, 6, 8, 9, 10 | Controls need meaningful names, roles, values, and reading order. | Use native semantic elements first; add accessible labels for icons; announce status changes such as “Dose marked Taken.” | Test the full reminder-to-log workflow with VoiceOver, TalkBack, and NVDA rather than testing isolated controls only.
+Large touch targets | 4, 7 | Important actions must be easy to activate without precise tapping. | Use at least 44×44 pt on iOS and comparable platform sizing; add spacing between Taken and Skip actions. | Primary dose actions will be larger than the minimum whenever the screen layout allows.
+Predictable, plain language | 1–13 | Navigation, labels, and error messages must be understandable and consistent. | Use the same words everywhere: Taken, Skipped, Missed, Due. Avoid unexplained icons or medical jargon in navigation. | Pair short instructions with examples during medication setup and summarize before saving.
+Error prevention and recovery | 1, 4, 12 | Users must be able to understand errors and correct mistakes. | Immediate Undo for dose status; confirmation before deleting a medication; explain invalid schedule fields next to the field. | Dose-history corrections remain available after the temporary Undo message disappears.
+Multiple ways to perceive reminders | 3, 10 | Audio cannot be the only way to receive essential information. | Voice reminders repeat the same medication content shown in the visual notification; support haptic/OS notification behavior where available. | If voice is unavailable, the visual workflow remains complete; if visual access is limited, screen readers can read the same essential content.
+Platform | Required implementation
+Mobile (iOS/Android) | Large touch targets, VoiceOver labels, dynamic text, clear focus, no gesture-only critical action, spoken reminders paired with visual, reduced transitions.
+Windows desktop | Complete keyboard navigation, visible focus, logical tab order, high-contrast support, all critical functions usable without a mouse.
+Web | Semantic HTML, real button and form elements, correct labels, heading hierarchy, skip-to-content link, responsive reflow at 200% zoom.
+Testing layer | Tools / approach | What the team will verify
+Automated | Rely on lighthouse as audit, automated CI/CD pipeline and smoke tests | Missing labels, common semantic errors, contrast issues, landmark problems, and basic WCAG violations.
+Keyboard | Keyboard-only walkthrough of every web/desktop story. Dedicated console-Canary runs | Focus order, visible focus, no mouse-only.
+Screen reader | VoiceOver (iOS), TalkBack (Android), integrated OS tools. | Reading, control, status announcements, form errors, and reminder-to-dose workflow.
+Text / zoom | 200% required. 250% check on primary medication screens. | No clipping, overlap, missing actions, horizontal scrolling for normal text, or unusable dialogs or bad UI elements
+Visual | High-contrast mode and color-blindness. | Remains understandable without color. Text and control boundaries remain distinct.
+Offline | Disable network | Accessibility does not degrade when the app is offline. Reminders and status logging still work.
+User testing | Three representative older adults, including at least one who uses an accessibility accommodation. | Can complete Add Medication, Today Schedule, Reminder, Dose Log, Symptom, and Summary tasks with minimal assistance.
+Layer | Choice | Why this keeps the project simple
+Mobile | React Native + eXPO + TypeScript | One language across the project. Expo reduces mobile setup and provides common device APIs.
+Web | React + Vite + TypeScript | Fast setup and access to semantic HTML for accessibility.
+Windows desktop | Electron + React | Reuses the web UI instead of building a separate desktop codebase.
+State | React Context | Enough for the current scope 
+Local data | SQLite on mobile/desktop | Supports local-first operation with storage appropriate to each platform.
+Backend | Node.js + Express + TypeScript | Basic REST API using the same language as the clients.
+Server database | SQLite for the prototype | Minimal, can migrate later if production scale requires.
+Method | Endpoint | Purpose
+POST | /api/auth/login | Sign in and return an authenticated session/token.
+GET | /api/medications | Return the user’s medication list.
+POST | /api/medications | Create a medication.
+PUT | /api/medications/:id | Update medication details or schedule.
+DELETE | /api/medications/:id | Archive/remove a medication after confirmation.
+GET | /api/schedule/today | Return today’s scheduled doses.
+POST | /api/doses | Create or update a dose status.
+GET | /api/doses | Return dose history for a date range.
+GET / POST | /api/symptoms | Read or add symptoms/side effects.
+GET | /api/reports/summary | Build an appointment summary for a date range.
+POST | /api/sync | Send queued offline changes and receive server updates.
+POST /api/doses
+{
+  "scheduleId": 35,
+  "status": "taken",
+  "loggedAt": "2026-09-30T08:02:00"
+}
+Table | Important fields | Relationship / purpose
+User | id, name, email, password_hash, allergies, created_at | Owns medications, symptoms, and caregiver permissions.
+Medication | id, user_id, name, strength_dosage, instructions, refills_remaining, active, updated_at, sync_status | One user can have many medications. updated_at supports “recently changed” reporting.
+Schedule | id, medication_id, time_of_day, frequency, start_date, end_date | One medication can have one or more schedules.
+DoseLog | id, schedule_id, status, scheduled_at, logged_at, updated_at, sync_status | Stores Taken / Skipped / Missed history and correction state.
+Symptom | id, user_id, name, severity, notes, recorded_at, sync_status | Stores symptoms or side effects for history and reports.
+CaregiverPermission | id, user_id, caregiver_user_id, can_view, missed_dose_alerts, can_edit_schedule | Permission-based caregiver access/schedule edits default to false.
+Practice | How the team will apply it
+Shared code | Put shared TypeScript models, validation, API client code, and repository interfaces in a common package.
+Repository pattern | UI components request data through repository functions rather than calling SQLite/IndexedDB directly.
+Adapter pattern | Use a SQLite adapter on mobile/desktop and an IndexedDB adapter on web behind the same repository interface.
+Service layer | Keep reminder, sync, report, and permission rules outside UI components.
+Small pull requests | Match the team charter: use focused branches, require review, keep changes small enough to test and understand.
+Accessibility definition of done | A story is not complete until its keyboard/screen-reader/large-text acceptance checks pass where applicable.
+Item | Details
+Date | September 29, 2026
+Duration | 20 minutes
+Location | Microsoft Teams
+Attendees | Eugene Masamuna, Amol Bhatia, Caleb Afunyah
+Agenda | Review mock-user feedback; refine personas and requirements; review the story backlog and priorities; review accessibility, architecture, and risks; identify final Week 2 follow-up work.
+Feedback theme | What users needed | Requirement decision
+Reminder detail | Medication reminders need to identify the medication, strength/dosage, and relevant instructions. | Refined story 3 and functional requirement 5.
+Accidental status changes | Users need a quick way to undo or correct a wrong Taken/Skipped selection. | Refined story 4; immediate Undo plus later history correction.
+Offline trust | The user should not have to guess which features stop working when internet is unavailable. | Expanded offline requirement to schedule, reminders, medication information, dose logging, and symptom entry.
+Appointment usefulness | A simple list of medications is not enough for a useful appointment summary. | Expanded summary to symptoms/side effects, allergies, refill information, and recent medication changes where supported.
+Caregiver boundaries | Caregivers can be helpful, but medication ownership must stay with the user. | Caregiver viewing/alerts remain permission-based; schedule edits require explicit authorization.
+Accessibility | Large readable text, controls, high contrast, and voice support need to be planned from the start. | Mapped accessibility requirements directly to stories and acceptance tests instead of treating them as a final audit.
+Priority | Rationale
+Must-Have | These features are necessary to safely complete the core medication workflow: accurate medication data, today’s schedule, specific reminders, dose status, reversible corrections, offline operation, and accessible controls. If these are not reliable, the product does not meet its primary purpose.
+Should-Have | Symptoms/side effects, appointment summaries, voice reminders, and refill information add substantial value but the user can still complete the minimum medication-management workflow without them.
+Nice-to-Have | Caregiver sharing and calendar integration introduce additional permissions, external integrations, and synchronization work. They are useful but should not delay the stable medication and accessibility experience.
+Risk | Why it matters | Mitigation
+Offline synchronization | Local and server copies can disagree after the device reconnects. | Write locally first, track sync status, use updated timestamps, test reconnect scenarios early, and flag unresolved conflicts instead of silently overwriting them.
+Notification reliability | Medication reminders are a central workflow; disabled permissions or OS behavior can prevent delivery. | Use local notifications, verify permission state, show a clear warning when reminders cannot be scheduled, and test on each supported mobile platform.
+Cross-platform differences | Notifications, local storage, accessibility APIs, and keyboard behavior differ by platform. | Keep shared business logic small, use adapters for platform storage, and run the same acceptance scenarios on every platform.
+Large-text layout failures | 200% text can cause clipped labels, overlapping controls, and hidden actions. | Use flexible layouts from the start; test 200% continuously and 250% on primary screens.
+Caregiver permission errors | An overly broad permission could expose health information or allow unintended changes. | Default to least privilege; separate view/alert/edit permissions; require user confirmation for schedule-edit access.
+Sensitive local data | Offline operation means medication data exists on the device. | Avoid unnecessary fields, protect credentials/tokens with platform secure storage, rely on device security/encryption capabilities, and never log sensitive values in debugging output.
+Front-end accessibility complexity | Accessible behavior can regress as components change. | Create shared accessible button/input components and include accessibility checks in code review and definition of done.
+Team risk | Mitigation
+Front-end learning curve | Start with a small vertical slice: Today screen → reminder → Taken/Skipped. Pair on the first reusable components and document the pattern before building more screens.
+Accessibility implementation is unfamiliar | Use a short accessibility checklist in every pull request, keep reusable controls accessible by default, and use automated tools as an early warning rather than the only test.
+Knowledge becomes concentrated in one teammate | Follow the charter’s rotating roles, review each other’s pull requests, and use short pairing sessions for difficult tasks.
+Integration ownership is unclear | Keep work in small branches, assign one owner per story, and require at least one teammate review before merge.
+Schedule risk | Contingency
+Offline sync takes longer than expected | Finish local-only medication and dose workflows first. A reliable offline experience is more important than sophisticated multi-device synchronization for the initial milestone.
+Cross-platform bugs consume too much time | Complete one end-to-end workflow on all platforms before expanding secondary features. Fix architecture differences early.
+Accessibility issues are discovered late | Run large-text, keyboard, and screen-reader checks as each screen is built. Do not defer them to final QA.
+Caregiver or calendar integration expands scope | Keep these Nice-to-Have. If the schedule slips, preserve the permission model in the design but defer the external integration.
+A team member becomes unavailable | Keep work visible in Git, maintain current setup notes, use small PRs, and rebalance work in the weekly meeting as described in the team charter.
+Testing accumulates near the deadline | Attach tests to acceptance criteria and require critical-path tests before merge rather than creating a separate testing phase at the end.

@@ -1,0 +1,2322 @@
+{
+  "provider": "WebAIM Contrast Checker public API",
+  "userDate": "2026-10-06 America/Phoenix",
+  "uniquePairs": 136,
+  "verifiedPairs": 136,
+  "failedRequests": 0,
+  "consistentWithinDisplayPrecision": true,
+  "results": [
+    {
+      "foreground": "#0E5144",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=0E5144&bcolor=F3F7F6&api",
+      "localRatio": 8.5323,
+      "webAIM": {
+        "ratio": "8.53",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0023,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.436797+00:00"
+    },
+    {
+      "foreground": "#0E5144",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=0E5144&bcolor=FFFFFF&api",
+      "localRatio": 9.2141,
+      "webAIM": {
+        "ratio": "9.21",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0041,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.432958+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#86DDB3",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=86DDB3&api",
+      "localRatio": 10.7336,
+      "webAIM": {
+        "ratio": "10.7",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0336,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.502013+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#86DDBE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=86DDBE&api",
+      "localRatio": 10.8101,
+      "webAIM": {
+        "ratio": "10.8",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0101,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.212338+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#A2E7CE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=A2E7CE&api",
+      "localRatio": 12.2609,
+      "webAIM": {
+        "ratio": "12.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0609,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.259470+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#A4C9EF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=A4C9EF&api",
+      "localRatio": 10.0507,
+      "webAIM": {
+        "ratio": "10.0",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0507,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.442124+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#B7F0D9",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=B7F0D9&api",
+      "localRatio": 13.599,
+      "webAIM": {
+        "ratio": "13.5",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.099,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.314803+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#F1CE87",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=F1CE87&api",
+      "localRatio": 11.4857,
+      "webAIM": {
+        "ratio": "11.4",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0857,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.442624+00:00"
+    },
+    {
+      "foreground": "#101D19",
+      "background": "#FFB1B8",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=101D19&bcolor=FFB1B8&api",
+      "localRatio": 10.0948,
+      "webAIM": {
+        "ratio": "10.0",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0948,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.483399+00:00"
+    },
+    {
+      "foreground": "#125E50",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=125E50&bcolor=F3F7F6&api",
+      "localRatio": 7.0903,
+      "webAIM": {
+        "ratio": "7.09",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0003,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.406358+00:00"
+    },
+    {
+      "foreground": "#125E50",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=125E50&bcolor=FFFFFF&api",
+      "localRatio": 7.6569,
+      "webAIM": {
+        "ratio": "7.65",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0069,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.335607+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=DBEBE2&api",
+      "localRatio": 10.9952,
+      "webAIM": {
+        "ratio": "10.9",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0952,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.967753+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#E0F2E7",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=E0F2E7&api",
+      "localRatio": 11.6621,
+      "webAIM": {
+        "ratio": "11.6",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0621,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.696920+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#E4ECE8",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=E4ECE8&api",
+      "localRatio": 11.2985,
+      "webAIM": {
+        "ratio": "11.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0985,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.114537+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#E4EFFA",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=E4EFFA&api",
+      "localRatio": 11.6631,
+      "webAIM": {
+        "ratio": "11.6",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0631,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.987556+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=E8F3EE&api",
+      "localRatio": 11.9609,
+      "webAIM": {
+        "ratio": "11.9",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0609,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.617309+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=F3F7F6&api",
+      "localRatio": 12.582,
+      "webAIM": {
+        "ratio": "12.5",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.082,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.028398+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#FCE7E9",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=FCE7E9&api",
+      "localRatio": 11.4821,
+      "webAIM": {
+        "ratio": "11.4",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0821,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.881340+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#FFF1CC",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=FFF1CC&api",
+      "localRatio": 12.1033,
+      "webAIM": {
+        "ratio": "12.1",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0033,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.791884+00:00"
+    },
+    {
+      "foreground": "#16332D",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=16332D&bcolor=FFFFFF&api",
+      "localRatio": 13.5875,
+      "webAIM": {
+        "ratio": "13.5",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0875,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.288144+00:00"
+    },
+    {
+      "foreground": "#176B43",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B43&bcolor=DBEBE2&api",
+      "localRatio": 5.2766,
+      "webAIM": {
+        "ratio": "5.27",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0066,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.079412+00:00"
+    },
+    {
+      "foreground": "#176B43",
+      "background": "#E0F2E7",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B43&bcolor=E0F2E7&api",
+      "localRatio": 5.5966,
+      "webAIM": {
+        "ratio": "5.59",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0066,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.642960+00:00"
+    },
+    {
+      "foreground": "#176B43",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B43&bcolor=E8F3EE&api",
+      "localRatio": 5.74,
+      "webAIM": {
+        "ratio": "5.73",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.01,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.750083+00:00"
+    },
+    {
+      "foreground": "#176B43",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B43&bcolor=F3F7F6&api",
+      "localRatio": 6.0381,
+      "webAIM": {
+        "ratio": "6.03",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0081,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.155171+00:00"
+    },
+    {
+      "foreground": "#176B43",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B43&bcolor=FFFFFF&api",
+      "localRatio": 6.5206,
+      "webAIM": {
+        "ratio": "6.52",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0006,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.492239+00:00"
+    },
+    {
+      "foreground": "#176B5B",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B5B&bcolor=DBEBE2&api",
+      "localRatio": 5.1643,
+      "webAIM": {
+        "ratio": "5.16",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0043,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.058613+00:00"
+    },
+    {
+      "foreground": "#176B5B",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B5B&bcolor=E8F3EE&api",
+      "localRatio": 5.6179,
+      "webAIM": {
+        "ratio": "5.61",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0079,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.717817+00:00"
+    },
+    {
+      "foreground": "#176B5B",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B5B&bcolor=F3F7F6&api",
+      "localRatio": 5.9096,
+      "webAIM": {
+        "ratio": "5.90",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0096,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.009304+00:00"
+    },
+    {
+      "foreground": "#176B5B",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=176B5B&bcolor=FFFFFF&api",
+      "localRatio": 6.3819,
+      "webAIM": {
+        "ratio": "6.38",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0019,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.399342+00:00"
+    },
+    {
+      "foreground": "#235B8A",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=235B8A&bcolor=DBEBE2&api",
+      "localRatio": 5.7902,
+      "webAIM": {
+        "ratio": "5.79",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0002,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.206275+00:00"
+    },
+    {
+      "foreground": "#235B8A",
+      "background": "#E4EFFA",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=235B8A&bcolor=E4EFFA&api",
+      "localRatio": 6.1419,
+      "webAIM": {
+        "ratio": "6.14",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0019,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.934210+00:00"
+    },
+    {
+      "foreground": "#235B8A",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=235B8A&bcolor=E8F3EE&api",
+      "localRatio": 6.2987,
+      "webAIM": {
+        "ratio": "6.29",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0087,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.858988+00:00"
+    },
+    {
+      "foreground": "#235B8A",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=235B8A&bcolor=F3F7F6&api",
+      "localRatio": 6.6258,
+      "webAIM": {
+        "ratio": "6.62",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0058,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.275661+00:00"
+    },
+    {
+      "foreground": "#235B8A",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=235B8A&bcolor=FFFFFF&api",
+      "localRatio": 7.1553,
+      "webAIM": {
+        "ratio": "7.15",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0053,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.513263+00:00"
+    },
+    {
+      "foreground": "#275D8C",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=275D8C&bcolor=DBEBE2&api",
+      "localRatio": 5.6071,
+      "webAIM": {
+        "ratio": "5.60",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0071,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.083279+00:00"
+    },
+    {
+      "foreground": "#275D8C",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=275D8C&bcolor=E8F3EE&api",
+      "localRatio": 6.0996,
+      "webAIM": {
+        "ratio": "6.09",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0096,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.751935+00:00"
+    },
+    {
+      "foreground": "#275D8C",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=275D8C&bcolor=F3F7F6&api",
+      "localRatio": 6.4163,
+      "webAIM": {
+        "ratio": "6.41",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0063,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.025005+00:00"
+    },
+    {
+      "foreground": "#275D8C",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=275D8C&bcolor=FFFFFF&api",
+      "localRatio": 6.9291,
+      "webAIM": {
+        "ratio": "6.92",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0091,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.385670+00:00"
+    },
+    {
+      "foreground": "#4F665F",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=4F665F&bcolor=DBEBE2&api",
+      "localRatio": 5.0007,
+      "webAIM": {
+        "ratio": "5.00",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0007,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.970918+00:00"
+    },
+    {
+      "foreground": "#4F665F",
+      "background": "#E4ECE8",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=4F665F&bcolor=E4ECE8&api",
+      "localRatio": 5.1386,
+      "webAIM": {
+        "ratio": "5.13",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0086,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.019226+00:00"
+    },
+    {
+      "foreground": "#4F665F",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=4F665F&bcolor=E8F3EE&api",
+      "localRatio": 5.4399,
+      "webAIM": {
+        "ratio": "5.43",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0099,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.624299+00:00"
+    },
+    {
+      "foreground": "#4F665F",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=4F665F&bcolor=F3F7F6&api",
+      "localRatio": 5.7224,
+      "webAIM": {
+        "ratio": "5.72",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0024,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.045181+00:00"
+    },
+    {
+      "foreground": "#4F665F",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=4F665F&bcolor=FFFFFF&api",
+      "localRatio": 6.1797,
+      "webAIM": {
+        "ratio": "6.17",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0097,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.398677+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=DBEBE2&api",
+      "localRatio": 6.1014,
+      "webAIM": {
+        "ratio": "6.10",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0014,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.283845+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#E0F2E7",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=E0F2E7&api",
+      "localRatio": 6.4715,
+      "webAIM": {
+        "ratio": "6.47",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0015,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.760355+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#E4ECE8",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=E4ECE8&api",
+      "localRatio": 6.2697,
+      "webAIM": {
+        "ratio": "6.26",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0097,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.114241+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#E4EFFA",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=E4EFFA&api",
+      "localRatio": 6.472,
+      "webAIM": {
+        "ratio": "6.47",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.002,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.988354+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=E8F3EE&api",
+      "localRatio": 6.6373,
+      "webAIM": {
+        "ratio": "6.63",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0073,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.954462+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=F3F7F6&api",
+      "localRatio": 6.9819,
+      "webAIM": {
+        "ratio": "6.98",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0019,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.279471+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#FCE7E9",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=FCE7E9&api",
+      "localRatio": 6.3716,
+      "webAIM": {
+        "ratio": "6.37",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0016,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.896357+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#FFF1CC",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=FFF1CC&api",
+      "localRatio": 6.7163,
+      "webAIM": {
+        "ratio": "6.71",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0063,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.824641+00:00"
+    },
+    {
+      "foreground": "#5C3CB7",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=5C3CB7&bcolor=FFFFFF&api",
+      "localRatio": 7.5399,
+      "webAIM": {
+        "ratio": "7.53",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0099,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.624562+00:00"
+    },
+    {
+      "foreground": "#71867F",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=71867F&bcolor=DBEBE2&api",
+      "localRatio": 3.1361,
+      "webAIM": {
+        "ratio": "3.13",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0061,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.208445+00:00"
+    },
+    {
+      "foreground": "#71867F",
+      "background": "#E4ECE8",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=71867F&bcolor=E4ECE8&api",
+      "localRatio": 3.2226,
+      "webAIM": {
+        "ratio": "3.22",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0026,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.051048+00:00"
+    },
+    {
+      "foreground": "#71867F",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=71867F&bcolor=E8F3EE&api",
+      "localRatio": 3.4116,
+      "webAIM": {
+        "ratio": "3.41",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0016,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.973580+00:00"
+    },
+    {
+      "foreground": "#71867F",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=71867F&bcolor=F3F7F6&api",
+      "localRatio": 3.5887,
+      "webAIM": {
+        "ratio": "3.58",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0087,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.275201+00:00"
+    },
+    {
+      "foreground": "#71867F",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=71867F&bcolor=FFFFFF&api",
+      "localRatio": 3.8755,
+      "webAIM": {
+        "ratio": "3.87",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0055,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.595742+00:00"
+    },
+    {
+      "foreground": "#7A4B00",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=7A4B00&bcolor=DBEBE2&api",
+      "localRatio": 5.9964,
+      "webAIM": {
+        "ratio": "5.99",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0064,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.078760+00:00"
+    },
+    {
+      "foreground": "#7A4B00",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=7A4B00&bcolor=E8F3EE&api",
+      "localRatio": 6.5231,
+      "webAIM": {
+        "ratio": "6.52",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0031,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.728179+00:00"
+    },
+    {
+      "foreground": "#7A4B00",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=7A4B00&bcolor=F3F7F6&api",
+      "localRatio": 6.8618,
+      "webAIM": {
+        "ratio": "6.86",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0018,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.162195+00:00"
+    },
+    {
+      "foreground": "#7A4B00",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=7A4B00&bcolor=FFFFFF&api",
+      "localRatio": 7.4102,
+      "webAIM": {
+        "ratio": "7.41",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0002,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.412573+00:00"
+    },
+    {
+      "foreground": "#805500",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=805500&bcolor=DBEBE2&api",
+      "localRatio": 5.282,
+      "webAIM": {
+        "ratio": "5.28",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.002,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.161444+00:00"
+    },
+    {
+      "foreground": "#805500",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=805500&bcolor=E8F3EE&api",
+      "localRatio": 5.7459,
+      "webAIM": {
+        "ratio": "5.74",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0059,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.841684+00:00"
+    },
+    {
+      "foreground": "#805500",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=805500&bcolor=F3F7F6&api",
+      "localRatio": 6.0443,
+      "webAIM": {
+        "ratio": "6.04",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0043,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.146795+00:00"
+    },
+    {
+      "foreground": "#805500",
+      "background": "#FFF1CC",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=805500&bcolor=FFF1CC&api",
+      "localRatio": 5.8143,
+      "webAIM": {
+        "ratio": "5.81",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0043,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.746004+00:00"
+    },
+    {
+      "foreground": "#805500",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=805500&bcolor=FFFFFF&api",
+      "localRatio": 6.5273,
+      "webAIM": {
+        "ratio": "6.52",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0073,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.508780+00:00"
+    },
+    {
+      "foreground": "#829C8D",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=829C8D&bcolor=101D19&api",
+      "localRatio": 5.85,
+      "webAIM": {
+        "ratio": "5.85",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.337510+00:00"
+    },
+    {
+      "foreground": "#829C8D",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=829C8D&bcolor=1B2D26&api",
+      "localRatio": 4.8893,
+      "webAIM": {
+        "ratio": "4.88",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0093,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.614905+00:00"
+    },
+    {
+      "foreground": "#829C8D",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=829C8D&bcolor=233C30&api",
+      "localRatio": 4.0268,
+      "webAIM": {
+        "ratio": "4.02",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0068,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.892517+00:00"
+    },
+    {
+      "foreground": "#829C8D",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=829C8D&bcolor=294A3B&api",
+      "localRatio": 3.3174,
+      "webAIM": {
+        "ratio": "3.31",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0074,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.152306+00:00"
+    },
+    {
+      "foreground": "#829C8D",
+      "background": "#2D4238",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=829C8D&bcolor=2D4238&api",
+      "localRatio": 3.6393,
+      "webAIM": {
+        "ratio": "3.63",
+        "AA": "fail",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "fail"
+      },
+      "absoluteDifference": 0.0093,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.896375+00:00"
+    },
+    {
+      "foreground": "#86DDB3",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDB3&bcolor=101D19&api",
+      "localRatio": 10.7336,
+      "webAIM": {
+        "ratio": "10.7",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0336,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.281040+00:00"
+    },
+    {
+      "foreground": "#86DDB3",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDB3&bcolor=1B2D26&api",
+      "localRatio": 8.9708,
+      "webAIM": {
+        "ratio": "8.97",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0008,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.585010+00:00"
+    },
+    {
+      "foreground": "#86DDB3",
+      "background": "#203F2E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDB3&bcolor=203F2E&api",
+      "localRatio": 7.1789,
+      "webAIM": {
+        "ratio": "7.17",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0089,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.564670+00:00"
+    },
+    {
+      "foreground": "#86DDB3",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDB3&bcolor=233C30&api",
+      "localRatio": 7.3884,
+      "webAIM": {
+        "ratio": "7.38",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0084,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.842838+00:00"
+    },
+    {
+      "foreground": "#86DDB3",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDB3&bcolor=294A3B&api",
+      "localRatio": 6.0868,
+      "webAIM": {
+        "ratio": "6.08",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0068,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.089535+00:00"
+    },
+    {
+      "foreground": "#86DDBE",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDBE&bcolor=101D19&api",
+      "localRatio": 10.8101,
+      "webAIM": {
+        "ratio": "10.8",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0101,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.235514+00:00"
+    },
+    {
+      "foreground": "#86DDBE",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDBE&bcolor=1B2D26&api",
+      "localRatio": 9.0347,
+      "webAIM": {
+        "ratio": "9.03",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0047,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.479032+00:00"
+    },
+    {
+      "foreground": "#86DDBE",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDBE&bcolor=233C30&api",
+      "localRatio": 7.441,
+      "webAIM": {
+        "ratio": "7.44",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.001,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.738865+00:00"
+    },
+    {
+      "foreground": "#86DDBE",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=86DDBE&bcolor=294A3B&api",
+      "localRatio": 6.1301,
+      "webAIM": {
+        "ratio": "6.13",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0001,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.013442+00:00"
+    },
+    {
+      "foreground": "#A2E7CE",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A2E7CE&bcolor=101D19&api",
+      "localRatio": 12.2609,
+      "webAIM": {
+        "ratio": "12.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0609,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.318333+00:00"
+    },
+    {
+      "foreground": "#A2E7CE",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A2E7CE&bcolor=1B2D26&api",
+      "localRatio": 10.2472,
+      "webAIM": {
+        "ratio": "10.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0472,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.271303+00:00"
+    },
+    {
+      "foreground": "#A32932",
+      "background": "#DBEBE2",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A32932&bcolor=DBEBE2&api",
+      "localRatio": 5.8186,
+      "webAIM": {
+        "ratio": "5.81",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0086,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.205976+00:00"
+    },
+    {
+      "foreground": "#A32932",
+      "background": "#E8F3EE",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A32932&bcolor=E8F3EE&api",
+      "localRatio": 6.3297,
+      "webAIM": {
+        "ratio": "6.32",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0097,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.856237+00:00"
+    },
+    {
+      "foreground": "#A32932",
+      "background": "#F3F7F6",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A32932&bcolor=F3F7F6&api",
+      "localRatio": 6.6584,
+      "webAIM": {
+        "ratio": "6.65",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0084,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.168080+00:00"
+    },
+    {
+      "foreground": "#A32932",
+      "background": "#FCE7E9",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A32932&bcolor=FCE7E9&api",
+      "localRatio": 6.0763,
+      "webAIM": {
+        "ratio": "6.07",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0063,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.869794+00:00"
+    },
+    {
+      "foreground": "#A32932",
+      "background": "#FFFFFF",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A32932&bcolor=FFFFFF&api",
+      "localRatio": 7.1905,
+      "webAIM": {
+        "ratio": "7.19",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0005,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:41.520082+00:00"
+    },
+    {
+      "foreground": "#A4C9EF",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A4C9EF&bcolor=101D19&api",
+      "localRatio": 10.0507,
+      "webAIM": {
+        "ratio": "10.0",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0507,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.234513+00:00"
+    },
+    {
+      "foreground": "#A4C9EF",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A4C9EF&bcolor=1B2D26&api",
+      "localRatio": 8.4,
+      "webAIM": {
+        "ratio": "8.40",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.496089+00:00"
+    },
+    {
+      "foreground": "#A4C9EF",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A4C9EF&bcolor=233C30&api",
+      "localRatio": 6.9183,
+      "webAIM": {
+        "ratio": "6.91",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0083,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.769366+00:00"
+    },
+    {
+      "foreground": "#A4C9EF",
+      "background": "#243C50",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A4C9EF&bcolor=243C50&api",
+      "localRatio": 6.6294,
+      "webAIM": {
+        "ratio": "6.62",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0094,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.787040+00:00"
+    },
+    {
+      "foreground": "#A4C9EF",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=A4C9EF&bcolor=294A3B&api",
+      "localRatio": 5.6995,
+      "webAIM": {
+        "ratio": "5.69",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0095,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.030458+00:00"
+    },
+    {
+      "foreground": "#B7F0D9",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B7F0D9&bcolor=101D19&api",
+      "localRatio": 13.599,
+      "webAIM": {
+        "ratio": "13.5",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.099,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.375255+00:00"
+    },
+    {
+      "foreground": "#B7F0D9",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B7F0D9&bcolor=1B2D26&api",
+      "localRatio": 11.3656,
+      "webAIM": {
+        "ratio": "11.3",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0656,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.379601+00:00"
+    },
+    {
+      "foreground": "#B8CCC1",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B8CCC1&bcolor=101D19&api",
+      "localRatio": 10.2699,
+      "webAIM": {
+        "ratio": "10.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0699,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.156481+00:00"
+    },
+    {
+      "foreground": "#B8CCC1",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B8CCC1&bcolor=1B2D26&api",
+      "localRatio": 8.5833,
+      "webAIM": {
+        "ratio": "8.58",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0033,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.466772+00:00"
+    },
+    {
+      "foreground": "#B8CCC1",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B8CCC1&bcolor=233C30&api",
+      "localRatio": 7.0692,
+      "webAIM": {
+        "ratio": "7.06",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0092,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.724477+00:00"
+    },
+    {
+      "foreground": "#B8CCC1",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B8CCC1&bcolor=294A3B&api",
+      "localRatio": 5.8238,
+      "webAIM": {
+        "ratio": "5.82",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0038,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.971522+00:00"
+    },
+    {
+      "foreground": "#B8CCC1",
+      "background": "#2D4238",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=B8CCC1&bcolor=2D4238&api",
+      "localRatio": 6.3888,
+      "webAIM": {
+        "ratio": "6.38",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0088,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.891977+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=101D19&api",
+      "localRatio": 10.2367,
+      "webAIM": {
+        "ratio": "10.2",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0367,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.389937+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=1B2D26&api",
+      "localRatio": 8.5555,
+      "webAIM": {
+        "ratio": "8.55",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0055,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.646060+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#203F2E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=203F2E&api",
+      "localRatio": 6.8465,
+      "webAIM": {
+        "ratio": "6.84",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0065,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.610546+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=233C30&api",
+      "localRatio": 7.0463,
+      "webAIM": {
+        "ratio": "7.04",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0063,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.906376+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#243C50",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=243C50&api",
+      "localRatio": 6.7522,
+      "webAIM": {
+        "ratio": "6.75",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0022,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.858137+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=294A3B&api",
+      "localRatio": 5.805,
+      "webAIM": {
+        "ratio": "5.80",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.005,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.211517+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#2D4238",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=2D4238&api",
+      "localRatio": 6.3682,
+      "webAIM": {
+        "ratio": "6.36",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0082,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.961866+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#43391E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=43391E&api",
+      "localRatio": 6.7321,
+      "webAIM": {
+        "ratio": "6.73",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0021,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.666347+00:00"
+    },
+    {
+      "foreground": "#D0BDFF",
+      "background": "#45292E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=D0BDFF&bcolor=45292E&api",
+      "localRatio": 7.7066,
+      "webAIM": {
+        "ratio": "7.70",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0066,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.795418+00:00"
+    },
+    {
+      "foreground": "#F1CE87",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F1CE87&bcolor=101D19&api",
+      "localRatio": 11.4857,
+      "webAIM": {
+        "ratio": "11.4",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0857,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.265992+00:00"
+    },
+    {
+      "foreground": "#F1CE87",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F1CE87&bcolor=1B2D26&api",
+      "localRatio": 9.5994,
+      "webAIM": {
+        "ratio": "9.59",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0094,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.524506+00:00"
+    },
+    {
+      "foreground": "#F1CE87",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F1CE87&bcolor=233C30&api",
+      "localRatio": 7.9061,
+      "webAIM": {
+        "ratio": "7.90",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0061,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.789806+00:00"
+    },
+    {
+      "foreground": "#F1CE87",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F1CE87&bcolor=294A3B&api",
+      "localRatio": 6.5133,
+      "webAIM": {
+        "ratio": "6.51",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0033,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.093218+00:00"
+    },
+    {
+      "foreground": "#F1CE87",
+      "background": "#43391E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F1CE87&bcolor=43391E&api",
+      "localRatio": 7.5535,
+      "webAIM": {
+        "ratio": "7.55",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0035,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.626112+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=101D19&api",
+      "localRatio": 16.1381,
+      "webAIM": {
+        "ratio": "16.1",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0381,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.143283+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=1B2D26&api",
+      "localRatio": 13.4877,
+      "webAIM": {
+        "ratio": "13.4",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0877,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.404935+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#203F2E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=203F2E&api",
+      "localRatio": 10.7935,
+      "webAIM": {
+        "ratio": "10.7",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0935,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.564901+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=233C30&api",
+      "localRatio": 11.1085,
+      "webAIM": {
+        "ratio": "11.1",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0085,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.688279+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#243C50",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=243C50&api",
+      "localRatio": 10.6447,
+      "webAIM": {
+        "ratio": "10.6",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0447,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.854900+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=294A3B&api",
+      "localRatio": 9.1516,
+      "webAIM": {
+        "ratio": "9.15",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0016,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.968037+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#2D4238",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=2D4238&api",
+      "localRatio": 10.0394,
+      "webAIM": {
+        "ratio": "10.0",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0394,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.977977+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#43391E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=43391E&api",
+      "localRatio": 10.6132,
+      "webAIM": {
+        "ratio": "10.6",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0132,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.684873+00:00"
+    },
+    {
+      "foreground": "#F3F8F5",
+      "background": "#45292E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=F3F8F5&bcolor=45292E&api",
+      "localRatio": 12.1493,
+      "webAIM": {
+        "ratio": "12.1",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0493,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.751666+00:00"
+    },
+    {
+      "foreground": "#FFB1B8",
+      "background": "#101D19",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFB1B8&bcolor=101D19&api",
+      "localRatio": 10.0948,
+      "webAIM": {
+        "ratio": "10.0",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0948,
+      "webAIMDisplayPrecision": 0.1,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.358951+00:00"
+    },
+    {
+      "foreground": "#FFB1B8",
+      "background": "#1B2D26",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFB1B8&bcolor=1B2D26&api",
+      "localRatio": 8.4369,
+      "webAIM": {
+        "ratio": "8.43",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0069,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.597686+00:00"
+    },
+    {
+      "foreground": "#FFB1B8",
+      "background": "#233C30",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFB1B8&bcolor=233C30&api",
+      "localRatio": 6.9486,
+      "webAIM": {
+        "ratio": "6.94",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0086,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:43.863024+00:00"
+    },
+    {
+      "foreground": "#FFB1B8",
+      "background": "#294A3B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFB1B8&bcolor=294A3B&api",
+      "localRatio": 5.7245,
+      "webAIM": {
+        "ratio": "5.72",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0045,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.135343+00:00"
+    },
+    {
+      "foreground": "#FFB1B8",
+      "background": "#45292E",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFB1B8&bcolor=45292E&api",
+      "localRatio": 7.5997,
+      "webAIM": {
+        "ratio": "7.59",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0097,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:44.733221+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#0E5144",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=0E5144&api",
+      "localRatio": 9.2141,
+      "webAIM": {
+        "ratio": "9.21",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0041,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.450964+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#125E50",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=125E50&api",
+      "localRatio": 7.6569,
+      "webAIM": {
+        "ratio": "7.65",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0069,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.328596+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#176B43",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=176B43&api",
+      "localRatio": 6.5206,
+      "webAIM": {
+        "ratio": "6.52",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0006,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.542124+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#176B5B",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=176B5B&api",
+      "localRatio": 6.3819,
+      "webAIM": {
+        "ratio": "6.38",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0019,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.328183+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#235B8A",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=235B8A&api",
+      "localRatio": 7.1553,
+      "webAIM": {
+        "ratio": "7.15",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0053,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.642395+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#275D8C",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=275D8C&api",
+      "localRatio": 6.9291,
+      "webAIM": {
+        "ratio": "6.92",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0091,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.536822+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#7A4B00",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=7A4B00&api",
+      "localRatio": 7.4102,
+      "webAIM": {
+        "ratio": "7.41",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0002,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.537135+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#805500",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=805500&api",
+      "localRatio": 6.5273,
+      "webAIM": {
+        "ratio": "6.52",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "fail",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0073,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.576649+00:00"
+    },
+    {
+      "foreground": "#FFFFFF",
+      "background": "#A32932",
+      "url": "https://webaim.org/resources/contrastchecker/?fcolor=FFFFFF&bcolor=A32932&api",
+      "localRatio": 7.1905,
+      "webAIM": {
+        "ratio": "7.19",
+        "AA": "pass",
+        "AALarge": "pass",
+        "AAA": "pass",
+        "AAALarge": "pass"
+      },
+      "absoluteDifference": 0.0005,
+      "webAIMDisplayPrecision": 0.01,
+      "consistentWithinDisplayPrecision": true,
+      "checkedAtUtc": "2026-10-06T08:10:42.668456+00:00"
+    }
+  ]
+}

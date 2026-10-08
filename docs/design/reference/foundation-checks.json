@@ -1,0 +1,34 @@
+{
+  "checkedDate": "2026-10-06 America/Phoenix",
+  "counts": {
+    "themes": 2,
+    "typographyStyles": 10,
+    "components": 21,
+    "icons": 26,
+    "approvedContrastUsages": 198,
+    "uniqueColorPairs": 136,
+    "webAIMVerifiedPairs": 136,
+    "failedWebAIMRequests": 0
+  },
+  "minimumFontSize": 16,
+  "minimumLineHeightRatio": 1.5,
+  "assertions": {
+    "all_font_sizes_at_least_16": true,
+    "all_line_height_ratios_at_least_1_5": true,
+    "all_normal_text_pairs_meet_4_5": true,
+    "all_large_text_pairs_meet_3": true,
+    "all_ui_pairs_meet_3": true,
+    "all_webAIM_pairs_meet_required_threshold": true,
+    "all_webAIM_results_match_local_display_precision": true,
+    "all_components_document_five_states": true,
+    "minimum_touch_target_at_least_48": true,
+    "preferred_touch_target_56": true,
+    "error_summary_receives_focus_before_fields": true,
+    "error_summary_links_to_invalid_fields": true,
+    "dose_undo_persists_until_dismissal_or_navigation": true,
+    "history_correction_remains_available": true
+  },
+  "allChecksPass": true,
+  "evidenceBoundary": "Specification and color-math checks; not evidence of native Figma components, screen-reader testing, device accessibility, or a functioning medical application.",
+  "reproduce": "Run build-foundations.py then verify-webaim.py --reuse-evidence. Existing color-pair coverage must match before cached WebAIM responses can be reused."
+}

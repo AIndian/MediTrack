@@ -1,0 +1,104 @@
+MediTrack Project Proposal
+1. Project Overview
+MediTrack is a healthcare application designed to help adults age 65 and older manage medications and monitor their health more independently. The application provides medication schedules, reminders, medication logging, symptom tracking, and easy-to-understand health summaries that can be shared with healthcare providers, cargivers and family  members. Because reliable internet access cannot always be assumed, MediTrack will be runnable completely offline, allowing features to continue functioning without a connection. The interface will prioritize accessibility through large controls, high contrast, simple navigation, support for 200% or greater text scaling, and voice medication reminders.
+Target Audience
+The primary target audience is seniors age 65 and older and users who may have limited technical experience, reduced vision, or difficulty interacting with small or complex interfaces.
+The application will take in the Apple design inspiration and therefore emphasize:
+Simple and predictable navigation
+Large touch targets
+High-contrast visual elements
+Minimal typing
+Clear language
+200%+ text scaling
+Voice reminders
+Primary Problem
+Managing multiple medications can become difficult, particularly when medications have different schedules or instructions. Users may forget, accidentally take a medication twice, or have difficulty remembering symptoms during medical appointments.
+MediTrack provides one centralized system, that can be integrated into existing calendars (skylight, apple, google etc.) where users can see what medications they need to take, when they need to take it, receive reminders, record a dose was taken or skipped (can also be auto skipped and notify dependents if not marked as taken), track symptoms, and generate symptomatic reports for appointments.
+
+
+2. Constraints
+Domain: Healthcare
+MediTrack addresses the healthcare domain by focusing on medication and personal health tracking.
+The application will store HIPAA information such as:
+Medication names
+Dosages
+Schedules
+Medication history
+Symptoms
+User voice notes (translated to text) or text notes
+This information may be sensitive, the application will be designed with privacy and HIPAA laws. 
+User Group: Seniors (65+)
+The interface will specifically be designed for adults age 65 and older or other users with disabilities that may benefit from the app.
+This will influence the design features:
+Large buttons and touch
+Simple screens 
+Clear labels 
+High-contrast interface 
+Confirmations
+medication status indicators
+Reduced steps for tasks
+Technical: Offline
+Core MediTrack functionality must remain available immediately and without connection.
+Users will still be able to:
+View medications
+View medication schedule
+Receive scheduled reminders
+Record medications as taken or skipped
+Add symptoms
+Review medication history
+Data will be stored locally on the device first. Features requiring remote services can synchronize when available.
+Accessibility: 200%+ Text Scaling
+MediTrack will support text scaling of 200%+ without loss of functionality.
+The interface will use responsive layouts. Screens will be tested at multiple text sizes to ensure that text does not overlap controls, clipped, or prevent navigation.
+
+3. Key Features
+
+4. Platform Deployment Plan
+MediTrack will be designed as a cross-platform application so users can access the system from multiple types of devices.
+iOS then Android (flutter and react native)
+The mobile application will support iOS and Android but integrateable with existing calendars
+Mobile will be the primary MediTrack experience because medication reminders need to be available on a device users commonly carry with them
+Windows
+The selected desktop operating system will be Windows.
+Windows provides target for the project and allows MediTrack to provide a larger-screen interface for users who may prefer managing medication information on a computer. Many other common hardware calendars rely on Windows as well and therefore MediTrack can easily be onboarded onto such hardware. 
+Web
+MediTrack will also provide a responsive web application.
+The web interface will automatically adapt to different screen sizes and will provide access to major functions such as medication schedules, medication history, symptoms, and reports.
+The responsive design will ensure that the application remains usable at increased browser zoom and text sizes.
+5. Success Criteria
+MediTrack will be considered successful if seniors can reliably manage their medication schedules without requiring extensive technical assistance.
+Medication adherence: Users successfully record scheduled medications as taken, skipped, or missed.
+Reminder effectiveness: Users receive medication reminders reliably and can understand which medication needs to be taken.
+Task completion: Users can independently complete critical tasks such as adding a medication, checking today's schedule, and recording a dose.
+Accessibility: All essential workflows remain usable with text scaling at 200% or greater without clipped text, overlapping elements, or inaccessible controls.
+Offline: Users can view schedules and log medications or symptoms while disconnected from the internet.
+Usability: Seniors participating in testing can navigate the primary application workflows with minimal assistance.
+User feedback: Test users report that medication schedules, reminders, and controls are understandable and easy to use.
+
+6. Initial Risks
+Offline Data Synchronization
+Maintaining an offline-first application introduces additional complexity. Data created while offline must eventually be replicated correctly. Using local snapshots and a replication pipeline may simplify this process. 
+Cross-Platform Differences
+Android, iOS, Windows, and web browsers handle notifications, local storage, accessibility, and processing differently.
+Notification Reliability
+Medication reminders are one of MediTrack's most important functions. Dependent on the user to put priority reminders for these notifications.
+
+
+Accessibility at Large Text Sizes
+Supporting 200%+ text scaling requires more than increasing font size. Large text can cause buttons, navigation elements, and other UI components clashes.
+Healthcare Data Privacy
+Medication and symptom information can be sensitive. The application must avoid unnecessary collection or exposure of personal health information and should use appropriate security measures for stored data.
+
+Priority | Feature | Description
+Must-Have | Medication Management | Add, edit, and remove medications including name, dosage, instructions, and frequency.
+Must-Have | Medication Schedule | Display medications organized by the time and date they should be taken.
+Must-Have | Medication Reminders | Generate notifications when medications are due.
+Must-Have | Dose Logging | Allow users to mark medication as taken, skipped, or missed.
+Must-Have | Offline Operation | Core medication and symptom functionality remains available without internet access.
+Must-Have | 200%+ Text Scaling | Interface remains functional and readable when text is enlarged to at least 200%.
+Must-Have | Accessible Interface | Large controls, clear navigation, readable typography, and high-contrast design.
+Should-Have | Symptom Tracking | Record symptoms, severity, date/time, and optional notes.
+Should-Have | Doctor Reports | Generate summaries of medication adherence, medication history, and reported symptoms for appointments.
+Should-Have | Voice Reminders | Provide spoken reminders in addition to standard visual notifications.
+Nice-to-Have | Caregiver Support | Allow selected medication information or reports to be shared with a trusted caregiver.
+Nice-to-Have | Medication History | Provide longer-term trends and summaries showing medication adherence over time.

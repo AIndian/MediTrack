@@ -1,0 +1,330 @@
+{
+  "project": "MediTrack mobile design system",
+  "version": "1.0",
+  "screenCount": 10,
+  "contentNote": "All people, medication records, doses, schedules, symptoms, and histories below are fictional demonstration data. Medication content represents imaginary user-entered records and is not a clinical recommendation.",
+  "sourceOfTruth": {
+    "primary": "MediTrack_Requirements_Document_Group1.docx, September 30, 2026",
+    "secondary": "Meditrack_proposal.docx",
+    "scope": "Mobile and tablet design only. Requirements in the documents are product context, not instructions to perform health actions or add scope.",
+    "mappingLegend": "FR1-FR20 refer to the numbered functional requirements in Section 2.2. US1-US13 refer to the numbered prioritized user stories in Section 2.1. NFR labels refer to Section 2.3.",
+    "deferred": "Calendar integration is optional (FR20/US13). Do not represent it as implemented. Login, clinical advice, drug interactions, pharmacy ordering, emergency triage, and AI-generated dosage are outside these screens."
+  },
+  "shared": {
+    "demoDate": "Tuesday, October 6, 2026",
+    "person": "Margaret Ellis",
+    "navigation": {
+      "phone": ["Today", "Medicines", "History", "More"],
+      "tablet": "Labeled navigation rail in wide layouts; same destination names and order. More opens Settings & sharing with visible links to Symptoms and Appointment summary.",
+      "secondaryEntryPoints": "Today exposes Log symptom and Appointment summary. More exposes Symptoms, Appointment summary, Reminders, Accessibility, Sync status, and Caregiver access.",
+      "behavior": "Selected destination includes a text label, selected state, and shape/indicator; color is supplementary. Back restores the previous screen and invoking control. No critical action requires a swipe or long press."
+    },
+    "layoutProfiles": [
+      {"id": "iphone_portrait", "device": "iPhone", "orientation": "portrait", "frame": "393 x 852 pt", "safeAreas": "Use native safe-area insets; never place controls under the home indicator.", "layout": "Single column; 16pt side margins; 16pt card gap; 24pt section gap."},
+      {"id": "iphone_landscape", "device": "iPhone", "orientation": "landscape", "frame": "852 x 393 pt", "safeAreas": "Respect camera and home-indicator insets on every side.", "layout": "One vertically scrollable content region; center content to at most 680pt; compact top app bar; no fixed-height content cards."},
+      {"id": "android_phone_portrait", "device": "Android phone", "orientation": "portrait", "frame": "412 x 915 dp", "safeAreas": "Use system bar and gesture insets.", "layout": "Single column; 16dp side margins; 16dp card gap; 24dp section gap."},
+      {"id": "android_phone_landscape", "device": "Android phone", "orientation": "landscape", "frame": "915 x 412 dp", "safeAreas": "Keep controls outside system bar and gesture insets.", "layout": "One vertically scrollable content region; center content to at most 680dp; persistent navigation can move to a labeled rail if vertical height is constrained."},
+      {"id": "ipad_portrait", "device": "iPad", "orientation": "portrait", "frame": "834 x 1194 pt", "safeAreas": "Use native safe-area insets.", "layout": "24pt outer margins; centered forms up to 600pt; list-detail when both panes retain useful reading width."},
+      {"id": "ipad_landscape", "device": "iPad", "orientation": "landscape", "frame": "1194 x 834 pt", "safeAreas": "Use native safe-area insets.", "layout": "Labeled rail plus 320pt list and flexible detail pane where appropriate; 24pt gaps; no stretched full-width text paragraphs."},
+      {"id": "android_tablet_portrait", "device": "Android tablet", "orientation": "portrait", "frame": "800 x 1280 dp", "safeAreas": "Respect system bar, gesture, and keyboard insets.", "layout": "24dp outer margins; centered forms up to 600dp; primary and secondary sections may use two columns when each has sufficient width."},
+      {"id": "android_tablet_landscape", "device": "Android tablet", "orientation": "landscape", "frame": "1280 x 800 dp", "safeAreas": "Respect system bar, gesture, and keyboard insets.", "layout": "Labeled rail plus 320dp list and flexible detail pane; 24dp gaps; match phone content and actions."}
+    ],
+    "accessibilityBaseline": {
+      "touch": "Use at least 48 x 48 logical units for all interactive targets: 48pt on iOS exceeds 44pt minimum; 48dp on Android. In exported 1x mockups this is 48 x 48 design pixels. Primary actions are at least 56 units high with 16-unit internal padding; allow height to grow with text. Separate adjacent dose actions by 16 units.",
+      "type": "Body text is at least 16 logical units; all text styles have at least 1.5x line height. Do not disable native text scaling.",
+      "readingOrder": "Top app bar/title, status messages, page content in logical order, primary and secondary actions, then persistent navigation. Decorative icons are hidden from screen readers; meaningful icons have labels or are grouped with adjacent text.",
+      "focus": "External keyboard Tab moves between interactive controls; Shift+Tab reverses; Enter/Space activates the appropriate control. Native radio groups and segmented controls use arrow keys. Focus is always visibly indicated. Opening a dialog moves focus to its heading, confines interaction to the dialog, and closing restores focus to the invoker. Escape closes dismissible overlays. Headings are available through screen-reader heading navigation but are not extra Tab stops.",
+      "announcements": "Announcement strings are intended content, role, and state. Actual VoiceOver/TalkBack wording varies by platform and must be manually verified. Use a polite status announcement for saved changes; alert semantics for errors that block the current task.",
+      "text200": "All screens reflow to one column when increased text would squeeze a pane. No essential text truncates, no horizontal text scroll, and no fixed card height. Actions stack; inputs and navigation grow; dialog content scrolls with reachable actions. Tablet two-pane layouts collapse when the measured content no longer fits, regardless of physical device width.",
+      "contrast": "Apply only approved light/dark token pairs from the design-system contrast register. Annotate main text/background, button text/fill, input boundary/surface, and focus ring/adjacent surface on each mockup. Target at least 4.5:1 for all text (including small labels) and 3:1 for meaningful UI boundaries/icons. Numerical ratios must come from the final token register rather than assumptions.",
+      "verificationBoundary": "These annotations specify intended behavior. Static mockups do not verify actual native screen-reader, keyboard, notification delivery, sync, or 200% runtime behavior."
+    }
+  },
+  "screens": [
+    {
+      "id": "today",
+      "number": "01",
+      "title": "Today",
+      "purpose": "See today's doses in time order and record a due dose with immediate feedback.",
+      "requirements": ["FR3", "FR6", "FR7", "FR8", "FR9", "FR18", "US2", "US4", "US5", "US6", "US7"],
+      "priority": "Must-Have",
+      "content": {
+        "eyebrow": "Tuesday, October 6",
+        "heading": "Good morning, Margaret",
+        "summary": "1 of 4 doses recorded Taken",
+        "connection": "Offline · Changes saved on this device",
+        "cards": [
+          {"time": "8:00 AM", "name": "Amlodipine", "dose": "5 mg", "instructions": "Use the instructions saved from your prescription label.", "status": "Taken", "detail": "Recorded at 8:02 AM", "icon": "check-circle", "actions": ["View dose"]},
+          {"time": "8:00 AM", "name": "Metformin", "dose": "500 mg", "instructions": "With breakfast. Saved by Margaret.", "status": "Due", "icon": "clock", "actions": ["Mark Taken", "Skip dose"]},
+          {"time": "12:00 PM", "name": "Vitamin D3", "dose": "1,000 IU", "instructions": "Instructions not added", "status": "Upcoming", "icon": "clock", "actions": ["View medicine"]},
+          {"time": "6:00 PM", "name": "Metformin", "dose": "500 mg", "instructions": "With dinner. Saved by Margaret.", "status": "Upcoming", "icon": "clock", "actions": ["View medicine"]}
+        ],
+        "secondaryActions": ["Log symptom", "Appointment summary"]
+      },
+      "primaryAction": "Mark Taken",
+      "secondaryStates": [
+        {"id": "dose_saved", "kind": "snackbar", "copy": "Metformin marked Taken. Saved on this device.", "action": "Undo", "behavior": "Update the relevant card immediately; announce the status once. Keep Undo reachable until dismissal or navigation, and retain later correction from History."},
+        {"id": "reminders_disabled", "kind": "warning_banner", "copy": "Reminders are off. Your phone is not allowing medication notifications.", "actions": ["Open reminder settings"], "behavior": "Do not describe reminders as active. Retain schedule viewing and manual logging."},
+        {"id": "empty", "kind": "empty_state", "copy": "No medicines scheduled today.", "actions": ["Add medicine"]},
+        {"id": "sync_pending", "kind": "status", "copy": "2 changes waiting to sync. Your records are saved here.", "actions": ["View sync status"]}
+      ],
+      "screenReaderOrder": ["Today, heading level 1", "Tuesday, October 6, 2026", "Good morning, Margaret", "1 of 4 doses recorded Taken", "Offline. Changes saved on this device, status", "8 AM, heading level 2", "Amlodipine, 5 milligrams, Taken, recorded at 8:02 AM", "View Amlodipine dose, button", "Metformin, 500 milligrams, Due. With breakfast. Saved by Margaret", "Mark 8 AM Metformin dose Taken, button", "Skip 8 AM Metformin dose, button", "12 PM, Vitamin D3, 1,000 international units, Upcoming", "View Vitamin D3 medicine, button", "6 PM, Metformin, 500 milligrams, Upcoming. With dinner. Saved by Margaret", "View evening Metformin medicine, button", "Log symptom, button", "Appointment summary, button", "Today, selected, navigation destination", "Medicines, navigation destination", "History, navigation destination", "More, navigation destination"],
+      "focusFlow": ["View Amlodipine dose", "Mark 8 AM Metformin Taken", "Skip 8 AM Metformin", "View Vitamin D3", "View evening Metformin", "Log symptom", "Appointment summary", "Today", "Medicines", "History", "More"],
+      "text200": "The summary, status banner, medicine names, doses, and instructions wrap. Mark Taken and Skip dose stack as separate full-width buttons. Time headings remain above associated cards. All four doses remain reachable by vertical scrolling.",
+      "layout": {"phonePortrait": "Single-column timeline with the due card visually prominent. Navigation stays after scroll content without obscuring the last action.", "phoneLandscape": "Keep one ordered timeline and vertically scroll; do not split morning and evening into independent columns.", "tabletPortrait": "Timeline occupies a readable main column; a secondary panel may contain summary and Log symptom only.", "tabletLandscape": "Labeled rail, ordered dose list, and selected-dose details; preserve list-before-detail reading and focus order."}
+    },
+    {
+      "id": "medications",
+      "number": "02",
+      "title": "Medicines",
+      "purpose": "Browse medication records and start adding or editing a medicine.",
+      "requirements": ["FR1", "FR2", "FR8", "FR11", "US1", "US5", "US7", "US11"],
+      "priority": "Must-Have",
+      "content": {
+        "heading": "Your medicines",
+        "summary": "3 active medicines",
+        "cards": [
+          {"name": "Amlodipine", "dose": "5 mg", "schedule": "Daily · 8:00 AM", "status": "Active", "action": "Open Amlodipine"},
+          {"name": "Metformin", "dose": "500 mg", "schedule": "Daily · 8:00 AM and 6:00 PM", "status": "Low supply", "detail": "8 tablets recorded · Reminder at 10", "action": "Open Metformin"},
+          {"name": "Vitamin D3", "dose": "1,000 IU", "schedule": "Daily · 12:00 PM", "status": "Active", "action": "Open Vitamin D3"}
+        ],
+        "primaryAction": "Add medicine",
+        "secondaryAction": "View archived medicines"
+      },
+      "primaryAction": "Add medicine",
+      "secondaryStates": [
+        {"id": "archived_list", "kind": "filter_state", "copy": "Archived medicines are kept in your history and no longer appear in today's schedule.", "behavior": "Clearly distinguish archived and active records; use an explicit Restore action where supported by the record model."},
+        {"id": "empty", "kind": "empty_state", "copy": "Your medicine list is empty.", "actions": ["Add your first medicine"]}
+      ],
+      "screenReaderOrder": ["Medicines, heading level 1", "3 active medicines", "Add medicine, button", "Amlodipine, 5 milligrams, daily at 8 AM, Active, button", "Metformin, 500 milligrams, daily at 8 AM and 6 PM, Low supply, 8 tablets recorded, reminder at 10, button", "Vitamin D3, 1,000 international units, daily at 12 PM, Active, button", "View archived medicines, button", "Today, navigation destination", "Medicines, selected, navigation destination", "History, navigation destination", "More, navigation destination"],
+      "focusFlow": ["Add medicine", "Open Amlodipine", "Open Metformin", "Open Vitamin D3", "View archived medicines", "Today", "Medicines", "History", "More"],
+      "text200": "Cards grow to fit full medicine names and schedules. The low-supply status moves to its own line. The Add medicine control remains a labeled full-width action, not an icon-only floating control.",
+      "layout": {"phonePortrait": "Full-width stacked medicine list with Add medicine above it.", "phoneLandscape": "One centered medicine list; preserve vertical reading order.", "tabletPortrait": "List can sit beside selected details if each column remains readable; otherwise stack.", "tabletLandscape": "Use a list-detail layout. The selected item is indicated by shape, label/state, and color."}
+    },
+    {
+      "id": "medication_detail",
+      "number": "03",
+      "title": "Medicine details",
+      "purpose": "Review the saved dose, schedule, instructions, and refill information for one medicine.",
+      "requirements": ["FR1", "FR2", "FR8", "FR11", "FR13", "US1", "US5", "US11"],
+      "priority": "Must-Have with Should-Have refill section",
+      "content": {
+        "name": "Metformin",
+        "dose": "500 mg",
+        "schedule": ["Daily at 8:00 AM", "Daily at 6:00 PM"],
+        "instructions": ["8:00 AM: With breakfast.", "6:00 PM: With dinner."],
+        "instructionCaption": "Instructions entered by Margaret",
+        "refill": {"status": "Low supply", "supply": "8 tablets recorded", "threshold": "Reminder at 10 tablets", "refillsRemaining": "1 refill recorded", "updated": "Updated October 5"},
+        "recentChange": "Evening time changed from 6:30 PM to 6:00 PM on October 3.",
+        "actions": ["Edit medicine", "Update refill information", "View dose history", "Archive medicine", "Remove medicine"]
+      },
+      "primaryAction": "Edit medicine",
+      "secondaryStates": [
+        {"id": "refill_edit", "kind": "sheet", "title": "Refill information", "fields": [{"label": "Current supply", "value": "8", "unit": "tablets"}, {"label": "Low-supply reminder", "type": "switch", "value": true}, {"label": "Remind me at", "value": "10", "unit": "tablets"}, {"label": "Refills remaining", "value": "1"}], "actions": ["Save refill information", "Cancel"], "announcement": "Refill information saved on this device.", "behavior": "Records supply information only. Do not imply an order has been placed or automatic pharmacy access exists."},
+        {"id": "archive_confirm", "kind": "dialog", "title": "Archive Metformin?", "copy": "This medicine will leave your active list. Its recorded dose history stays available.", "actions": ["Cancel", "Archive medicine"]},
+        {"id": "remove_confirm", "kind": "dialog", "title": "Remove Metformin?", "copy": "Remove this medication record? Archive it instead if you want to keep the record. Review the information affected before confirming.", "actions": ["Cancel", "Remove medicine"], "behavior": "The final implementation must specify its deletion/history policy before shipping; do not silently delete dose history."}
+      ],
+      "screenReaderOrder": ["Back to Medicines, button", "Medicine details, heading level 1", "Metformin, 500 milligrams", "Schedule, heading level 2", "Daily at 8 AM and 6 PM", "Saved instructions, heading level 2", "8 AM, With breakfast. 6 PM, With dinner. Instructions entered by Margaret", "Refill information, heading level 2", "Low supply. 8 tablets recorded. Reminder at 10 tablets. 1 refill recorded. Updated October 5", "Update refill information, button", "Recent change, heading level 2", "Evening time changed from 6:30 PM to 6 PM on October 3", "Edit Metformin, button", "View Metformin dose history, button", "Archive Metformin, button", "Remove Metformin, button"],
+      "focusFlow": ["Back", "Update refill information", "Edit medicine", "View dose history", "Archive medicine", "Remove medicine"],
+      "text200": "Dose and medicine name occupy separate lines. Instructions and refill facts are single-column label/value pairs. Secondary actions stack with full text. Refill sheets become full-height pages if needed.",
+      "layout": {"phonePortrait": "Stack medicine header, schedule, instructions, refill card, recent change, then actions.", "phoneLandscape": "Keep one scrollable detail panel with wrapped text; avoid a fixed footer covering refill actions.", "tabletPortrait": "Use a centered detail panel or the detail side of the Medicines list.", "tabletLandscape": "Show Medicine list at left and details at right; schedule and refill sections may sit side by side only if label/value text fits."}
+    },
+    {
+      "id": "medication_form",
+      "number": "04",
+      "title": "Add medicine",
+      "purpose": "Enter a medicine and its user-provided schedule with clear labels and inline validation.",
+      "requirements": ["FR1", "FR2", "FR8", "US1", "US5", "US6", "US7"],
+      "priority": "Must-Have",
+      "content": {
+        "intro": "Enter the information from your medicine record.",
+        "fields": [{"label": "Medicine name", "value": "Metformin", "required": true, "type": "text"}, {"label": "Strength / dose", "value": "500 mg", "required": true, "type": "text"}, {"label": "Instructions", "value": "With breakfast at 8 AM. With dinner at 6 PM.", "required": false, "type": "multiline"}, {"label": "Frequency", "value": "Daily", "required": true, "type": "dropdown", "options": ["Daily", "Custom"]}, {"label": "First time", "value": "8:00 AM", "required": true, "type": "native_time_picker"}, {"label": "Second time", "value": "6:00 PM", "required": false, "type": "native_time_picker"}],
+        "actions": ["Add another time", "Review medicine", "Cancel"]
+      },
+      "primaryAction": "Review medicine",
+      "secondaryStates": [
+        {"id": "edit", "kind": "form_variant", "title": "Edit medicine", "copy": "Review changes before saving.", "behavior": "Use the same component and field order; prefill existing information."},
+        {"id": "validation_error", "kind": "inline_error", "summary": "Check 2 fields before continuing.", "errors": [{"field": "Medicine name", "message": "Enter a medicine name."}, {"field": "First time", "message": "Choose at least one scheduled time."}], "behavior": "Move focus to an error summary linked to invalid fields. Retain entered data. Associate each error with its field."},
+        {"id": "discard_changes", "kind": "dialog", "title": "Discard your changes?", "copy": "Your changes have not been saved.", "actions": ["Keep editing", "Discard changes"]}
+      ],
+      "screenReaderOrder": ["Back, button", "Add medicine, heading level 1", "Enter the information from your medicine record", "Medicine name, required, text field, Metformin", "Strength or dose, required, text field, 500 mg", "Instructions, optional, multiline text field, With breakfast at 8 AM. With dinner at 6 PM", "Frequency, required, Daily, dropdown", "First time, required, 8 AM, button", "Second time, 6 PM, button", "Remove second time, button", "Add another time, button", "Review medicine, button", "Cancel, button"],
+      "focusFlow": ["Back", "Medicine name", "Strength / dose", "Instructions", "Frequency", "First time", "Second time", "Remove second time", "Add another time", "Review medicine", "Cancel"],
+      "text200": "Labels remain above fields, helper text wraps, and all fields become a single column. Keyboard insets keep the focused field visible; the user can scroll to Review medicine after dismissing the keyboard. Never use placeholder text as the sole label.",
+      "layout": {"phonePortrait": "One column of labeled fields; schedule section after medicine details; primary action at the end.", "phoneLandscape": "One scrollable form that adjusts to the software keyboard; do not squeeze fields into a multi-column grid.", "tabletPortrait": "Center a form up to 600 units wide; keep field and helper text together.", "tabletLandscape": "Center the same form; optional persistent plain-language summary to the right is secondary in reading order and disappears into the flow at large text."}
+    },
+    {
+      "id": "medication_review",
+      "number": "05",
+      "title": "Review medicine",
+      "purpose": "Check exactly what will be saved before committing a new or edited medication record.",
+      "requirements": ["FR1", "FR2", "FR8", "FR9", "US1", "US5", "US6", "US7", "Journey A review step"],
+      "priority": "Must-Have",
+      "content": {
+        "heading": "Does this look right?",
+        "medicine": "Metformin · 500 mg",
+        "schedule": "Every day at 8:00 AM and 6:00 PM",
+        "instructions": "With breakfast at 8 AM. With dinner at 6 PM.",
+        "connection": "Offline · You can save this medicine on your device.",
+        "actions": ["Save medicine", "Edit details"]
+      },
+      "primaryAction": "Save medicine",
+      "secondaryStates": [
+        {"id": "saved", "kind": "status", "copy": "Metformin saved on this device. Changes will sync when connected.", "behavior": "Return to its detail page; announce once and place focus on the detail heading."},
+        {"id": "local_save_error", "kind": "inline_error", "copy": "We could not save this medicine on your device. Your entries are still here.", "actions": ["Try saving again", "Edit details"], "behavior": "Do not show success, start reminders, or discard input until the local write succeeds."}
+      ],
+      "screenReaderOrder": ["Back to Add medicine, button", "Review medicine, heading level 1", "Does this look right?", "Medicine, Metformin, 500 milligrams", "Schedule, Every day at 8 AM and 6 PM", "Instructions, With breakfast at 8 AM. With dinner at 6 PM", "Offline. You can save this medicine on your device", "Save medicine, button", "Edit details, button"],
+      "focusFlow": ["Back", "Save medicine", "Edit details"],
+      "text200": "Use stacked label/value groups. The full schedule and instructions remain visible through scrolling. Save medicine and Edit details stack and grow to fit their labels.",
+      "layout": {"phonePortrait": "One review card with clearly separated medicine, schedule, and instruction groups.", "phoneLandscape": "Centered single-column summary with actions in the document flow.", "tabletPortrait": "Centered review card up to 600 units wide.", "tabletLandscape": "Keep a readable centered review; do not spread related medicine facts across distant columns."}
+    },
+    {
+      "id": "dose_reminder",
+      "number": "06",
+      "title": "Medication reminder",
+      "purpose": "Identify a scheduled dose and offer direct Taken or Skip controls with reversible logging.",
+      "requirements": ["FR4", "FR5", "FR6", "FR7", "FR8", "FR14", "FR15", "FR18", "US3", "US4", "US5", "US10"],
+      "priority": "Must-Have with Should-Have spoken reminder",
+      "content": {
+        "heading": "8:00 AM medicine",
+        "name": "Metformin",
+        "dose": "500 mg",
+        "instructions": "With breakfast. Saved by Margaret.",
+        "status": "Due",
+        "voice": "Spoken reminders on",
+        "connection": "Available offline",
+        "actions": ["Mark Taken", "Skip dose", "Read reminder aloud", "View medicine details"]
+      },
+      "primaryAction": "Mark Taken",
+      "secondaryStates": [
+        {"id": "taken", "kind": "confirmation", "copy": "Metformin marked Taken at 8:10 AM.", "actions": ["Undo", "Back to Today"], "behavior": "Only logging changes; do not imply the app verified physical ingestion."},
+        {"id": "skipped", "kind": "confirmation", "copy": "Metformin marked Skipped.", "actions": ["Undo", "Back to Today"]},
+        {"id": "already_recorded", "kind": "status", "copy": "This 8:00 AM dose is already recorded Taken at 8:10 AM.", "actions": ["View history", "Back to Today"], "behavior": "Show the current record instead of offering another Mark Taken action for the same scheduled dose."},
+        {"id": "voice_off", "kind": "state_variant", "copy": "Spoken reminders off. Reminder details remain on screen.", "behavior": "Visual dose, schedule, and action content remains complete; an explicit one-time read action may use assistive technology without changing the saved preference."},
+        {"id": "system_notification", "kind": "platform_preview", "title": "Metformin · 500 mg", "copy": "8:00 AM · With breakfast.", "actions": ["Open reminder"], "behavior": "Use native notification styling; privacy/display options follow the eventual OS implementation. This is a mockup, not delivery evidence."}
+      ],
+      "screenReaderOrder": ["Close reminder, button", "Medication reminder, heading level 1", "8 AM medicine", "Metformin, 500 milligrams, Due", "With breakfast. Saved by Margaret", "Spoken reminders on", "Available offline", "Mark 8 AM Metformin dose Taken, button", "Skip 8 AM Metformin dose, button", "Read this reminder aloud, button", "View Metformin details, button"],
+      "focusFlow": ["Close reminder", "Mark Taken", "Skip dose", "Read reminder aloud", "View medicine details"],
+      "text200": "Medicine name, dose, time, and instructions wrap in a vertically scrollable page. Taken and Skip are at least 56 units high, stacked with 16 units separation. The reminder never forces a short fixed-height dialog.",
+      "layout": {"phonePortrait": "Full-page focused reminder with medicine facts above two large actions.", "phoneLandscape": "Scrollable full-page reminder; keep actions below content and available without horizontal scrolling.", "tabletPortrait": "Centered reminder panel with reachable close control; maintain generous action separation.", "tabletLandscape": "Centered panel up to 640 units wide; do not make Taken and Skip small adjacent icons."}
+    },
+    {
+      "id": "dose_history",
+      "number": "07",
+      "title": "Dose history",
+      "purpose": "Review recorded statuses and correct accidental dose entries after immediate Undo is gone.",
+      "requirements": ["FR6", "FR7", "FR8", "FR9", "FR13", "US4", "US5", "US6", "US7"],
+      "priority": "Must-Have",
+      "content": {
+        "range": "October 5–6, 2026",
+        "filter": "All medicines",
+        "groups": [
+          {"date": "Today, October 6", "items": [{"name": "Amlodipine", "dose": "5 mg", "scheduled": "8:00 AM", "status": "Taken", "recorded": "8:02 AM", "action": "Correct Amlodipine entry"}]},
+          {"date": "Monday, October 5", "items": [{"name": "Metformin", "dose": "500 mg", "scheduled": "6:00 PM", "status": "Skipped", "recorded": "6:05 PM", "action": "Correct evening Metformin entry"}, {"name": "Vitamin D3", "dose": "1,000 IU", "scheduled": "12:00 PM", "status": "Taken", "recorded": "12:01 PM", "action": "Correct Vitamin D3 entry"}, {"name": "Metformin", "dose": "500 mg", "scheduled": "8:00 AM", "status": "Taken", "recorded": "8:04 AM", "action": "Correct morning Metformin entry"}, {"name": "Amlodipine", "dose": "5 mg", "scheduled": "8:00 AM", "status": "Taken", "recorded": "8:03 AM", "action": "Correct Amlodipine entry"}]}
+        ]
+      },
+      "primaryAction": "Correct entry",
+      "secondaryStates": [
+        {"id": "history_correction", "kind": "sheet", "title": "Correct dose entry", "context": "Metformin · 500 mg · October 5, 6:00 PM", "copy": "Currently recorded Skipped at 6:05 PM.", "fields": [{"label": "Recorded status", "type": "radio_group", "options": ["Taken", "Skipped"], "value": "Taken"}, {"label": "Recorded time", "type": "native_time_picker", "value": "6:05 PM"}], "actions": ["Save correction", "Cancel"], "announcement": "October 5 evening Metformin entry corrected to Taken. Saved on this device.", "behavior": "Do not alter the medication's schedule. Keep original and correction metadata for the underlying record policy; show the user the result."},
+        {"id": "missed", "kind": "row_variant", "copy": "Missed · No dose recorded under your configured overdue rule.", "actions": ["Correct entry"], "behavior": "Do not invent a universal missed-dose time threshold; show the actual configured rule in the implemented app."},
+        {"id": "sync_conflict", "kind": "review_sheet", "title": "Review two saved versions", "context": "Metformin · October 5, 6:00 PM", "copy": "This device and the synced record differ. Both versions are kept while you review.", "versions": [{"label": "On this device", "status": "Taken", "saved": "October 6, 8:12 AM"}, {"label": "Synced record", "status": "Skipped", "saved": "October 5, 6:05 PM"}], "actions": ["Keep this device's version", "Use synced version", "Decide later"], "behavior": "Compare field values before confirmation. Preserve the local version and flag the item while unresolved; never silently overwrite. Local logging remains available.", "announcement": "Dose record needs review. Both versions are saved."}
+      ],
+      "screenReaderOrder": ["Dose history, heading level 1", "October 5 to October 6, 2026, date range, button", "All medicines, filter, dropdown", "Today, October 6, heading level 2", "Amlodipine, 5 milligrams, scheduled 8 AM, Taken, recorded 8:02 AM", "Correct today's Amlodipine entry, button", "Monday, October 5, heading level 2", "Metformin, 500 milligrams, scheduled 6 PM, Skipped, recorded 6:05 PM", "Correct October 5 evening Metformin entry, button", "Vitamin D3, 1,000 international units, scheduled 12 PM, Taken, recorded 12:01 PM", "Correct October 5 Vitamin D3 entry, button", "Metformin, 500 milligrams, scheduled 8 AM, Taken, recorded 8:04 AM", "Correct October 5 morning Metformin entry, button", "Amlodipine, 5 milligrams, scheduled 8 AM, Taken, recorded 8:03 AM", "Correct October 5 Amlodipine entry, button", "Today, navigation destination", "Medicines, navigation destination", "History, selected, navigation destination", "More, navigation destination"],
+      "focusFlow": ["Date range", "Medicine filter", "Correct today's Amlodipine", "Correct October 5 evening Metformin", "Correct October 5 Vitamin D3", "Correct October 5 morning Metformin", "Correct October 5 Amlodipine", "Today", "Medicines", "History", "More"],
+      "text200": "History is a list of labeled cards instead of a horizontally scrolling table. Date filters stack. Correction and conflict sheets use vertical groups; competing versions appear one after the other with explicit labels.",
+      "layout": {"phonePortrait": "Date groups with complete, expandable dose records and clear Correct entry buttons.", "phoneLandscape": "Maintain single-column groups and reachable filters; no compact spreadsheet table.", "tabletPortrait": "History list with selected record detail below or beside it when space permits.", "tabletLandscape": "List-detail view; the correction panel occupies the detail pane with focus moved on explicit selection only."}
+    },
+    {
+      "id": "symptoms",
+      "number": "08",
+      "title": "Symptoms",
+      "purpose": "Record an observation, severity, date/time, and optional note for later review.",
+      "requirements": ["FR8", "FR9", "FR10", "FR13", "US5", "US8", "US9"],
+      "priority": "Should-Have",
+      "content": {
+        "heading": "Record a symptom",
+        "fields": [{"label": "Symptom or side effect", "value": "Dry mouth", "required": true, "type": "text"}, {"label": "Severity", "value": "Mild", "required": true, "type": "radio_group", "options": ["Mild", "Moderate", "Severe"]}, {"label": "Date", "value": "October 6, 2026", "required": true, "type": "native_date_picker"}, {"label": "Time", "value": "7:30 AM", "required": true, "type": "native_time_picker"}, {"label": "Notes", "value": "Noticed after waking. Mention at my next appointment.", "required": false, "type": "multiline"}],
+        "recent": [{"name": "Tiredness", "severity": "Mild", "when": "October 4 · 2:15 PM", "notes": "Rested in the afternoon."}],
+        "actions": ["Save symptom", "View recent symptoms"]
+      },
+      "primaryAction": "Save symptom",
+      "secondaryStates": [
+        {"id": "saved_offline", "kind": "status", "copy": "Dry mouth saved on this device. Changes will sync when connected.", "behavior": "Add to recent symptoms after local save succeeds. Do not infer a diagnosis, medication cause, or treatment from the entry."},
+        {"id": "symptom_error", "kind": "inline_error", "copy": "Enter a symptom or side effect.", "behavior": "Connect the error to the empty field and retain all other entered values."},
+        {"id": "recent_expanded", "kind": "expandable_list", "title": "Tiredness · October 4", "copy": "Severity: Mild. Recorded at 2:15 PM. Rested in the afternoon.", "behavior": "Use a labeled disclosure button with expanded/collapsed state; details follow their heading in reading order."}
+      ],
+      "screenReaderOrder": ["Back, button", "Symptoms, heading level 1", "Record a symptom, heading level 2", "Symptom or side effect, required, text field, Dry mouth", "Severity, required, radio group", "Mild, selected, radio button, 1 of 3", "Moderate, radio button, 2 of 3", "Severe, radio button, 3 of 3", "Date, October 6, 2026, button", "Time, 7:30 AM, button", "Notes, optional, multiline text field, Noticed after waking. Mention at my next appointment", "Save symptom, button", "Recent symptoms, heading level 2", "Tiredness, Mild, October 4 at 2:15 PM, collapsed, button", "View recent symptoms, button"],
+      "focusFlow": ["Back", "Symptom field", "Severity group (arrow keys move choices)", "Date", "Time", "Notes", "Save symptom", "Recent Tiredness disclosure", "View recent symptoms"],
+      "text200": "Severity choices stack as full-width radio rows, each at least 48 units high. Date and time fields stack. Notes and recently recorded symptoms grow without clipping.",
+      "layout": {"phonePortrait": "Single-column entry form followed by a short recent-symptom list.", "phoneLandscape": "One scrollable form with keyboard-aware insets.", "tabletPortrait": "Centered entry form with recent entries below.", "tabletLandscape": "Form on the left and recent symptoms on the right; read and tab through the form before the recent list."}
+    },
+    {
+      "id": "appointment_summary",
+      "number": "09",
+      "title": "Appointment summary",
+      "purpose": "Review an understandable summary for a date range and confirm exactly what is shared.",
+      "requirements": ["FR12", "FR13", "FR19", "US9", "US12"],
+      "priority": "Should-Have",
+      "content": {
+        "person": "Margaret Ellis",
+        "range": "September 29–October 5, 2026",
+        "summary": [{"label": "Recorded Taken", "value": "24 of 28 scheduled doses (86%)"}, {"label": "Skipped", "value": "2 doses"}, {"label": "Missed", "value": "2 doses"}],
+        "sections": [
+          {"title": "Medicines", "items": ["Amlodipine · 5 mg · Daily at 8:00 AM", "Metformin · 500 mg · Daily at 8:00 AM and 6:00 PM", "Vitamin D3 · 1,000 IU · Daily at 12:00 PM"]},
+          {"title": "Symptoms / side effects", "items": ["Tiredness · Mild · October 4, 2:15 PM · Rested in the afternoon."]},
+          {"title": "Allergies", "items": ["Not recorded"]},
+          {"title": "Refill information", "items": ["Metformin · 8 tablets recorded · 1 refill recorded · Updated October 5"]},
+          {"title": "Recent medicine changes", "items": ["October 3 · Metformin evening time changed from 6:30 PM to 6:00 PM"]}
+        ],
+        "caption": "Summary of your recorded information. Missing fields are marked Not recorded.",
+        "actions": ["Review export / sharing", "Change date range"]
+      },
+      "primaryAction": "Review export / sharing",
+      "secondaryStates": [
+        {"id": "share_preview", "kind": "confirmation_sheet", "title": "Review information to share", "copy": "September 29–October 5, 2026. Choose the sections to include before continuing.", "fields": [{"label": "Medicine list", "type": "checkbox", "value": true}, {"label": "Dose history and summary", "type": "checkbox", "value": true}, {"label": "Symptoms / side effects", "type": "checkbox", "value": true}, {"label": "Allergies", "type": "checkbox", "value": true}, {"label": "Refill information", "type": "checkbox", "value": true}, {"label": "Recent medicine changes", "type": "checkbox", "value": true}], "actions": ["Confirm and open sharing options", "Cancel"], "behavior": "Display the selected information and date range before the explicit confirmation. Opening sharing options does not mean anything has been sent. Use the native share flow for final destination selection."},
+        {"id": "no_data", "kind": "empty_state", "copy": "No records in this date range.", "actions": ["Choose another date range"]},
+        {"id": "generating", "kind": "loading_state", "copy": "Preparing your summary…", "behavior": "Announce progress once and preserve the selected date range; do not announce spinner frames."}
+      ],
+      "screenReaderOrder": ["Back, button", "Appointment summary, heading level 1", "Margaret Ellis", "September 29 to October 5, 2026", "Change date range, button", "Dose summary, heading level 2", "24 of 28 scheduled doses recorded Taken, 86 percent. 2 Skipped. 2 Missed", "Medicines, heading level 2", "Amlodipine, 5 milligrams, daily at 8 AM", "Metformin, 500 milligrams, daily at 8 AM and 6 PM", "Vitamin D3, 1,000 international units, daily at 12 PM", "Symptoms and side effects, heading level 2", "Tiredness, Mild, October 4 at 2:15 PM, Rested in the afternoon", "Allergies, heading level 2", "Not recorded", "Refill information, heading level 2", "Metformin, 8 tablets recorded, 1 refill recorded, updated October 5", "Recent medicine changes, heading level 2", "October 3, Metformin evening time changed from 6:30 PM to 6 PM", "Review export or sharing, button"],
+      "focusFlow": ["Back", "Change date range", "Review export / sharing"],
+      "text200": "Use text summaries and vertical section lists, not a chart as the sole carrier of information. Keep count denominators and labels together where possible; wrap without truncation. Sharing checkboxes become vertical rows with the complete section name.",
+      "layout": {"phonePortrait": "Stack date range, text dose summary, medication list, symptoms, allergies, refill, and changes; final action after content.", "phoneLandscape": "Readable one-column summary with heading anchors supplied by native screen-reader semantics.", "tabletPortrait": "Centered document-like summary; optional short section index before the content.", "tabletLandscape": "Readable summary column with a preview/sharing selection pane; preserve summary-before-sharing order and explicit confirmation."}
+    },
+    {
+      "id": "settings_sharing",
+      "number": "10",
+      "title": "Settings & sharing",
+      "navigationLabel": "More",
+      "purpose": "Control reminders, accessible appearance, sync review, and permission-based caregiver access.",
+      "requirements": ["FR9", "FR14", "FR15", "FR16", "FR17", "FR18", "FR19", "US5", "US6", "US7", "US10", "US12"],
+      "priority": "Must-Have reminder/accessibility controls; Should-Have voice; Nice-to-Have caregiver",
+      "content": {
+        "links": ["Symptoms", "Appointment summary"],
+        "sections": [
+          {"title": "Reminders", "rows": [{"label": "Medication notifications", "value": "Allowed", "control": "Open device notification settings"}, {"label": "Spoken reminders", "value": "On", "control": "switch"}], "helper": "Spoken reminders repeat the medicine name, dose, and saved instructions. Visual reminders remain available."},
+          {"title": "Appearance & accessibility", "rows": [{"label": "Theme", "value": "System", "control": "dropdown", "options": ["System", "Light", "Dark"]}, {"label": "Text size", "value": "Follows device setting", "control": "Open device text settings"}], "helper": "Layouts support text enlarged to 200% and above."},
+          {"title": "Saved data", "rows": [{"label": "Sync status", "value": "2 changes waiting", "control": "View sync details"}], "helper": "Your records are saved on this device."},
+          {"title": "Caregiver access", "rows": [{"label": "Linda Martinez", "value": "View only · Schedule changes not allowed", "control": "Review permissions"}], "helper": "You choose what a caregiver can view or change."}
+        ]
+      },
+      "primaryAction": "Review permissions",
+      "secondaryStates": [
+        {"id": "caregiver_permission", "kind": "sheet", "title": "Linda's permissions", "copy": "Choose the access you approve for Linda Martinez.", "fields": [{"label": "View medicine information", "type": "checkbox", "value": true}, {"label": "Receive missed-dose alerts", "type": "checkbox", "value": false}, {"label": "Change medication schedules", "type": "checkbox", "value": false}], "actions": ["Review permission changes", "Cancel", "Remove access"], "behavior": "All caregiver permissions default off for new access. Viewing, alerts, and schedule edits are independent. Do not infer edit permission from viewing permission."},
+        {"id": "caregiver_approval", "kind": "confirmation_dialog", "title": "Allow schedule changes?", "copy": "Linda Martinez will be able to change your medication times and schedule. This permission is currently off.", "actions": ["Keep schedule changes off", "Allow schedule changes"], "behavior": "Require this explicit user approval before granting edit access; confirmation is separate from merely opening the permissions sheet."},
+        {"id": "caregiver_view_only", "kind": "role_variant", "copy": "You have permission to view Margaret's medicine information. Schedule changes are not allowed.", "behavior": "Do not render active schedule-edit controls for a caregiver without edit permission. Announce the restriction as explanatory text."},
+        {"id": "reminders_disabled", "kind": "warning_banner", "title": "Medication reminders are off", "copy": "Notifications are blocked in your device settings. Scheduled reminders cannot be delivered until you allow them.", "actions": ["Open device settings"], "behavior": "Use a warning icon plus text. Opening settings is a user action; do not claim the permission changed until the app reads the actual OS state."},
+        {"id": "reminder_schedule_failed", "kind": "error_banner", "title": "A reminder could not be scheduled", "copy": "Your medicine record is saved. Review reminder settings to restore its notification.", "actions": ["Review reminder settings"], "behavior": "Keep local record and logging available. Do not equate saved medication with scheduled notification success."},
+        {"id": "sync_review", "kind": "status_panel", "title": "Saved on this device", "copy": "2 changes waiting to sync. 1 dose record needs review.", "actions": ["Review dose record"], "behavior": "Open the Dose history sync-conflict state. Pending or conflicted sync must never block local medication or symptom tasks."}
+      ],
+      "screenReaderOrder": ["Settings and sharing, heading level 1", "Symptoms, button", "Appointment summary, button", "Reminders, heading level 2", "Medication notifications, Allowed, Open device notification settings, button", "Spoken reminders, On, switch", "Spoken reminders repeat the medicine name, dose, and saved instructions. Visual reminders remain available", "Appearance and accessibility, heading level 2", "Theme, System, dropdown", "Text size, Follows device setting, Open device text settings, button", "Saved data, heading level 2", "Sync status, 2 changes waiting, View sync details, button", "Your records are saved on this device", "Caregiver access, heading level 2", "Linda Martinez, View only. Schedule changes not allowed. Review permissions, button", "Today, navigation destination", "Medicines, navigation destination", "History, navigation destination", "More, selected, navigation destination"],
+      "focusFlow": ["Symptoms", "Appointment summary", "Device notification settings", "Spoken reminders switch", "Theme", "Device text settings", "Sync details", "Linda's permissions", "Today", "Medicines", "History", "More"],
+      "text200": "Settings rows change from label/value side-by-side to stacked text and control. Caregiver permission labels wrap fully, with each row at least 48 units high. Approval dialogs use vertical actions and a scrollable explanation.",
+      "layout": {"phonePortrait": "Single-column grouped settings; two feature links above reminder and permission controls.", "phoneLandscape": "Single scrollable column; no settings labels compressed beside fixed-width values.", "tabletPortrait": "Grouped settings with a readable 640-unit content width.", "tabletLandscape": "Section list at left and selected settings at right; preserve the same section order and ensure keyboard focus moves only after user selection."}
+    }
+  ],
+  "coverage": {
+    "requiredSecondaryStates": {"caregiverPermission": "settings_sharing.caregiver_permission + caregiver_approval + caregiver_view_only", "syncConflict": "dose_history.sync_conflict + settings_sharing.sync_review", "remindersDisabled": "today.reminders_disabled + settings_sharing.reminders_disabled", "refill": "medication_detail.refill_edit", "doseHistoryCorrection": "dose_history.history_correction"},
+    "allMajorFlows": ["Add medicine → Review medicine → Medicine details", "Today → Medication reminder → Taken/Skipped → Undo", "History → Correct dose entry", "Symptoms → Save locally", "Appointment summary → Preview selected information → Confirm sharing options", "Settings → Review caregiver permissions → Explicit approval", "Offline records → Pending sync → Conflict review without local blocking"],
+    "annotationChecklistPerMockup": ["Numbered screen-reader order markers", "Accessible names/roles/states for every interactive control", "External-keyboard focus sequence and dialog focus behavior", "48 x 48 minimum measured targets and 56-unit primary controls", "Final color-token pair and measured contrast ratio labels", "200% text reflow callout and corresponding enlarged-text specimen"],
+    "actualTestingRequired": ["VoiceOver on iPhone/iPad", "TalkBack on Android phone/tablet", "External keyboard with portrait and landscape layouts", "System text at 200% without clipping, missing actions, or horizontal text scroll", "Low-vision and older-adult task walkthrough", "Native reminder permission and offline delivery behavior", "Local persistence, queued sync, and conflict handling"]
+  }
+}
