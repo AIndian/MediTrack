@@ -11,13 +11,13 @@ Local validation on macOS with Flutter 3.47.5 and Dart 3.13.4:
 | Formatting | No changes required |
 | Static analysis | No issues |
 | Unit tests | 2 passed |
-| Widget tests | 6 passed |
-| All application line coverage | 522 / 542 = **96.31%** |
+| Widget tests | 8 passed |
+| All application line coverage | 559 / 579 = **96.55%** |
 | Web release build | Passed |
 
-Coverage includes all 17 Dart files under `lib/`, with no exclusions. The report script fails if an application file is missing from LCOV. Coverage is executed-line coverage, not branch coverage. Generated files are written to `coverage/lcov.info`, `reports/coverage.html`, and `reports/coverage-summary.txt`.
+Coverage includes all 18 Dart files under `lib/`, with no exclusions. The report script fails if an application file is missing from LCOV. Coverage is executed-line coverage, not branch coverage. Generated files are written to `coverage/lcov.info`, `reports/coverage.html`, and `reports/coverage-summary.txt`.
 
-The full verification command also passed in a fresh directory populated only from Git-staged files. No local build output, SDK settings, generated reports or enclosing project files were copied into that check. The copied design references were verified byte-for-byte against the original synced sources.
+At the initial repository setup, the full verification command also passed in a fresh directory populated only from Git-staged files. No local build output, SDK settings, generated reports or enclosing project files were copied into that check. The copied design references were verified byte-for-byte against the original synced sources.
 
 ## What the tests check
 
@@ -25,6 +25,7 @@ The full verification command also passed in a fresh directory populated only fr
 - Startup through the production entry point, empty states, form errors, review-before-save, medicine editing, dose Undo and later history correction.
 - Symptom saving, summary date ranges and larger-text settings.
 - Every core screen at 393×852 with 200% text scaling and no overflow exceptions.
+- Live header time: minute/midnight updates, app resume, 12/24-hour formatting, safe timer disposal, and top-right placement with Back navigation at 200% text.
 - Labeled tap targets and Android minimum target sizes on the main screen.
 
 The default widget-test viewport is 800×600, which also exercises tablet navigation. Tests use isolated mock preferences and fictional medicine data. No tests connect to a real health account or service.
@@ -35,6 +36,6 @@ The default widget-test viewport is 800×600, which also exercises tablet naviga
 flutter test tool/preview_test.dart --dart-define=VISUAL_FONT=/absolute/path/to/font.ttf
 ```
 
-Supply an available TrueType font on your machine. The renderer loads Material icons from Flutter's assets and writes `reports/flutter-phone.png`. It runs separately from the eight-test coverage suite and is skipped when no font path is provided. The checked-in image in `docs/images/` is the previously inspected sample, not a golden-image assertion.
+Supply an available TrueType font on your machine. The renderer loads Material icons from Flutter's assets and writes `reports/flutter-phone.png`. It runs separately from the ten-test coverage suite and is skipped when no font path is provided. The checked-in image in `docs/images/` is the previously inspected sample, not a golden-image assertion.
 
 GitHub CI executes the same verification command and uploads coverage and the web build. See [GitHub Actions](https://github.com/AIndian/MediTrack/actions/workflows/ci.yml) for results on each pushed commit. Native Android/iOS builds, hardware accessibility and browser interaction remain outside these automated checks.

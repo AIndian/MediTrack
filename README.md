@@ -20,7 +20,7 @@ flutter pub get --enforce-lockfile
 flutter run -d chrome
 ```
 
-Start with **Add medicine**. Enter sample details, daily times such as `08:00, 18:00`, then review and save. Today supports Taken, Skip and Undo; History lets you correct saved records. More opens symptoms, summaries and larger-text settings. The app starts empty so demonstration records cannot be mistaken for personal records.
+Start with **Add medicine**. Enter sample details, daily times such as `08:00, 18:00`, then review and save. Today supports Taken, Skip and Undo; History lets you correct saved records. More opens symptoms, summaries and larger-text settings. The app starts empty so demonstration records cannot be mistaken for personal records. Every screen shows the current local time at the top right, using your device’s 12/24-hour preference.
 
 To run on an Android emulator or iOS simulator, complete that platform's setup reported by `flutter doctor`, start the emulator/simulator, run `flutter devices`, then `flutter run -d DEVICE_ID`. iOS requires macOS and Xcode. Native builds have not been verified in this repository's current validation.
 

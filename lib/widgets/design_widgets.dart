@@ -1,3 +1,5 @@
+import 'header_clock.dart';
+
 import 'package:flutter/material.dart';
 
 import '../models/medicine.dart';
@@ -133,23 +135,51 @@ class AppPage extends StatelessWidget {
               border: Border(bottom: BorderSide(color: Color(0xffD5E3E0))),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
-            child: Row(
-              children: [
-                if (Navigator.canPop(context))
-                  BackButton(onPressed: () => Navigator.pop(context)),
-                const Icon(
-                  Icons.health_and_safety_outlined,
-                  color: Color(0xff075E64),
-                  size: 26,
-                ),
-                const SizedBox(width: 8),
-                const Expanded(
-                  child: Text(
-                    'MediTrack',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                  ),
-                ),
-              ],
+            child: LayoutBuilder(
+              builder: (context, constraints) {
+                final brand = Row(
+                  children: [
+                    if (Navigator.canPop(context))
+                      BackButton(onPressed: () => Navigator.pop(context)),
+                    const Icon(
+                      Icons.health_and_safety_outlined,
+                      color: Color(0xff075E64),
+                      size: 26,
+                    ),
+                    const SizedBox(width: 8),
+                    const Expanded(
+                      child: Text(
+                        'MediTrack',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+                if (constraints.maxWidth <
+                    MediaQuery.textScalerOf(context).scale(310)) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Align(
+                        alignment: Alignment.topRight,
+                        child: HeaderClock(),
+                      ),
+                      const SizedBox(height: 8),
+                      brand,
+                    ],
+                  );
+                }
+                return Row(
+                  children: [
+                    Expanded(child: brand),
+                    const SizedBox(width: 12),
+                    const HeaderClock(),
+                  ],
+                );
+              },
             ),
           ),
           Expanded(

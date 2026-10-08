@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meditrack/app.dart';
+import 'package:meditrack/widgets/header_clock.dart';
 import 'package:meditrack/main.dart' as entry;
 
 import '../support/fixtures.dart';
@@ -162,6 +163,11 @@ void main() {
         ),
       );
       await t.pumpAndSettle();
+      expect(
+        find.byType(HeaderClock),
+        findsOneWidget,
+        reason: '${page.runtimeType} shows the clock',
+      );
       await t.drag(find.byType(ListView).first, const Offset(0, -1600));
       await t.pumpAndSettle();
       expect(

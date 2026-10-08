@@ -5,7 +5,7 @@ Reference: `reference/index.html`, specifically `.device-viewport`, `renderScree
 | Reference | Flutter implementation |
 |---|---|
 | Teal `#075E64`, canvas `#F6FAF9`, white surface, ink `#183B42`, muted `#52686C` | Theme and shared widgets use these HTML colors rather than the different JSON palette. |
-| Header with health mark and MediTrack branding | Shared `Page` header, with native back control on detail routes. |
+| Header with health mark and MediTrack branding | Shared `AppPage` header, with native back control on detail routes and a live local-time clock at the top right. At enlarged text sizes the clock occupies its own right-aligned row. |
 | 32px page titles, 16px body, 1.5 line height | Page headings/body theme; semantic heading annotations. |
 | `.card`, `.card.emphasis` | White, 18px rounded bordered panels with 20px padding; first Today card has a 2px teal border. |
 | `.pill-icon`, `.badge` | Mint medicine icon tile; text-and-icon Due/Taken/Skipped badges, with success/warning colors. |
