@@ -11,7 +11,9 @@ class AppStore extends ChangeNotifier {
   List<Medicine> medicines = [];
   Map<String, String> doses = {};
   List<Map<String, dynamic>> symptoms = [];
-  bool largeText = false;
+  double textScale = 1.0;
+  bool get largeText => textScale > 1.0;
+  static const textScales = [1.0, 1.25, 1.5, 1.75, 2.0];
   String? error;
   Future<void> pending = Future.value();
   AppStore(this.prefs, {DateTime Function()? clock})
@@ -25,11 +27,14 @@ class AppStore extends ChangeNotifier {
             .toList();
         doses = Map<String, String>.from(j['doses']);
         symptoms = List<Map<String, dynamic>>.from(j['symptoms']);
-        largeText = j['largeText'];
+        final savedScale =
+            j['textScale'] ?? (j['largeText'] == true ? 2.0 : 1.0);
+        if (savedScale is num && textScales.contains(savedScale.toDouble())) {
+          textScale = savedScale.toDouble();
+        }
       }
     } catch (_) {
-      error =
-          'Saved data could not be read. Please restart before making changes.';
+      error = 'Could not load data. Restart the app.';
     }
   }
   String get day => now().toIso8601String().substring(0, 10);
@@ -46,6 +51,7 @@ class AppStore extends ChangeNotifier {
       'doses': doses,
       'symptoms': symptoms,
       'largeText': largeText,
+      'textScale': textScale,
     });
     pending = pending.then((_) async {
       try {
@@ -53,7 +59,7 @@ class AppStore extends ChangeNotifier {
           throw StateError('write');
         }
       } catch (_) {
-        error = 'Could not save changes. Keep this app open and try again.';
+        error = 'Could not save. Keep the app open.';
         notifyListeners();
       }
     });
@@ -106,8 +112,17 @@ class AppStore extends ChangeNotifier {
     save();
   }
 
-  void setLargeText(bool value) {
-    largeText = value;
+  void setLargeText(bool value) => setTextScale(value ? 2.0 : 1.0);
+
+  void setTextScale(double value) {
+    if (!textScales.contains(value)) {
+      throw ArgumentError.value(
+        value,
+        'textScale',
+        'Choose 100% to 200% in 25% steps',
+      );
+    }
+    textScale = value;
     save();
   }
 

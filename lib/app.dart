@@ -59,7 +59,7 @@ class MediTrack extends StatelessWidget {
           textScaler: TextScaler.linear(
             MediaQuery.textScalerOf(context)
                 .scale(1)
-                .clamp(store.largeText ? 2.0 : 1.0, 10.0),
+                .clamp(store.textScale, 10.0),
           ),
         ),
         child: child!,

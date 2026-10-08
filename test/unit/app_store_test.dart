@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:meditrack/state/app_store.dart';
@@ -47,4 +49,43 @@ void main() {
     s.save();
     expect(s.prefs.getString('meditrack.v1'), '{bad');
   });
+  test(
+    'All text sizes persist and quick toggle uses 100 or 200 percent',
+    () async {
+      final store = await fresh();
+      for (final scale in AppStore.textScales) {
+        store.setTextScale(scale);
+        await store.pending;
+        expect(AppStore(store.prefs).textScale, scale);
+      }
+      expect(() => store.setTextScale(1.4), throwsArgumentError);
+      expect(() => store.setTextScale(3), throwsArgumentError);
+      store.setTextScale(1.5);
+      store.setLargeText(false);
+      expect(store.textScale, 1.0);
+      store.setLargeText(true);
+      expect(store.textScale, 2.0);
+      await store.pending;
+    },
+  );
+
+  test(
+    'Existing larger-text settings migrate without losing records',
+    () async {
+      for (final enabled in [true, false]) {
+        SharedPreferences.setMockInitialValues({
+          'meditrack.v1': jsonEncode({
+            'medicines': [med.toJson()],
+            'doses': {},
+            'symptoms': [],
+            'largeText': enabled,
+          }),
+        });
+        final store = AppStore(await SharedPreferences.getInstance());
+        expect(store.textScale, enabled ? 2.0 : 1.0);
+        expect(store.medicines.single.name, med.name);
+        expect(store.error, isNull);
+      }
+    },
+  );
 }

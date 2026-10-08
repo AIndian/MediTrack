@@ -2,7 +2,7 @@
 
 SWEN 661 Group 1 project · Healthcare · Seniors (65+)
 
-Team member: Amol Bhatia. The project targets offline-first medication workflows and 200%+ text scaling.
+Team members: Amol Bhatia, Caleb Afunyah, and Eugene Masamuna. The project targets offline-first medication workflows and 200%+ text scaling.
 
 A self-contained Flutter prototype for managing medicines, recording doses and symptoms, and preparing an appointment summary. Ten core screens follow the supplied MediTrack HTML design. All records stay on the current device.
 
@@ -20,7 +20,7 @@ flutter pub get --enforce-lockfile
 flutter run -d chrome
 ```
 
-Start with **Add medicine**. Enter sample details, daily times such as `08:00, 18:00`, then review and save. Today supports Taken, Skip and Undo; History lets you correct saved records. More opens symptoms, summaries and larger-text settings. The app starts empty so demonstration records cannot be mistaken for personal records. Every screen shows the current local time at the top right, using your device’s 12/24-hour preference.
+Start with **Add medicine**. Enter sample details, daily times such as `08:00, 18:00`, then review and save. Today supports Taken, Skip and Undo; History lets you correct saved records. More opens symptoms, summaries and larger-text settings. The text-size slider offers 100%, 125%, 150%, 175% and 200%; the quick toggle switches between 100% and 200%. Your choice is saved, and larger device accessibility settings still apply. The app starts empty so demonstration records cannot be mistaken for personal records. Every screen shows the current local time at the top right, using your device’s 12/24-hour preference.
 
 To run on an Android emulator or iOS simulator, complete that platform's setup reported by `flutter doctor`, start the emulator/simulator, run `flutter devices`, then `flutter run -d DEVICE_ID`. iOS requires macOS and Xcode. Native builds have not been verified in this repository's current validation.
 

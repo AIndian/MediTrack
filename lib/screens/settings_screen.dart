@@ -13,23 +13,31 @@ class Settings extends StatelessWidget {
     SwitchListTile(
       contentPadding: EdgeInsets.zero,
       title: const Text('Larger text'),
-      subtitle: const Text('Use at least 200% text size'),
+      subtitle: const Text('Quick switch: 100% or 200%'),
       value: store.largeText,
       onChanged: store.setLargeText,
     ),
+    Text('Text size: ${(store.textScale * 100).round()}%'),
+    Semantics(
+      label: 'Text size',
+      child: Slider(
+        value: store.textScale,
+        min: 1.0,
+        max: 2.0,
+        divisions: 4,
+        label: '${(store.textScale * 100).round()}%',
+        semanticFormatterCallback: (value) => '${(value * 100).round()}%',
+        onChanged: store.setTextScale,
+      ),
+    ),
+    const Text('100% · 125% · 150% · 175% · 200%'),
+    const Text('Your device’s larger text setting still applies.'),
     action('Symptoms', () => open(context, Symptoms(store: store))),
     action('Appointment summary', () => open(context, Summary(store: store))),
-    panel([
-      heading('Reminders'),
-      const Text(
-        'System notifications and spoken reminders are not connected. No reminders will be delivered.',
-      ),
-    ]),
+    panel([heading('Reminders'), const Text('Reminders are off.')]),
     panel([
       heading('Privacy & sharing'),
-      const Text(
-        'Records are stored locally. No caregiver has access. Cloud sync, caregiver invitations and exports are unavailable.',
-      ),
+      const Text('Saved on this device. Sharing is off.'),
     ]),
     const Text(
       'Prototype storage is not encrypted. Use sample information only.',

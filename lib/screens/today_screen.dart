@@ -103,12 +103,7 @@ class Today extends StatelessWidget {
             ),
           ),
         ]),
-        panel([
-          const Text('On this device • No cloud connection'),
-          const Text(
-            'Notifications are unavailable in this build. Use your usual reminder system.',
-          ),
-        ]),
+        panel([const Text('No connection')]),
         action('Log symptom', () => open(context, Symptoms(store: store))),
         action(
           'Appointment summary',
