@@ -78,4 +78,6 @@ Open `docs/design/reference/index.html` in a browser to inspect the supplied int
 
 ![Sample Flutter phone preview](docs/images/flutter-phone.png)
 
-No new license has been assigned. Repository owners should choose licensing before public distribution, including rights to the supplied design/reference files.
+## License
+
+Licensed under the [MIT License](LICENSE). Copyright (c) 2026 Amol Bhatia and UMGC. Third-party dependencies retain their respective licenses.
