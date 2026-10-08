@@ -1,5 +1,9 @@
 # MediTrack
 
+SWEN 661 Group 1 project · Healthcare · Seniors (65+)
+
+Team member: Amol Bhatia. The project targets offline-first medication workflows and 200%+ text scaling.
+
 A self-contained Flutter prototype for managing medicines, recording doses and symptoms, and preparing an appointment summary. Ten core screens follow the supplied MediTrack HTML design. All records stay on the current device.
 
 **Prototype only: use sample data.** Local storage is unencrypted; notifications, cloud sync and external sharing are not connected. See [limitations](docs/LIMITATIONS.md).
