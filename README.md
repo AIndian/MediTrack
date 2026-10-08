@@ -74,7 +74,7 @@ Read the [architecture](docs/ARCHITECTURE.md), [design mapping](docs/design/DESI
 
 ## GitHub automation
 
-The workflow runs the same verification helper on pull requests, pushes to `main`, and manual dispatch. It downloads the pinned Flutter SDK from the official Flutter repository, requires read-only repository permissions, and uploads coverage reports and the compiled web app as artifacts. No custom secrets or paid coverage service are required. The workflow is prepared for GitHub but has not run there yet; local checks and a clean-copy check are documented separately.
+The workflow runs the same verification helper on pull requests, pushes to `main`, and manual dispatch. It downloads the pinned Flutter SDK from the official Flutter repository, requires read-only repository permissions, and uploads coverage reports and the compiled web app as artifacts. No custom secrets or paid coverage service are required. See [GitHub Actions](https://github.com/AIndian/MediTrack/actions/workflows/ci.yml) for the current run status. Local checks and a clean-copy check are documented separately.
 
 ## Reference preview
 

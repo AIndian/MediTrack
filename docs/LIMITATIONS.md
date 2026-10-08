@@ -7,4 +7,4 @@
 - Symptom timestamps are automatic. History covers 30 days; summaries offer 7 or 30 days. Allergies and medication-change records are not collected. Corrections replace statuses without an audit trail.
 - Light appearance only. Several controls are simplified from the reference; see the design mapping. This is not a pixel-identical Figma export.
 - Unit/widget tests and a web release build have been run locally. Android/iOS builds, native VoiceOver/TalkBack and physical-device keyboard operation have not been validated. Automated accessibility checks do not establish WCAG conformance.
-- GitHub Actions must run after the repository is pushed before remote CI can be considered verified.
+- Check the GitHub Actions result for the commit you are using; local verification alone does not guarantee a successful hosted run.

@@ -16,6 +16,9 @@ dart = shutil.which('dart')
 if not flutter or not dart:
     sys.exit('Install Flutter and add its bin directory to PATH. See README.md.')
 required = (root / '.flutter-version').read_text().strip()
+# A newly cloned SDK may print first-run setup messages before its JSON.
+# Complete that initialization before requesting machine-readable output.
+subprocess.run([flutter, '--version'], cwd=root, check=True)
 installed = json.loads(subprocess.check_output([flutter, '--version', '--machine'], cwd=root, text=True))
 if installed['frameworkVersion'] != required:
     sys.exit(f"Use Flutter {required}; found {installed['frameworkVersion']}.")

@@ -37,4 +37,4 @@ flutter test tool/preview_test.dart --dart-define=VISUAL_FONT=/absolute/path/to/
 
 Supply an available TrueType font on your machine. The renderer loads Material icons from Flutter's assets and writes `reports/flutter-phone.png`. It runs separately from the eight-test coverage suite and is skipped when no font path is provided. The checked-in image in `docs/images/` is the previously inspected sample, not a golden-image assertion.
 
-GitHub CI executes the same verification command and uploads coverage and the web build. A GitHub-hosted run has not yet been executed. Native Android/iOS builds, hardware accessibility and browser interaction remain outside these automated checks.
+GitHub CI executes the same verification command and uploads coverage and the web build. See [GitHub Actions](https://github.com/AIndian/MediTrack/actions/workflows/ci.yml) for results on each pushed commit. Native Android/iOS builds, hardware accessibility and browser interaction remain outside these automated checks.
