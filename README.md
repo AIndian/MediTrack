@@ -24,6 +24,48 @@ Start with **Add medicine**. Enter sample details, daily times such as `08:00, 1
 
 To run on an Android emulator or iOS simulator, complete that platform's setup reported by `flutter doctor`, start the emulator/simulator, run `flutter devices`, then `flutter run -d DEVICE_ID`. iOS requires macOS and Xcode. Native builds have not been verified in this repository's current validation.
 
+## Run from GitHub in the iPhone Simulator
+
+Clone the repository to your Mac and run it locally. GitHub hosts the source code and automated checks; the interactive iPhone Simulator runs on your Mac.
+
+You need macOS, Xcode with an installed iOS simulator runtime, and the Flutter version listed above. Run `flutter doctor` and address any iOS setup issues before continuing. See [Flutter's iOS setup guide](https://docs.flutter.dev/platform-integration/ios/setup).
+
+In Terminal, run:
+
+```sh
+git clone https://github.com/AIndian/MediTrack.git
+cd MediTrack
+
+flutter pub get --enforce-lockfile
+xcrun simctl boot "iPhone 18 Pro"
+open -a DeviceHub
+flutter run -d "iPhone 18 Pro"
+```
+
+This example uses an installed **iPhone 18 Pro** simulator. If your Mac has a different simulator, run `xcrun simctl list devices available` and substitute its name in the boot command. Then run `flutter devices` and use its name or device ID with `flutter run -d`. If the simulator is already booted, continue with the remaining commands.
+
+Xcode 27 calls the simulator app **Device Hub**. On Xcode 26 or earlier, replace `open -a DeviceHub` with `open -a Simulator`. The first build may take several minutes.
+
+While Flutter is running in Terminal:
+
+- Press **r** to reload code changes.
+- Press **R** to restart the app.
+- Press **q** to stop.
+
+### Get updates from GitHub
+
+If you already cloned the repository, use the existing folder instead of cloning again. Stop the running app, save and commit any local changes, then run from the repository root:
+
+```sh
+git pull --ff-only
+flutter pub get --enforce-lockfile
+flutter run -d "iPhone 18 Pro"
+```
+
+Use your simulator's name or device ID if different. If the simulator has been shut down, boot it again before running Flutter.
+
+GitHub also runs automated tests and provides downloadable coverage reports and web builds in the repository's [Actions tab](https://github.com/AIndian/MediTrack/actions).
+
 ## Run all checks
 
 ```sh
