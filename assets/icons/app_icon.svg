@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <title>MediTrack green shield with white medical cross</title>
+  <rect width="1024" height="1024" fill="#FFFFFF"/>
+  <polygon fill="#176B5B" points="512,152 792,248 780,490 744,628 656,756 512,872 368,756 280,628 244,490 232,248"/>
+  <polygon fill="#FFFFFF" points="460,330 564,330 564,446 680,446 680,550 564,550 564,666 460,666 460,550 344,550 344,446 460,446"/>
+</svg>
