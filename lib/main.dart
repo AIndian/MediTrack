@@ -14,7 +14,7 @@ Future<void> main() async {
   runApp(
     ChangeNotifierProvider<AppStore>.value(
       value: store,
-      child: MediTrack(store: store),
+      child: const MediTrack(),
     ),
   );
 }

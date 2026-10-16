@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'state/app_store.dart';
 import 'screens/home_shell.dart';
 
 class MediTrack extends StatelessWidget {
-  final AppStore store;
-  const MediTrack({super.key, required this.store});
+  const MediTrack({super.key});
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: store,
-    builder: (context, _) => MaterialApp(
+  Widget build(BuildContext context) => Consumer<AppStore>(
+    builder: (context, store, _) => MaterialApp(
       title: 'MediTrack',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -64,7 +63,7 @@ class MediTrack extends StatelessWidget {
         ),
         child: child!,
       ),
-      home: Home(store: store),
+      home: const Home(),
     ),
   );
 }

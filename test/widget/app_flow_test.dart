@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meditrack/app.dart';
 import 'package:meditrack/widgets/header_clock.dart';
@@ -49,7 +50,9 @@ void main() {
     t,
   ) async {
     final s = await fresh();
-    await t.pumpWidget(MediTrack(store: s));
+    await t.pumpWidget(
+      ChangeNotifierProvider.value(value: s, child: const MediTrack()),
+    );
     expect(find.textContaining('No medicines scheduled'), findsOneWidget);
     await tap(t, 'History');
     expect(find.text('No doses recorded yet.'), findsOneWidget);
@@ -88,7 +91,9 @@ void main() {
   ) async {
     final s = await fresh();
     s.put(med);
-    await t.pumpWidget(MediTrack(store: s));
+    await t.pumpWidget(
+      ChangeNotifierProvider.value(value: s, child: const MediTrack()),
+    );
     await tap(t, 'Open Sample medicine dose at 08:00');
     await tap(t, 'Mark Taken');
     expect(find.text('Status: Taken'), findsOneWidget);
@@ -108,7 +113,9 @@ void main() {
     final s = await fresh();
     s.put(med);
     s.record(s.doseKey(med, '08:00'), 'Taken');
-    await t.pumpWidget(MediTrack(store: s));
+    await t.pumpWidget(
+      ChangeNotifierProvider.value(value: s, child: const MediTrack()),
+    );
     await tap(t, 'More');
     await tap(t, 'Symptoms');
     await tap(t, 'Save symptom');
@@ -176,14 +183,18 @@ void main() {
         reason: '${page.runtimeType} must reflow',
       );
     }
-    await t.pumpWidget(MediTrack(store: s));
+    await t.pumpWidget(
+      ChangeNotifierProvider.value(value: s, child: const MediTrack()),
+    );
     await t.pumpAndSettle();
     expect(t.takeException(), isNull);
   });
   testWidgets('Labeled controls and minimum mobile touch targets', (t) async {
     final handle = t.ensureSemantics();
     final s = await fresh();
-    await t.pumpWidget(MediTrack(store: s));
+    await t.pumpWidget(
+      ChangeNotifierProvider.value(value: s, child: const MediTrack()),
+    );
     await t.pumpAndSettle();
     await expectLater(t, meetsGuideline(androidTapTargetGuideline));
     await expectLater(t, meetsGuideline(labeledTapTargetGuideline));
