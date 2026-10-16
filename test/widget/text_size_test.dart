@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:meditrack/app.dart';
 import 'package:meditrack/screens/settings_screen.dart';
@@ -26,7 +27,9 @@ void main() {
       }
 
       final store = await fresh();
-      await tester.pumpWidget(MediTrack(store: store));
+      await tester.pumpWidget(
+        ChangeNotifierProvider.value(value: store, child: const MediTrack()),
+      );
       await tester.tap(find.text('More'));
       await tester.pumpAndSettle();
       expect(find.text('Text size: 100%'), findsOneWidget);
@@ -77,7 +80,9 @@ void main() {
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
     final store = await fresh();
     store.setTextScale(1.25);
-    await tester.pumpWidget(MediTrack(store: store));
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(value: store, child: const MediTrack()),
+    );
     await tester.pumpAndSettle();
     final context = tester.element(find.text('MediTrack'));
     expect(MediaQuery.textScalerOf(context).scale(16), 40);
@@ -86,7 +91,9 @@ void main() {
 
   testWidgets('Today uses the short connection notice', (tester) async {
     final store = await fresh();
-    await tester.pumpWidget(MediTrack(store: store));
+    await tester.pumpWidget(
+      ChangeNotifierProvider.value(value: store, child: const MediTrack()),
+    );
     await tester.pumpAndSettle();
     expect(find.text('No connection'), findsOneWidget);
     expect(find.textContaining('Notifications are unavailable'), findsNothing);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../state/app_store.dart';
 import 'today_screen.dart';
@@ -7,8 +8,7 @@ import 'history_screen.dart';
 import 'settings_screen.dart';
 
 class Home extends StatefulWidget {
-  final AppStore store;
-  const Home({super.key, required this.store});
+  const Home({super.key});
   @override
   State<Home> createState() => _HomeState();
 }
@@ -16,10 +16,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int tab = 0;
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: widget.store,
-    builder: (context, _) {
-      final s = widget.store;
+  Widget build(BuildContext context) => Consumer<AppStore>(
+    builder: (context, s, _) {
       final pages = [
         Today(store: s),
         Medicines(store: s),

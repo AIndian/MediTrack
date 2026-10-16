@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -47,7 +48,10 @@ void main() {
     await tester.pumpWidget(
       RepaintBoundary(
         key: key,
-        child: MediTrack(store: store),
+        child: ChangeNotifierProvider.value(
+          value: store,
+          child: const MediTrack(),
+        ),
       ),
     );
     await tester.pumpAndSettle();
