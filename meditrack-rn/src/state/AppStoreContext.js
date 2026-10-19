@@ -14,3 +14,12 @@ export function useAppStore() {
   useSyncExternalStore(store.subscribe, () => store.version);
   return store;
 }
+
+const noopSubscribe = () => () => {};
+
+// Safe to use even outside the provider (returns 1.0 there)
+export function useTextScale() {
+  const store = useContext(AppStoreContext);
+  useSyncExternalStore(store ? store.subscribe : noopSubscribe, () => (store ? store.version : 0));
+  return store ? store.textScale : 1;
+}
