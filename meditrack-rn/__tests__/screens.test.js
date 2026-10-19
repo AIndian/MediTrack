@@ -5,7 +5,6 @@ import { STORAGE_KEY } from '../src/state/AppStore';
 import TodayScreen, { todaySlots } from '../src/screens/TodayScreen';
 import MedicineDetailsScreen from '../src/screens/MedicineDetailsScreen';
 import DoseScreen from '../src/screens/DoseScreen';
-import ComingSoonScreen from '../src/screens/ComingSoonScreen';
 import { seedIfEmpty } from '../src/state/sampleData';
 import { createMedicine } from '../src/models/medicine';
 import { makeStore } from '../test-utils/store';
@@ -69,22 +68,12 @@ describe('TodayScreen', () => {
     expect(screen.getByText('1 of 3 doses recorded Taken')).toBeTruthy();
   });
 
-  test('buttons navigate to the right screens', async () => {
+  test('opening a dose navigates with its medicine and time', async () => {
     const store = await storeWith(metformin, lisinopril);
     const nav = mockNav();
     await show(<TodayScreen navigation={nav} />, store);
     await fireEvent.press(screen.getByLabelText('Open Metformin dose at 12:00'));
     expect(nav.navigate).toHaveBeenCalledWith('Dose', { medicineId: 'b', time: '12:00' });
-    const routes = {
-      'Add medicine': 'MedicineForm',
-      'View dose history': 'History',
-      'Log symptom': 'Symptoms',
-      'Appointment summary': 'Summary',
-    };
-    for (const [label, route] of Object.entries(routes)) {
-      await fireEvent.press(screen.getByLabelText(label));
-      expect(nav.navigate).toHaveBeenLastCalledWith(route);
-    }
   });
 });
 
@@ -115,12 +104,10 @@ describe('MedicineDetailsScreen', () => {
     expect(screen.getByText('Active')).toBeTruthy();
   });
 
-  test('edit and back buttons navigate', async () => {
+  test('back button navigates back', async () => {
     const store = await storeWith(lisinopril);
     const nav = mockNav();
     await show(<MedicineDetailsScreen navigation={nav} route={{ params: { id: 'a' } }} />, store);
-    await fireEvent.press(screen.getByLabelText('Edit medicine'));
-    expect(nav.navigate).toHaveBeenCalledWith('MedicineForm', { id: 'a' });
     await fireEvent.press(screen.getByLabelText('Go back'));
     expect(nav.goBack).toHaveBeenCalled();
   });
@@ -160,18 +147,6 @@ describe('DoseScreen', () => {
     const store = await storeWith();
     await show(<DoseScreen navigation={mockNav(false)} route={{}} />, store);
     expect(screen.getByText('This medicine is no longer saved.')).toBeTruthy();
-  });
-});
-
-describe('ComingSoonScreen', () => {
-  test('uses the title param', async () => {
-    await render(<ComingSoonScreen navigation={mockNav()} route={{ name: 'History', params: { title: 'Dose history' } }} />);
-    expect(screen.getByRole('header', { name: 'Dose history' })).toBeTruthy();
-  });
-
-  test('falls back to the route name', async () => {
-    await render(<ComingSoonScreen navigation={mockNav(false)} route={{ name: 'History' }} />);
-    expect(screen.getByRole('header', { name: 'History' })).toBeTruthy();
   });
 });
 

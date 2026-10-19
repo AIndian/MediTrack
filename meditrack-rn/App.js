@@ -10,7 +10,6 @@ import { seedIfEmpty } from './src/state/sampleData';
 import TodayScreen from './src/screens/TodayScreen';
 import DoseScreen from './src/screens/DoseScreen';
 import MedicineDetailsScreen from './src/screens/MedicineDetailsScreen';
-import ComingSoonScreen from './src/screens/ComingSoonScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,11 +19,6 @@ export function AppNavigator() {
       <Stack.Screen name="Today" component={TodayScreen} />
       <Stack.Screen name="Dose" component={DoseScreen} />
       <Stack.Screen name="MedicineDetails" component={MedicineDetailsScreen} />
-      {/* Placeholders: teammates replace these with the real screens */}
-      <Stack.Screen name="MedicineForm" component={ComingSoonScreen} initialParams={{ title: 'Add medicine' }} />
-      <Stack.Screen name="History" component={ComingSoonScreen} initialParams={{ title: 'Dose history' }} />
-      <Stack.Screen name="Symptoms" component={ComingSoonScreen} initialParams={{ title: 'Symptoms' }} />
-      <Stack.Screen name="Summary" component={ComingSoonScreen} initialParams={{ title: 'Appointment summary' }} />
     </Stack.Navigator>
   );
 }

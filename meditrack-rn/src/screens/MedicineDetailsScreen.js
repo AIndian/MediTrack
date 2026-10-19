@@ -35,10 +35,6 @@ export default function MedicineDetailsScreen({ navigation, route }) {
         <AppText>Low-supply threshold: 10 doses</AppText>
       </Panel>
       <ActionButton
-        label="Edit medicine"
-        onPress={() => navigation.navigate('MedicineForm', { id: medicine.id })}
-      />
-      <ActionButton
         label={medicine.archived ? 'Restore medicine' : 'Archive medicine'}
         onPress={() => store.archive(medicine)}
       />

@@ -34,7 +34,6 @@ export default function TodayScreen({ navigation }) {
         >
           <View style={[styles.fill, { width: `${progress * 100}%` }]} />
         </View>
-        <ActionButton label="View dose history" onPress={() => navigation.navigate('History')} />
       </Panel>
       <Panel>
         <AppText>No connection</AppText>
@@ -42,8 +41,6 @@ export default function TodayScreen({ navigation }) {
           Prototype: your information is saved only on this device and is not encrypted. Do not enter real health information.
         </AppText>
       </Panel>
-      <ActionButton label="Log symptom" onPress={() => navigation.navigate('Symptoms')} />
-      <ActionButton label="Appointment summary" onPress={() => navigation.navigate('Summary')} />
     </View>
   );
 
@@ -73,7 +70,6 @@ export default function TodayScreen({ navigation }) {
           </View>
         );
       })}
-      <ActionButton label="Add medicine" onPress={() => navigation.navigate('MedicineForm')} />
     </AppPage>
   );
 }
