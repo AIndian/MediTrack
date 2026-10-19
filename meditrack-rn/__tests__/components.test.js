@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { Dimensions, StyleSheet, Text } from 'react-native';
 import { render, screen, fireEvent, act } from '@testing-library/react-native';
 import { AppStoreProvider, useAppStore } from '../src/state/AppStoreContext';
 import AppText from '../src/components/AppText';
@@ -45,16 +45,18 @@ describe('HeaderClock', () => {
 });
 
 describe('AppText', () => {
+  const phoneScale = () => Dimensions.get('window').fontScale;
+
   test('uses normal size outside the app store', async () => {
     await render(<AppText>Hello</AppText>);
-    expect(fontSizeOf(screen.getByText('Hello'))).toBe(16);
+    expect(fontSizeOf(screen.getByText('Hello'))).toBe(16 * Math.max(1, phoneScale()));
   });
 
-  test('scales with the text size setting', async () => {
+  test('uses the larger of app and phone text size, not both multiplied', async () => {
     const store = await makeStore();
     store.setTextScale(2.0);
     await withStore(<AppText style={{ fontSize: 20 }}>Big</AppText>, store);
-    expect(fontSizeOf(screen.getByText('Big'))).toBe(40);
+    expect(fontSizeOf(screen.getByText('Big'))).toBe(20 * Math.max(2, phoneScale()));
   });
 });
 
@@ -140,6 +142,8 @@ test('useAppStore outside the provider gives a clear error', async () => {
     useAppStore();
     return null;
   }
-  await expect(render(<Broken />)).rejects.toThrow('useAppStore must be used inside AppStoreProvider');
+  await expect(async () => {
+    await render(<Broken />);
+  }).rejects.toThrow('useAppStore must be used inside AppStoreProvider');
   spy.mockRestore();
 });

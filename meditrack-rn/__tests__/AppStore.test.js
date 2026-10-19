@@ -58,7 +58,9 @@ test('corrupt saved data sets a load error', async () => {
 });
 
 test('localDate uses local time, not UTC', () => {
-  expect(localDate(new Date(2026, 9, 19, 23, 30))).toBe('2026-10-19');
+  const lateEvening = new Date(2026, 9, 19, 23, 30); // 11:30 pm Eastern = Oct 20 in UTC
+  expect(lateEvening.toISOString().slice(0, 10)).toBe('2026-10-20'); // proves the time zone is set
+  expect(localDate(lateEvening)).toBe('2026-10-19');
 });
 
 test('doseKey combines day, medicine id, and time', async () => {

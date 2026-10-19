@@ -34,7 +34,7 @@ export default function App() {
 
   useEffect(() => {
     AppStore.load(AsyncStorage).then((loaded) => {
-      seedIfEmpty(loaded);
+      if (__DEV__) seedIfEmpty(loaded); // demo data in development only
       setStore(loaded);
     });
   }, []);

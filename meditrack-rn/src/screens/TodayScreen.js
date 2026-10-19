@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import AppText from '../components/AppText';
 import DoseControls from '../components/DoseControls';
 import { ActionButton, AppPage, Heading, MedicineHeading, Panel, StatusBadge } from '../components/DesignWidgets';
-import { useAppStore } from '../state/AppStoreContext';
+import { useAppStore, useCurrentDay } from '../state/AppStoreContext';
 import { colors } from '../theme';
 
 // Every (medicine, time) pair for active medicines, earliest first
@@ -15,6 +15,7 @@ export function todaySlots(store) {
 
 export default function TodayScreen({ navigation }) {
   const store = useAppStore();
+  useCurrentDay(store.now); // re-render after midnight so dose keys use today's date
   const slots = todaySlots(store);
   const taken = slots.filter((s) => store.status(store.doseKey(s.medicine, s.time)) === 'Taken').length;
   const progress = slots.length === 0 ? 0 : taken / slots.length;
@@ -37,6 +38,9 @@ export default function TodayScreen({ navigation }) {
       </Panel>
       <Panel>
         <AppText>No connection</AppText>
+        <AppText style={styles.note}>
+          Prototype: your information is saved only on this device and is not encrypted. Do not enter real health information.
+        </AppText>
       </Panel>
       <ActionButton label="Log symptom" onPress={() => navigation.navigate('Symptoms')} />
       <ActionButton label="Appointment summary" onPress={() => navigation.navigate('Summary')} />
@@ -85,6 +89,7 @@ const styles = StyleSheet.create({
   },
   cardNext: { borderWidth: 2, borderColor: colors.primary },
   time: { fontWeight: '700' },
+  note: { marginTop: 8, color: colors.muted },
   track: {
     height: 12,
     marginTop: 12,

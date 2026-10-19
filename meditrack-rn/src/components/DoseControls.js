@@ -5,23 +5,26 @@ import { useAppStore } from '../state/AppStoreContext';
 
 export default function DoseControls({ doseKey }) {
   const store = useAppStore();
-  const [previous, setPrevious] = useState(null);
+  // What we changed, so Undo can tell whether a newer change has happened since
+  const [last, setLast] = useState(null);
 
   const record = (status) => {
-    setPrevious(store.status(doseKey));
+    setLast({ previous: store.status(doseKey), applied: status });
     store.record(doseKey, status);
   };
 
   const undo = () => {
-    store.record(doseKey, previous);
-    setPrevious(null);
+    if (last && store.status(doseKey) === last.applied) {
+      store.record(doseKey, last.previous);
+    }
+    setLast(null);
   };
 
   return (
     <View>
       <ActionButton label="Mark Taken" onPress={() => record('Taken')} />
       <ActionButton label="Skip dose" variant="outlined" onPress={() => record('Skipped')} />
-      {previous !== null && <ActionButton label="Undo last change" onPress={undo} />}
+      {last !== null && <ActionButton label="Undo last change" onPress={undo} />}
     </View>
   );
 }

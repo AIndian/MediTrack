@@ -16,6 +16,9 @@ export function createMedicine({
       throw new Error(`Medicine is missing required field: ${field}`);
     }
   }
+  if (!Array.isArray(times) || !times.every((t) => typeof t === 'string')) {
+    throw new Error('Medicine times must be a list of time strings');
+  }
   return Object.freeze({
     id,
     name,

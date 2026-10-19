@@ -2,10 +2,11 @@ import React from 'react';
 import AppText from '../components/AppText';
 import DoseControls from '../components/DoseControls';
 import { ActionButton, AppPage, MedicineHeading, Panel, StatusBadge } from '../components/DesignWidgets';
-import { useAppStore } from '../state/AppStoreContext';
+import { useAppStore, useCurrentDay } from '../state/AppStoreContext';
 
 export default function DoseScreen({ navigation, route }) {
   const store = useAppStore();
+  useCurrentDay(store.now); // re-render after midnight so the dose key uses today's date
   const { medicineId, time } = route.params ?? {};
   const medicine = store.medicines.find((m) => m.id === medicineId);
   const onBack = navigation.canGoBack() ? () => navigation.goBack() : undefined;

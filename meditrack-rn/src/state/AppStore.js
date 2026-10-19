@@ -22,6 +22,7 @@ export class AppStore {
     this.symptoms = [];
     this.textScale = 1.0;
     this.error = null;
+    this.loadFailed = false;
     this.pending = Promise.resolve();
     this.version = 0;
     this.listeners = new Set();
@@ -43,7 +44,9 @@ export class AppStore {
           store.textScale = saved;
         }
       }
-    } catch {
+    } catch (e) {
+      console.warn('MediTrack: could not load saved data', e);
+      store.loadFailed = true;
       store.error = 'Could not load data. Restart the app.';
     }
     return store;
@@ -80,7 +83,8 @@ export class AppStore {
   }
 
   save() {
-    if (this.error) {
+    // Never overwrite saved data we could not read
+    if (this.loadFailed) {
       this.notify();
       return;
     }
@@ -94,7 +98,13 @@ export class AppStore {
     this.pending = this.pending.then(async () => {
       try {
         await this.storage.setItem(STORAGE_KEY, encoded);
-      } catch {
+        if (this.error) {
+          // A later save worked, so clear the earlier warning
+          this.error = null;
+          this.notify();
+        }
+      } catch (e) {
+        console.warn('MediTrack: could not save data', e);
         this.error = 'Could not save. Keep the app open.';
         this.notify();
       }
