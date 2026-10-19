@@ -15,7 +15,7 @@
     "test:widget": "vitest run test/widget",
     "test:browser": "playwright test",
     "coverage": "vitest run --coverage",
-    "verify": "npm run coverage && npm run build && npm run test:browser"
+    "verify": "npm run coverage && python ../tool/coverage_report.py --react && python -m unittest discover -s test/tools -p *_test.py && npm run build && npm run test:browser"
   },
   "dependencies": {
     "react": "19.3.1",

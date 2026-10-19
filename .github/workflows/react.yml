@@ -1,0 +1,57 @@
+name: React checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: react-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: react
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: react/package-lock.json
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Test, enforce coverage, reuse report and build
+        run: npm run verify
+      - name: Upload React coverage and browser evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: meditrack-react-reports
+          path: |
+            react/coverage/
+            react/reports/
+            react/playwright-report/
+            react/test-results/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload React build
+        uses: actions/upload-artifact@v7
+        with:
+          name: meditrack-react-web
+          path: react/dist/
+          if-no-files-found: error
+          retention-days: 14

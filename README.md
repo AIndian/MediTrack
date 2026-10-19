@@ -10,6 +10,10 @@ A self-contained Flutter prototype for managing medicines, recording doses and s
 
 ## Start here
 
+For the separate React web implementation, see [react/README.md](react/README.md).
+It has its own dependencies, tests, 60% coverage checks, and build. Flutter
+commands and saved records remain separate. See the [small PR sequence](docs/REACT_PR_PLAN.md).
+
 Install **Flutter 3.47.5** (includes Dart 3.13.4), Git, and Python 3.10 or newer. The exact Flutter version is recorded in `.flutter-version`; dependencies are pinned in `pubspec.lock`. Add Flutter's `bin` directory to your PATH. Chrome is the simplest way to try the app; no Android SDK or Xcode is needed for the web version.
 
 After cloning this repository, open its root folder (the one containing `pubspec.yaml`):
