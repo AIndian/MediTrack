@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from './App';
 import { AppStore } from './store';
 
-createRoot(document.getElementById('root')).render(
+export const root = createRoot(document.getElementById('root'));
+root.render(
   <StrictMode><App store={new AppStore()} /></StrictMode>,
 );

@@ -8,17 +8,22 @@ Requires Node.js 22.12+ and Python 3.10+ (for the shared coverage reporter).
 ```sh
 cd react
 npm ci
+npx playwright install chromium
 npm run dev
 ```
 
 ```sh
 npm run test:unit
 npm run test:widget
+npm run test:browser
 npm run verify
 ```
 
 `verify` runs tests, requires at least 60% lines, statements, branches and
-functions across every JavaScript/JSX file under `src/`, then builds `dist/`.
+functions across every JavaScript/JSX file under `src/`, builds `dist/`, then
+checks real Chromium layouts on phone/tablet in portrait/landscape at 100/200%
+text. Browser tests also verify minimum target sizes, input labels and local
+workflows while the loaded app has no network connection.
 Open `coverage/index.html` for interactive coverage; `coverage/lcov.info`
 supports other reporting tools. Dependencies are pinned in `package-lock.json`.
 
