@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import AppText from '../components/AppText';
 import DoseControls from '../components/DoseControls';
@@ -47,6 +47,10 @@ export default function TodayScreen({ navigation }) {
   return (
     <AppPage title="Today" side={side}>
       <AppText>{store.day}</AppText>
+      <ActionButton
+        label="View your medicines"
+        onPress={() => navigation.navigate('Medicines')}
+      />
       {slots.length === 0 && (
         <AppText>No medicines scheduled today. Add your first medicine to get started.</AppText>
       )}

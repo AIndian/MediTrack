@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,6 +10,7 @@ import { seedIfEmpty } from './src/state/sampleData';
 import TodayScreen from './src/screens/TodayScreen';
 import DoseScreen from './src/screens/DoseScreen';
 import MedicineDetailsScreen from './src/screens/MedicineDetailsScreen';
+import MedicinesScreen from './src/screens/MedicinesScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export function AppNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Today" component={TodayScreen} />
+      <Stack.Screen name="Medicines" component={MedicinesScreen} />
       <Stack.Screen name="Dose" component={DoseScreen} />
       <Stack.Screen name="MedicineDetails" component={MedicineDetailsScreen} />
     </Stack.Navigator>
