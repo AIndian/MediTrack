@@ -18,6 +18,9 @@
     "web": {
       "favicon": "../assets/icons/app_icon.png"
     },
-    "plugins": ["expo-font"]
+    "plugins": [
+      "expo-font",
+      "expo-status-bar"
+    ]
   }
 }
