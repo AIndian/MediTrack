@@ -30,6 +30,17 @@ class Settings extends StatelessWidget {
         onChanged: store.setTextScale,
       ),
     ),
+    Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final scale in AppStore.textScales)
+          OutlinedButton(
+            onPressed: () => store.setTextScale(scale),
+            child: Text('Set text size to ${(scale * 100).round()}%'),
+          ),
+      ],
+    ),
     const Text('100% · 125% · 150% · 175% · 200%'),
     const Text('Your device’s larger text setting still applies.'),
     action('Symptoms', () => open(context, Symptoms(store: store))),
