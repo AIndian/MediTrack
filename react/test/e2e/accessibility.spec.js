@@ -4,6 +4,19 @@ import AxeBuilder from '@axe-core/playwright';
 import { medicine } from '../support/fixtures.js';
 import { storageKey } from '../../src/store.js';
 
+test('uses the Flutter header glyph styling and serves the shared browser icon', async ({ page, request }) => {
+  await page.goto('/');
+  const icon = page.getByRole('link', { name: 'MediTrack home' }).locator('svg');
+  await expect(icon).toHaveAttribute('aria-hidden', 'true');
+  await expect(icon).toHaveCSS('fill', 'rgb(7, 94, 100)');
+  await expect(icon).toHaveCSS('width', '26px');
+  await expect(icon).toHaveCSS('height', '26px');
+  const href = await page.locator('link[rel="icon"]').getAttribute('href');
+  const response = await request.get(new URL(href, page.url()).href);
+  expect(response.ok()).toBe(true);
+  expect(await response.body()).toEqual(await readFile(new URL('../../../web/favicon.png', import.meta.url)));
+});
+
 test('all ten screens reflow at 200%, have labeled targets, and pass axe checks', async ({ page }, testInfo) => {
   await page.clock.install({ time: new Date('2026-10-08T12:00:00-07:00') });
   await page.addInitScript(

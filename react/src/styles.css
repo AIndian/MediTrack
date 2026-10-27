@@ -102,12 +102,11 @@ p {
   min-height: 3rem;
 }
 .brand svg {
-  width: 1.5em;
-  height: 1.7em;
+  width: 1.625rem;
+  height: 1.625rem;
   flex-shrink: 0;
-  fill: #e8f3f1;
-  stroke: #075e64;
-  stroke-width: 2;
+  color: #075e64;
+  fill: currentColor;
 }
 .header-clock {
   margin-left: auto;

@@ -29,9 +29,8 @@ export default function App() {
       </a>
       <header className="app-header">
         <Link className="brand" to="/" aria-label="MediTrack home">
-          <svg viewBox="0 0 32 36" aria-hidden="true">
-            <path d="M16 2 29 7v10c0 8-7 14-13 17C10 31 3 25 3 17V7Z" />
-            <path d="M16 10v14M9 17h14" />
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M10.5,13H8v-3h2.5V7.5h3V10H16v3h-2.5v2.5h-3V13z M12,2L4,5v6.09c0,5.05,3.41,9.76,8,10.91c4.59-1.15,8-5.86,8-10.91V5L12,2 z M18,11.09c0,4-2.55,7.7-6,8.83c-3.45-1.13-6-4.82-6-8.83v-4.7l6-2.25l6,2.25V11.09z" />
           </svg>
           <span>MediTrack</span>
         </Link>

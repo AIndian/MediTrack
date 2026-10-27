@@ -71,6 +71,10 @@ The palette, cards and typography follow `docs/design/reference/index.html` and 
 Flutter app's documented adaptations. This is a responsive React web implementation,
 not React Native. It does not change or merge the separate teammate React Native PRs.
 
+The header uses the same Material `health_and_safety_outlined` glyph and teal color
+as Flutter. Its Apache 2.0 license is included in `public/material-icons-LICENSE.txt`.
+The browser favicon is copied byte-for-byte from Flutter's `web/favicon.png`.
+
 The store ports medicine replacement, archive/restore, daily dose records, Undo,
 symptoms, date filters and five persisted text sizes from `lib/state/app_store.dart`.
 It validates saved records, protects unreadable data from overwrite, and retains
