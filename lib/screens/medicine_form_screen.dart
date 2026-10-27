@@ -66,7 +66,7 @@ class _MedicineFormState extends State<MedicineForm> {
                   keyboardType: i == 4 ? TextInputType.number : TextInputType.text,
                   validator: (v) {
                     if (i != 2 && (v == null || v.trim().isEmpty)) {
-                      return 'Please enter a value';
+                      return ['Enter a medicine name', 'Enter a strength / dosage', '', 'Use times such as 08:00, 18:00', 'Enter a whole number, zero or more'][i];
                     }
                     if (i == 3 &&
                         v!

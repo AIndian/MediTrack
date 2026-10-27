@@ -53,7 +53,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 3.2.4 | Consistent Identification | AA | [x] Shared Field, DoseControls, Status and medicine/action labels. | [x] Shared design widgets, badge and DoseControls with matching action names. | Review shared components and complete-process tests. |
 | 3.3.1 | Error Identification | A | [x] Existing focused error summary links to aria-invalid/described fields. | [x] Validation focuses/scrolls first invalid field; native errors remain programmatic. | Existing validation tests plus final focus/error integration cases. |
 | 3.3.2 | Labels or Instructions | A | [x] Required semantics and visible required/optional, time-format and prescription instructions. | [x] Wrapping visible labels, required instructions and numeric supply keyboard. | Final label/required and invalid-input assertions. |
-| 3.3.3 | Error Suggestion | AA | [ ] Pending | [ ] Pending | Pending |
+| 3.3.3 | Error Suggestion | AA | [x] Existing field-specific messages include valid time examples and supply bounds. | [x] Replace generic required errors with field-specific correction suggestions. | Final invalid name/strength/time/supply tests preserve entered values. |
 | 3.3.4 | Error Prevention (Legal, Financial, Data) | AA | [ ] Pending | [ ] Pending | Pending |
 | 4.1.1 | Parsing | A | [ ] Pending | [ ] Pending | Pending |
 | 4.1.2 | Name, Role, Value | A | [ ] Pending | [ ] Pending | Pending |
