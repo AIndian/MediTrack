@@ -51,13 +51,15 @@ export function Dose() {
 export function History() {
   const store = useStore();
   const history = store.history(30);
+  const [message, setMessage] = useState('');
   return <Page title="Dose history" subtitle="Review or correct a record">
+    <p role="status" aria-atomic="true">{message}</p>
     <p>Last 30 days · Select a status to correct an entry.</p>
     {!history.length && <Card><p>No doses recorded yet.</p></Card>}
     {history.map(([key, status]) => <Card key={key} label={store.doseLabel(key)}>
       <h2>{store.doseLabel(key)}</h2><Status value={status} />
       <div className="actions inline">{['Taken', 'Skipped', 'Due'].map(value =>
-        <button className="secondary" key={value} onClick={() => { if (value === 'Due') document.querySelector('h1').focus(); store.record(key, value); }}>{value}</button>)}</div>
+        <button className="secondary" key={value} onClick={() => { if (value === 'Due') document.querySelector('h1').focus(); store.record(key, value); setMessage(`${store.doseLabel(key)}: ${value}`); }}>{value}</button>)}</div>
     </Card>)}
   </Page>;
 }

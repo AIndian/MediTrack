@@ -15,6 +15,8 @@ class _SymptomsState extends State<Symptoms> {
   final form = GlobalKey<FormState>();
   final nameFocus = FocusNode();
   String severity = 'Mild';
+  String message = '';
+  bool saving = false;
   @override
   void dispose() {
     nameFocus.dispose();
@@ -57,14 +59,22 @@ class _SymptomsState extends State<Symptoms> {
             'Notes (optional)',
             TextFormField(controller: notes, maxLines: 3),
           ),
-          action('Save symptom', () {
+          action('Save symptom', () async {
+            if (saving) return;
             if (!form.currentState!.validate()) {
               nameFocus.requestFocus();
               return;
             }
             {
+              saving = true;
               widget.store.symptom(name.text, severity, notes.text);
+              await widget.store.pending;
+              if (!mounted) return;
               setState(() {
+                saving = false;
+                message = widget.store.error == null
+                    ? 'Symptom saved on this device.'
+                    : 'Symptom kept in memory. Could not save on this device.';
                 name.clear();
                 notes.clear();
               });
@@ -73,6 +83,7 @@ class _SymptomsState extends State<Symptoms> {
         ],
       ),
     ),
+    Semantics(liveRegion: true, child: Text(message)),
     if (widget.store.symptoms.isEmpty) const Text('No symptoms recorded.'),
     for (final s in widget.store.symptoms)
       panel([

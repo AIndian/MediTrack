@@ -28,7 +28,7 @@ export function MedicineDetails() {
       <MedicineHeading medicine={m} />
       <h3>Instructions you entered</h3><p>{m.instructions || 'None entered'}</p>
       <h3>Schedule</h3><p>Daily at {m.times.join(', ')}</p>
-      <p>{m.archived ? 'Archived — no longer scheduled' : 'Active'}</p>
+      <p role="status">{m.archived ? 'Archived — no longer scheduled' : 'Active'}</p>
     </Card>
     <Card><h2>Refill details</h2><p>Recorded supply: {m.supply} doses</p><p>Low-supply threshold: 10 doses</p></Card>
     <div className="actions">
