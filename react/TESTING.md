@@ -1,6 +1,6 @@
 # React testing and coverage
 
-Run from `react/` with Node.js 22.13 or newer:
+Run from `react/` with Node.js **22.22.2**, the version pinned in CI:
 
 ```sh
 npm ci

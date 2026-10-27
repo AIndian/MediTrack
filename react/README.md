@@ -4,7 +4,8 @@ A separate browser implementation of the existing Flutter prototype. Flutter sou
 tests, platform projects and design references remain in place. React uses its own
 `meditrack.react.v1` browser-storage key; it does not read or migrate Flutter records.
 
-Use Node.js 22.13 or newer. From this directory:
+Use Node.js **22.22.2**, the version used in CI. Other compatible runtime ranges
+are declared in `package.json`. From this directory:
 
 ```sh
 npm ci

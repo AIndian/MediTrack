@@ -28,7 +28,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
-          node-version: '22.18.0'
+          node-version: '22.22.2'
           cache: npm
           cache-dependency-path: react/package-lock.json
       - run: npm ci
