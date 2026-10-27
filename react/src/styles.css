@@ -60,6 +60,7 @@ small { display: block; font-size: .8em; font-weight: 400; }
 input[type="range"] { padding: 0; accent-color: #075e64; }
 progress { display: block; width: 100%; height: 1.2rem; accent-color: #075e64; margin-bottom: 1.25rem; }
 .storage-error { color: #81212a; background: #fff0f0; border-bottom: 2px solid #a32932; padding: 1rem 2rem; }
+.save-status { color: #176b43; background: #eaf5ed; margin: 0; padding: 1rem 2rem; }
 footer { font-size: .85em; text-align: center; color: #52686c; padding: 1.5rem; }
 .skip-link { position: fixed; left: 1rem; top: -10rem; z-index: 2; background: white; padding: 1rem; }
 .skip-link:focus { top: 1rem; }
