@@ -121,16 +121,42 @@ Widget medicineHeading(Medicine m) => Column(
   ],
 );
 
-class AppPage extends StatelessWidget {
+class AppPage extends StatefulWidget {
   final String title;
   final List<Widget> children;
   final List<Widget> side;
   const AppPage(this.title, this.children, {super.key, this.side = const []});
   @override
+  State<AppPage> createState() => _AppPageState();
+}
+
+class _AppPageState extends State<AppPage> {
+  final contentFocus = FocusNode(debugLabel: 'Page heading', skipTraversal: true);
+  final contentKey = GlobalKey();
+  String get title => widget.title;
+  List<Widget> get children => widget.children;
+  List<Widget> get side => widget.side;
+
+  void focusContent() {
+    contentFocus.requestFocus();
+    Scrollable.ensureVisible(contentKey.currentContext!);
+  }
+
+  @override
+  void dispose() {
+    contentFocus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
       child: ListView(
         children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: TextButton(onPressed: focusContent, child: const Text('Skip to content')),
+          ),
           Container(
             decoration: const BoxDecoration(
               color: Colors.white,
@@ -185,19 +211,23 @@ class AppPage extends StatelessWidget {
             ),
           ),
           Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1120),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final wide =
-                        constraints.maxWidth >= 700 &&
-                        MediaQuery.textScalerOf(context).scale(1) < 1.5;
-                    return Padding(
-                      padding: EdgeInsets.all(wide ? 32 : 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                        Semantics(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1120),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final wide =
+                      constraints.maxWidth >= 700 &&
+                      MediaQuery.textScalerOf(context).scale(1) < 1.5;
+                  return Padding(
+                    padding: EdgeInsets.all(wide ? 32 : 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Focus(
+                          key: contentKey,
+                          focusNode: contentFocus,
+                          autofocus: true,
+                          child: Semantics(
                           headingLevel: 1,
                           child: Text(
                             title,
@@ -208,6 +238,7 @@ class AppPage extends StatelessWidget {
                               letterSpacing: -1,
                             ),
                           ),
+                        ),
                         ),
                         Text(
                           subtitles[title] ?? '',
@@ -241,12 +272,12 @@ class AppPage extends StatelessWidget {
                           ...children,
                           ...side,
                         ],
-                        ],
-                      ),
-                    );
-                  },
-                ),
+                      ],
+                    ),
+                  );
+                },
               ),
+            ),
           ),
         ],
       ),

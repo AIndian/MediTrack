@@ -34,7 +34,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.2.1 | Timing Adjustable | A | [x] No session timeout, timed form or expiring Undo. | [x] No session timeout or expiring Undo. | Existing Undo-after-five-minutes widget test; no timed interaction limits. |
 | 2.2.2 | Pause, Stop, Hide | A | [x] Pause clock updates toggle stops visible automatic time updates without freezing the day/store. | [x] Same toggle; resumes with current time and no live-region ticking. | Final fake-clock tests verify pause/resume across minute changes. |
 | 2.3.1 | Three Flashes or Below Threshold | A | [x] No flashing media, strobes or flashing animations. | [x] No flashing media or effects; normal Material transitions. | Source review of CSS/widgets/assets; no flashing content introduced. |
-| 2.4.1 | Bypass Blocks | A | [ ] Pending | [ ] Pending | Pending |
+| 2.4.1 | Bypass Blocks | A | [x] Existing skip link focuses main; native main/nav landmarks. | [x] Shared page skip action focuses/scrolls heading; semantic headings support AT bypass. | Keyboard skip tests; screen-reader landmark/heading review pending. |
 | 2.4.2 | Page Titled | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.3 | Focus Order | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.4 | Link Purpose (In Context) | A | [ ] Pending | [ ] Pending | Pending |
