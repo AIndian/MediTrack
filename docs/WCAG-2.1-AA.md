@@ -23,7 +23,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.4.2 | Audio Control | A | [x] N/A: no audio output or autoplay. | [x] N/A: no audio output or autoplay. | Source review of both applications. |
 | 1.4.3 | Contrast (Minimum) | AA | [x] Explicit dark text, muted text and error/status palettes on light surfaces. | [x] Pin muted/error foregrounds and backgrounds instead of seed-derived colors. | Contrast ratio assertions in final integration suites; rendered/device review pending. |
 | 1.4.4 | Resize Text | AA | [x] Relative font sizes, 100-200% in-app scale and unrestricted browser zoom. | [x] Preserve nonlinear system text scaling when larger; remove arbitrary system-size cap. | Existing text-size tests plus final 200% viewport matrix. |
-| 1.4.5 | Images of Text | AA | [ ] Pending | [ ] Pending | Pending |
+| 1.4.5 | Images of Text | AA | [x] All UI copy is rendered text; SVG is a decorative symbol. | [x] All UI copy is Text widgets; icons carry no text images. | Source review; no rasterized instructions or labels. |
 | 1.4.10 | Reflow | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.11 | Non-text Contrast | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.12 | Text Spacing | AA | [ ] Pending | [ ] Pending | Pending |
