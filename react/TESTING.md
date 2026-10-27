@@ -3,12 +3,12 @@
 Run from `react/` with Node.js **22.22.2**, the version pinned in CI:
 
 ```sh
-npm ci
-npx playwright install chromium
+npm ci --engine-strict
+npx --no-install playwright install chromium
 npm run verify
 ```
 
-On Linux CI, use `npx playwright install --with-deps chromium` to install required
+On Linux CI, use `npx --no-install playwright install --with-deps chromium` to install required
 browser system packages as well. `verify` runs Prettier's format check and ESLint
 first and stops on a format violation, lint error or warning, failed test, coverage threshold,
 build or browser check. It starts and stops a local production-preview server for
@@ -120,17 +120,37 @@ Reports are generated locally and ignored by Git:
 - `playwright-report/index.html`: browser test report.
 - `test-results/`: inspected 200% screenshots, plus traces/screenshots on failure.
 
-The separate `.github/workflows/react.yml` runs `npm ci` and the same verification
-command on React pull requests, relevant main-branch pushes and manual runs. It uploads
+The separate `.github/workflows/react.yml` runs on every pull request, every push to
+`main`, and manual runs. There are no path filters that can leave a required check
+pending when only shared configuration changes. The **React verification** and
+**Flutter verification** jobs have distinct check names for branch protection.
+
+React CI installs the exact lockfile with `npm ci --engine-strict`, so unsupported
+dependency engines fail the install. Named steps run the same checks as `npm run verify`:
+formatting, lint, unit/component coverage, production build and browser tests. Browser
+installation follows the cheaper checks and uses the locked Playwright executable.
+Vitest rejects focused tests in CI; Playwright also rejects focused tests and any test
+that passes only on retry. The single retry still captures failure diagnostics.
+
+Both workflows require nonempty coverage reports and build output before succeeding.
+React additionally requires the browser HTML report. Missing expected files fail the
+job. Available coverage and browser diagnostics are uploaded after failures, and a
+successful React build is retained even if a later browser check fails. Canceled runs
+do not continue uploading artifacts. Upload errors fail the job; they are not warnings.
+Actions use full commit SHAs, read-only repository permissions, bounded job timeouts,
+and 14-day artifact retention. New runs cancel older runs for the same branch.
+
+React CI uploads
 `react-coverage`, `react-browser-checks`, and `meditrack-react-web` artifacts. Download
-and extract the coverage artifact, then open its `index.html`. The existing Flutter
-workflow and reporting helper are unchanged.
+and extract the coverage artifact, then open its `index.html`. Flutter retains its
+existing verification helper and coverage/build artifacts.
 
 ## Verified locally on October 27, 2026
 
-Windows, Node.js 22.22.2, npm 10.9.7, Chromium through Playwright. A clean `npm ci`
-completed without `EBADENGINE` warnings. The committed lockfile uses jsdom 26.1.0;
-this change raises the project runtime baseline without changing that dependency.
+Windows, Node.js 22.22.2, npm 10.9.7, Chromium through Playwright, with `CI=true`.
+A clean `npm ci --engine-strict` completed without `EBADENGINE` warnings. The lockfile
+includes the updates already merged into `main`: jsdom 30.1.3 and user-event 14.6.8.
+The supported runtime range and CI baseline satisfy their engine requirements.
 
 | Check                     | Result                                     |
 | ------------------------- | ------------------------------------------ |
@@ -141,8 +161,15 @@ this change raises the project runtime baseline without changing that dependency
 | Statement coverage        | 352 / 352 = **100%**                       |
 | Function coverage         | 121 / 121 = **100%**                       |
 | Branch coverage           | 244 / 252 = **96.82%**                     |
-| Browser tests             | 24 passed across phone, tablet and desktop |
+| Browser tests             | 27 passed across phone, tablet and desktop |
 | Production build          | Passed                                     |
+
+The browser checks also verify Flutter's header icon color/size and exact favicon
+bytes served by the production build. The phone screenshot at 200% was inspected.
+Actionlint 1.7.12 validated both workflows. Temporary failure probes confirmed nonzero
+exits for focused unit tests, focused browser tests, a browser test passing only on
+retry, and a strict install on unsupported Node.js 22.18.0. Those probes are not part
+of the committed application suite.
 
 Automated accessibility checks do not establish WCAG conformance. Native Flutter
 builds, physical devices, VoiceOver/TalkBack and browsers other than Chromium were

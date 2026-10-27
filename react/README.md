@@ -8,7 +8,7 @@ Use Node.js **22.22.2**, the version used in CI. Other compatible runtime ranges
 are declared in `package.json`. From this directory:
 
 ```sh
-npm ci
+npm ci --engine-strict
 npm run format:check
 npm run lint
 npm run dev
@@ -18,7 +18,7 @@ npm run build
 
 Use `npm run format` to apply the committed Prettier configuration to React files.
 For formatting, lint, tests, coverage, production-build and browser checks, run
-`npx playwright install chromium` once, then `npm run verify`. The coverage gate is
+`npx --no-install playwright install chromium` once, then `npm run verify`. The coverage gate is
 60% for every metric. Open `coverage/index.html` after `npm run test:coverage`.
 See [testing and Flutter test mapping](TESTING.md) for reports and verified results.
 
