@@ -61,11 +61,9 @@ class MediTrack extends StatelessWidget {
       ),
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(
-          textScaler: TextScaler.linear(
-            MediaQuery.textScalerOf(context)
-                .scale(1)
-                .clamp(store.textScale, 10.0),
-          ),
+          textScaler: MediaQuery.textScalerOf(context).scale(16) >= 16 * store.textScale
+              ? MediaQuery.textScalerOf(context)
+              : TextScaler.linear(store.textScale),
         ),
         child: child!,
       ),
