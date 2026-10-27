@@ -12,7 +12,7 @@ export function Today() {
   const taken = slots.filter((slot) => store.status(slot.key) === 'Taken').length;
   const next = slots.find((slot) => store.status(slot.key) === 'Due' && slot.time >= currentTime);
   return <Page title="Today">
-    <p className="eyebrow">{store.day} · Your daily routine</p>
+    <p className="eyebrow"><time dateTime={store.day}>{now.toLocaleDateString(undefined, { dateStyle: 'full' })}</time> · Your daily routine</p>
     <div className="today-layout">
       <section aria-label="Today's medicines">
         {slots.length === 0 && <div className="card"><h2>A little help with your routine</h2><p>No medicines scheduled today. Add your first medicine to get started.</p></div>}
