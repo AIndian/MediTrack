@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../StoreContext';
 
 export function StorageNotice() {
   const { store, error, readOnly } = useStore();
   const [downloadError, setDownloadError] = useState('');
-  if (!error) return null;
+  const [confirmation, setConfirmation] = useState(null);
+  const status = useRef(null);
+  useEffect(() => { if (!error && confirmation) status.current?.focus(); }, [error, confirmation]);
+  if (!error) return confirmation && <p className="save-status" ref={status} tabIndex={-1} role="status">{confirmation.message}</p>;
   const canRecover = store.rawData !== null;
 
   function download() {
@@ -38,6 +41,8 @@ export function StorageNotice() {
         }}>Reset saved data</button>
       </div>
       {downloadError && <p role="alert">{downloadError}</p>}
-    </> : <button onClick={() => store.save()}>Retry saving</button>}
+    </> : <button onClick={() => {
+      if (store.save()) setConfirmation({ message: 'Changes saved on this device.' });
+    }}>Retry saving</button>}
   </section>;
 }
