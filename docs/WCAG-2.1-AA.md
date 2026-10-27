@@ -11,7 +11,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.1.1 | Non-text Content | A | [x] Decorative SVG/brand icons hidden; controls have text. | [x] Decorative medication icon explicitly excluded; controls use text. | Inspect accessible names; labeled-target tests. |
 | 1.2.1 | Audio-only and Video-only (Prerecorded) | A | [x] N/A: no prerecorded audio or video. | [x] N/A: no prerecorded audio or video. | Source review: no media players, assets or streams in application screens. |
 | 1.2.2 | Captions (Prerecorded) | A | [x] N/A: no synchronized prerecorded media. | [x] N/A: no synchronized prerecorded media. | Source review: no media players, assets or streams in application screens. |
-| 1.2.3 | Audio Description or Media Alternative (Prerecorded) | A | [ ] Pending | [ ] Pending | Pending |
+| 1.2.3 | Audio Description or Media Alternative (Prerecorded) | A | [x] N/A: no prerecorded video. | [x] N/A: no prerecorded video. | Source review: no media players, assets or streams in application screens. |
 | 1.2.4 | Captions (Live) | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.2.5 | Audio Description (Prerecorded) | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.3.1 | Info and Relationships | A | [ ] Pending | [ ] Pending | Pending |
