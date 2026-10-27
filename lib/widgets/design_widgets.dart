@@ -149,7 +149,10 @@ class _AppPageState extends State<AppPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => Title(
+    title: '$title · MediTrack',
+    color: const Color(0xff075E64),
+    child: Scaffold(
     body: SafeArea(
       child: ListView(
         children: [
@@ -228,6 +231,7 @@ class _AppPageState extends State<AppPage> {
                           focusNode: contentFocus,
                           autofocus: true,
                           child: Semantics(
+                          namesRoute: true,
                           headingLevel: 1,
                           child: Text(
                             title,
@@ -281,6 +285,7 @@ class _AppPageState extends State<AppPage> {
           ),
         ],
       ),
+    ),
     ),
   );
 }
