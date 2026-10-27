@@ -31,7 +31,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.1.1 | Keyboard | A | [x] Native links, buttons, fields, selects and keyboard-adjustable range. | [x] Material controls; explicit text-size buttons provide keyboard/pointer alternative to slider gestures. | Final keyboard workflows and Flutter focus traversal tests. |
 | 2.1.2 | No Keyboard Trap | A | [x] No custom key suppression or modal focus traps. | [x] Standard Navigator/Material controls; Tab/Shift+Tab and Escape for dropdown. | Final bidirectional keyboard tests; native external-keyboard check pending. |
 | 2.1.4 | Character Key Shortcuts | A | [x] N/A: no unmodified character shortcuts. | [x] N/A: no unmodified character shortcuts. | Source review of keyboard handlers. |
-| 2.2.1 | Timing Adjustable | A | [ ] Pending | [ ] Pending | Pending |
+| 2.2.1 | Timing Adjustable | A | [x] No session timeout, timed form or expiring Undo. | [x] No session timeout or expiring Undo. | Existing Undo-after-five-minutes widget test; no timed interaction limits. |
 | 2.2.2 | Pause, Stop, Hide | A | [ ] Pending | [ ] Pending | Pending |
 | 2.3.1 | Three Flashes or Below Threshold | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.1 | Bypass Blocks | A | [ ] Pending | [ ] Pending | Pending |
