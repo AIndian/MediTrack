@@ -111,7 +111,9 @@ Widget medicineHeading(Medicine m) => Column(
         color: const Color(0xffE8F3F1),
         borderRadius: BorderRadius.circular(14),
       ),
-      child: const Icon(Icons.medication_outlined, color: Color(0xff075E64)),
+      child: const ExcludeSemantics(
+        child: Icon(Icons.medication_outlined, color: Color(0xff075E64)),
+      ),
     ),
     const SizedBox(height: 12),
     heading(m.name),

@@ -26,7 +26,7 @@ export function Card({ children, emphasis = false, label }) {
 export function MedicineHeading({ medicine }) {
   return <>
     <span className="medicine-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
+      <svg focusable="false" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M8 4a5 5 0 0 1 7 0l5 5a5 5 0 0 1-7 7l-5-5a5 5 0 0 1 0-7ZM10 6l8 8" />
       </svg>
     </span>
