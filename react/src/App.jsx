@@ -1,5 +1,6 @@
+import { useContext, useSyncExternalStore } from 'react';
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
-import { useStore } from './StoreContext';
+import { StoreContext } from './StoreContext';
 import { StorageNotice } from './components/StorageNotice';
 import { HeaderClock, useCurrentTime } from './components/HeaderClock';
 import { Page } from './components/Page';
@@ -11,7 +12,8 @@ import { Symptoms, Summary, Settings } from './screens/More';
 import './styles.css';
 
 export default function App() {
-  const { store, textScale } = useStore();
+  const store = useContext(StoreContext);
+  const textScale = useSyncExternalStore(store.subscribe, () => store.getSnapshot().textScale);
   const date = useCurrentTime(store.now);
   return <div className="app" style={{ '--text-scale': textScale }}>
     <a className="skip-link" href="#main" onClick={(event) => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to content</a>

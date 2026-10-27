@@ -33,6 +33,28 @@ rules and React Hooks rules for application code. Browser and Node globals are
 scoped to the appropriate files. Generated builds, dependencies and reports are
 excluded. Lint changes do not reformat or alter application behavior.
 
+## Measured history preparation
+
+A local Node.js 22.18.0 benchmark used ten fictional medicines with four daily doses
+over 90 days: 3,600 saved records, filtered to a 1,200-record 30-day view. After five
+warm-up calls, 30 calls to `history(30)` were timed with `performance.now()` on the
+same Windows machine. The complete ordered output had the same SHA-256 before and
+after the change.
+
+| History filtering/sorting | Before | After |
+| --- | --- | --- |
+| Median | 14.67 ms | 2.07 ms |
+| 95th percentile | 16.04 ms | 2.45 ms |
+
+The implementation computes calendar boundaries once per query and reuses one
+locale comparator. It does not cache records or defer writes. A separate render
+regression checks that dose changes update the controls without rendering the app
+header, while text-size and clock updates still reach the header.
+
+These figures measure data preparation, excluding rendering, storage writes,
+simulated typing and browser paint. They are not a whole-app or physical-phone
+latency claim, and CI does not enforce a hardware-dependent timing threshold.
+
 ## Flutter test mapping
 
 The original tests remain under the repository's `test/` folder. The React copy
@@ -103,11 +125,11 @@ Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
 | Check | Result |
 | --- | --- |
 | ESLint | Passed with no errors or warnings |
-| Unit/component tests | 48 passed across 14 files |
-| Application line coverage | 289 / 289 = **100%** |
-| Statement coverage | 344 / 344 = **100%** |
-| Function coverage | 120 / 120 = **100%** |
-| Branch coverage | 242 / 250 = **96.80%** |
+| Unit/component tests | 50 passed across 15 files |
+| Application line coverage | 296 / 296 = **100%** |
+| Statement coverage | 352 / 352 = **100%** |
+| Function coverage | 121 / 121 = **100%** |
+| Branch coverage | 244 / 252 = **96.82%** |
 | Browser tests | 24 passed across phone, tablet and desktop |
 | Production build | Passed |
 
