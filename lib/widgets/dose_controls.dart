@@ -19,6 +19,7 @@ class _DoseControlsState extends State<DoseControls> {
     takenFocus.dispose();
     super.dispose();
   }
+
   void record(String status) {
     setState(() => previous = widget.store.status(widget.doseKey));
     widget.store.record(widget.doseKey, status);
@@ -30,7 +31,11 @@ class _DoseControlsState extends State<DoseControls> {
     children: [
       Padding(
         padding: const EdgeInsets.only(top: 12),
-        child: FilledButton(focusNode: takenFocus, onPressed: () => record('Taken'), child: const Text('Mark Taken')),
+        child: FilledButton(
+          focusNode: takenFocus,
+          onPressed: () => record('Taken'),
+          child: const Text('Mark Taken'),
+        ),
       ),
       Padding(
         padding: const EdgeInsets.only(top: 12),

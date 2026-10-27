@@ -12,10 +12,20 @@ class History extends StatefulWidget {
 
 class _HistoryState extends State<History> {
   String message = '';
+  final resultFocus = FocusNode(skipTraversal: true);
+  @override
+  void dispose() {
+    resultFocus.dispose();
+    super.dispose();
+  }
+
   AppStore get store => widget.store;
   @override
   Widget build(BuildContext context) => AppPage('Dose history', [
-    Semantics(liveRegion: true, child: Text(message)),
+    Focus(
+      focusNode: resultFocus,
+      child: Semantics(container: true, liveRegion: true, child: Text(message)),
+    ),
     const Text('Last 30 days • Select a status to correct an entry.'),
     if (store.history(30).isEmpty) const Text('No doses recorded yet.'),
     for (final entry in store.history(30))
@@ -29,9 +39,11 @@ class _HistoryState extends State<History> {
             for (final status in ['Taken', 'Skipped', 'Due'])
               OutlinedButton(
                 onPressed: () {
-                  if (status == 'Due') FocusScope.of(context).previousFocus();
+                  if (status == 'Due') resultFocus.requestFocus();
                   store.record(entry.key, status);
-                  setState(() => message = '${store.doseLabel(entry.key)}: $status');
+                  setState(
+                    () => message = '${store.doseLabel(entry.key)}: $status',
+                  );
                 },
                 child: Text(status),
               ),
