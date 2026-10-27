@@ -41,7 +41,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.4.5 | Multiple Ways | AA | [x] Main navigation plus contextual Today/history, Medicines/detail, and More/summary/symptom routes. | [x] Main destinations plus contextual Today history/symptom/summary actions. | Forms/review are process steps; final workflows cover alternate entry routes. |
 | 2.4.6 | Headings and Labels | AA | [x] One page h1, descriptive section headings and explicit labels. | [x] Page/section heading levels and wrapping, programmatic field labels. | Final DOM/semantics assertions; human heading review pending. |
 | 2.4.7 | Focus Visible | AA | [x] Existing 3px purple outline on focusable controls and programmatic headings. | [x] Explicit button/input focus borders plus visible focused page heading. | Final focus-style/contrast assertions and browser keyboard tests. |
-| 2.5.1 | Pointer Gestures | A | [ ] Pending | [ ] Pending | Pending |
+| 2.5.1 | Pointer Gestures | A | [x] Single-click controls; native range supports track click and keyboard. | [x] Slider has explicit percentage buttons; no multipoint/path-dependent actions. | Keyboard and button alternatives tested in final suites. |
 | 2.5.2 | Pointer Cancellation | A | [ ] Pending | [ ] Pending | Pending |
 | 2.5.3 | Label in Name | A | [ ] Pending | [ ] Pending | Pending |
 | 2.5.4 | Motion Actuation | A | [ ] Pending | [ ] Pending | Pending |
