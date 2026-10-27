@@ -91,13 +91,7 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(child: pages[tab]),
-                  ],
-                ),
-              ),
+              Expanded(child: pages[tab]),
             ],
           ),
         ),

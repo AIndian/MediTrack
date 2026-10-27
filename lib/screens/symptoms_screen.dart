@@ -65,25 +65,23 @@ class _SymptomsState extends State<Symptoms> {
               nameFocus.requestFocus();
               return;
             }
-            {
-              saving = true;
-              widget.store.symptom(name.text, severity, notes.text);
-              await widget.store.pending;
-              if (!mounted) return;
-              setState(() {
-                saving = false;
-                message = widget.store.error == null
-                    ? 'Symptom saved on this device.'
-                    : 'Symptom kept in memory. Could not save on this device.';
-                name.clear();
-                notes.clear();
-              });
-            }
+            saving = true;
+            widget.store.symptom(name.text, severity, notes.text);
+            await widget.store.pending;
+            if (!mounted) return;
+            setState(() {
+              saving = false;
+              message = widget.store.error == null
+                  ? 'Symptom saved on this device.'
+                  : 'Symptom kept in memory. Could not save on this device.';
+              name.clear();
+              notes.clear();
+            });
           }),
         ],
       ),
     ),
-    Semantics(liveRegion: true, child: Text(message)),
+    Semantics(container: true, liveRegion: true, child: Text(message)),
     if (widget.store.symptoms.isEmpty) const Text('No symptoms recorded.'),
     for (final s in widget.store.symptoms)
       panel([

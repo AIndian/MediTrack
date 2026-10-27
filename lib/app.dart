@@ -19,6 +19,7 @@ class MediTrack extends StatelessWidget {
         focusColor: const Color(0xffDCCAF5),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
+            minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
             side: WidgetStateProperty.resolveWith(
               (states) => states.contains(WidgetState.focused)
                   ? const BorderSide(color: Color(0xff703DB2), width: 3)
@@ -98,14 +99,32 @@ class MediTrack extends StatelessWidget {
               ? MediaQuery.textScalerOf(context)
               : TextScaler.linear(store.textScale),
         ),
-        child: Column(children: [
-          if (store.error != null)
-            SafeArea(child: Semantics(liveRegion: true, child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: Text(store.error!, style: const TextStyle(color: Color(0xffA52B3C))),
-            ))),
-          Expanded(child: child!),
-        ]),
+        child: Column(
+          children: [
+            if (store.error != null)
+              SafeArea(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.sizeOf(context).height * .3,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Semantics(
+                      container: true,
+                      liveRegion: true,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          store.error!,
+                          style: const TextStyle(color: Color(0xffA52B3C)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            Expanded(child: child!),
+          ],
+        ),
       ),
       home: Home(store: store),
     ),

@@ -22,7 +22,13 @@ class Details extends StatelessWidget {
           const SizedBox(height: 16),
           heading('Schedule'),
           Text('Daily at ${m.times.join(', ')}'),
-          Semantics(liveRegion: true, child: Text(m.archived ? 'Archived — no longer scheduled' : 'Active')),
+          Semantics(
+            container: true,
+            liveRegion: true,
+            child: Text(
+              m.archived ? 'Archived — no longer scheduled' : 'Active',
+            ),
+          ),
         ]),
         panel([
           heading('Refill details'),
