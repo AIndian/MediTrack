@@ -109,7 +109,10 @@ class _HomeState extends State<Home> {
                 child: Container(
                   color: Colors.white,
                   padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
-                  child: LayoutBuilder(
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .35),
+                    child: SingleChildScrollView(
+                    child: LayoutBuilder(
                     builder: (context, c) => Wrap(
                       spacing: 3,
                       runSpacing: 3,
@@ -122,6 +125,8 @@ class _HomeState extends State<Home> {
                             child: destination(i),
                           ),
                       ],
+                    ),
+                    ),
                     ),
                   ),
                 ),

@@ -27,29 +27,26 @@ class _SymptomsState extends State<Symptoms> {
       key: form,
       child: Column(
         children: [
-          TextFormField(
+          labeledField('Symptom', TextFormField(
             controller: name,
-            decoration: const InputDecoration(labelText: 'Symptom'),
             validator: (s) => s!.trim().isEmpty ? 'Enter a symptom' : null,
-          ),
+          )),
           const SizedBox(height: 16),
-          DropdownButtonFormField<String>(
+          labeledField('Severity', DropdownButtonFormField<String>(
             initialValue: severity,
             isExpanded: true,
-            decoration: const InputDecoration(labelText: 'Severity'),
             items: [
               'Mild',
               'Moderate',
               'Severe',
             ].map((s) => DropdownMenuItem(value: s, child: Text(s))).toList(),
             onChanged: (s) => setState(() => severity = s!),
-          ),
+          )),
           const SizedBox(height: 16),
-          TextFormField(
+          labeledField('Notes (optional)', TextFormField(
             controller: notes,
-            decoration: const InputDecoration(labelText: 'Notes (optional)'),
             maxLines: 3,
-          ),
+          )),
           action('Save symptom', () {
             if (form.currentState!.validate()) {
               widget.store.symptom(name.text, severity, notes.text);

@@ -18,15 +18,14 @@ class _SummaryState extends State<Summary> {
     final cutoff = DateTime.parse(widget.store.day)
         .subtract(Duration(days: days - 1));
     return AppPage('Appointment summary', [
-      DropdownButtonFormField<int>(
+      labeledField('Date range', DropdownButtonFormField<int>(
         isExpanded: true,
         initialValue: days,
-        decoration: const InputDecoration(labelText: 'Date range'),
         items: [7, 30]
             .map((n) => DropdownMenuItem(value: n, child: Text('Last $n days')))
             .toList(),
         onChanged: (v) => setState(() => days = v!),
-      ),
+      )),
       panel([
         heading('Recorded doses'),
         Text(

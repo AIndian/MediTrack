@@ -50,18 +50,16 @@ class _MedicineFormState extends State<MedicineForm> {
               ),
             Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: TextFormField(
-                controller: fields[i],
-                decoration: InputDecoration(
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
-                  labelText: [
+              child: labeledField(
+                [
                     'Medicine name',
                     'Strength / dosage',
                     'Instructions (optional)',
                     'Daily times (HH:mm, separated by commas)',
                     'Supply in doses',
-                  ][i],
-                ),
+                ][i],
+                TextFormField(
+                controller: fields[i],
                 validator: (v) {
                   if (i != 2 && (v == null || v.trim().isEmpty)) {
                     return 'Please enter a value';
@@ -82,6 +80,7 @@ class _MedicineFormState extends State<MedicineForm> {
                   }
                   return null;
                 },
+                ),
               ),
             ),
           ],

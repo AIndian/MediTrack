@@ -129,7 +129,7 @@ class AppPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
     body: SafeArea(
-      child: Column(
+      child: ListView(
         children: [
           Container(
             decoration: const BoxDecoration(
@@ -184,8 +184,7 @@ class AppPage extends StatelessWidget {
               },
             ),
           ),
-          Expanded(
-            child: Center(
+          Center(
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 1120),
                 child: LayoutBuilder(
@@ -193,9 +192,11 @@ class AppPage extends StatelessWidget {
                     final wide =
                         constraints.maxWidth >= 700 &&
                         MediaQuery.textScalerOf(context).scale(1) < 1.5;
-                    return ListView(
+                    return Padding(
                       padding: EdgeInsets.all(wide ? 32 : 20),
-                      children: [
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
                         Semantics(
                           headingLevel: 1,
                           child: Text(
@@ -240,15 +241,24 @@ class AppPage extends StatelessWidget {
                           ...children,
                           ...side,
                         ],
-                      ],
+                        ],
+                      ),
                     );
                   },
                 ),
               ),
-            ),
           ),
         ],
       ),
     ),
   );
 }
+
+Widget labeledField(String label, Widget child) => Column(
+  crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: [
+    ExcludeSemantics(child: Text(label)),
+    const SizedBox(height: 8),
+    Semantics(label: label, child: child),
+  ],
+);
