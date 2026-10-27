@@ -51,7 +51,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 3.2.2 | On Input | A | [x] Inputs update drafts/preferences; review/save is explicit. | [x] Same; selecting severity/range changes only local content. | Final tests assert drafts do not save before confirmation. |
 | 3.2.3 | Consistent Navigation | AA | [x] Today, Medicines, History, More retain order/labels on every primary page. | [x] Same destination order across navigation rail and bottom navigation. | Final navigation/orientation tests. |
 | 3.2.4 | Consistent Identification | AA | [x] Shared Field, DoseControls, Status and medicine/action labels. | [x] Shared design widgets, badge and DoseControls with matching action names. | Review shared components and complete-process tests. |
-| 3.3.1 | Error Identification | A | [ ] Pending | [ ] Pending | Pending |
+| 3.3.1 | Error Identification | A | [x] Existing focused error summary links to aria-invalid/described fields. | [x] Validation focuses/scrolls first invalid field; native errors remain programmatic. | Existing validation tests plus final focus/error integration cases. |
 | 3.3.2 | Labels or Instructions | A | [ ] Pending | [ ] Pending | Pending |
 | 3.3.3 | Error Suggestion | AA | [ ] Pending | [ ] Pending | Pending |
 | 3.3.4 | Error Prevention (Legal, Financial, Data) | AA | [ ] Pending | [ ] Pending | Pending |

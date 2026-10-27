@@ -22,11 +22,13 @@ class _MedicineFormState extends State<MedicineForm> {
     TextEditingController(text: widget.medicine?.times.join(', ') ?? '08:00'),
     TextEditingController(text: '${widget.medicine?.supply ?? 30}'),
   ];
+  final fieldFocus = List.generate(5, (_) => FocusNode());
   @override
   void dispose() {
     for (final c in fields) {
       c.dispose();
     }
+    for (final node in fieldFocus) { node.dispose(); }
     super.dispose();
   }
 
@@ -60,6 +62,7 @@ class _MedicineFormState extends State<MedicineForm> {
                 ][i],
                 TextFormField(
                   controller: fields[i],
+                  focusNode: fieldFocus[i],
                   validator: (v) {
                     if (i != 2 && (v == null || v.trim().isEmpty)) {
                       return 'Please enter a value';
@@ -85,7 +88,14 @@ class _MedicineFormState extends State<MedicineForm> {
             ),
           ],
           action('Review medicine', () async {
-            if (!form.currentState!.validate()) {
+            final invalid = form.currentState!.validateGranularly();
+            if (invalid.isNotEmpty) {
+              final first = invalid.first;
+              final index = fields.indexOf((first.widget as TextFormField).controller!);
+              fieldFocus[index].requestFocus();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) Scrollable.ensureVisible(first.context);
+              });
               return;
             }
             final m = Medicine(

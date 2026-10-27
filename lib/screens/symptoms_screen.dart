@@ -13,9 +13,11 @@ class Symptoms extends StatefulWidget {
 class _SymptomsState extends State<Symptoms> {
   final name = TextEditingController(), notes = TextEditingController();
   final form = GlobalKey<FormState>();
+  final nameFocus = FocusNode();
   String severity = 'Mild';
   @override
   void dispose() {
+    nameFocus.dispose();
     name.dispose();
     notes.dispose();
     super.dispose();
@@ -31,6 +33,7 @@ class _SymptomsState extends State<Symptoms> {
             'Symptom',
             TextFormField(
               controller: name,
+              focusNode: nameFocus,
               validator: (s) => s!.trim().isEmpty ? 'Enter a symptom' : null,
             ),
           ),
@@ -54,7 +57,11 @@ class _SymptomsState extends State<Symptoms> {
             TextFormField(controller: notes, maxLines: 3),
           ),
           action('Save symptom', () {
-            if (form.currentState!.validate()) {
+            if (!form.currentState!.validate()) {
+              nameFocus.requestFocus();
+              return;
+            }
+            {
               widget.store.symptom(name.text, severity, notes.text);
               setState(() {
                 name.clear();
