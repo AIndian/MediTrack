@@ -5,10 +5,12 @@ import { DoseControls } from '../components/DoseControls';
 
 export function Today() {
   const { store } = useStore();
+  const now = store.now();
+  const currentTime = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
   const slots = store.active.flatMap((medicine) => medicine.times.map((time) => ({ medicine, time, key: store.doseKey(medicine, time) })))
     .sort((a, b) => a.time.localeCompare(b.time));
   const taken = slots.filter((slot) => store.status(slot.key) === 'Taken').length;
-  const next = slots.find((slot) => store.status(slot.key) === 'Due');
+  const next = slots.find((slot) => store.status(slot.key) === 'Due' && slot.time >= currentTime);
   return <Page title="Today">
     <p className="eyebrow">{store.day} · Your daily routine</p>
     <div className="today-layout">
@@ -16,6 +18,7 @@ export function Today() {
         {slots.length === 0 && <div className="card"><h2>A little help with your routine</h2><p>No medicines scheduled today. Add your first medicine to get started.</p></div>}
         {slots.map(({ medicine, time, key }) => <article key={key} className={`card ${next?.key === key ? 'emphasis' : ''}`} aria-label={`${medicine.name} at ${time}`}>
           {next?.key === key && <p className="eyebrow">Next dose</p>}
+          {time < currentTime && store.status(key) === 'Due' && <p className="eyebrow">Not recorded yet</p>}
           <MedicineHeading medicine={medicine} />
           <p className="dose-time">{time}</p>
           <p>{medicine.instructions || 'No instructions entered.'}</p>
