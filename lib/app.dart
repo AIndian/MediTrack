@@ -53,6 +53,7 @@ class MediTrack extends StatelessWidget {
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
+          errorMaxLines: 6,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(11)),
           ),

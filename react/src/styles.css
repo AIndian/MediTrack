@@ -33,7 +33,7 @@ h3 { font-size: 1.125em; margin-top: 1em; }
 .card.emphasis { border: 2px solid #075e64; }
 .card > :last-child { margin-bottom: 0; }
 .medicine-icon { width: 48px; height: 48px; border-radius: 14px; background: #e8f3f1; color: #075e64; display: flex; justify-content: center; align-items: center; margin-bottom: 12px; }
-.badge { border: 1px solid currentColor; border-radius: 8px; padding: .25em .65em; margin: .75em 0; width: fit-content; color: #075e64; background: #e8f3f1; font-weight: 650; }
+.badge { max-width: 100%; overflow-wrap: anywhere; border: 1px solid currentColor; border-radius: 8px; padding: .25em .65em; margin: .75em 0; width: fit-content; color: #075e64; background: #e8f3f1; font-weight: 650; }
 .badge.taken { color: #14653f; background: #e3f4e9; }
 .badge.skipped, .low-supply { color: #795000; background: #fff1ce; }
 .low-supply { padding: .5em; border-radius: 8px; }
