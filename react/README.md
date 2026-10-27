@@ -19,6 +19,22 @@ then review and save. Today supports Taken, Skip and Undo; History supports corr
 More opens symptoms, appointment summaries and text-size settings. Hash URLs support
 browser Back/Forward and direct links without server rewrite rules.
 
+History shows recent days first, then times in chronological order and medicine
+names alphabetically. Clearing an entry with Due offers **Undo last removal** and
+moves keyboard focus to that action. Successful storage retries announce confirmation;
+a pending Review save continues to medicine details when the retry succeeds.
+
+Today localizes its date using your browser preference. Past unrecorded slots say
+**Not recorded yet**; **Next dose** is reserved for an upcoming slot. Appointment
+summaries show Taken/Skipped counts separately from a clearly labeled estimate of
+scheduled doses. That estimate applies the current active routine throughout the
+selected range; historical schedule changes and medicine start dates are not tracked.
+
+Medicine creation supports plain-HTTP phone/LAN testing by using random bytes when
+the browser's UUID API is unavailable. A top-level render-error boundary offers a
+return to Today without clearing stored records. Unsaved form details may need to
+be entered again after a render error.
+
 | Core screen | Route | Source |
 | --- | --- | --- |
 | Today | `#/` | `src/screens/Today.jsx` |
