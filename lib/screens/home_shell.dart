@@ -48,6 +48,9 @@ class _HomeState extends State<Home> {
             backgroundColor: i == tab ? const Color(0xffE8F3F1) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(11),
+              side: i == tab
+                  ? const BorderSide(color: Color(0xff075E64), width: 2)
+                  : BorderSide.none,
             ),
           ),
           child: Column(

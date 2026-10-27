@@ -19,7 +19,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.3.3 | Sensory Characteristics | A | [x] Named actions and explicit times; no position/shape-only instructions. | [x] Same textual action names and times. | Review instructions across all screens. |
 | 1.3.4 | Orientation | AA | [x] Responsive layouts; no orientation lock. | [x] No SystemChrome lock; iOS supports all four orientations. | Portrait/landscape browser and Flutter viewport matrix; hardware rotation pending. |
 | 1.3.5 | Identify Input Purpose | AA | [x] N/A: fields describe medicines/symptoms, not user personal-profile data in WCAG input-purpose list. | [x] N/A: same domain fields; no personal-profile inputs. | Do not mislabel medicine name as autocomplete=name; reassess for future profile forms. |
-| 1.4.1 | Use of Color | A | [ ] Pending | [ ] Pending | Pending |
+| 1.4.1 | Use of Color | A | [x] Status words, error messages and active-nav borders accompany color. | [x] Selected destination now also has a border; status words and error text accompany color. | Review grayscale/semantics; selection remains programmatically exposed. |
 | 1.4.2 | Audio Control | A | [ ] Pending | [ ] Pending | Pending |
 | 1.4.3 | Contrast (Minimum) | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.4 | Resize Text | AA | [ ] Pending | [ ] Pending | Pending |
