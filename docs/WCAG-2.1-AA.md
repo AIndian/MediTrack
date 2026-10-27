@@ -21,7 +21,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.3.5 | Identify Input Purpose | AA | [x] N/A: fields describe medicines/symptoms, not user personal-profile data in WCAG input-purpose list. | [x] N/A: same domain fields; no personal-profile inputs. | Do not mislabel medicine name as autocomplete=name; reassess for future profile forms. |
 | 1.4.1 | Use of Color | A | [x] Status words, error messages and active-nav borders accompany color. | [x] Selected destination now also has a border; status words and error text accompany color. | Review grayscale/semantics; selection remains programmatically exposed. |
 | 1.4.2 | Audio Control | A | [x] N/A: no audio output or autoplay. | [x] N/A: no audio output or autoplay. | Source review of both applications. |
-| 1.4.3 | Contrast (Minimum) | AA | [ ] Pending | [ ] Pending | Pending |
+| 1.4.3 | Contrast (Minimum) | AA | [x] Explicit dark text, muted text and error/status palettes on light surfaces. | [x] Pin muted/error foregrounds and backgrounds instead of seed-derived colors. | Contrast ratio assertions in final integration suites; rendered/device review pending. |
 | 1.4.4 | Resize Text | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.5 | Images of Text | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.10 | Reflow | AA | [ ] Pending | [ ] Pending | Pending |

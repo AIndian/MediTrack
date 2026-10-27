@@ -21,6 +21,11 @@ class MediTrack extends StatelessWidget {
               onPrimary: Colors.white,
               surface: Colors.white,
               onSurface: const Color(0xff183B42),
+              onSurfaceVariant: const Color(0xff52686C),
+              error: const Color(0xffA52B3C),
+              onError: Colors.white,
+              errorContainer: const Color(0xffFDE8EA),
+              onErrorContainer: const Color(0xffA52B3C),
               outline: const Color(0xff687F82),
             ),
         textTheme: const TextTheme(
