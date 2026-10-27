@@ -66,7 +66,7 @@ footer { font-size: .85em; text-align: center; color: #52686c; padding: 1.5rem; 
 .skip-link:focus { top: 1rem; }
 @media (min-width: 1100px) { .today-layout { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.5rem; } }
 @media (max-width: 699px) {
-  .app-layout { display: flex; flex-direction: column-reverse; }
+  .app-layout { display: flex; flex-direction: column; }
   .primary-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid #d5e3e0; }
   .primary-nav p { display: none; }
   .header-clock { flex-basis: 100%; }

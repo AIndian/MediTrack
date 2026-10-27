@@ -38,6 +38,8 @@ Draft medicine details stay in navigation state until explicitly saved. The shar
 page focuses its heading after navigation and sets the document title. Forms use
 visible labels, linked error messages and first-error focus. Buttons have at least
 48px targets (primary actions 56px), and the layout reflows at enlarged text sizes.
+Phone navigation appears above content so its visual, reading and keyboard order
+agree; wider screens retain the navigation rail.
 The live clock follows browser locale, refreshes on resume and updates the schedule
 at midnight. It is readable by screen readers without announcing every minute.
 
