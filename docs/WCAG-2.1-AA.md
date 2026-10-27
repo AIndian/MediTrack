@@ -16,7 +16,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.2.5 | Audio Description (Prerecorded) | AA | [x] N/A: no prerecorded video needing descriptions. | [x] N/A: no prerecorded video needing descriptions. | Source review: no media players, assets or streams in application screens. |
 | 1.3.1 | Info and Relationships | A | [x] Native main/nav, heading hierarchy, labels and named card regions. | [x] Heading levels distinguish page/section; history entries and instructions are headings. | DOM/semantics integration checks; manual heading navigation pending. |
 | 1.3.2 | Meaningful Sequence | A | [x] Mobile navigation and large-text header now follow DOM reading order. | [x] Widget order follows header, content, then bottom navigation; wide columns keep coherent groups. | Compare visual, DOM and semantics order at narrow/wide sizes. |
-| 1.3.3 | Sensory Characteristics | A | [ ] Pending | [ ] Pending | Pending |
+| 1.3.3 | Sensory Characteristics | A | [x] Named actions and explicit times; no position/shape-only instructions. | [x] Same textual action names and times. | Review instructions across all screens. |
 | 1.3.4 | Orientation | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.3.5 | Identify Input Purpose | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.1 | Use of Color | A | [ ] Pending | [ ] Pending | Pending |
