@@ -13,9 +13,36 @@ npm test
 npm run build
 ```
 
-Open the local URL printed by Vite. The first PR supplies the state/persistence layer
-and a small startup page. The next PR adds the ten core screens and navigation; the
-third expands the ported unit/component tests and adds coverage enforcement and CI.
+Open the local URL printed by Vite. Start with **Add medicine**, enter sample details,
+then review and save. Today supports Taken, Skip and Undo; History supports corrections.
+More opens symptoms, appointment summaries and text-size settings. Hash URLs support
+browser Back/Forward and direct links without server rewrite rules.
+
+| Core screen | Route | Source |
+| --- | --- | --- |
+| Today | `#/` | `src/screens/Today.jsx` |
+| Your medicines | `#/medicines` | `src/screens/Medicines.jsx` |
+| Medicine details | `#/medicines/:id` | `src/screens/Medicines.jsx` |
+| Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
+| Review medicine | `#/medicines/review` | `src/screens/MedicineFlow.jsx` |
+| Medication reminder | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
+| Dose history | `#/history` | `src/screens/Doses.jsx` |
+| Symptoms | `#/symptoms` | `src/screens/More.jsx` |
+| Appointment summary | `#/summary` | `src/screens/More.jsx` |
+| Settings & sharing | `#/settings` | `src/screens/More.jsx` |
+
+React Context supplies one external store, subscribed through `useSyncExternalStore`.
+React Router supplies routes; components have no separate copies of saved records.
+Draft medicine details stay in navigation state until explicitly saved. The shared
+page focuses its heading after navigation and sets the document title. Forms use
+visible labels, linked error messages and first-error focus. Buttons have at least
+48px targets (primary actions 56px), and the layout reflows at enlarged text sizes.
+The live clock follows browser locale, refreshes on resume and updates the schedule
+at midnight. It is readable by screen readers without announcing every minute.
+
+The palette, cards and typography follow `docs/design/reference/index.html` and the
+Flutter app's documented adaptations. This is a responsive React web implementation,
+not React Native. It does not change or merge the separate teammate React Native PRs.
 
 The store ports medicine replacement, archive/restore, daily dose records, Undo,
 symptoms, date filters and five persisted text sizes from `lib/state/app_store.dart`.
