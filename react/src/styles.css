@@ -18,7 +18,7 @@ h3 { font-size: 1.125em; margin-top: 1em; }
 .brand { flex-wrap: wrap; display: flex; align-items: center; gap: .6em; font-size: 1.125em; font-weight: 750; min-width: 0; }
 .brand-mark { color: #075e64; }
 .back { min-height: 48px; padding: .5em .7em; font-size: .9em; }
-.clock { color: #075e64; font-weight: 650; margin-left: auto; white-space: nowrap; }
+.clock { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 12px; max-width: 100%; color: #075e64; font-weight: 650; margin-left: auto; }
 .app-shell { display: grid; grid-template-columns: 205px minmax(0, 1fr); max-width: 1440px; margin: auto; min-height: calc(100dvh - 150px); }
 .detail-shell { grid-template-columns: minmax(0, 1fr); }
 .content { min-width: 0; }

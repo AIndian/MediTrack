@@ -178,7 +178,7 @@ class AppPage extends StatelessWidget {
                   children: [
                     Expanded(child: brand),
                     const SizedBox(width: 12),
-                    const HeaderClock(),
+                    const Flexible(child: HeaderClock()),
                   ],
                 );
               },

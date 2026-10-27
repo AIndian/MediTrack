@@ -32,7 +32,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.1.2 | No Keyboard Trap | A | [x] No custom key suppression or modal focus traps. | [x] Standard Navigator/Material controls; Tab/Shift+Tab and Escape for dropdown. | Final bidirectional keyboard tests; native external-keyboard check pending. |
 | 2.1.4 | Character Key Shortcuts | A | [x] N/A: no unmodified character shortcuts. | [x] N/A: no unmodified character shortcuts. | Source review of keyboard handlers. |
 | 2.2.1 | Timing Adjustable | A | [x] No session timeout, timed form or expiring Undo. | [x] No session timeout or expiring Undo. | Existing Undo-after-five-minutes widget test; no timed interaction limits. |
-| 2.2.2 | Pause, Stop, Hide | A | [ ] Pending | [ ] Pending | Pending |
+| 2.2.2 | Pause, Stop, Hide | A | [x] Pause clock updates toggle stops visible automatic time updates without freezing the day/store. | [x] Same toggle; resumes with current time and no live-region ticking. | Final fake-clock tests verify pause/resume across minute changes. |
 | 2.3.1 | Three Flashes or Below Threshold | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.1 | Bypass Blocks | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.2 | Page Titled | A | [ ] Pending | [ ] Pending | Pending |

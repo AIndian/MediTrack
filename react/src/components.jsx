@@ -61,11 +61,12 @@ export function DoseControls({ doseKey }) {
 
 const systemNow = () => new Date();
 export function HeaderClock({ now = systemNow, onDayChange, locale, hour12 }) {
+  const [paused, setPaused] = useState(false);
   const [time, setTime] = useState(() => now());
   useEffect(() => {
     function refresh() {
       const current = now();
-      setTime(previous => Math.floor(previous.getTime() / 60000) === Math.floor(current.getTime() / 60000) ? previous : current);
+      if (!paused) setTime(previous => Math.floor(previous.getTime() / 60000) === Math.floor(current.getTime() / 60000) ? previous : current);
       onDayChange?.(localDay(current));
     }
     const timer = setInterval(refresh, 1000);
@@ -76,9 +77,12 @@ export function HeaderClock({ now = systemNow, onDayChange, locale, hour12 }) {
       window.removeEventListener('focus', refresh);
       document.removeEventListener('visibilitychange', refresh);
     };
-  }, [now, onDayChange]);
+  }, [now, onDayChange, paused]);
   const formatted = time.toLocaleTimeString(locale, { hour: '2-digit', minute: '2-digit', hour12 });
-  return <time className="clock" dateTime={time.toISOString()} aria-label={`Current time: ${formatted}`}>{formatted}</time>;
+  return <div className="clock">
+    <time dateTime={time.toISOString()} aria-label={`${paused ? "Paused time" : "Current time"}: ${formatted}`}>{formatted}</time>
+    <button className="secondary" aria-pressed={paused} onClick={() => setPaused(value => !value)}>Pause clock updates</button>
+  </div>;
 }
 
 export function ErrorSummary({ errors }) {
