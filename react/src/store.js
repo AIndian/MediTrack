@@ -167,14 +167,22 @@ export class AppStore {
   }
 
   history(days) {
+    const day = this.day;
+    const cutoff = new Date(`${day}T00:00:00`);
+    cutoff.setDate(cutoff.getDate() - days + 1);
+    const firstDay = localDay(cutoff);
     const names = new Map(this.state.medicines.map((medicine) => [medicine.id, medicine.name]));
+    const compareNames = new Intl.Collator(undefined, { sensitivity: 'base' }).compare;
     return Object.entries(this.state.doses)
-      .filter(([key]) => this.inRange(`${key.split('|')[0]}T12:00:00`, days))
+      .filter(([key]) => {
+        const date = key.slice(0, 10);
+        return date >= firstDay && date <= day;
+      })
       .sort(([a], [b]) => {
         const [dayA, idA, timeA] = a.split('|');
         const [dayB, idB, timeB] = b.split('|');
         return dayB.localeCompare(dayA) || timeA.localeCompare(timeB) ||
-          (names.get(idA) ?? 'Removed medicine').localeCompare(names.get(idB) ?? 'Removed medicine', undefined, { sensitivity: 'base' }) ||
+          compareNames(names.get(idA) ?? 'Removed medicine', names.get(idB) ?? 'Removed medicine') ||
           idA.localeCompare(idB);
       });
   }

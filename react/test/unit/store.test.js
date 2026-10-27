@@ -176,4 +176,20 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
       '2026-10-08|zz-uuid|18:00', '2026-10-07|zz-uuid|18:00',
     ]);
   });
+
+  it('keeps inclusive local-day boundaries and recalculates the range after midnight', () => {
+    let date = new Date(2026, 9, 8, 0, 1);
+    const store = fresh({ clock: () => date });
+    for (const key of ['2026-09-08|1|08:00', '2026-09-09|1|08:00',
+      '2026-10-08|1|00:00', '2026-10-08|1|23:59', '2026-10-09|1|08:00']) {
+      store.record(key, 'Taken');
+    }
+    expect(store.history(30).map(([key]) => key)).toEqual([
+      '2026-10-08|1|00:00', '2026-10-08|1|23:59', '2026-09-09|1|08:00',
+    ]);
+    date = new Date(2026, 9, 9, 0, 1);
+    expect(store.history(30).map(([key]) => key)).toEqual([
+      '2026-10-09|1|08:00', '2026-10-08|1|00:00', '2026-10-08|1|23:59',
+    ]);
+  });
 });
