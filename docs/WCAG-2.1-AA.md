@@ -55,7 +55,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 3.3.2 | Labels or Instructions | A | [x] Required semantics and visible required/optional, time-format and prescription instructions. | [x] Wrapping visible labels, required instructions and numeric supply keyboard. | Final label/required and invalid-input assertions. |
 | 3.3.3 | Error Suggestion | AA | [x] Existing field-specific messages include valid time examples and supply bounds. | [x] Replace generic required errors with field-specific correction suggestions. | Final invalid name/strength/time/supply tests preserve entered values. |
 | 3.3.4 | Error Prevention (Legal, Financial, Data) | AA | [x] Medicine review/edit before save; archive/restore and dose Undo/history correction are reversible. | [x] Wait for persistence before leaving review; global storage-error announcement covers pushed routes; same review/reversible actions. | Final persistence-failure/review and undo/correction tests. No irreversible delete or legal/financial submission. |
-| 4.1.1 | Parsing | A | [ ] Pending | [ ] Pending | Pending |
+| 4.1.1 | Parsing | A | [x] Valid React host and native form relationships; no duplicate authored IDs. | [x] Valid English HTML host; semantics emitted by Flutter. | Final duplicate-ID/label-reference browser assertions; current W3C 2.1 erratum treats Parsing as always satisfied. |
 | 4.1.2 | Name, Role, Value | A | [ ] Pending | [ ] Pending | Pending |
 | 4.1.3 | Status Messages | AA | [ ] Pending | [ ] Pending | Pending |
 
