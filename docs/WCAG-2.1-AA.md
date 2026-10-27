@@ -25,7 +25,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.4.4 | Resize Text | AA | [x] Relative font sizes, 100-200% in-app scale and unrestricted browser zoom. | [x] Preserve nonlinear system text scaling when larger; remove arbitrary system-size cap. | Existing text-size tests plus final 200% viewport matrix. |
 | 1.4.5 | Images of Text | AA | [x] All UI copy is rendered text; SVG is a decorative symbol. | [x] All UI copy is Text widgets; icons carry no text images. | Source review; no rasterized instructions or labels. |
 | 1.4.10 | Reflow | AA | [x] Wrapping brand/controls and flexible grid; no fixed page heights. | [x] Scroll header with content, wrap external field labels and bound scrollable mobile navigation. | Final matrix at 320px width / 256px height, 200% text and 400% zoom equivalent. |
-| 1.4.11 | Non-text Contrast | AA | [ ] Pending | [ ] Pending | Pending |
+| 1.4.11 | Non-text Contrast | AA | [x] Input outlines, focus rings and active borders exceed 3:1 against adjacent light surfaces. | [x] Pin outline/outlineVariant and enabled field border; selected navigation has dark border. | Ratio assertions; decorative card borders are not control boundaries. |
 | 1.4.12 | Text Spacing | AA | [ ] Pending | [ ] Pending | Pending |
 | 1.4.13 | Content on Hover or Focus | AA | [ ] Pending | [ ] Pending | Pending |
 | 2.1.1 | Keyboard | A | [ ] Pending | [ ] Pending | Pending |

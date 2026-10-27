@@ -27,6 +27,7 @@ class MediTrack extends StatelessWidget {
               errorContainer: const Color(0xffFDE8EA),
               onErrorContainer: const Color(0xffA52B3C),
               outline: const Color(0xff687F82),
+              outlineVariant: const Color(0xff687F82),
             ),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(fontSize: 16, height: 1.5),
@@ -57,6 +58,10 @@ class MediTrack extends StatelessWidget {
           ),
           filled: true,
           fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
+            borderSide: BorderSide(color: Color(0xff687F82)),
+          ),
         ),
       ),
       builder: (context, child) => MediaQuery(
