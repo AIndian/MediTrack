@@ -22,7 +22,7 @@ export function Today() {
           <MedicineHeading medicine={medicine} />
           <p className="dose-time">{time}</p>
           <p>{medicine.instructions || 'No instructions entered.'}</p>
-          <DoseControls key={key} doseKey={key} />
+          <DoseControls doseKey={key} />
           <Link className="button secondary" to={`/dose/${encodeURIComponent(medicine.id)}/${time}`}>Open {medicine.name} dose at {time}</Link>
         </article>)}
         <Link className="button" to="/medicines/new">Add medicine</Link>
