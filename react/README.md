@@ -4,10 +4,11 @@ A separate browser implementation of the existing Flutter prototype. Flutter sou
 tests, platform projects and design references remain in place. React uses its own
 `meditrack.react.v1` browser-storage key; it does not read or migrate Flutter records.
 
-Use Node.js 22.12 or newer. From this directory:
+Use Node.js 22.13 or newer. From this directory:
 
 ```sh
 npm ci
+npm run lint
 npm run dev
 npm test
 npm run build
@@ -66,9 +67,11 @@ reset cannot restore the deleted records.
 `.github/dependabot.yml` schedules weekly npm and GitHub Actions update PRs once
 merged into the repository's default branch; exact versions remain committed.
 The existing root `analysis_options.yaml` and Flutter CI check Dart with
-`flutter analyze`. They do not lint React JavaScript; React verification currently
-uses tests, coverage (in the third PR), and a production build.
-The foundation PR runs its React tests and build in `.github/workflows/react.yml`;
+`flutter analyze`. React uses `eslint.config.js` with recommended JavaScript and
+React Hooks rules across application code, and JavaScript checks across tests and
+configuration. Generated builds, reports and dependencies are ignored. Run
+`npm run lint`; any error or warning fails the command.
+The foundation PR runs lint, React tests and build in `.github/workflows/react.yml`;
 the third PR expands that workflow with coverage and browser checks.
 
 Prototype only: use sample information. Browser storage is unencrypted. Notifications,
