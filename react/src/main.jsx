@@ -10,9 +10,11 @@ const store = new AppStore();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>
-    <StoreContext.Provider value={store}>
-      <HashRouter><App /></HashRouter>
-    </StoreContext.Provider>
+      <StoreContext.Provider value={store}>
+        <HashRouter>
+          <App />
+        </HashRouter>
+      </StoreContext.Provider>
     </ErrorBoundary>
   </StrictMode>,
 );

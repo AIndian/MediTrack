@@ -16,7 +16,12 @@ export function MedicineForm() {
   const { id } = useParams();
   const { medicines } = useStore();
   const medicine = medicines.find((m) => m.id === id);
-  if (id && !medicine) return <Page title="Edit medicine" backTo="/medicines"><p>Medicine not found.</p></Page>;
+  if (id && !medicine)
+    return (
+      <Page title="Edit medicine" backTo="/medicines">
+        <p>Medicine not found.</p>
+      </Page>
+    );
   return <MedicineEditor key={id ?? 'new'} medicine={medicine} />;
 }
 
@@ -24,8 +29,24 @@ function MedicineEditor({ medicine }) {
   const { readOnly } = useStore();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [draft] = useState(() => state?.draft ?? medicine ?? { id: createMedicineId(), name: '', strength: '', instructions: '', times: ['08:00'], supply: 30, archived: false });
-  const [values, setValues] = useState(() => ({ ...draft, times: draft.times.join(', '), supply: String(draft.supply) }));
+  const [draft] = useState(
+    () =>
+      state?.draft ??
+      medicine ?? {
+        id: createMedicineId(),
+        name: '',
+        strength: '',
+        instructions: '',
+        times: ['08:00'],
+        supply: 30,
+        archived: false,
+      },
+  );
+  const [values, setValues] = useState(() => ({
+    ...draft,
+    times: draft.times.join(', '),
+    supply: String(draft.supply),
+  }));
   const [errors, setErrors] = useState({});
   const formPath = medicine ? `/medicines/${encodeURIComponent(medicine.id)}/edit` : '/medicines/new';
   const backTo = medicine ? `/medicines/${encodeURIComponent(medicine.id)}` : '/medicines';
@@ -37,27 +58,54 @@ function MedicineEditor({ medicine }) {
       document.getElementById(`medicine-${Object.keys(errors)[0]}`).focus();
       return;
     }
-    navigate('/medicines/review', { state: { formPath, draft: {
-      ...draft, name: values.name.trim(), strength: values.strength.trim(), instructions: values.instructions.trim(),
-      times: values.times.split(',').map((time) => time.trim()).sort(), supply: Number(values.supply.trim()),
-    } } });
+    navigate('/medicines/review', {
+      state: {
+        formPath,
+        draft: {
+          ...draft,
+          name: values.name.trim(),
+          strength: values.strength.trim(),
+          instructions: values.instructions.trim(),
+          times: values.times
+            .split(',')
+            .map((time) => time.trim())
+            .sort(),
+          supply: Number(values.supply.trim()),
+        },
+      },
+    });
   }
-  return <Page title={medicine ? 'Edit medicine' : 'Add medicine'} backTo={backTo}>
-    <p>Copy details from your prescription label. Times use the 24-hour clock.</p>
-    <form noValidate onSubmit={review}>
-      <fieldset disabled={readOnly}><legend>Medicine information</legend>
-        {fields.map(([key, label]) => <div className="field" key={key}>
-          <label htmlFor={`medicine-${key}`}>{label}</label>
-          <input id={`medicine-${key}`} name={key} value={values[key]} required={key !== 'instructions'}
-            inputMode={key === 'supply' ? 'numeric' : undefined} aria-invalid={Boolean(errors[key])}
-            aria-describedby={errors[key] ? `error-${key}` : undefined}
-            onChange={(event) => setValues({ ...values, [key]: event.target.value })} />
-          {errors[key] && <p className="field-error" id={`error-${key}`}>{errors[key]}</p>}
-        </div>)}
-        <button type="submit">Review medicine</button>
-      </fieldset>
-    </form>
-  </Page>;
+  return (
+    <Page title={medicine ? 'Edit medicine' : 'Add medicine'} backTo={backTo}>
+      <p>Copy details from your prescription label. Times use the 24-hour clock.</p>
+      <form noValidate onSubmit={review}>
+        <fieldset disabled={readOnly}>
+          <legend>Medicine information</legend>
+          {fields.map(([key, label]) => (
+            <div className="field" key={key}>
+              <label htmlFor={`medicine-${key}`}>{label}</label>
+              <input
+                id={`medicine-${key}`}
+                name={key}
+                value={values[key]}
+                required={key !== 'instructions'}
+                inputMode={key === 'supply' ? 'numeric' : undefined}
+                aria-invalid={Boolean(errors[key])}
+                aria-describedby={errors[key] ? `error-${key}` : undefined}
+                onChange={(event) => setValues({ ...values, [key]: event.target.value })}
+              />
+              {errors[key] && (
+                <p className="field-error" id={`error-${key}`}>
+                  {errors[key]}
+                </p>
+              )}
+            </div>
+          ))}
+          <button type="submit">Review medicine</button>
+        </fieldset>
+      </form>
+    </Page>
+  );
 }
 
 export function MedicineReview() {
@@ -69,19 +117,41 @@ export function MedicineReview() {
   useEffect(() => {
     if (waitingForSave && !error && draft) navigate(`/medicines/${encodeURIComponent(draft.id)}`, { replace: true });
   }, [waitingForSave, error, draft, navigate]);
-  if (!draft) return <Page title="Review medicine" backTo="/medicines"><p>No medicine is waiting for review.</p><Link to="/medicines/new">Add medicine</Link></Page>;
+  if (!draft)
+    return (
+      <Page title="Review medicine" backTo="/medicines">
+        <p>No medicine is waiting for review.</p>
+        <Link to="/medicines/new">Add medicine</Link>
+      </Page>
+    );
   const formPath = state.formPath ?? '/medicines/new';
-  return <Page title="Review medicine" backTo={formPath} backState={{ draft }}>
-    <div className="card"><MedicineHeading medicine={draft} />
-      <p>{draft.instructions || 'No instructions entered.'}</p>
-      <p>Every day at {draft.times.join(', ')}</p><p>{draft.supply} doses recorded</p>
-    </div>
-    <p>Check these details against your prescription before saving.</p>
-    {waitingForSave && <p role="status">This medicine is recorded in this tab. Use Retry saving above; medicine details will open once it is saved on this device.</p>}
-    <button disabled={readOnly} onClick={() => {
-      if (store.put(draft)) navigate(`/medicines/${encodeURIComponent(draft.id)}`, { replace: true });
-      else setWaitingForSave(true);
-    }}>Save medicine</button>
-    <Link className="button secondary" to={formPath} state={{ draft }} replace>Edit details</Link>
-  </Page>;
+  return (
+    <Page title="Review medicine" backTo={formPath} backState={{ draft }}>
+      <div className="card">
+        <MedicineHeading medicine={draft} />
+        <p>{draft.instructions || 'No instructions entered.'}</p>
+        <p>Every day at {draft.times.join(', ')}</p>
+        <p>{draft.supply} doses recorded</p>
+      </div>
+      <p>Check these details against your prescription before saving.</p>
+      {waitingForSave && (
+        <p role="status">
+          This medicine is recorded in this tab. Use Retry saving above; medicine details will open once it is saved on
+          this device.
+        </p>
+      )}
+      <button
+        disabled={readOnly}
+        onClick={() => {
+          if (store.put(draft)) navigate(`/medicines/${encodeURIComponent(draft.id)}`, { replace: true });
+          else setWaitingForSave(true);
+        }}
+      >
+        Save medicine
+      </button>
+      <Link className="button secondary" to={formPath} state={{ draft }} replace>
+        Edit details
+      </Link>
+    </Page>
+  );
 }

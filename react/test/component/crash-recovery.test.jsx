@@ -35,13 +35,23 @@ it('keeps the platform UUID when available', () => {
 
 it('catches a page render error and recovers without clearing saved records', async () => {
   vi.spyOn(console, 'error').mockImplementation(() => {});
-  function Broken() { throw new Error('Test render failure'); }
+  function Broken() {
+    throw new Error('Test render failure');
+  }
   localStorage.setItem(storageKey, 'Original saved records');
   const user = userEvent.setup();
-  const { rerender } = render(<ErrorBoundary><Broken /></ErrorBoundary>);
+  const { rerender } = render(
+    <ErrorBoundary>
+      <Broken />
+    </ErrorBoundary>,
+  );
   expect(screen.getByRole('heading', { name: 'This page could not open' })).toHaveFocus();
   expect(screen.getByRole('alert')).toHaveTextContent('saved records have not been cleared');
-  rerender(<ErrorBoundary><p>Recovered content</p></ErrorBoundary>);
+  rerender(
+    <ErrorBoundary>
+      <p>Recovered content</p>
+    </ErrorBoundary>,
+  );
   await user.click(screen.getByRole('button', { name: 'Return to Today' }));
   expect(screen.getByText('Recovered content')).toBeInTheDocument();
   expect(window.location.hash).toBe('#/');

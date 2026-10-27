@@ -4,15 +4,23 @@ A separate browser implementation of the existing Flutter prototype. Flutter sou
 tests, platform projects and design references remain in place. React uses its own
 `meditrack.react.v1` browser-storage key; it does not read or migrate Flutter records.
 
-Use Node.js 22.13 or newer. From this directory:
+Use Node.js **22.22.2**, the version used in CI. Other compatible runtime ranges
+are declared in `package.json`. From this directory:
 
 ```sh
-npm ci
+npm ci --engine-strict
+npm run format:check
 npm run lint
 npm run dev
 npm test
 npm run build
 ```
+
+Use `npm run format` to apply the committed Prettier configuration to React files.
+For formatting, lint, tests, coverage, production-build and browser checks, run
+`npx --no-install playwright install chromium` once, then `npm run verify`. The coverage gate is
+60% for every metric. Open `coverage/index.html` after `npm run test:coverage`.
+See [testing and Flutter test mapping](TESTING.md) for reports and verified results.
 
 Open the local URL printed by Vite. Start with **Add medicine**, enter sample details,
 then review and save. Today supports Taken, Skip and Undo; History supports corrections.
@@ -35,18 +43,18 @@ the browser's UUID API is unavailable. A top-level render-error boundary offers 
 return to Today without clearing stored records. Unsaved form details may need to
 be entered again after a render error.
 
-| Core screen | Route | Source |
-| --- | --- | --- |
-| Today | `#/` | `src/screens/Today.jsx` |
-| Your medicines | `#/medicines` | `src/screens/Medicines.jsx` |
-| Medicine details | `#/medicines/:id` | `src/screens/Medicines.jsx` |
-| Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
-| Review medicine | `#/medicines/review` | `src/screens/MedicineFlow.jsx` |
-| Dose details | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
-| Dose history | `#/history` | `src/screens/Doses.jsx` |
-| Symptoms | `#/symptoms` | `src/screens/More.jsx` |
-| Appointment summary | `#/summary` | `src/screens/More.jsx` |
-| Settings & sharing | `#/settings` | `src/screens/More.jsx` |
+| Core screen         | Route                                     | Source                         |
+| ------------------- | ----------------------------------------- | ------------------------------ |
+| Today               | `#/`                                      | `src/screens/Today.jsx`        |
+| Your medicines      | `#/medicines`                             | `src/screens/Medicines.jsx`    |
+| Medicine details    | `#/medicines/:id`                         | `src/screens/Medicines.jsx`    |
+| Add/edit medicine   | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
+| Review medicine     | `#/medicines/review`                      | `src/screens/MedicineFlow.jsx` |
+| Dose details        | `#/dose/:id/:time`                        | `src/screens/Doses.jsx`        |
+| Dose history        | `#/history`                               | `src/screens/Doses.jsx`        |
+| Symptoms            | `#/symptoms`                              | `src/screens/More.jsx`         |
+| Appointment summary | `#/summary`                               | `src/screens/More.jsx`         |
+| Settings & sharing  | `#/settings`                              | `src/screens/More.jsx`         |
 
 React Context supplies one external store, subscribed through `useSyncExternalStore`.
 React Router supplies routes; components have no separate copies of saved records.
@@ -62,6 +70,10 @@ at midnight. It is readable by screen readers without announcing every minute.
 The palette, cards and typography follow `docs/design/reference/index.html` and the
 Flutter app's documented adaptations. This is a responsive React web implementation,
 not React Native. It does not change or merge the separate teammate React Native PRs.
+
+The header uses the same Material `health_and_safety_outlined` glyph and teal color
+as Flutter. Its Apache 2.0 license is included in `public/material-icons-LICENSE.txt`.
+The browser favicon is copied byte-for-byte from Flutter's `web/favicon.png`.
 
 The store ports medicine replacement, archive/restore, daily dose records, Undo,
 symptoms, date filters and five persisted text sizes from `lib/state/app_store.dart`.

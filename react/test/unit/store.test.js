@@ -49,7 +49,12 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
   });
 
   it('retains unsaved changes after a write failure and allows retry', () => {
-    const storage = { getItem: () => null, setItem: vi.fn(() => { throw new Error('full'); }) };
+    const storage = {
+      getItem: () => null,
+      setItem: vi.fn(() => {
+        throw new Error('full');
+      }),
+    };
     const store = fresh({ storage });
     expect(store.put(medicine)).toBe(false);
     expect(store.active).toEqual([medicine]);
@@ -70,7 +75,10 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     store.setLargeText(true);
     expect(store.state.textScale).toBe(2);
     for (const enabled of [true, false]) {
-      localStorage.setItem(storageKey, JSON.stringify({ medicines: [medicine], doses: {}, symptoms: [], largeText: enabled }));
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({ medicines: [medicine], doses: {}, symptoms: [], largeText: enabled }),
+      );
       expect(fresh().state.textScale).toBe(enabled ? 2 : 1);
       expect(fresh().active).toEqual([medicine]);
     }
@@ -91,10 +99,12 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
   });
 
   it.each(['08:00, 08:00', ' 08:00 ,08:00 '])('rejects duplicate daily times after trimming: %s', (times) => {
-    expect(validateMedicine({ name: 'Sample', strength: '5 mg', times, supply: ' 5 ' }))
-      .toEqual({ times: 'Enter each daily time only once' });
-    expect(() => fresh().put({ ...medicine, times: times.split(',').map((time) => time.trim()) }))
-      .toThrow('Invalid medicine');
+    expect(validateMedicine({ name: 'Sample', strength: '5 mg', times, supply: ' 5 ' })).toEqual({
+      times: 'Enter each daily time only once',
+    });
+    expect(() => fresh().put({ ...medicine, times: times.split(',').map((time) => time.trim()) })).toThrow(
+      'Invalid medicine',
+    );
   });
 
   it('accepts surrounding supply whitespace without accepting fractions or unsafe integers', () => {
@@ -119,13 +129,24 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     expect(store.reset(false)).toBe(false);
     expect(localStorage.getItem(storageKey)).toBe(raw);
     for (const change of [
-      () => store.save(), () => store.put(medicine), () => store.archive(medicine),
+      () => store.save(),
+      () => store.put(medicine),
+      () => store.archive(medicine),
       () => store.record('2026-10-08|1|08:00', 'Taken'),
-      () => store.symptom('Headache', 'Mild', ''), () => store.setTextScale(2),
-    ]) expect(change).toThrow('Cannot edit unreadable saved data');
+      () => store.symptom('Headache', 'Mild', ''),
+      () => store.setTextScale(2),
+    ])
+      expect(change).toThrow('Cannot edit unreadable saved data');
     expect(store.reset(true)).toBe(true);
     expect(store.rawData).toBeNull();
-    expect(store.state).toMatchObject({ medicines: [], doses: {}, symptoms: [], textScale: 1, error: null, readOnly: false });
+    expect(store.state).toMatchObject({
+      medicines: [],
+      doses: {},
+      symptoms: [],
+      textScale: 1,
+      error: null,
+      readOnly: false,
+    });
     expect(localStorage.getItem(storageKey)).toBeNull();
     expect(localStorage.getItem('meditrack.v1')).toBe('Flutter records');
     expect(localStorage.getItem('other-app')).toBe('Other records');
@@ -136,7 +157,12 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
   });
 
   it('keeps the backup and read-only state when a confirmed reset fails', () => {
-    const storage = { getItem: () => '{bad', removeItem: vi.fn(() => { throw new Error('blocked'); }) };
+    const storage = {
+      getItem: () => '{bad',
+      removeItem: vi.fn(() => {
+        throw new Error('blocked');
+      }),
+    };
     const store = fresh({ storage });
     expect(store.reset(true)).toBe(false);
     expect(store.rawData).toBe('{bad');
@@ -156,7 +182,12 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
   });
 
   it('does not offer a destructive reset when storage cannot be read', () => {
-    const storage = { getItem: () => { throw new Error('blocked'); }, removeItem: vi.fn() };
+    const storage = {
+      getItem: () => {
+        throw new Error('blocked');
+      },
+      removeItem: vi.fn(),
+    };
     const store = fresh({ storage });
     expect(store.rawData).toBeNull();
     expect(store.reset(true)).toBe(false);
@@ -167,29 +198,46 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     const store = fresh();
     store.put({ ...medicine, id: 'zz-uuid', name: 'Alpha' });
     store.put({ ...medicine, id: 'aa-uuid', name: 'Zeta' });
-    for (const key of ['2026-10-07|zz-uuid|18:00', '2026-10-08|zz-uuid|18:00',
-      '2026-10-08|aa-uuid|08:00', '2026-10-08|zz-uuid|08:00', '2026-10-08|gone|08:00']) {
+    for (const key of [
+      '2026-10-07|zz-uuid|18:00',
+      '2026-10-08|zz-uuid|18:00',
+      '2026-10-08|aa-uuid|08:00',
+      '2026-10-08|zz-uuid|08:00',
+      '2026-10-08|gone|08:00',
+    ]) {
       store.record(key, 'Taken');
     }
     expect(store.history(7).map(([key]) => key)).toEqual([
-      '2026-10-08|zz-uuid|08:00', '2026-10-08|gone|08:00', '2026-10-08|aa-uuid|08:00',
-      '2026-10-08|zz-uuid|18:00', '2026-10-07|zz-uuid|18:00',
+      '2026-10-08|zz-uuid|08:00',
+      '2026-10-08|gone|08:00',
+      '2026-10-08|aa-uuid|08:00',
+      '2026-10-08|zz-uuid|18:00',
+      '2026-10-07|zz-uuid|18:00',
     ]);
   });
 
   it('keeps inclusive local-day boundaries and recalculates the range after midnight', () => {
     let date = new Date(2026, 9, 8, 0, 1);
     const store = fresh({ clock: () => date });
-    for (const key of ['2026-09-08|1|08:00', '2026-09-09|1|08:00',
-      '2026-10-08|1|00:00', '2026-10-08|1|23:59', '2026-10-09|1|08:00']) {
+    for (const key of [
+      '2026-09-08|1|08:00',
+      '2026-09-09|1|08:00',
+      '2026-10-08|1|00:00',
+      '2026-10-08|1|23:59',
+      '2026-10-09|1|08:00',
+    ]) {
       store.record(key, 'Taken');
     }
     expect(store.history(30).map(([key]) => key)).toEqual([
-      '2026-10-08|1|00:00', '2026-10-08|1|23:59', '2026-09-09|1|08:00',
+      '2026-10-08|1|00:00',
+      '2026-10-08|1|23:59',
+      '2026-09-09|1|08:00',
     ]);
     date = new Date(2026, 9, 9, 0, 1);
     expect(store.history(30).map(([key]) => key)).toEqual([
-      '2026-10-09|1|08:00', '2026-10-08|1|00:00', '2026-10-08|1|23:59',
+      '2026-10-09|1|08:00',
+      '2026-10-08|1|00:00',
+      '2026-10-08|1|23:59',
     ]);
   });
 });
