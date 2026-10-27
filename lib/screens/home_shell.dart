@@ -110,23 +110,25 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
                   child: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: MediaQuery.sizeOf(context).height * .35),
+                    constraints: BoxConstraints(
+                      maxHeight: MediaQuery.sizeOf(context).height * .35,
+                    ),
                     child: SingleChildScrollView(
-                    child: LayoutBuilder(
-                    builder: (context, c) => Wrap(
-                      spacing: 3,
-                      runSpacing: 3,
-                      children: [
-                        for (int i = 0; i < 4; i++)
-                          SizedBox(
-                            width:
-                                (c.maxWidth - (large ? 3 : 9)) /
-                                (large ? 2 : 4),
-                            child: destination(i),
-                          ),
-                      ],
-                    ),
-                    ),
+                      child: LayoutBuilder(
+                        builder: (context, c) => Wrap(
+                          spacing: 3,
+                          runSpacing: 3,
+                          children: [
+                            for (int i = 0; i < 4; i++)
+                              SizedBox(
+                                width:
+                                    (c.maxWidth - (large ? 3 : 9)) /
+                                    (large ? 2 : 4),
+                                child: destination(i),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

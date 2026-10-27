@@ -243,6 +243,9 @@ class _AppPageState extends State<AppPage> {
                           key: contentKey,
                           focusNode: contentFocus,
                           autofocus: true,
+                          child: Builder(builder: (context) => Container(
+                            decoration: BoxDecoration(border: Focus.of(context).hasFocus
+                              ? Border.all(color: const Color(0xff703DB2), width: 3) : null),
                           child: Semantics(
                           namesRoute: true,
                           headingLevel: 1,
@@ -257,6 +260,7 @@ class _AppPageState extends State<AppPage> {
                           ),
                         ),
                         ),
+                        )),
                         Text(
                           subtitles[title] ?? '',
                           style: const TextStyle(color: Color(0xff52686C)),

@@ -60,31 +60,35 @@ class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: [Semantics(
-      label: '${_paused ? 'Paused time' : 'Current time'}: $formatted',
-      excludeSemantics: true,
-      child: Text(
-        formatted,
-        textAlign: TextAlign.right,
-        style: const TextStyle(
-          fontSize: 16,
-          height: 1.5,
-          fontWeight: FontWeight.w600,
-          color: Color(0xff075E64),
+      children: [
+        Semantics(
+          label: '${_paused ? 'Paused time' : 'Current time'}: $formatted',
+          excludeSemantics: true,
+          child: Text(
+            formatted,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff075E64),
+            ),
+          ),
         ),
-      ),
-    ),
-    Semantics(
-      toggled: _paused,
-      child: TextButton(
-        onPressed: () => setState(() {
-          _paused = !_paused;
-          if (!_paused) _time = _readTime();
-        }),
-        child: const Text('Pause clock updates', textAlign: TextAlign.right),
-      ),
-    ),
-    ],
+        Semantics(
+          toggled: _paused,
+          child: TextButton(
+            onPressed: () => setState(() {
+              _paused = !_paused;
+              if (!_paused) _time = _readTime();
+            }),
+            child: const Text(
+              'Pause clock updates',
+              textAlign: TextAlign.right,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

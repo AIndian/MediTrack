@@ -14,6 +14,13 @@ class MediTrack extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        focusColor: const Color(0xffDCCAF5),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            side: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.focused)
+                ? const BorderSide(color: Color(0xff703DB2), width: 3) : null),
+          ),
+        ),
         scaffoldBackgroundColor: const Color(0xffF6FAF9),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff075E64))
             .copyWith(
@@ -36,6 +43,8 @@ class MediTrack extends StatelessWidget {
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
+            side: WidgetStateBorderSide.resolveWith((states) => states.contains(WidgetState.focused)
+                ? const BorderSide(color: Color(0xffDCCAF5), width: 3) : BorderSide.none),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -45,6 +54,9 @@ class MediTrack extends StatelessWidget {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            side: WidgetStateBorderSide.resolveWith((states) => states.contains(WidgetState.focused)
+                ? const BorderSide(color: Color(0xff703DB2), width: 3)
+                : const BorderSide(color: Color(0xff687F82))),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -54,6 +66,10 @@ class MediTrack extends StatelessWidget {
         ),
         inputDecorationTheme: const InputDecorationTheme(
           errorMaxLines: 6,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
+            borderSide: BorderSide(color: Color(0xff703DB2), width: 3),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(11)),
           ),
@@ -67,7 +83,8 @@ class MediTrack extends StatelessWidget {
       ),
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(
-          textScaler: MediaQuery.textScalerOf(context).scale(16) >= 16 * store.textScale
+          textScaler:
+              MediaQuery.textScalerOf(context).scale(16) >= 16 * store.textScale
               ? MediaQuery.textScalerOf(context)
               : TextScaler.linear(store.textScale),
         ),

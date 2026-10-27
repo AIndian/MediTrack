@@ -52,34 +52,34 @@ class _MedicineFormState extends State<MedicineForm> {
               padding: const EdgeInsets.only(top: 20),
               child: labeledField(
                 [
-                    'Medicine name',
-                    'Strength / dosage',
-                    'Instructions (optional)',
-                    'Daily times (HH:mm, separated by commas)',
-                    'Supply in doses',
+                  'Medicine name',
+                  'Strength / dosage',
+                  'Instructions (optional)',
+                  'Daily times (HH:mm, separated by commas)',
+                  'Supply in doses',
                 ][i],
                 TextFormField(
-                controller: fields[i],
-                validator: (v) {
-                  if (i != 2 && (v == null || v.trim().isEmpty)) {
-                    return 'Please enter a value';
-                  }
-                  if (i == 3 &&
-                      v!
-                          .split(',')
-                          .any(
-                            (t) =>
-                                !RegExp(r'^([01]\d|2[0-3]):[0-5]\d$')
-                                    .hasMatch(t.trim()),
-                          )) {
-                    return 'Use times such as 08:00, 18:00';
-                  }
-                  if (i == 4 &&
-                      (int.tryParse(v!) == null || int.parse(v) < 0)) {
-                    return 'Enter a whole number, zero or more';
-                  }
-                  return null;
-                },
+                  controller: fields[i],
+                  validator: (v) {
+                    if (i != 2 && (v == null || v.trim().isEmpty)) {
+                      return 'Please enter a value';
+                    }
+                    if (i == 3 &&
+                        v!
+                            .split(',')
+                            .any(
+                              (t) =>
+                                  !RegExp(r'^([01]\d|2[0-3]):[0-5]\d$')
+                                      .hasMatch(t.trim()),
+                            )) {
+                      return 'Use times such as 08:00, 18:00';
+                    }
+                    if (i == 4 &&
+                        (int.tryParse(v!) == null || int.parse(v) < 0)) {
+                      return 'Enter a whole number, zero or more';
+                    }
+                    return null;
+                  },
                 ),
               ),
             ),
