@@ -38,7 +38,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.4.2 | Page Titled | A | [x] Page effect sets descriptive document title on every route. | [x] Shared page now sets platform/browser Title and route-name semantics. | Final route-title assertions across screens. |
 | 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; Undo restores focus; removed history entry returns focus to heading. | [x] Widget-order page traversal, page-heading focus, Undo return focus and history traversal before removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
 | 2.4.4 | Link Purpose (In Context) | A | [x] Open links include medicine/time; other links describe destinations. | [x] Open actions use medicine/time; Back and destination labels remain descriptive. | Accessible-name and workflow assertions. |
-| 2.4.5 | Multiple Ways | AA | [ ] Pending | [ ] Pending | Pending |
+| 2.4.5 | Multiple Ways | AA | [x] Main navigation plus contextual Today/history, Medicines/detail, and More/summary/symptom routes. | [x] Main destinations plus contextual Today history/symptom/summary actions. | Forms/review are process steps; final workflows cover alternate entry routes. |
 | 2.4.6 | Headings and Labels | AA | [ ] Pending | [ ] Pending | Pending |
 | 2.4.7 | Focus Visible | AA | [ ] Pending | [ ] Pending | Pending |
 | 2.5.1 | Pointer Gestures | A | [ ] Pending | [ ] Pending | Pending |
