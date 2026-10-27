@@ -42,6 +42,6 @@ it('refreshes Today and clears the prior day Undo when midnight passes', () => {
   date = new Date(2026, 9, 9, 0, 0);
   act(() => vi.advanceTimersByTime(1000));
   expect(screen.getByText('Status: Due')).toBeInTheDocument();
-  expect(screen.getByText(/2026-10-09 · Your daily routine/)).toBeInTheDocument();
+  expect(screen.getByText(/Your daily routine/).querySelector('time')).toHaveAttribute('datetime', '2026-10-09');
   expect(screen.queryByRole('button', { name: 'Undo last change' })).not.toBeInTheDocument();
 });

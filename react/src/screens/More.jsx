@@ -41,10 +41,16 @@ export function Summary() {
   const { store, symptoms } = useStore();
   const [days, setDays] = useState(7);
   const history = store.history(days);
+  const daily = store.active.reduce((total, medicine) => total + medicine.times.length, 0);
+  const taken = history.filter(([, value]) => value === 'Taken').length;
   const recordedSymptoms = symptoms.filter((s) => store.inRange(s.date, days));
   return <Page title="Appointment summary" backTo="/settings">
     <div className="field"><label htmlFor="date-range">Date range</label><select id="date-range" value={days} onChange={(e) => setDays(Number(e.target.value))}><option value={7}>Last 7 days</option><option value={30}>Last 30 days</option></select></div>
-    <section className="card"><h2>Recorded doses</h2><p>{history.filter(([, value]) => value === 'Taken').length} taken of {history.length} recorded doses</p><p>Unrecorded doses are not included in this count.</p></section>
+    <section className="card"><h2>Recorded doses</h2>
+      <p>{taken} recorded Taken · {history.length - taken} recorded Skipped</p>
+      <p><strong>Current schedule estimate: {daily * days} doses over {days} days</strong> ({daily} per day).</p>
+      <p>The estimate applies today’s active schedule to every selected day. Past schedule changes and medicine start dates are not tracked. Unrecorded doses are not included in the recorded counts.</p>
+    </section>
     <section className="card"><h2>Current medicines</h2>
       {store.active.length === 0 && <p>No active medicines.</p>}
       {store.active.map((m) => <p key={m.id}>{m.name} · {m.strength} · {m.times.join(', ')} · Supply: {m.supply}</p>)}

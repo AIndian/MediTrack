@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, expect, it, vi } from 'vitest';
 import { StorageNotice } from '../../src/components/StorageNotice';
@@ -103,5 +103,13 @@ it('retries a failed write from the shared notice', async () => {
   storage.setItem.mockImplementation(() => {});
   await user.click(screen.getByRole('button', { name: 'Retry saving' }));
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  expect(screen.getByRole('status')).toHaveTextContent('Changes saved on this device.');
+  expect(screen.getByRole('status')).toHaveFocus();
   expect(store.active).toEqual([medicine]);
+  storage.setItem.mockImplementation(() => { throw new Error('full again'); });
+  act(() => store.setTextScale(1.25));
+  storage.setItem.mockImplementation(() => {});
+  await user.click(screen.getByRole('button', { name: 'Retry saving' }));
+  expect(screen.getByRole('status')).toHaveFocus();
+  expect(store.state.textScale).toBe(1.25);
 });

@@ -24,6 +24,22 @@ then review and save. Today supports Taken, Skip and Undo; History supports corr
 More opens symptoms, appointment summaries and text-size settings. Hash URLs support
 browser Back/Forward and direct links without server rewrite rules.
 
+History shows recent days first, then times in chronological order and medicine
+names alphabetically. Clearing an entry with Due offers **Undo last removal** and
+moves keyboard focus to that action. Successful storage retries announce confirmation;
+a pending Review save continues to medicine details when the retry succeeds.
+
+Today localizes its date using your browser preference. Past unrecorded slots say
+**Not recorded yet**; **Next dose** is reserved for an upcoming slot. Appointment
+summaries show Taken/Skipped counts separately from a clearly labeled estimate of
+scheduled doses. That estimate applies the current active routine throughout the
+selected range; historical schedule changes and medicine start dates are not tracked.
+
+Medicine creation supports plain-HTTP phone/LAN testing by using random bytes when
+the browser's UUID API is unavailable. A top-level render-error boundary offers a
+return to Today without clearing stored records. Unsaved form details may need to
+be entered again after a render error.
+
 | Core screen | Route | Source |
 | --- | --- | --- |
 | Today | `#/` | `src/screens/Today.jsx` |
@@ -31,7 +47,7 @@ browser Back/Forward and direct links without server rewrite rules.
 | Medicine details | `#/medicines/:id` | `src/screens/Medicines.jsx` |
 | Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
 | Review medicine | `#/medicines/review` | `src/screens/MedicineFlow.jsx` |
-| Medication reminder | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
+| Dose details | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
 | Dose history | `#/history` | `src/screens/Doses.jsx` |
 | Symptoms | `#/symptoms` | `src/screens/More.jsx` |
 | Appointment summary | `#/summary` | `src/screens/More.jsx` |
@@ -43,6 +59,8 @@ Draft medicine details stay in navigation state until explicitly saved. The shar
 page focuses its heading after navigation and sets the document title. Forms use
 visible labels, linked error messages and first-error focus. Buttons have at least
 48px targets (primary actions 56px), and the layout reflows at enlarged text sizes.
+Phone navigation appears above content so its visual, reading and keyboard order
+agree; wider screens retain the navigation rail.
 The live clock follows browser locale, refreshes on resume and updates the schedule
 at midnight. It is readable by screen readers without announcing every minute.
 

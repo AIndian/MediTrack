@@ -37,7 +37,7 @@ test('all ten screens reflow at 200%, have labeled targets, and pass axe checks'
 
   for (const [route, title] of [
     ['/', 'Today'], ['/medicines', 'Your medicines'], ['/medicines/1', 'Medicine details'],
-    ['/dose/1/08:00', 'Medication reminder'], ['/history', 'Dose history'],
+    ['/dose/1/08:00', 'Dose details'], ['/history', 'Dose history'],
     ['/symptoms', 'Symptoms'], ['/summary', 'Appointment summary'], ['/settings', 'Settings & sharing'],
     ['/medicines/new', 'Add medicine'],
   ]) {

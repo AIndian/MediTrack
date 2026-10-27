@@ -10,8 +10,8 @@ it.each([
   ['/medicines/missing', 'Medicine details'],
   ['/medicines/missing/edit', 'Edit medicine'],
   ['/medicines/review', 'Review medicine'],
-  ['/dose/missing/08:00', 'Medication reminder'],
-  ['/dose/1/25:00', 'Medication reminder'],
+  ['/dose/missing/08:00', 'Dose details'],
+  ['/dose/1/25:00', 'Dose details'],
 ])('handles unavailable links: %s', (route, title) => {
   renderApp(fresh(), route);
   expect(screen.getByRole('heading', { level: 1, name: title })).toHaveFocus();

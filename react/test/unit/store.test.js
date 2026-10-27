@@ -162,4 +162,18 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     expect(store.reset(true)).toBe(false);
     expect(storage.removeItem).not.toHaveBeenCalled();
   });
+
+  it('orders history by recent day, chronological time, then medicine name instead of ID', () => {
+    const store = fresh();
+    store.put({ ...medicine, id: 'zz-uuid', name: 'Alpha' });
+    store.put({ ...medicine, id: 'aa-uuid', name: 'Zeta' });
+    for (const key of ['2026-10-07|zz-uuid|18:00', '2026-10-08|zz-uuid|18:00',
+      '2026-10-08|aa-uuid|08:00', '2026-10-08|zz-uuid|08:00', '2026-10-08|gone|08:00']) {
+      store.record(key, 'Taken');
+    }
+    expect(store.history(7).map(([key]) => key)).toEqual([
+      '2026-10-08|zz-uuid|08:00', '2026-10-08|gone|08:00', '2026-10-08|aa-uuid|08:00',
+      '2026-10-08|zz-uuid|18:00', '2026-10-07|zz-uuid|18:00',
+    ]);
+  });
 });

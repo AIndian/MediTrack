@@ -20,6 +20,11 @@ export function localDay(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
 
+export function createMedicineId() {
+  if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+  return Array.from(crypto.getRandomValues(new Uint8Array(16)), (byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
 export function validateMedicine(fields) {
   const errors = {};
   if (!fields.name.trim()) errors.name = 'Please enter a medicine name';
@@ -163,9 +168,16 @@ export class AppStore {
   }
 
   history(days) {
+    const names = new Map(this.state.medicines.map((medicine) => [medicine.id, medicine.name]));
     return Object.entries(this.state.doses)
       .filter(([key]) => this.inRange(`${key.split('|')[0]}T12:00:00`, days))
-      .sort(([a], [b]) => b.localeCompare(a));
+      .sort(([a], [b]) => {
+        const [dayA, idA, timeA] = a.split('|');
+        const [dayB, idB, timeB] = b.split('|');
+        return dayB.localeCompare(dayA) || timeA.localeCompare(timeB) ||
+          (names.get(idA) ?? 'Removed medicine').localeCompare(names.get(idB) ?? 'Removed medicine', undefined, { sensitivity: 'base' }) ||
+          idA.localeCompare(idB);
+      });
   }
 
   doseLabel(key) {

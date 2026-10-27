@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '../StoreContext';
-import { validateMedicine } from '../store';
+import { createMedicineId, validateMedicine } from '../store';
 import { MedicineHeading, Page } from '../components/Page';
 
 const fields = [
@@ -24,7 +24,7 @@ function MedicineEditor({ medicine }) {
   const { readOnly } = useStore();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [draft] = useState(() => state?.draft ?? medicine ?? { id: crypto.randomUUID(), name: '', strength: '', instructions: '', times: ['08:00'], supply: 30, archived: false });
+  const [draft] = useState(() => state?.draft ?? medicine ?? { id: createMedicineId(), name: '', strength: '', instructions: '', times: ['08:00'], supply: 30, archived: false });
   const [values, setValues] = useState(() => ({ ...draft, times: draft.times.join(', '), supply: String(draft.supply) }));
   const [errors, setErrors] = useState({});
   const formPath = medicine ? `/medicines/${encodeURIComponent(medicine.id)}/edit` : '/medicines/new';
@@ -62,9 +62,13 @@ function MedicineEditor({ medicine }) {
 
 export function MedicineReview() {
   const { state } = useLocation();
-  const { store, readOnly } = useStore();
+  const { store, readOnly, error } = useStore();
   const navigate = useNavigate();
   const draft = state?.draft;
+  const [waitingForSave, setWaitingForSave] = useState(false);
+  useEffect(() => {
+    if (waitingForSave && !error && draft) navigate(`/medicines/${encodeURIComponent(draft.id)}`, { replace: true });
+  }, [waitingForSave, error, draft, navigate]);
   if (!draft) return <Page title="Review medicine" backTo="/medicines"><p>No medicine is waiting for review.</p><Link to="/medicines/new">Add medicine</Link></Page>;
   const formPath = state.formPath ?? '/medicines/new';
   return <Page title="Review medicine" backTo={formPath} backState={{ draft }}>
@@ -73,8 +77,10 @@ export function MedicineReview() {
       <p>Every day at {draft.times.join(', ')}</p><p>{draft.supply} doses recorded</p>
     </div>
     <p>Check these details against your prescription before saving.</p>
+    {waitingForSave && <p role="status">This medicine is recorded in this tab. Use Retry saving above; medicine details will open once it is saved on this device.</p>}
     <button disabled={readOnly} onClick={() => {
       if (store.put(draft)) navigate(`/medicines/${encodeURIComponent(draft.id)}`, { replace: true });
+      else setWaitingForSave(true);
     }}>Save medicine</button>
     <Link className="button secondary" to={formPath} state={{ draft }} replace>Edit details</Link>
   </Page>;

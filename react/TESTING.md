@@ -56,6 +56,17 @@ confirmed resets, failed resets, inaccessible storage and changed-data protectio
 checks field errors before review. Browser checks download the real file and verify
 that reset leaves the separate Flutter storage key unchanged.
 
+The core-screen review adds HTTP-safe medicine IDs and top-level render recovery;
+focus and announcements after history removal, Undo and save retry; Review retry
+navigation; chronological history; upcoming/past dose labels; archived-supply handling;
+and recorded counts separated from current-schedule estimates. Each product fix is
+a separate commit on `react/02-core-screens`.
+
+`test/e2e/core-review.spec.js` runs the built app on an insecure HTTP test origin
+and asserts that `randomUUID` is absent while creation/reload still succeeds. It also
+checks render recovery without clearing records, repeated persistence failures and
+focus restoration, French date formatting, and visual/tab navigation order at 200%.
+
 The static Flutter "No connection" notice is adapted to "Saved on this device";
 the web app does not infer connectivity or imply cloud sync. Browser locale replaces
 Flutter's device clock-format setting. React component tests use a DOM simulator;
@@ -65,7 +76,7 @@ are checked against the built app in Chromium. Browser tests also exercise effec
 
 ## Coverage reports
 
-`npm run test:coverage` uses Vitest's V8 coverage. All thirteen application `.js`/`.jsx`
+`npm run test:coverage` uses Vitest's V8 coverage. All fourteen application `.js`/`.jsx`
 files under `src/` are included, including the production entry point, router, store
 and every screen. No application JavaScript files are excluded. CSS and HTML are
 checked through browser tests rather than JavaScript coverage.
@@ -92,12 +103,12 @@ Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
 | Check | Result |
 | --- | --- |
 | ESLint | Passed with no errors or warnings |
-| Unit/component tests | 37 passed across 8 files |
-| Application line coverage | 251 / 251 = **100%** |
-| Statement coverage | 294 / 294 = **100%** |
-| Function coverage | 107 / 107 = **100%** |
-| Branch coverage | 197 / 205 = **96.09%** |
-| Browser tests | 12 passed across phone, tablet and desktop |
+| Unit/component tests | 48 passed across 14 files |
+| Application line coverage | 289 / 289 = **100%** |
+| Statement coverage | 344 / 344 = **100%** |
+| Function coverage | 120 / 120 = **100%** |
+| Branch coverage | 242 / 250 = **96.80%** |
+| Browser tests | 24 passed across phone, tablet and desktop |
 | Production build | Passed |
 
 Automated accessibility checks do not establish WCAG conformance. Native Flutter

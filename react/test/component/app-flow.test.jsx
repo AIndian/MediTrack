@@ -98,9 +98,9 @@ it('saves symptoms and filters summaries by the selected date range', async () =
   expect(screen.getByLabelText('Symptom', { exact: true })).toHaveValue('');
   await user.click(screen.getByRole('link', { name: '← Back' }));
   await user.click(screen.getByRole('link', { name: 'Appointment summary' }));
-  expect(screen.getByText('1 taken of 1 recorded doses')).toBeInTheDocument();
+  expect(screen.getByText('1 recorded Taken · 0 recorded Skipped')).toBeInTheDocument();
   await user.selectOptions(screen.getByLabelText('Date range'), '30');
-  expect(screen.getByText('1 taken of 2 recorded doses')).toBeInTheDocument();
+  expect(screen.getByText('1 recorded Taken · 1 recorded Skipped')).toBeInTheDocument();
   expect(screen.getByText(/Headache · Moderate/)).toBeInTheDocument();
 });
 

@@ -12,7 +12,7 @@ export function Medicines() {
       <MedicineHeading medicine={medicine} />
       <p>Daily at {medicine.times.join(', ')}</p>
       <p className="badge">{medicine.archived ? 'Archived' : 'Active'}</p>
-      {medicine.supply <= 10 && <p className="supply-note">Low supply · Check your refill</p>}
+      {!medicine.archived && medicine.supply <= 10 && <p className="supply-note">Low supply · Check your refill</p>}
       <Link className="button secondary" to={`/medicines/${encodeURIComponent(medicine.id)}`}>Open {medicine.name}</Link>
     </article>)}
   </Page>;
