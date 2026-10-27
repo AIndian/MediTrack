@@ -1,6 +1,6 @@
 # React testing and coverage
 
-Run from `react/` with Node.js 22.12 or newer:
+Run from `react/` with Node.js 22.13 or newer:
 
 ```sh
 npm ci
@@ -9,13 +9,15 @@ npm run verify
 ```
 
 On Linux CI, use `npx playwright install --with-deps chromium` to install required
-browser system packages as well. `verify` stops on a failed test, coverage threshold,
+browser system packages as well. `verify` runs ESLint first and stops on a lint error
+or warning, failed test, coverage threshold,
 build or browser check. It starts and stops a local production-preview server for
 the browser checks. It requires a free port 4173.
 
 For individual checks:
 
 ```sh
+npm run lint
 npm run test:unit
 npm run test:component
 npm run test:coverage
@@ -25,6 +27,11 @@ npm run test:e2e
 
 Run the build before browser tests if you have changed the app. `npm run test:watch`
 runs the unit/component tests while editing.
+
+ESLint checks application code, tests and configuration with recommended JavaScript
+rules and React Hooks rules for application code. Browser and Node globals are
+scoped to the appropriate files. Generated builds, dependencies and reports are
+excluded. Lint changes do not reformat or alter application behavior.
 
 ## Flutter test mapping
 
@@ -84,6 +91,7 @@ Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
 
 | Check | Result |
 | --- | --- |
+| ESLint | Passed with no errors or warnings |
 | Unit/component tests | 37 passed across 8 files |
 | Application line coverage | 251 / 251 = **100%** |
 | Statement coverage | 294 / 294 = **100%** |
