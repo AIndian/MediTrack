@@ -37,7 +37,7 @@ class _MedicineFormState extends State<MedicineForm> {
     BuildContext context,
   ) => AppPage(widget.medicine == null ? 'Add medicine' : 'Edit medicine', [
     const Text(
-      'Copy details from your prescription label. Times use the 24-hour clock.',
+      'Copy details from your prescription label. Times use the 24-hour clock. All fields except Instructions are required.',
     ),
     Form(
       key: form,
@@ -63,6 +63,7 @@ class _MedicineFormState extends State<MedicineForm> {
                 TextFormField(
                   controller: fields[i],
                   focusNode: fieldFocus[i],
+                  keyboardType: i == 4 ? TextInputType.number : TextInputType.text,
                   validator: (v) {
                     if (i != 2 && (v == null || v.trim().isEmpty)) {
                       return 'Please enter a value';

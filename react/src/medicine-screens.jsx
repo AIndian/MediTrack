@@ -67,7 +67,7 @@ export function MedicineFlow() {
     </Page>;
   }
   return <Page title={id ? 'Edit medicine' : 'Add medicine'} subtitle="Step 1 of 2 · Enter details">
-    <p>Copy details from your prescription label. Times use the 24-hour clock.</p>
+    <p>Copy details from your prescription label. Times use the 24-hour clock. All fields except Instructions are required.</p>
     <form noValidate onSubmit={event => {
       event.preventDefault();
       const nextErrors = validateMedicine(fields);
@@ -81,6 +81,7 @@ export function MedicineFlow() {
           ['name', 'Medicine name'], ['strength', 'Strength / dosage'], ['instructions', 'Instructions (optional)'],
           ['times', 'Daily times (HH:mm, separated by commas)'], ['supply', 'Supply in doses'],
         ].map(([key, label]) => <Field key={key} name={key} label={label} value={fields[key]} error={errors[key]}
+          required={key !== 'instructions'}
           inputMode={key === 'supply' ? 'numeric' : 'text'}
           onChange={event => setFields({ ...fields, [key]: event.target.value })} />)}
       </Card>

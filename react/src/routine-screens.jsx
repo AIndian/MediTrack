@@ -70,6 +70,7 @@ export function Symptoms() {
   const [errors, setErrors] = useState({});
   const [message, setMessage] = useState('');
   return <Page title="Symptoms" subtitle="Keep a note for your next visit">
+    <p>Symptom is required. Notes are optional.</p>
     <form noValidate onSubmit={event => {
       event.preventDefault();
       setErrors(name.trim() ? {} : { symptom: 'Enter a symptom' });
@@ -82,7 +83,7 @@ export function Symptoms() {
     }}>
       <ErrorSummary errors={errors} />
       <Card>
-        <Field name="symptom" label="Symptom" value={name} error={errors.symptom} onChange={event => setName(event.target.value)} />
+        <Field required name="symptom" label="Symptom" value={name} error={errors.symptom} onChange={event => setName(event.target.value)} />
         <label htmlFor="severity">Severity</label>
         <select id="severity" value={severity} onChange={event => setSeverity(event.target.value)}>
           {['Mild', 'Moderate', 'Severe'].map(value => <option key={value}>{value}</option>)}

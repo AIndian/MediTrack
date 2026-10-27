@@ -25,6 +25,7 @@ class _SymptomsState extends State<Symptoms> {
 
   @override
   Widget build(BuildContext context) => AppPage('Symptoms', [
+    const Text('Symptom is required. Notes are optional.'),
     Form(
       key: form,
       child: Column(
