@@ -62,11 +62,11 @@ footer { text-align: center; color: #52686c; padding: 24px; font-size: 1em; }
 .large .navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 0; }
 .large .navigation p { display: none; }
 .large .today-grid { grid-template-columns: minmax(0, 1fr); }
-.large .header { flex-direction: column-reverse; align-items: stretch; }
+.large .header { flex-direction: column; align-items: stretch; }
 .large .clock { align-self: flex-end; }
 @media (max-width: 1100px) { .today-grid { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 699px) {
-  .app-shell { display: flex; flex-direction: column-reverse; }
+  .app-shell { display: flex; flex-direction: column; }
   .navigation { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 0; border-top: 1px solid #d5e3e0; gap: 3px; padding: 8px; }
   .navigation a { padding: 8px 3px; }
   .navigation p { display: none; }
