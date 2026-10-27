@@ -62,6 +62,7 @@ class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         Semantics(
+          container: true,
           label: '${_paused ? 'Paused time' : 'Current time'}: $formatted',
           excludeSemantics: true,
           child: Text(
@@ -75,17 +76,14 @@ class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
             ),
           ),
         ),
-        Semantics(
-          toggled: _paused,
-          child: TextButton(
-            onPressed: () => setState(() {
-              _paused = !_paused;
-              if (!_paused) _time = _readTime();
-            }),
-            child: const Text(
-              'Pause clock updates',
-              textAlign: TextAlign.right,
-            ),
+        TextButton(
+          onPressed: () => setState(() {
+            _paused = !_paused;
+            if (!_paused) _time = _readTime();
+          }),
+          child: Text(
+            _paused ? 'Resume clock updates' : 'Pause clock updates',
+            textAlign: TextAlign.right,
           ),
         ),
       ],

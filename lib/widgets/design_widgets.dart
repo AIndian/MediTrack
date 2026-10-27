@@ -7,6 +7,7 @@ import '../models/medicine.dart';
 void open(BuildContext context, Widget page) =>
     Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 Widget heading(String text) => Semantics(
+  container: true,
   headingLevel: 2,
   child: Text(
     text,
@@ -62,6 +63,7 @@ Widget badge(String status) {
       ? const Color(0xff795000)
       : const Color(0xff075E64);
   return Semantics(
+    container: true,
     liveRegion: true,
     child: Align(
       alignment: Alignment.centerLeft,
@@ -131,7 +133,10 @@ class AppPage extends StatefulWidget {
 }
 
 class _AppPageState extends State<AppPage> {
-  final contentFocus = FocusNode(debugLabel: 'Page heading', skipTraversal: true);
+  final contentFocus = FocusNode(
+    debugLabel: 'Page heading',
+    skipTraversal: true,
+  );
   final contentKey = GlobalKey();
   String get title => widget.title;
   List<Widget> get children => widget.children;
@@ -149,7 +154,6 @@ class _AppPageState extends State<AppPage> {
   }
 
   @override
-  @override
   void didUpdateWidget(AppPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.title != title) {
@@ -164,146 +168,179 @@ class _AppPageState extends State<AppPage> {
     title: '$title · MediTrack',
     color: const Color(0xff075E64),
     child: Scaffold(
-    body: SafeArea(
-      child: FocusTraversalGroup(
-        policy: WidgetOrderTraversalPolicy(),
-        child: ListView(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: TextButton(onPressed: focusContent, child: const Text('Skip to content')),
-          ),
-          Container(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              border: Border(bottom: BorderSide(color: Color(0xffD5E3E0))),
-            ),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 11),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                final brand = Row(
+      body: SafeArea(
+        child: FocusTraversalGroup(
+          policy: WidgetOrderTraversalPolicy(),
+          child: Semantics(
+            container: true,
+            explicitChildNodes: true,
+            child: ListView(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    if (Navigator.canPop(context))
-                      BackButton(onPressed: () => Navigator.pop(context)),
-                    const Icon(
-                      Icons.health_and_safety_outlined,
-                      color: Color(0xff075E64),
-                      size: 26,
-                    ),
-                    const SizedBox(width: 8),
-                    const Expanded(
-                      child: Text(
-                        'MediTrack',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                        ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: focusContent,
+                        child: const Text('Skip to content'),
                       ),
                     ),
-                  ],
-                );
-                if (constraints.maxWidth <
-                    MediaQuery.textScalerOf(context).scale(310)) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Align(
-                        alignment: Alignment.topRight,
-                        child: HeaderClock(),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(color: Color(0xffD5E3E0)),
+                        ),
                       ),
-                      const SizedBox(height: 8),
-                      brand,
-                    ],
-                  );
-                }
-                return Row(
-                  children: [
-                    Expanded(child: brand),
-                    const SizedBox(width: 12),
-                    const Flexible(child: HeaderClock()),
-                  ],
-                );
-              },
-            ),
-          ),
-          Center(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 1120),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final wide =
-                      constraints.maxWidth >= 700 &&
-                      MediaQuery.textScalerOf(context).scale(1) < 1.5;
-                  return Padding(
-                    padding: EdgeInsets.all(wide ? 32 : 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Focus(
-                          key: contentKey,
-                          focusNode: contentFocus,
-                          autofocus: true,
-                          child: Builder(builder: (context) => Container(
-                            decoration: BoxDecoration(border: Focus.of(context).hasFocus
-                              ? Border.all(color: const Color(0xff703DB2), width: 3) : null),
-                          child: Semantics(
-                          namesRoute: true,
-                          headingLevel: 1,
-                          child: Text(
-                            title,
-                            style: const TextStyle(
-                              fontSize: 32,
-                              height: 1.5,
-                              fontWeight: FontWeight.w700,
-                              letterSpacing: -1,
-                            ),
-                          ),
-                        ),
-                        ),
-                        )),
-                        Text(
-                          subtitles[title] ?? '',
-                          style: const TextStyle(color: Color(0xff52686C)),
-                        ),
-                        const SizedBox(height: 24),
-                        if (wide && side.isNotEmpty)
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 11,
+                      ),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final brand = Row(
                             children: [
-                              Expanded(
-                                flex: 6,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: children,
+                              if (Navigator.canPop(context))
+                                BackButton(
+                                  onPressed: () => Navigator.pop(context),
                                 ),
+                              const Icon(
+                                Icons.health_and_safety_outlined,
+                                color: Color(0xff075E64),
+                                size: 26,
                               ),
-                              const SizedBox(width: 24),
-                              Expanded(
-                                flex: 4,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: side,
+                              const SizedBox(width: 8),
+                              const Expanded(
+                                child: Text(
+                                  'MediTrack',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
                                 ),
                               ),
                             ],
-                          )
-                        else ...[
-                          ...children,
-                          ...side,
-                        ],
-                      ],
+                          );
+                          if (constraints.maxWidth <
+                              MediaQuery.textScalerOf(context).scale(310)) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const Align(
+                                  alignment: Alignment.topRight,
+                                  child: HeaderClock(),
+                                ),
+                                const SizedBox(height: 8),
+                                brand,
+                              ],
+                            );
+                          }
+                          return Row(
+                            children: [
+                              Expanded(child: brand),
+                              const SizedBox(width: 12),
+                              const Flexible(child: HeaderClock()),
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  );
-                },
-              ),
+                    Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1120),
+                        child: LayoutBuilder(
+                          builder: (context, constraints) {
+                            final wide =
+                                constraints.maxWidth >= 700 &&
+                                MediaQuery.textScalerOf(context).scale(1) < 1.5;
+                            return Padding(
+                              padding: EdgeInsets.all(wide ? 32 : 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Focus(
+                                    key: contentKey,
+                                    focusNode: contentFocus,
+                                    autofocus: true,
+                                    child: Builder(
+                                      builder: (context) => Container(
+                                        decoration: BoxDecoration(
+                                          border: Focus.of(context).hasFocus
+                                              ? Border.all(
+                                                  color: const Color(
+                                                    0xff703DB2,
+                                                  ),
+                                                  width: 3,
+                                                )
+                                              : null,
+                                        ),
+                                        child: Semantics(
+                                          container: true,
+                                          namesRoute: true,
+                                          headingLevel: 1,
+                                          child: Text(
+                                            title,
+                                            style: const TextStyle(
+                                              fontSize: 32,
+                                              height: 1.5,
+                                              fontWeight: FontWeight.w700,
+                                              letterSpacing: -1,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    subtitles[title] ?? '',
+                                    style: const TextStyle(
+                                      color: Color(0xff52686C),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 24),
+                                  if (wide && side.isNotEmpty)
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 6,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: children,
+                                          ),
+                                        ),
+                                        const SizedBox(width: 24),
+                                        Expanded(
+                                          flex: 4,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.stretch,
+                                            children: side,
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  else ...[
+                                    ...children,
+                                    ...side,
+                                  ],
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
-    ),
-    ),
     ),
   );
 }
