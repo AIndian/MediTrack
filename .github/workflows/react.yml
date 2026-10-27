@@ -3,9 +3,9 @@ name: React checks
 on:
   push:
     branches: [main]
-    paths: ['react/**', '.github/workflows/react.yml']
+    paths: ['react/**', '.github/workflows/react.yml', '.github/dependabot.yml']
   pull_request:
-    paths: ['react/**', '.github/workflows/react.yml']
+    paths: ['react/**', '.github/workflows/react.yml', '.github/dependabot.yml']
   workflow_dispatch:
 
 permissions:

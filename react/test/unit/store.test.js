@@ -44,7 +44,7 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     const store = fresh();
     expect(store.state.readOnly).toBe(true);
     expect(store.state.error).toContain('Could not load');
-    expect(store.put(medicine)).toBe(false);
+    expect(() => store.put(medicine)).toThrow('Cannot edit unreadable saved data');
     expect(localStorage.getItem(storageKey)).toBe(raw);
   });
 
@@ -88,5 +88,78 @@ describe('AppStore (ported from Flutter app_store_test)', () => {
     expect(localDay(new Date(2026, 9, 8, 23, 59))).toBe('2026-10-08');
     expect(validateMedicine({ name: ' ', strength: '', times: '25:00', supply: '-1' })).toHaveProperty('times');
     expect(validateMedicine({ name: 'Sample', strength: '5 mg', times: '08:00, 18:00', supply: '0' })).toEqual({});
+  });
+
+  it.each(['08:00, 08:00', ' 08:00 ,08:00 '])('rejects duplicate daily times after trimming: %s', (times) => {
+    expect(validateMedicine({ name: 'Sample', strength: '5 mg', times, supply: ' 5 ' }))
+      .toEqual({ times: 'Enter each daily time only once' });
+    expect(() => fresh().put({ ...medicine, times: times.split(',').map((time) => time.trim()) }))
+      .toThrow('Invalid medicine');
+  });
+
+  it('accepts surrounding supply whitespace without accepting fractions or unsafe integers', () => {
+    const values = { name: 'Sample', strength: '5 mg', times: ' 08:00,18:00 ', supply: ' 5 ' };
+    expect(validateMedicine(values)).toEqual({});
+    for (const supply of ['', ' ', '-1', '1.5', '1e2', '9007199254740992']) {
+      expect(validateMedicine({ ...values, supply })).toHaveProperty('supply');
+    }
+  });
+
+  it('requires confirmation before resetting corrupt data and only resets React storage', () => {
+    const raw = JSON.stringify({ medicines: [medicine], doses: { bad: 'Taken' }, symptoms: [] });
+    localStorage.setItem(storageKey, raw);
+    localStorage.setItem('meditrack.v1', 'Flutter records');
+    localStorage.setItem('other-app', 'Other records');
+    const store = fresh();
+    const listener = vi.fn();
+    store.subscribe(listener);
+    expect(store.rawData).toBe(raw);
+    expect(store.state.readOnly).toBe(true);
+    expect(store.reset()).toBe(false);
+    expect(store.reset(false)).toBe(false);
+    expect(localStorage.getItem(storageKey)).toBe(raw);
+    for (const change of [
+      () => store.save(), () => store.put(medicine), () => store.archive(medicine),
+      () => store.record('2026-10-08|1|08:00', 'Taken'),
+      () => store.symptom('Headache', 'Mild', ''), () => store.setTextScale(2),
+    ]) expect(change).toThrow('Cannot edit unreadable saved data');
+    expect(store.reset(true)).toBe(true);
+    expect(store.rawData).toBeNull();
+    expect(store.state).toMatchObject({ medicines: [], doses: {}, symptoms: [], textScale: 1, error: null, readOnly: false });
+    expect(localStorage.getItem(storageKey)).toBeNull();
+    expect(localStorage.getItem('meditrack.v1')).toBe('Flutter records');
+    expect(localStorage.getItem('other-app')).toBe('Other records');
+    expect(listener).toHaveBeenCalledOnce();
+    expect(store.put(medicine)).toBe(true);
+    expect(fresh().active).toEqual([medicine]);
+    expect(store.reset(true)).toBe(false);
+  });
+
+  it('keeps the backup and read-only state when a confirmed reset fails', () => {
+    const storage = { getItem: () => '{bad', removeItem: vi.fn(() => { throw new Error('blocked'); }) };
+    const store = fresh({ storage });
+    expect(store.reset(true)).toBe(false);
+    expect(store.rawData).toBe('{bad');
+    expect(store.state.readOnly).toBe(true);
+    expect(store.state.error).toContain('Could not reset');
+  });
+
+  it('does not reset a different snapshot written after the backup was read', () => {
+    localStorage.setItem(storageKey, '{bad');
+    const store = fresh();
+    localStorage.setItem(storageKey, 'Different saved data');
+    expect(store.reset(true)).toBe(false);
+    expect(localStorage.getItem(storageKey)).toBe('Different saved data');
+    expect(store.rawData).toBe('{bad');
+    expect(store.state.readOnly).toBe(true);
+    expect(store.state.error).toContain('Reload');
+  });
+
+  it('does not offer a destructive reset when storage cannot be read', () => {
+    const storage = { getItem: () => { throw new Error('blocked'); }, removeItem: vi.fn() };
+    const store = fresh({ storage });
+    expect(store.rawData).toBeNull();
+    expect(store.reset(true)).toBe(false);
+    expect(storage.removeItem).not.toHaveBeenCalled();
   });
 });

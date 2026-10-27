@@ -42,6 +42,13 @@ details.
 | `test/widget/header_clock_test.dart` | `test/component/header-clock.test.jsx`, `test/e2e/accessibility.spec.js` | Minute/midnight, resume, locale formatting, timer disposal and enlarged-text layout |
 | Widget overflow and touch-target checks | `test/e2e/accessibility.spec.js` | All ten screens at 200% on phone/tablet/desktop, horizontal overflow, 48px targets, axe checks and navigation |
 
+Review regressions add shared form/store duplicate-time rules, trimmed supply,
+explicit errors for blocked edits, exact raw JSON backup downloads, canceled and
+confirmed resets, failed resets, inaccessible storage and changed-data protection.
+`storage-notice.test.jsx` tests the shared recovery UI; `medicine-validation.test.jsx`
+checks field errors before review. Browser checks download the real file and verify
+that reset leaves the separate Flutter storage key unchanged.
+
 The static Flutter "No connection" notice is adapted to "Saved on this device";
 the web app does not infer connectivity or imply cloud sync. Browser locale replaces
 Flutter's device clock-format setting. React component tests use a DOM simulator;
@@ -51,7 +58,7 @@ are checked against the built app in Chromium. Browser tests also exercise effec
 
 ## Coverage reports
 
-`npm run test:coverage` uses Vitest's V8 coverage. All twelve application `.js`/`.jsx`
+`npm run test:coverage` uses Vitest's V8 coverage. All thirteen application `.js`/`.jsx`
 files under `src/` are included, including the production entry point, router, store
 and every screen. No application JavaScript files are excluded. CSS and HTML are
 checked through browser tests rather than JavaScript coverage.
@@ -77,12 +84,12 @@ Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
 
 | Check | Result |
 | --- | --- |
-| Unit/component tests | 23 passed across 6 files |
-| Application line coverage | 217 / 217 = **100%** |
-| Statement coverage | 251 / 251 = **100%** |
-| Function coverage | 98 / 98 = **100%** |
-| Branch coverage | 175 / 184 = **95.10%** |
-| Browser tests | 9 passed across phone, tablet and desktop |
+| Unit/component tests | 37 passed across 8 files |
+| Application line coverage | 251 / 251 = **100%** |
+| Statement coverage | 294 / 294 = **100%** |
+| Function coverage | 107 / 107 = **100%** |
+| Branch coverage | 197 / 205 = **96.09%** |
+| Browser tests | 12 passed across phone, tablet and desktop |
 | Production build | Passed |
 
 Automated accessibility checks do not establish WCAG conformance. Native Flutter

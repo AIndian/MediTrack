@@ -27,6 +27,12 @@ it('adds only after review, navigates to details and archives/restores a medicin
   await user.clear(screen.getByLabelText('Supply in doses'));
   await user.type(screen.getByLabelText('Supply in doses'), '8');
   await user.click(screen.getByRole('button', { name: 'Review medicine' }));
+  expect(screen.getByText('Enter each daily time only once')).toBeInTheDocument();
+  expect(screen.getByLabelText(/Daily times/)).toHaveFocus();
+  expect(store.active).toEqual([]);
+  await user.clear(screen.getByLabelText(/Daily times/));
+  await user.type(screen.getByLabelText(/Daily times/), '18:00, 08:00');
+  await user.click(screen.getByRole('button', { name: 'Review medicine' }));
   expect(screen.getByRole('heading', { name: 'Review medicine', level: 1 })).toHaveFocus();
   expect(store.active).toEqual([]);
   await user.click(screen.getByRole('link', { name: 'Edit details' }));

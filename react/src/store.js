@@ -2,6 +2,19 @@ export const storageKey = 'meditrack.react.v1';
 export const textScales = [1, 1.25, 1.5, 1.75, 2];
 const timePattern = /^([01]\d|2[0-3]):[0-5]\d$/;
 const severities = ['Mild', 'Moderate', 'Severe'];
+const emptyState = () => ({ medicines: [], doses: {}, symptoms: [], textScale: 1, error: null, readOnly: false });
+
+function validateTimes(times) {
+  if (!Array.isArray(times) || times.length === 0 ||
+      times.some((time) => typeof time !== 'string' || !timePattern.test(time))) {
+    return 'Use times such as 08:00, 18:00';
+  }
+  if (new Set(times).size !== times.length) return 'Enter each daily time only once';
+}
+
+function validSupply(supply) {
+  return Number.isSafeInteger(supply) && supply >= 0;
+}
 
 export function localDay(date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -11,10 +24,10 @@ export function validateMedicine(fields) {
   const errors = {};
   if (!fields.name.trim()) errors.name = 'Please enter a medicine name';
   if (!fields.strength.trim()) errors.strength = 'Please enter a strength / dosage';
-  if (fields.times.split(',').some((time) => !timePattern.test(time.trim()))) {
-    errors.times = 'Use times such as 08:00, 18:00';
-  }
-  if (!/^\d+$/.test(String(fields.supply)) || !Number.isSafeInteger(Number(fields.supply))) {
+  const timeError = validateTimes(fields.times.split(',').map((time) => time.trim()));
+  if (timeError) errors.times = timeError;
+  const supply = String(fields.supply).trim();
+  if (!/^\d+$/.test(supply) || !validSupply(Number(supply))) {
     errors.supply = 'Enter a whole number, zero or more';
   }
   return errors;
@@ -23,10 +36,8 @@ export function validateMedicine(fields) {
 function validMedicine(m) {
   return m && typeof m.id === 'string' && m.id.length > 0 && !m.id.includes('|') &&
     ['name', 'strength', 'instructions'].every((key) => typeof m[key] === 'string') &&
-    m.name.trim() && m.strength.trim() && Array.isArray(m.times) && m.times.length > 0 &&
-    m.times.every((time) => typeof time === 'string' && timePattern.test(time)) &&
-    new Set(m.times).size === m.times.length && Number.isSafeInteger(m.supply) &&
-    m.supply >= 0 && typeof m.archived === 'boolean';
+    m.name.trim() && m.strength.trim() && !validateTimes(m.times) &&
+    validSupply(m.supply) && typeof m.archived === 'boolean';
 }
 
 function validDoseKey(key) {
@@ -63,13 +74,14 @@ export class AppStore {
   constructor({ storage, clock = () => new Date() } = {}) {
     this.now = clock;
     this.listeners = new Set();
-    this.state = { medicines: [], doses: {}, symptoms: [], textScale: 1, error: null, readOnly: false };
+    this.state = emptyState();
+    this.rawData = null;
     try {
       this.storage = storage ?? window.localStorage;
-      const raw = this.storage.getItem(storageKey);
-      if (raw !== null) this.state = { ...this.state, ...decode(raw) };
+      this.rawData = this.storage.getItem(storageKey);
+      if (this.rawData !== null) this.state = { ...this.state, ...decode(this.rawData) };
     } catch {
-      this.state = { ...this.state, error: 'Could not load data. Your saved data has not been changed. Restart the app to try again.', readOnly: true };
+      this.state = { ...this.state, error: 'Could not load data. Your saved data has not been changed. Download a backup before resetting.', readOnly: true };
     }
   }
 
@@ -81,7 +93,7 @@ export class AppStore {
 
   // shortcut: single-tab writes only; reconcile storage events before supporting multiple tabs.
   save(changes = {}) {
-    if (this.state.readOnly) return false;
+    if (this.state.readOnly) throw new Error('Cannot edit unreadable saved data. Download a backup and reset first.');
     this.state = { ...this.state, ...changes, error: null };
     const { medicines, doses, symptoms, textScale } = this.state;
     try {
@@ -91,6 +103,20 @@ export class AppStore {
     }
     this.listeners.forEach((listener) => listener());
     return this.state.error === null;
+  }
+
+  reset(confirmed = false) {
+    if (confirmed !== true || !this.state.readOnly || this.rawData === null) return false;
+    try {
+      if (this.storage.getItem(storageKey) !== this.rawData) throw new Error('Changed since loading');
+      this.storage.removeItem(storageKey);
+      this.rawData = null;
+      this.state = emptyState();
+    } catch {
+      this.state = { ...this.state, error: 'Could not reset saved data. Nothing was deleted. Reload the app and check browser storage access before trying again.' };
+    }
+    this.listeners.forEach((listener) => listener());
+    return !this.state.readOnly;
   }
 
   get day() { return localDay(this.now()); }

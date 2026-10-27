@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 import AxeBuilder from '@axe-core/playwright';
 import { medicine } from '../support/fixtures.js';
 import { storageKey } from '../../src/store.js';
@@ -97,4 +98,35 @@ test('browser text settings above 200% are respected without horizontal overflow
   await page.keyboard.press('Space');
   await expect(page.getByRole('slider')).toHaveAttribute('aria-valuetext', '100%');
   await expect(page.locator('.app')).toHaveCSS('font-size', '20px');
+});
+
+test('downloads corrupt data and resets only after confirmation without touching Flutter records', async ({ page }) => {
+  const raw = JSON.stringify({ medicines: [medicine], doses: { bad: 'Taken' }, symptoms: [] });
+  await page.addInitScript(({ storageKey, raw }) => {
+    localStorage.setItem(storageKey, raw);
+    localStorage.setItem('meditrack.v1', 'Sample Flutter records');
+  }, { storageKey, raw });
+  await page.goto('/');
+  await expect(page.getByRole('alert')).toContainText('Could not load data');
+  const [download] = await Promise.all([
+    page.waitForEvent('download'),
+    page.getByRole('button', { name: 'Download saved JSON' }).click(),
+  ]);
+  expect(download.suggestedFilename()).toBe('meditrack-react-backup.json');
+  expect(await readFile(await download.path(), 'utf8')).toBe(raw);
+  const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+  expect(result.violations).toEqual([]);
+
+  page.once('dialog', (dialog) => dialog.dismiss());
+  await page.getByRole('button', { name: 'Reset saved data' }).click();
+  expect(await page.evaluate((key) => localStorage.getItem(key), storageKey)).toBe(raw);
+  await expect(page.getByRole('alert')).toContainText('Could not load data');
+  page.once('dialog', (dialog) => dialog.accept());
+  await page.getByRole('button', { name: 'Reset saved data' }).click();
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  expect(await page.evaluate((key) => localStorage.getItem(key), storageKey)).toBeNull();
+  expect(await page.evaluate(() => localStorage.getItem('meditrack.v1'))).toBe('Sample Flutter records');
+  await expect(page.getByRole('main')).toBeFocused();
+  await page.getByRole('link', { name: 'Add medicine', exact: true }).click();
+  await expect(page.getByLabel('Medicine name', { exact: true })).toBeEnabled();
 });
