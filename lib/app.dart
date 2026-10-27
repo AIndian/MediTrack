@@ -19,8 +19,11 @@ class MediTrack extends StatelessWidget {
         focusColor: const Color(0xffDCCAF5),
         textButtonTheme: TextButtonThemeData(
           style: ButtonStyle(
-            side: WidgetStateProperty.resolveWith((states) => states.contains(WidgetState.focused)
-                ? const BorderSide(color: Color(0xff703DB2), width: 3) : null),
+            side: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xff703DB2), width: 3)
+                  : null,
+            ),
           ),
         ),
         scaffoldBackgroundColor: const Color(0xffF6FAF9),
@@ -45,8 +48,11 @@ class MediTrack extends StatelessWidget {
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
-            side: WidgetStateBorderSide.resolveWith((states) => states.contains(WidgetState.focused)
-                ? const BorderSide(color: Color(0xffDCCAF5), width: 3) : BorderSide.none),
+            side: WidgetStateBorderSide.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xffDCCAF5), width: 3)
+                  : BorderSide.none,
+            ),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -56,9 +62,11 @@ class MediTrack extends StatelessWidget {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
-            side: WidgetStateBorderSide.resolveWith((states) => states.contains(WidgetState.focused)
-                ? const BorderSide(color: Color(0xff703DB2), width: 3)
-                : const BorderSide(color: Color(0xff687F82))),
+            side: WidgetStateBorderSide.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xff703DB2), width: 3)
+                  : const BorderSide(color: Color(0xff687F82)),
+            ),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -90,7 +98,14 @@ class MediTrack extends StatelessWidget {
               ? MediaQuery.textScalerOf(context)
               : TextScaler.linear(store.textScale),
         ),
-        child: child!,
+        child: Column(children: [
+          if (store.error != null)
+            SafeArea(child: Semantics(liveRegion: true, child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(store.error!, style: const TextStyle(color: Color(0xffA52B3C))),
+            ))),
+          Expanded(child: child!),
+        ]),
       ),
       home: Home(store: store),
     ),

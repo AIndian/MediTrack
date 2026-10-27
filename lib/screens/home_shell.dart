@@ -94,8 +94,6 @@ class _HomeState extends State<Home> {
               Expanded(
                 child: Column(
                   children: [
-                    if (s.error != null)
-                      Semantics(liveRegion: true, child: Text(s.error!)),
                     Expanded(child: pages[tab]),
                   ],
                 ),
