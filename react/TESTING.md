@@ -38,16 +38,16 @@ excluded. Lint changes do not reformat or alter application behavior.
 
 ## Measured history preparation
 
-A local Node.js 22.18.0 benchmark used ten fictional medicines with four daily doses
+A local Node.js 22.22.2 benchmark used ten fictional medicines with four daily doses
 over 90 days: 3,600 saved records, filtered to a 1,200-record 30-day view. After five
 warm-up calls, 30 calls to `history(30)` were timed with `performance.now()` on the
-same Windows machine. The complete ordered output had the same SHA-256 before and
+same Windows machine, alternating the before/after order. The complete ordered output had the same SHA-256 before and
 after the change.
 
 | History filtering/sorting | Before   | After   |
 | ------------------------- | -------- | ------- |
-| Median                    | 14.67 ms | 2.07 ms |
-| 95th percentile           | 16.04 ms | 2.45 ms |
+| Median                    | 13.77 ms | 1.74 ms |
+| 95th percentile           | 15.49 ms | 2.66 ms |
 
 The implementation computes calendar boundaries once per query and reuses one
 locale comparator. It does not cache records or defer writes. A separate render
@@ -80,6 +80,11 @@ confirmed resets, failed resets, inaccessible storage and changed-data protectio
 `storage-notice.test.jsx` tests the shared recovery UI; `medicine-validation.test.jsx`
 checks field errors before review. Browser checks download the real file and verify
 that reset leaves the separate Flutter storage key unchanged.
+
+The Undo regression is a no-expiry guard, not a latency assertion. Virtual timers
+are enabled before the dose is recorded, then advanced across an idle interval;
+the Undo action must remain available. Undo has no independent timeout, while
+navigation or a new dose/day can replace its controls.
 
 The core-screen review adds HTTP-safe medicine IDs and top-level render recovery;
 focus and announcements after history removal, Undo and save retry; Review retry
@@ -123,13 +128,16 @@ workflow and reporting helper are unchanged.
 
 ## Verified locally on October 27, 2026
 
-Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
+Windows, Node.js 22.22.2, npm 10.9.7, Chromium through Playwright. A clean `npm ci`
+completed without `EBADENGINE` warnings. The committed lockfile uses jsdom 26.1.0;
+this change raises the project runtime baseline without changing that dependency.
 
 | Check                     | Result                                     |
 | ------------------------- | ------------------------------------------ |
+| Prettier                  | All matched files pass the format check    |
 | ESLint                    | Passed with no errors or warnings          |
 | Unit/component tests      | 50 passed across 15 files                  |
-| Application line coverage | 296 / 296 = **100%**                       |
+| Application line coverage | 307 / 307 = **100%**                       |
 | Statement coverage        | 352 / 352 = **100%**                       |
 | Function coverage         | 121 / 121 = **100%**                       |
 | Branch coverage           | 244 / 252 = **96.82%**                     |
