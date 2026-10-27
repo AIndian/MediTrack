@@ -1,8 +1,10 @@
-import { act, screen, within } from '@testing-library/react';
+import { act, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { expect, it, vi } from 'vitest';
+import { afterEach, expect, it, vi } from 'vitest';
 import { fresh, medicine } from '../support/fixtures';
 import { renderApp } from '../support/render';
+
+afterEach(() => vi.useRealTimers());
 
 it('adds only after review, navigates to details and archives/restores a medicine', async () => {
   const store = fresh();
@@ -56,16 +58,18 @@ it('adds only after review, navigates to details and archives/restores a medicin
   expect(screen.getByText('Low supply · Check your refill')).toBeInTheDocument();
 });
 
-it('records doses, preserves Undo after five minutes, and corrects history', async () => {
+it('records doses with non-expiring Undo and corrects history', async () => {
   const store = fresh();
   store.put(medicine);
   const user = userEvent.setup();
   renderApp(store);
   await user.click(screen.getByRole('link', { name: 'Open Sample medicine dose at 08:00' }));
-  await user.click(screen.getByRole('button', { name: 'Mark Taken' }));
-  expect(screen.getByText('Status: Taken')).toBeInTheDocument();
   vi.useFakeTimers();
+  fireEvent.click(screen.getByRole('button', { name: 'Mark Taken' }));
+  expect(screen.getByText('Status: Taken')).toBeInTheDocument();
+  // Undo has no expiry; elapsed virtual time must not remove the action.
   act(() => vi.advanceTimersByTime(300000));
+  expect(screen.getByRole('button', { name: 'Undo last change' })).toBeInTheDocument();
   vi.useRealTimers();
   await user.click(screen.getByRole('button', { name: 'Undo last change' }));
   expect(screen.getByText('Status: Due')).toBeInTheDocument();
