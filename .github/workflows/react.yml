@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: react/package-lock.json
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - name: Lint, tests, 60% coverage gate, production build and browser checks
+      - name: Format, lint, tests, 60% coverage gate, production build and browser checks
         run: npm run verify
       - name: Upload React coverage
         if: always()

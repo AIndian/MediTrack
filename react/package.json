@@ -15,9 +15,11 @@
     "test:component": "vitest run test/component",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
-    "verify": "npm run lint && npm run test:coverage && npm run build && npm run test:e2e",
+    "verify": "npm run format:check && npm run lint && npm run test:coverage && npm run build && npm run test:e2e",
     "test:watch": "vitest",
-    "lint": "eslint . --max-warnings 0"
+    "lint": "eslint . --max-warnings 0",
+    "format": "prettier --write . --ignore-path ../.gitignore --ignore-path .prettierignore",
+    "format:check": "prettier --check . --ignore-path ../.gitignore --ignore-path .prettierignore"
   },
   "dependencies": {
     "react": "19.3.1",
@@ -37,6 +39,7 @@
     "eslint-plugin-react-hooks": "7.1.1",
     "globals": "17.13.0",
     "jsdom": "26.1.0",
+    "prettier": "3.9.10",
     "vite": "8.3.5",
     "vitest": "5.0.5"
   }

@@ -44,7 +44,9 @@ it('announces a failed write and retries without losing the dose change', async 
   const storage = { getItem: () => null, setItem: vi.fn() };
   const store = fresh({ storage });
   store.put({ ...medicine, times: ['08:00'] });
-  storage.setItem.mockImplementation(() => { throw new Error('full'); });
+  storage.setItem.mockImplementation(() => {
+    throw new Error('full');
+  });
   const user = userEvent.setup();
   renderApp(store, '/dose/1/08:00');
   await user.click(screen.getByRole('button', { name: 'Mark Taken' }));

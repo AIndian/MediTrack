@@ -5,8 +5,11 @@ const severities = ['Mild', 'Moderate', 'Severe'];
 const emptyState = () => ({ medicines: [], doses: {}, symptoms: [], textScale: 1, error: null, readOnly: false });
 
 function validateTimes(times) {
-  if (!Array.isArray(times) || times.length === 0 ||
-      times.some((time) => typeof time !== 'string' || !timePattern.test(time))) {
+  if (
+    !Array.isArray(times) ||
+    times.length === 0 ||
+    times.some((time) => typeof time !== 'string' || !timePattern.test(time))
+  ) {
     return 'Use times such as 08:00, 18:00';
   }
   if (new Set(times).size !== times.length) return 'Enter each daily time only once';
@@ -39,31 +42,59 @@ export function validateMedicine(fields) {
 }
 
 function validMedicine(m) {
-  return m && typeof m.id === 'string' && m.id.length > 0 && !m.id.includes('|') &&
+  return (
+    m &&
+    typeof m.id === 'string' &&
+    m.id.length > 0 &&
+    !m.id.includes('|') &&
     ['name', 'strength', 'instructions'].every((key) => typeof m[key] === 'string') &&
-    m.name.trim() && m.strength.trim() && !validateTimes(m.times) &&
-    validSupply(m.supply) && typeof m.archived === 'boolean';
+    m.name.trim() &&
+    m.strength.trim() &&
+    !validateTimes(m.times) &&
+    validSupply(m.supply) &&
+    typeof m.archived === 'boolean'
+  );
 }
 
 function validDoseKey(key) {
   const [day, id, time, extra] = key.split('|');
   const date = new Date(`${day}T12:00:00`);
-  return /^\d{4}-\d{2}-\d{2}$/.test(day) && !Number.isNaN(+date) &&
-    localDay(date) === day && Boolean(id) && timePattern.test(time) && extra === undefined;
+  return (
+    /^\d{4}-\d{2}-\d{2}$/.test(day) &&
+    !Number.isNaN(+date) &&
+    localDay(date) === day &&
+    Boolean(id) &&
+    timePattern.test(time) &&
+    extra === undefined
+  );
 }
 
 function validSymptom(s) {
-  return s && typeof s.name === 'string' && s.name.trim() && severities.includes(s.severity) &&
-    typeof s.notes === 'string' && typeof s.date === 'string' && !Number.isNaN(Date.parse(s.date));
+  return (
+    s &&
+    typeof s.name === 'string' &&
+    s.name.trim() &&
+    severities.includes(s.severity) &&
+    typeof s.notes === 'string' &&
+    typeof s.date === 'string' &&
+    !Number.isNaN(Date.parse(s.date))
+  );
 }
 
 function decode(raw) {
   const data = JSON.parse(raw);
-  if (!data || !Array.isArray(data.medicines) || !data.medicines.every(validMedicine) ||
-      new Set(data.medicines.map((m) => m.id)).size !== data.medicines.length ||
-      !data.doses || typeof data.doses !== 'object' || Array.isArray(data.doses) ||
-      !Object.entries(data.doses).every(([key, status]) => validDoseKey(key) && ['Taken', 'Skipped'].includes(status)) ||
-      !Array.isArray(data.symptoms) || !data.symptoms.every(validSymptom)) {
+  if (
+    !data ||
+    !Array.isArray(data.medicines) ||
+    !data.medicines.every(validMedicine) ||
+    new Set(data.medicines.map((m) => m.id)).size !== data.medicines.length ||
+    !data.doses ||
+    typeof data.doses !== 'object' ||
+    Array.isArray(data.doses) ||
+    !Object.entries(data.doses).every(([key, status]) => validDoseKey(key) && ['Taken', 'Skipped'].includes(status)) ||
+    !Array.isArray(data.symptoms) ||
+    !data.symptoms.every(validSymptom)
+  ) {
     throw new Error('Invalid saved records');
   }
   const scale = data.textScale ?? (data.largeText === true ? 2 : 1);
@@ -86,7 +117,11 @@ export class AppStore {
       this.rawData = this.storage.getItem(storageKey);
       if (this.rawData !== null) this.state = { ...this.state, ...decode(this.rawData) };
     } catch {
-      this.state = { ...this.state, error: 'Could not load data. Your saved data has not been changed. Download a backup before resetting.', readOnly: true };
+      this.state = {
+        ...this.state,
+        error: 'Could not load data. Your saved data has not been changed. Download a backup before resetting.',
+        readOnly: true,
+      };
     }
   }
 
@@ -118,16 +153,28 @@ export class AppStore {
       this.rawData = null;
       this.state = emptyState();
     } catch {
-      this.state = { ...this.state, error: 'Could not reset saved data. Nothing was deleted. Reload the app and check browser storage access before trying again.' };
+      this.state = {
+        ...this.state,
+        error:
+          'Could not reset saved data. Nothing was deleted. Reload the app and check browser storage access before trying again.',
+      };
     }
     this.listeners.forEach((listener) => listener());
     return !this.state.readOnly;
   }
 
-  get day() { return localDay(this.now()); }
-  get active() { return this.state.medicines.filter((m) => !m.archived); }
-  doseKey(medicine, time) { return `${this.day}|${medicine.id}|${time}`; }
-  status(key) { return this.state.doses[key] ?? 'Due'; }
+  get day() {
+    return localDay(this.now());
+  }
+  get active() {
+    return this.state.medicines.filter((m) => !m.archived);
+  }
+  doseKey(medicine, time) {
+    return `${this.day}|${medicine.id}|${time}`;
+  }
+  status(key) {
+    return this.state.doses[key] ?? 'Due';
+  }
 
   put(medicine) {
     if (!validMedicine(medicine)) throw new Error('Invalid medicine');
@@ -137,7 +184,9 @@ export class AppStore {
     return this.save({ medicines });
   }
 
-  archive(medicine) { return this.put({ ...medicine, archived: !medicine.archived }); }
+  archive(medicine) {
+    return this.put({ ...medicine, archived: !medicine.archived });
+  }
 
   record(key, value) {
     if (!validDoseKey(key) || !['Due', 'Taken', 'Skipped'].includes(value)) throw new Error('Invalid dose record');
@@ -153,7 +202,9 @@ export class AppStore {
     return this.save({ symptoms: [symptom, ...this.state.symptoms] });
   }
 
-  setLargeText(value) { return this.setTextScale(value ? 2 : 1); }
+  setLargeText(value) {
+    return this.setTextScale(value ? 2 : 1);
+  }
   setTextScale(value) {
     if (!textScales.includes(value)) throw new Error('Choose 100% to 200% in 25% steps');
     return this.save({ textScale: value });
@@ -182,9 +233,12 @@ export class AppStore {
       .sort(([a], [b]) => {
         const [dayA, idA, timeA] = a.split('|');
         const [dayB, idB, timeB] = b.split('|');
-        return dayB.localeCompare(dayA) || timeA.localeCompare(timeB) ||
+        return (
+          dayB.localeCompare(dayA) ||
+          timeA.localeCompare(timeB) ||
           compareNames(names.get(idA) ?? 'Removed medicine', names.get(idB) ?? 'Removed medicine') ||
-          idA.localeCompare(idB);
+          idA.localeCompare(idB)
+        );
       });
   }
 

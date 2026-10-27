@@ -9,14 +9,15 @@ npm run verify
 ```
 
 On Linux CI, use `npx playwright install --with-deps chromium` to install required
-browser system packages as well. `verify` runs ESLint first and stops on a lint error
-or warning, failed test, coverage threshold,
+browser system packages as well. `verify` runs Prettier's format check and ESLint
+first and stops on a format violation, lint error or warning, failed test, coverage threshold,
 build or browser check. It starts and stops a local production-preview server for
 the browser checks. It requires a free port 4173.
 
 For individual checks:
 
 ```sh
+npm run format:check
 npm run lint
 npm run test:unit
 npm run test:component
@@ -26,7 +27,9 @@ npm run test:e2e
 ```
 
 Run the build before browser tests if you have changed the app. `npm run test:watch`
-runs the unit/component tests while editing.
+runs the unit/component tests while editing. Apply formatting with `npm run format`.
+The formatter respects repository and React ignore rules, including generated output
+and local environment files. Flutter code and copied references are outside its scope.
 
 ESLint checks application code, tests and configuration with recommended JavaScript
 rules and React Hooks rules for application code. Browser and Node globals are
@@ -41,10 +44,10 @@ warm-up calls, 30 calls to `history(30)` were timed with `performance.now()` on 
 same Windows machine. The complete ordered output had the same SHA-256 before and
 after the change.
 
-| History filtering/sorting | Before | After |
-| --- | --- | --- |
-| Median | 14.67 ms | 2.07 ms |
-| 95th percentile | 16.04 ms | 2.45 ms |
+| History filtering/sorting | Before   | After   |
+| ------------------------- | -------- | ------- |
+| Median                    | 14.67 ms | 2.07 ms |
+| 95th percentile           | 16.04 ms | 2.45 ms |
 
 The implementation computes calendar boundaries once per query and reuses one
 locale comparator. It does not cache records or defer writes. A separate render
@@ -62,14 +65,14 @@ reuses the fictional medicine details and October 8 fixed clock, with isolated
 browser storage. Tests assert user behavior rather than Dart/React implementation
 details.
 
-| Flutter source | React copy | Checks |
-| --- | --- | --- |
-| `test/support/fixtures.dart` | `test/support/fixtures.js` | Fictional medicine and local fixed clock |
-| `test/unit/app_store_test.dart` | `test/unit/store.test.js` | Replacement, persistence, archive/restore, Undo, validation, date filtering, corruption protection, five text sizes and legacy preference |
-| `test/widget/app_flow_test.dart` | `test/component/app-flow.test.jsx`, `main.test.jsx`, `routes-errors.test.jsx` | Production boot, empty states, add/review/edit, dose Undo/correction, symptoms, summary ranges, unavailable routes and storage errors |
-| `test/widget/text_size_test.dart` | `test/component/text-size.test.jsx`, `test/e2e/accessibility.spec.js` | Five stops, toggle synchronization, persistence, keyboard slider controls and larger browser text |
-| `test/widget/header_clock_test.dart` | `test/component/header-clock.test.jsx`, `test/e2e/accessibility.spec.js` | Minute/midnight, resume, locale formatting, timer disposal and enlarged-text layout |
-| Widget overflow and touch-target checks | `test/e2e/accessibility.spec.js` | All ten screens at 200% on phone/tablet/desktop, horizontal overflow, 48px targets, axe checks and navigation |
+| Flutter source                          | React copy                                                                    | Checks                                                                                                                                    |
+| --------------------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `test/support/fixtures.dart`            | `test/support/fixtures.js`                                                    | Fictional medicine and local fixed clock                                                                                                  |
+| `test/unit/app_store_test.dart`         | `test/unit/store.test.js`                                                     | Replacement, persistence, archive/restore, Undo, validation, date filtering, corruption protection, five text sizes and legacy preference |
+| `test/widget/app_flow_test.dart`        | `test/component/app-flow.test.jsx`, `main.test.jsx`, `routes-errors.test.jsx` | Production boot, empty states, add/review/edit, dose Undo/correction, symptoms, summary ranges, unavailable routes and storage errors     |
+| `test/widget/text_size_test.dart`       | `test/component/text-size.test.jsx`, `test/e2e/accessibility.spec.js`         | Five stops, toggle synchronization, persistence, keyboard slider controls and larger browser text                                         |
+| `test/widget/header_clock_test.dart`    | `test/component/header-clock.test.jsx`, `test/e2e/accessibility.spec.js`      | Minute/midnight, resume, locale formatting, timer disposal and enlarged-text layout                                                       |
+| Widget overflow and touch-target checks | `test/e2e/accessibility.spec.js`                                              | All ten screens at 200% on phone/tablet/desktop, horizontal overflow, 48px targets, axe checks and navigation                             |
 
 Review regressions add shared form/store duplicate-time rules, trimmed supply,
 explicit errors for blocked edits, exact raw JSON backup downloads, canceled and
@@ -122,16 +125,16 @@ workflow and reporting helper are unchanged.
 
 Windows, Node.js 22.18.0, npm 10.9.3, Chromium through Playwright:
 
-| Check | Result |
-| --- | --- |
-| ESLint | Passed with no errors or warnings |
-| Unit/component tests | 50 passed across 15 files |
-| Application line coverage | 296 / 296 = **100%** |
-| Statement coverage | 352 / 352 = **100%** |
-| Function coverage | 121 / 121 = **100%** |
-| Branch coverage | 244 / 252 = **96.82%** |
-| Browser tests | 24 passed across phone, tablet and desktop |
-| Production build | Passed |
+| Check                     | Result                                     |
+| ------------------------- | ------------------------------------------ |
+| ESLint                    | Passed with no errors or warnings          |
+| Unit/component tests      | 50 passed across 15 files                  |
+| Application line coverage | 296 / 296 = **100%**                       |
+| Statement coverage        | 352 / 352 = **100%**                       |
+| Function coverage         | 121 / 121 = **100%**                       |
+| Branch coverage           | 244 / 252 = **96.82%**                     |
+| Browser tests             | 24 passed across phone, tablet and desktop |
+| Production build          | Passed                                     |
 
 Automated accessibility checks do not establish WCAG conformance. Native Flutter
 builds, physical devices, VoiceOver/TalkBack and browsers other than Chromium were

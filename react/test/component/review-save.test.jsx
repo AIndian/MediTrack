@@ -5,7 +5,12 @@ import { fresh, medicine } from '../support/fixtures';
 import { renderApp } from '../support/render';
 
 it('continues to saved details after a Review write failure is successfully retried', async () => {
-  const storage = { getItem: () => null, setItem: vi.fn(() => { throw new Error('full'); }) };
+  const storage = {
+    getItem: () => null,
+    setItem: vi.fn(() => {
+      throw new Error('full');
+    }),
+  };
   const store = fresh({ storage });
   const user = userEvent.setup();
   renderApp(store, { pathname: '/medicines/review', state: { draft: medicine } });

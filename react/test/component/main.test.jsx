@@ -5,11 +5,14 @@ import { afterEach, expect, it, vi } from 'vitest';
 const roots = vi.hoisted(() => []);
 vi.mock('react-dom/client', async (importOriginal) => {
   const original = await importOriginal();
-  return { ...original, createRoot: (container) => {
-    const root = original.createRoot(container);
-    roots.push(root);
-    return root;
-  } };
+  return {
+    ...original,
+    createRoot: (container) => {
+      const root = original.createRoot(container);
+      roots.push(root);
+      return root;
+    },
+  };
 });
 
 afterEach(() => {
@@ -22,7 +25,9 @@ it('boots through the production entry point with the real store and hash router
   const container = document.createElement('div');
   container.id = 'root';
   document.body.append(container);
-  await act(async () => { await import('../../src/main.jsx'); });
+  await act(async () => {
+    await import('../../src/main.jsx');
+  });
   expect(screen.getByRole('heading', { name: 'Today', level: 1 })).toBeInTheDocument();
   expect(screen.getByText(/No medicines scheduled today/)).toBeInTheDocument();
   const user = userEvent.setup();

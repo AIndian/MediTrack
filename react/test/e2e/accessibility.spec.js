@@ -6,16 +6,28 @@ import { storageKey } from '../../src/store.js';
 
 test('all ten screens reflow at 200%, have labeled targets, and pass axe checks', async ({ page }, testInfo) => {
   await page.clock.install({ time: new Date('2026-10-08T12:00:00-07:00') });
-  await page.addInitScript(({ medicine, storageKey }) => {
-    localStorage.setItem(storageKey, JSON.stringify({
-      medicines: [medicine], doses: { '2026-10-08|1|08:00': 'Taken' }, textScale: 2,
-      symptoms: [{ name: 'Sample headache', severity: 'Mild', notes: 'Sample notes', date: '2026-10-08T18:00:00.000Z' }],
-    }));
-  }, { medicine, storageKey });
+  await page.addInitScript(
+    ({ medicine, storageKey }) => {
+      localStorage.setItem(
+        storageKey,
+        JSON.stringify({
+          medicines: [medicine],
+          doses: { '2026-10-08|1|08:00': 'Taken' },
+          textScale: 2,
+          symptoms: [
+            { name: 'Sample headache', severity: 'Mild', notes: 'Sample notes', date: '2026-10-08T18:00:00.000Z' },
+          ],
+        }),
+      );
+    },
+    { medicine, storageKey },
+  );
 
   async function checkScreen(title) {
     await expect(page.getByRole('heading', { level: 1, name: title, exact: true })).toBeFocused();
-    const overflow = await page.evaluate(() => Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - innerWidth);
+    const overflow = await page.evaluate(
+      () => Math.max(document.body.scrollWidth, document.documentElement.scrollWidth) - innerWidth,
+    );
     expect(overflow, `${title} must not scroll sideways`).toBeLessThanOrEqual(1);
     if (testInfo.project.name !== 'phone') {
       const labelHeight = await page.getByRole('link', { name: 'Medicines', exact: true }).evaluate((link) => {
@@ -36,9 +48,14 @@ test('all ten screens reflow at 200%, have labeled targets, and pass axe checks'
   }
 
   for (const [route, title] of [
-    ['/', 'Today'], ['/medicines', 'Your medicines'], ['/medicines/1', 'Medicine details'],
-    ['/dose/1/08:00', 'Dose details'], ['/history', 'Dose history'],
-    ['/symptoms', 'Symptoms'], ['/summary', 'Appointment summary'], ['/settings', 'Settings & sharing'],
+    ['/', 'Today'],
+    ['/medicines', 'Your medicines'],
+    ['/medicines/1', 'Medicine details'],
+    ['/dose/1/08:00', 'Dose details'],
+    ['/history', 'Dose history'],
+    ['/symptoms', 'Symptoms'],
+    ['/summary', 'Appointment summary'],
+    ['/settings', 'Settings & sharing'],
     ['/medicines/new', 'Add medicine'],
   ]) {
     await page.goto(`/#${route}`);
@@ -102,10 +119,13 @@ test('browser text settings above 200% are respected without horizontal overflow
 
 test('downloads corrupt data and resets only after confirmation without touching Flutter records', async ({ page }) => {
   const raw = JSON.stringify({ medicines: [medicine], doses: { bad: 'Taken' }, symptoms: [] });
-  await page.addInitScript(({ storageKey, raw }) => {
-    localStorage.setItem(storageKey, raw);
-    localStorage.setItem('meditrack.v1', 'Sample Flutter records');
-  }, { storageKey, raw });
+  await page.addInitScript(
+    ({ storageKey, raw }) => {
+      localStorage.setItem(storageKey, raw);
+      localStorage.setItem('meditrack.v1', 'Sample Flutter records');
+    },
+    { storageKey, raw },
+  );
   await page.goto('/');
   await expect(page.getByRole('alert')).toContainText('Could not load data');
   const [download] = await Promise.all([

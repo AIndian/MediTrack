@@ -9,13 +9,15 @@ are declared in `package.json`. From this directory:
 
 ```sh
 npm ci
+npm run format:check
 npm run lint
 npm run dev
 npm test
 npm run build
 ```
 
-For the full test, coverage, production-build and browser checks, run
+Use `npm run format` to apply the committed Prettier configuration to React files.
+For formatting, lint, tests, coverage, production-build and browser checks, run
 `npx playwright install chromium` once, then `npm run verify`. The coverage gate is
 60% for every metric. Open `coverage/index.html` after `npm run test:coverage`.
 See [testing and Flutter test mapping](TESTING.md) for reports and verified results.
@@ -41,18 +43,18 @@ the browser's UUID API is unavailable. A top-level render-error boundary offers 
 return to Today without clearing stored records. Unsaved form details may need to
 be entered again after a render error.
 
-| Core screen | Route | Source |
-| --- | --- | --- |
-| Today | `#/` | `src/screens/Today.jsx` |
-| Your medicines | `#/medicines` | `src/screens/Medicines.jsx` |
-| Medicine details | `#/medicines/:id` | `src/screens/Medicines.jsx` |
-| Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
-| Review medicine | `#/medicines/review` | `src/screens/MedicineFlow.jsx` |
-| Dose details | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
-| Dose history | `#/history` | `src/screens/Doses.jsx` |
-| Symptoms | `#/symptoms` | `src/screens/More.jsx` |
-| Appointment summary | `#/summary` | `src/screens/More.jsx` |
-| Settings & sharing | `#/settings` | `src/screens/More.jsx` |
+| Core screen         | Route                                     | Source                         |
+| ------------------- | ----------------------------------------- | ------------------------------ |
+| Today               | `#/`                                      | `src/screens/Today.jsx`        |
+| Your medicines      | `#/medicines`                             | `src/screens/Medicines.jsx`    |
+| Medicine details    | `#/medicines/:id`                         | `src/screens/Medicines.jsx`    |
+| Add/edit medicine   | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
+| Review medicine     | `#/medicines/review`                      | `src/screens/MedicineFlow.jsx` |
+| Dose details        | `#/dose/:id/:time`                        | `src/screens/Doses.jsx`        |
+| Dose history        | `#/history`                               | `src/screens/Doses.jsx`        |
+| Symptoms            | `#/symptoms`                              | `src/screens/More.jsx`         |
+| Appointment summary | `#/summary`                               | `src/screens/More.jsx`         |
+| Settings & sharing  | `#/settings`                              | `src/screens/More.jsx`         |
 
 React Context supplies one external store, subscribed through `useSyncExternalStore`.
 React Router supplies routes; components have no separate copies of saved records.

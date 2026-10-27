@@ -27,10 +27,18 @@ test('creates and reloads a medicine on a real insecure HTTP origin', async ({ p
 
 test('recovers from a render failure without clearing saved records', async ({ page }) => {
   const raw = JSON.stringify({ medicines: [medicine], doses: {}, symptoms: [], textScale: 1 });
-  await page.addInitScript(({ raw, storageKey }) => {
-    localStorage.setItem(storageKey, raw);
-    Object.defineProperty(crypto, 'randomUUID', { configurable: true, value: () => { throw new Error('Test ID failure'); } });
-  }, { raw, storageKey });
+  await page.addInitScript(
+    ({ raw, storageKey }) => {
+      localStorage.setItem(storageKey, raw);
+      Object.defineProperty(crypto, 'randomUUID', {
+        configurable: true,
+        value: () => {
+          throw new Error('Test ID failure');
+        },
+      });
+    },
+    { raw, storageKey },
+  );
   await page.goto('/#/medicines/new');
   await expect(page.getByRole('heading', { name: 'This page could not open' })).toBeFocused();
   expect(await page.evaluate((key) => localStorage.getItem(key), storageKey)).toBe(raw);
@@ -47,12 +55,16 @@ test('retains focus after Review retry, history removal, Undo and a second retry
   await page.getByRole('button', { name: 'Review medicine', exact: true }).click();
   await page.evaluate(() => {
     window.originalSetItem = Storage.prototype.setItem;
-    Storage.prototype.setItem = () => { throw new DOMException('Full', 'QuotaExceededError'); };
+    Storage.prototype.setItem = () => {
+      throw new DOMException('Full', 'QuotaExceededError');
+    };
   });
   await page.getByRole('button', { name: 'Save medicine', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Could not save');
   await expect(page.getByRole('heading', { level: 1, name: 'Review medicine' })).toBeVisible();
-  await page.evaluate(() => { Storage.prototype.setItem = window.originalSetItem; });
+  await page.evaluate(() => {
+    Storage.prototype.setItem = window.originalSetItem;
+  });
   await page.getByRole('button', { name: 'Retry saving' }).click();
   await expect(page.getByRole('heading', { level: 1, name: 'Medicine details' })).toBeFocused();
   await page.getByRole('link', { name: 'Today', exact: true }).click();
@@ -64,18 +76,32 @@ test('retains focus after Review retry, history removal, Undo and a second retry
   await expect(page.getByText('Removal undone.', { exact: true })).toBeFocused();
   await page.keyboard.press('Tab');
   await expect(page.getByRole('button', { name: 'Taken', exact: true })).toBeFocused();
-  await page.evaluate(() => { Storage.prototype.setItem = () => { throw new DOMException('Full', 'QuotaExceededError'); }; });
+  await page.evaluate(() => {
+    Storage.prototype.setItem = () => {
+      throw new DOMException('Full', 'QuotaExceededError');
+    };
+  });
   await page.getByRole('button', { name: 'Skipped', exact: true }).click();
-  await page.evaluate(() => { Storage.prototype.setItem = window.originalSetItem; });
+  await page.evaluate(() => {
+    Storage.prototype.setItem = window.originalSetItem;
+  });
   await page.getByRole('button', { name: 'Retry saving' }).click();
   await expect(page.getByText('Changes saved on this device.', { exact: true })).toBeFocused();
 });
 
 test('localizes dates and aligns visual navigation with the tab sequence', async ({ browser }, testInfo) => {
-  const page = await browser.newPage({ locale: 'fr-FR', timezoneId: 'America/Phoenix', viewport: testInfo.project.use.viewport });
+  const page = await browser.newPage({
+    locale: 'fr-FR',
+    timezoneId: 'America/Phoenix',
+    viewport: testInfo.project.use.viewport,
+  });
   try {
     await page.clock.install({ time: new Date('2026-10-08T12:00:00-07:00') });
-    await page.addInitScript((storageKey) => localStorage.setItem(storageKey, JSON.stringify({ medicines: [], doses: {}, symptoms: [], textScale: 2 })), storageKey);
+    await page.addInitScript(
+      (storageKey) =>
+        localStorage.setItem(storageKey, JSON.stringify({ medicines: [], doses: {}, symptoms: [], textScale: 2 })),
+      storageKey,
+    );
     await page.goto('http://127.0.0.1:4173/');
     await expect(page.locator('main .eyebrow time')).toHaveText('jeudi 8 octobre 2026');
     await expect(page.locator('main .eyebrow time')).toHaveAttribute('datetime', '2026-10-08');
