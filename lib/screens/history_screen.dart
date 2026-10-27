@@ -20,7 +20,10 @@ class History extends StatelessWidget {
           children: [
             for (final status in ['Taken', 'Skipped', 'Due'])
               OutlinedButton(
-                onPressed: () => store.record(entry.key, status),
+                onPressed: () {
+                  if (status == 'Due') FocusScope.of(context).previousFocus();
+                  store.record(entry.key, status);
+                },
                 child: Text(status),
               ),
           ],

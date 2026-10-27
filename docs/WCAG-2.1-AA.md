@@ -36,7 +36,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.3.1 | Three Flashes or Below Threshold | A | [x] No flashing media, strobes or flashing animations. | [x] No flashing media or effects; normal Material transitions. | Source review of CSS/widgets/assets; no flashing content introduced. |
 | 2.4.1 | Bypass Blocks | A | [x] Existing skip link focuses main; native main/nav landmarks. | [x] Shared page skip action focuses/scrolls heading; semantic headings support AT bypass. | Keyboard skip tests; screen-reader landmark/heading review pending. |
 | 2.4.2 | Page Titled | A | [x] Page effect sets descriptive document title on every route. | [x] Shared page now sets platform/browser Title and route-name semantics. | Final route-title assertions across screens. |
-| 2.4.3 | Focus Order | A | [ ] Pending | [ ] Pending | Pending |
+| 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; Undo restores focus; removed history entry returns focus to heading. | [x] Widget-order page traversal, page-heading focus, Undo return focus and history traversal before removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
 | 2.4.4 | Link Purpose (In Context) | A | [ ] Pending | [ ] Pending | Pending |
 | 2.4.5 | Multiple Ways | AA | [ ] Pending | [ ] Pending | Pending |
 | 2.4.6 | Headings and Labels | AA | [ ] Pending | [ ] Pending | Pending |

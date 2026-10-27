@@ -45,16 +45,18 @@ export function Status({ value }) {
 export function DoseControls({ doseKey }) {
   const store = useStore();
   const [previous, setPrevious] = useState(null);
+  const takenButton = useRef(null);
   function record(status) {
     setPrevious(store.status(doseKey));
     store.record(doseKey, status);
   }
   return <div className="actions">
-    <button onClick={() => record('Taken')}>Mark Taken</button>
+    <button ref={takenButton} onClick={() => record('Taken')}>Mark Taken</button>
     <button className="secondary" onClick={() => record('Skipped')}>Skip dose</button>
     {previous !== null && <button className="secondary" onClick={() => {
       store.record(doseKey, previous);
       setPrevious(null);
+      takenButton.current.focus();
     }}>Undo last change</button>}
   </div>;
 }

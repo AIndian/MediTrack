@@ -57,7 +57,7 @@ export function History() {
     {history.map(([key, status]) => <Card key={key} label={store.doseLabel(key)}>
       <h2>{store.doseLabel(key)}</h2><Status value={status} />
       <div className="actions inline">{['Taken', 'Skipped', 'Due'].map(value =>
-        <button className="secondary" key={value} onClick={() => store.record(key, value)}>{value}</button>)}</div>
+        <button className="secondary" key={value} onClick={() => { if (value === 'Due') document.querySelector('h1').focus(); store.record(key, value); }}>{value}</button>)}</div>
     </Card>)}
   </Page>;
 }

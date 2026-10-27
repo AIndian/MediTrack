@@ -149,12 +149,25 @@ class _AppPageState extends State<AppPage> {
   }
 
   @override
+  @override
+  void didUpdateWidget(AppPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.title != title) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) focusContent();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) => Title(
     title: '$title · MediTrack',
     color: const Color(0xff075E64),
     child: Scaffold(
     body: SafeArea(
-      child: ListView(
+      child: FocusTraversalGroup(
+        policy: WidgetOrderTraversalPolicy(),
+        child: ListView(
         children: [
           Align(
             alignment: Alignment.centerLeft,
@@ -285,6 +298,7 @@ class _AppPageState extends State<AppPage> {
           ),
         ],
       ),
+    ),
     ),
     ),
   );
