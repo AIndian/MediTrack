@@ -11,6 +11,8 @@ class MediTrack extends StatelessWidget {
     listenable: store,
     builder: (context, _) => MaterialApp(
       title: 'MediTrack',
+      locale: const Locale('en'),
+      supportedLocales: const [Locale('en')],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

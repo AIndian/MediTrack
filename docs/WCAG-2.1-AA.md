@@ -45,7 +45,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.5.2 | Pointer Cancellation | A | [x] Actions use click activation after release; no pointerdown mutations. | [x] Material onPressed fires after successful tap; no down-event writes. | Browser pointer down/move-out/up cancellation E2E; native cancellation check pending. |
 | 2.5.3 | Label in Name | A | [x] Visible text supplies action names; text-size value extends visible label. | [x] Visible labels supply semantic names; slider label contains Text size. | Final role/name assertions; speech-input manual check pending. |
 | 2.5.4 | Motion Actuation | A | [x] N/A: no motion/sensor activation. | [x] N/A: no motion/sensor activation. | Source review; all actions have visible controls. |
-| 3.1.1 | Language of Page | A | [ ] Pending | [ ] Pending | Pending |
+| 3.1.1 | Language of Page | A | [x] HTML host already declares English. | [x] Flutter HTML host now declares English; app explicitly declares supported locale. | Final host/locale assertions. |
 | 3.1.2 | Language of Parts | AA | [ ] Pending | [ ] Pending | Pending |
 | 3.2.1 | On Focus | A | [ ] Pending | [ ] Pending | Pending |
 | 3.2.2 | On Input | A | [ ] Pending | [ ] Pending | Pending |
