@@ -49,7 +49,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 3.1.2 | Language of Parts | AA | [x] English UI; medicine names/user notes have no inferred foreign-language tagging. | [x] Same English UI; user-entered names/notes retain original text. | N/A for authored language changes; proper names/indeterminate language are exempt. Reassess localized content. |
 | 3.2.1 | On Focus | A | [x] Focusing never submits, writes records or navigates. | [x] Same; focus only changes presentation/scroll position. | Final keyboard focus-without-activation tests. |
 | 3.2.2 | On Input | A | [x] Inputs update drafts/preferences; review/save is explicit. | [x] Same; selecting severity/range changes only local content. | Final tests assert drafts do not save before confirmation. |
-| 3.2.3 | Consistent Navigation | AA | [ ] Pending | [ ] Pending | Pending |
+| 3.2.3 | Consistent Navigation | AA | [x] Today, Medicines, History, More retain order/labels on every primary page. | [x] Same destination order across navigation rail and bottom navigation. | Final navigation/orientation tests. |
 | 3.2.4 | Consistent Identification | AA | [ ] Pending | [ ] Pending | Pending |
 | 3.3.1 | Error Identification | A | [ ] Pending | [ ] Pending | Pending |
 | 3.3.2 | Labels or Instructions | A | [ ] Pending | [ ] Pending | Pending |
