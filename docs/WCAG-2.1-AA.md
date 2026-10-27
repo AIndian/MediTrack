@@ -30,7 +30,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.4.13 | Content on Hover or Focus | AA | [x] N/A: no custom hover/focus popovers; content is always available. | [x] No custom hover popovers; BackButton uses platform tooltip behavior. | Keyboard/hover inspection; platform tooltip Escape/hover behavior remains a manual release check. |
 | 2.1.1 | Keyboard | A | [x] Native links, buttons, fields, selects and keyboard-adjustable range. | [x] Material controls; explicit text-size buttons provide keyboard/pointer alternative to slider gestures. | Final keyboard workflows and Flutter focus traversal tests. |
 | 2.1.2 | No Keyboard Trap | A | [x] No custom key suppression or modal focus traps. | [x] Standard Navigator/Material controls; Tab/Shift+Tab and Escape for dropdown. | Final bidirectional keyboard tests; native external-keyboard check pending. |
-| 2.1.4 | Character Key Shortcuts | A | [ ] Pending | [ ] Pending | Pending |
+| 2.1.4 | Character Key Shortcuts | A | [x] N/A: no unmodified character shortcuts. | [x] N/A: no unmodified character shortcuts. | Source review of keyboard handlers. |
 | 2.2.1 | Timing Adjustable | A | [ ] Pending | [ ] Pending | Pending |
 | 2.2.2 | Pause, Stop, Hide | A | [ ] Pending | [ ] Pending | Pending |
 | 2.3.1 | Three Flashes or Below Threshold | A | [ ] Pending | [ ] Pending | Pending |
