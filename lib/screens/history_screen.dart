@@ -12,7 +12,7 @@ class History extends StatelessWidget {
     if (store.history(30).isEmpty) const Text('No doses recorded yet.'),
     for (final entry in store.history(30))
       panel([
-        Text(store.doseLabel(entry.key)),
+        heading(store.doseLabel(entry.key)),
         Text('Status: ${entry.value}'),
         Wrap(
           spacing: 12,

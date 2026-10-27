@@ -17,7 +17,7 @@ class Details extends StatelessWidget {
         panel([
           medicineHeading(m),
           const SizedBox(height: 16),
-          const Text('Instructions you entered'),
+          heading('Instructions you entered'),
           Text(m.instructions.isEmpty ? 'None entered' : m.instructions),
           const SizedBox(height: 16),
           heading('Schedule'),

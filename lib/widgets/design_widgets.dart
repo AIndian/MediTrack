@@ -7,7 +7,7 @@ import '../models/medicine.dart';
 void open(BuildContext context, Widget page) =>
     Navigator.of(context).push(MaterialPageRoute<void>(builder: (_) => page));
 Widget heading(String text) => Semantics(
-  header: true,
+  headingLevel: 2,
   child: Text(
     text,
     style: const TextStyle(
@@ -197,7 +197,7 @@ class AppPage extends StatelessWidget {
                       padding: EdgeInsets.all(wide ? 32 : 20),
                       children: [
                         Semantics(
-                          header: true,
+                          headingLevel: 1,
                           child: Text(
                             title,
                             style: const TextStyle(
