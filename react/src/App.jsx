@@ -1,5 +1,6 @@
 import { Link, NavLink, Route, Routes } from 'react-router-dom';
 import { useStore } from './StoreContext';
+import { StorageNotice } from './components/StorageNotice';
 import { HeaderClock, useCurrentTime } from './components/HeaderClock';
 import { Page } from './components/Page';
 import { Today } from './screens/Today';
@@ -10,7 +11,7 @@ import { Symptoms, Summary, Settings } from './screens/More';
 import './styles.css';
 
 export default function App() {
-  const { store, textScale, error, readOnly } = useStore();
+  const { store, textScale } = useStore();
   const date = useCurrentTime(store.now);
   return <div className="app" style={{ '--text-scale': textScale }}>
     <a className="skip-link" href="#main" onClick={(event) => { event.preventDefault(); document.getElementById('main').focus(); }}>Skip to content</a>
@@ -21,10 +22,7 @@ export default function App() {
       </Link>
       <HeaderClock date={date} />
     </header>
-    {error && <div className="storage-error" role="alert">
-      <p>{error}</p>
-      {!readOnly && <button onClick={() => store.save()}>Retry saving</button>}
-    </div>}
+    <StorageNotice />
     <div className="app-layout">
       <nav className="primary-nav" aria-label="Main navigation">
         <NavLink to="/" end>Today</NavLink>

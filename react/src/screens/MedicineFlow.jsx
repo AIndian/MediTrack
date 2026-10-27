@@ -39,7 +39,7 @@ function MedicineEditor({ medicine }) {
     }
     navigate('/medicines/review', { state: { formPath, draft: {
       ...draft, name: values.name.trim(), strength: values.strength.trim(), instructions: values.instructions.trim(),
-      times: [...new Set(values.times.split(',').map((time) => time.trim()))].sort(), supply: Number(values.supply),
+      times: values.times.split(',').map((time) => time.trim()).sort(), supply: Number(values.supply.trim()),
     } } });
   }
   return <Page title={medicine ? 'Edit medicine' : 'Add medicine'} backTo={backTo}>

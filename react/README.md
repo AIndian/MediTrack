@@ -50,6 +50,27 @@ It validates saved records, protects unreadable data from overwrite, and retains
 in-memory changes with a retry action when persistence fails. Dates use the browser's
 local calendar. Date ranges exclude future records.
 
+Form and store validation share the daily-time and supply rules. Duplicate times are
+rejected after trimming; supply input accepts surrounding whitespace. A read-only
+store throws an explicit error if a caller attempts to edit it. A failed storage
+write returns `false`, keeps the changes in memory and shows the retry action.
+
+If one saved record is invalid, the recovery notice offers **Download saved JSON**
+and **Reset saved data**. The download preserves the exact original text, including
+invalid entries. Reset requires confirmation and removes only `meditrack.react.v1`;
+canceling or a storage failure preserves the original. If another tab changed the
+saved data, reload before resetting. When storage cannot be read at all, recovery
+controls stay disabled until access is restored. Download the backup before reset;
+reset cannot restore the deleted records.
+
+`.github/dependabot.yml` schedules weekly npm and GitHub Actions update PRs once
+merged into the repository's default branch; exact versions remain committed.
+The existing root `analysis_options.yaml` and Flutter CI check Dart with
+`flutter analyze`. They do not lint React JavaScript; React verification currently
+uses tests, coverage (in the third PR), and a production build.
+The foundation PR runs its React tests and build in `.github/workflows/react.yml`;
+the third PR expands that workflow with coverage and browser checks.
+
 Prototype only: use sample information. Browser storage is unencrypted. Notifications,
 cloud sync, external sharing and caregiver access are unavailable. Multiple simultaneous
 tabs are not supported; use one tab to avoid competing writes. Offline-capable storage

@@ -51,9 +51,9 @@ app.*.map.json
 # Generated reports; publish through CI artifacts instead.
 /reports/
 __pycache__/
-.env
-.env.*
+.env*
 !.env.example
+*.local
 *.p12
 *.mobileprovision
 

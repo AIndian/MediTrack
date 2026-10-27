@@ -1,0 +1,36 @@
+name: React checks
+
+on:
+  push:
+    branches: [main]
+    paths: ['react/**', '.github/workflows/react.yml', '.github/dependabot.yml']
+  pull_request:
+    paths: ['react/**', '.github/workflows/react.yml', '.github/dependabot.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: react-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: react
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.18.0'
+          cache: npm
+          cache-dependency-path: react/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
