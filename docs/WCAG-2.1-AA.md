@@ -46,7 +46,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.5.3 | Label in Name | A | [x] Visible text supplies action names; text-size value extends visible label. | [x] Visible labels supply semantic names; slider label contains Text size. | Final role/name assertions; speech-input manual check pending. |
 | 2.5.4 | Motion Actuation | A | [x] N/A: no motion/sensor activation. | [x] N/A: no motion/sensor activation. | Source review; all actions have visible controls. |
 | 3.1.1 | Language of Page | A | [x] HTML host already declares English. | [x] Flutter HTML host now declares English; app explicitly declares supported locale. | Final host/locale assertions. |
-| 3.1.2 | Language of Parts | AA | [ ] Pending | [ ] Pending | Pending |
+| 3.1.2 | Language of Parts | AA | [x] English UI; medicine names/user notes have no inferred foreign-language tagging. | [x] Same English UI; user-entered names/notes retain original text. | N/A for authored language changes; proper names/indeterminate language are exempt. Reassess localized content. |
 | 3.2.1 | On Focus | A | [ ] Pending | [ ] Pending | Pending |
 | 3.2.2 | On Input | A | [ ] Pending | [ ] Pending | Pending |
 | 3.2.3 | Consistent Navigation | AA | [ ] Pending | [ ] Pending | Pending |
