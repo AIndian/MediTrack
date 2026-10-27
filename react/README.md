@@ -13,6 +13,11 @@ npm test
 npm run build
 ```
 
+For the full test, coverage, production-build and browser checks, run
+`npx playwright install chromium` once, then `npm run verify`. The coverage gate is
+60% for every metric. Open `coverage/index.html` after `npm run test:coverage`.
+See [testing and Flutter test mapping](TESTING.md) for reports and verified results.
+
 Open the local URL printed by Vite. Start with **Add medicine**, enter sample details,
 then review and save. Today supports Taken, Skip and Undo; History supports corrections.
 More opens symptoms, appointment summaries and text-size settings. Hash URLs support

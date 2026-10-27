@@ -1,0 +1,62 @@
+name: React checks
+
+on:
+  push:
+    branches: [main]
+    paths: ['react/**', '.github/workflows/react.yml']
+  pull_request:
+    paths: ['react/**', '.github/workflows/react.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: react-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: react
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22.18.0'
+          cache: npm
+          cache-dependency-path: react/package-lock.json
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Tests, 60% coverage gate, production build and browser checks
+        run: npm run verify
+      - name: Upload React coverage
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: react-coverage
+          path: react/coverage/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload browser reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: react-browser-checks
+          path: |
+            react/playwright-report/
+            react/test-results/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload React web build
+        uses: actions/upload-artifact@v7
+        with:
+          name: meditrack-react-web
+          path: react/dist/
+          if-no-files-found: error
+          retention-days: 14

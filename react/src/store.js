@@ -79,6 +79,7 @@ export class AppStore {
     return () => this.listeners.delete(listener);
   };
 
+  // shortcut: single-tab writes only; reconcile storage events before supporting multiple tabs.
   save(changes = {}) {
     if (this.state.readOnly) return false;
     this.state = { ...this.state, ...changes, error: null };

@@ -17,7 +17,7 @@ p { margin: .6em 0 1em; }
 .brand { display: inline-flex; align-items: center; gap: .6em; font-size: 1.35em; font-weight: 750; text-decoration: none; min-height: 3rem; }
 .brand svg { width: 1.5em; height: 1.7em; flex-shrink: 0; fill: #e8f3f1; stroke: #075e64; stroke-width: 2; }
 .header-clock { margin-left: auto; color: #075e64; font-weight: 650; text-align: right; }
-.app-layout { max-width: 95rem; margin: 0 auto; display: grid; grid-template-columns: 12.8rem minmax(0, 1fr); min-height: 75vh; }
+.app-layout { max-width: 95rem; margin: 0 auto; display: grid; grid-template-columns: minmax(12.8rem, 8em) minmax(0, 1fr); min-height: 75vh; }
 .primary-nav { background: white; padding: 1rem; display: flex; flex-direction: column; gap: .6rem; }
 .primary-nav a { padding: .8em .5em; min-height: 3rem; border-radius: .7rem; text-decoration: none; color: #52686c; text-align: center; }
 .primary-nav a.active { background: #e8f3f1; color: #075e64; font-weight: 700; }
