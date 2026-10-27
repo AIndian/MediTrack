@@ -9,10 +9,10 @@ export function Dose() {
   const { store, medicines } = useStore();
   const medicine = medicines.find((m) => m.id === id);
   if (!medicine || medicine.archived || !medicine.times.includes(time)) {
-    return <Page title="Medication reminder" backTo="/"><p>This dose is no longer scheduled. Review your current medicines.</p><Link to="/medicines">Your medicines</Link></Page>;
+    return <Page title="Dose details" backTo="/"><p>This dose is no longer scheduled. Review your current medicines.</p><Link to="/medicines">Your medicines</Link></Page>;
   }
   const key = store.doseKey(medicine, time);
-  return <Page title="Medication reminder" backTo="/">
+  return <Page title="Dose details" backTo="/">
     <article className="card emphasis"><MedicineHeading medicine={medicine} />
       <p className="dose-time">{store.day} at {time}</p><p>{medicine.instructions || 'No instructions entered.'}</p>
       <DoseControls key={key} doseKey={key} />

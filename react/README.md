@@ -26,7 +26,7 @@ browser Back/Forward and direct links without server rewrite rules.
 | Medicine details | `#/medicines/:id` | `src/screens/Medicines.jsx` |
 | Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
 | Review medicine | `#/medicines/review` | `src/screens/MedicineFlow.jsx` |
-| Medication reminder | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
+| Dose details | `#/dose/:id/:time` | `src/screens/Doses.jsx` |
 | Dose history | `#/history` | `src/screens/Doses.jsx` |
 | Symptoms | `#/symptoms` | `src/screens/More.jsx` |
 | Appointment summary | `#/summary` | `src/screens/More.jsx` |
