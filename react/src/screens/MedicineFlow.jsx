@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '../StoreContext';
-import { validateMedicine } from '../store';
+import { createMedicineId, validateMedicine } from '../store';
 import { MedicineHeading, Page } from '../components/Page';
 
 const fields = [
@@ -24,7 +24,7 @@ function MedicineEditor({ medicine }) {
   const { readOnly } = useStore();
   const { state } = useLocation();
   const navigate = useNavigate();
-  const [draft] = useState(() => state?.draft ?? medicine ?? { id: crypto.randomUUID(), name: '', strength: '', instructions: '', times: ['08:00'], supply: 30, archived: false });
+  const [draft] = useState(() => state?.draft ?? medicine ?? { id: createMedicineId(), name: '', strength: '', instructions: '', times: ['08:00'], supply: 30, archived: false });
   const [values, setValues] = useState(() => ({ ...draft, times: draft.times.join(', '), supply: String(draft.supply) }));
   const [errors, setErrors] = useState({});
   const formPath = medicine ? `/medicines/${encodeURIComponent(medicine.id)}/edit` : '/medicines/new';
