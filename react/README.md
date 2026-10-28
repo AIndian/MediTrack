@@ -1,123 +1,110 @@
-# MediTrack React
+# MediTrack for React
 
-Separate React web implementation. The Flutter app and its records are unchanged.
-Use fictional sample information: browser storage is unencrypted.
+A separate browser implementation of the existing Flutter prototype. Flutter sources,
+tests, platform projects and design references remain in place. React uses its own
+`meditrack.react.v1` browser-storage key; it does not read or migrate Flutter records.
 
-Requires Node.js 22.12+ and Python 3.10+ (for the shared coverage reporter).
+Use Node.js **22.22.2**, the version used in CI. Other compatible runtime ranges
+are declared in `package.json`. From this directory:
 
 ```sh
-cd react
-npm ci
-npx playwright install chromium
+npm ci --engine-strict
+npm run format:check
+npm run lint
 npm run dev
+npm test
+npm run build
 ```
 
-```sh
-npm run test:unit
-npm run test:widget
-npm run test:browser
-npm run verify
-```
+Use `npm run format` to apply the committed Prettier configuration to React files.
+For formatting, lint, tests, coverage, production-build and browser checks, run
+`npx --no-install playwright install chromium` once, then `npm run verify`. The coverage gate is
+60% for every metric. Open `coverage/index.html` after `npm run test:coverage`.
+See [testing and Flutter test mapping](TESTING.md) for reports and verified results.
 
-`verify` runs tests, requires at least 60% lines, statements, branches and
-functions across every JavaScript/JSX file under `src/`, builds `dist/`, then
-checks real Chromium layouts on phone/tablet in portrait/landscape at 100/200%
-text. Browser tests also verify minimum target sizes, input labels and local
-workflows while the loaded app has no network connection.
-It also runs `python ../tool/coverage_report.py --react`, reusing the Flutter
-report helper, and checks that helper against synthetic Flutter and React LCOV.
-Open `reports/coverage.html` for the shared line-by-line report, or
-`coverage/index.html` for Vitest's interactive report. `coverage/lcov.info` and
-`coverage/coverage-summary.json` support other reporting tools. Dependencies are
-pinned in `package-lock.json`; generated outputs are ignored by Git.
+Open the local URL printed by Vite. Start with **Add medicine**, enter sample details,
+then review and save. Today supports Taken, Skip and Undo; History supports corrections.
+More opens symptoms, appointment summaries and text-size settings. Hash URLs support
+browser Back/Forward and direct links without server rewrite rules.
 
-The store mirrors Flutter's local-first operations with React's
-`useSyncExternalStore`. It uses the separate key `meditrack.react.v1` and starts
-empty. Corrupt or unavailable storage shows an error and is never overwritten.
-Failed writes retain the in-memory records and show an error; retry the action
-after storage becomes available. No server, accounts, notifications or sharing
-are connected.
+History shows recent days first, then times in chronological order and medicine
+names alphabetically. Clearing an entry with Due offers **Undo last removal** and
+moves keyboard focus to that action. Successful storage retries announce confirmation;
+a pending Review save continues to medicine details when the retry succeeds.
 
-The unit suite ports `test/unit/app_store_test.dart` and reuses its fictional
-medicine and fixed local clock. It also tests validation, failed writes, local
-midnight, future-record filtering and isolation from Flutter storage.
+Today localizes its date using your browser preference. Past unrecorded slots say
+**Not recorded yet**; **Next dose** is reserved for an upcoming slot. Appointment
+summaries show Taken/Skipped counts separately from a clearly labeled estimate of
+scheduled doses. That estimate applies the current active routine throughout the
+selected range; historical schedule changes and medicine start dates are not tracked.
 
-## Screens and navigation
+Medicine creation supports plain-HTTP phone/LAN testing by using random bytes when
+the browser's UUID API is unavailable. A top-level render-error boundary offers a
+return to Today without clearing stored records. Unsaved form details may need to
+be entered again after a render error.
 
-Hash URLs work on ordinary static hosting without server route rewrites.
-Navigation uses labeled links and browser Back/Forward; secondary screens have
-a Back button. Forms preserve their draft while moving between entry and review.
-The header clock follows local minutes, midnight and browser resume. Today rolls
-over to the next date without reusing yesterday's dose statuses.
+| Core screen         | Route                                     | Source                         |
+| ------------------- | ----------------------------------------- | ------------------------------ |
+| Today               | `#/`                                      | `src/screens/Today.jsx`        |
+| Your medicines      | `#/medicines`                             | `src/screens/Medicines.jsx`    |
+| Medicine details    | `#/medicines/:id`                         | `src/screens/Medicines.jsx`    |
+| Add/edit medicine   | `#/medicines/new`, `#/medicines/:id/edit` | `src/screens/MedicineFlow.jsx` |
+| Review medicine     | `#/medicines/review`                      | `src/screens/MedicineFlow.jsx` |
+| Dose details        | `#/dose/:id/:time`                        | `src/screens/Doses.jsx`        |
+| Dose history        | `#/history`                               | `src/screens/Doses.jsx`        |
+| Symptoms            | `#/symptoms`                              | `src/screens/More.jsx`         |
+| Appointment summary | `#/summary`                               | `src/screens/More.jsx`         |
+| Settings & sharing  | `#/settings`                              | `src/screens/More.jsx`         |
 
-| Existing Flutter screen | React route | Implementation |
-|---|---|---|
-| Today | `#/` | `src/routine-screens.jsx` |
-| Medicines | `#/medicines` | `src/medicine-screens.jsx` |
-| Medicine details | `#/medicines/:id` | `src/medicine-screens.jsx` |
-| Add/edit medicine | `#/medicines/new`, `#/medicines/:id/edit` | `src/medicine-screens.jsx` |
-| Review medicine | Add/edit URL plus `/review` | `src/medicine-screens.jsx` |
-| Medication reminder | `#/dose/:id/:time` | `src/routine-screens.jsx` |
-| Dose history | `#/history` | `src/routine-screens.jsx` |
-| Symptoms | `#/symptoms` | `src/routine-screens.jsx` |
-| Appointment summary | `#/summary` | `src/routine-screens.jsx` |
-| Settings & sharing | `#/more` | `src/routine-screens.jsx` |
+React Context supplies one external store, subscribed through `useSyncExternalStore`.
+React Router supplies routes; components have no separate copies of saved records.
+Draft medicine details stay in navigation state until explicitly saved. The shared
+page focuses its heading after navigation and sets the document title. Forms use
+visible labels, linked error messages and first-error focus. Buttons have at least
+48px targets (primary actions 56px), and the layout reflows at enlarged text sizes.
+Phone navigation appears above content so its visual, reading and keyboard order
+agree; wider screens retain the navigation rail.
+The live clock follows browser locale, refreshes on resume and updates the schedule
+at midnight. It is readable by screen readers without announcing every minute.
 
-`src/components.jsx` adapts the existing `AppPage`, panel, medicine heading,
-badge, dose controls and header clock into shared React components. `src/App.jsx`
-owns navigation and subscribes to `AppStore`; screens call the same store
-operations as their Flutter counterparts. No extra state-management library is
-needed. The existing HTML palette, typography, card/button shapes, 205px rail,
-700px breakpoint and large-text reflow are retained. `public/favicon.png` is
-copied byte-for-byte from the existing `web/favicon.png`.
+The palette, cards and typography follow `docs/design/reference/index.html` and the
+Flutter app's documented adaptations. This is a responsive React web implementation,
+not React Native. It does not change or merge the separate teammate React Native PRs.
 
-## Test copy and verified results
+The header uses the same Material `health_and_safety_outlined` glyph and teal color
+as Flutter. Its Apache 2.0 license is included in `public/material-icons-LICENSE.txt`.
+The browser favicon is copied byte-for-byte from Flutter's `web/favicon.png`.
 
-| Existing tests | React copy |
-|---|---|
-| `test/unit/app_store_test.dart` | `test/unit/app_store.test.js`, `test/unit/medicine.test.js` |
-| `test/widget/app_flow_test.dart` | `test/widget/app_flow.test.jsx`, `test/widget/startup.test.jsx` |
-| `test/widget/header_clock_test.dart` | `test/widget/header_clock.test.jsx`, browser layout checks |
-| `test/widget/text_size_test.dart` | Text slider/toggle in `app_flow.test.jsx`, browser reflow tests |
-| Mobile target-size and enlarged-text checks | `test/browser/accessibility.spec.js` |
-| `test/support/fixtures.dart` | `test/support/fixtures.js` (same fictional medicine and fixed local date) |
+The store ports medicine replacement, archive/restore, daily dose records, Undo,
+symptoms, date filters and five persisted text sizes from `lib/state/app_store.dart`.
+It validates saved records, protects unreadable data from overwrite, and retains
+in-memory changes with a retry action when persistence fails. Dates use the browser's
+local calendar. Date ranges exclude future records.
 
-Verified on Windows with Node.js 22.18.0 and Python 3.13 on October 19, 2026:
+Form and store validation share the daily-time and supply rules. Duplicate times are
+rejected after trimming; supply input accepts surrounding whitespace. A read-only
+store throws an explicit error if a caller attempts to edit it. A failed storage
+write returns `false`, keeps the changes in memory and shows the retry action.
 
-- 36 unit/component tests passed, including the production entry point.
-- All 7 application JS/JSX files are included: 229/229 lines (100%),
-  99.63% statements, 99.06% branches and 99.11% functions.
-- 9 Chromium tests passed: 11 screens/states × 4 phone/tablet orientation sizes
-  × 2 text sizes = 88 layout checks, plus an offline/persistence workflow.
-- No horizontal page overflow; tested controls meet 48×48px targets and all
-  inputs have labels. A sample phone screenshot is generated at
-  `reports/react-phone.png` and was visually inspected.
-- The shared reporter's Flutter and React paths pass its regression test.
-- The production build passed. `npm audit` reported no known vulnerabilities
-  in the installed dependency tree at verification time.
+If one saved record is invalid, the recovery notice offers **Download saved JSON**
+and **Reset saved data**. The download preserves the exact original text, including
+invalid entries. Reset requires confirmation and removes only `meditrack.react.v1`;
+canceling or a storage failure preserves the original. If another tab changed the
+saved data, reload before resetting. When storage cannot be read at all, recovery
+controls stay disabled until access is restored. Download the backup before reset;
+reset cannot restore the deleted records.
 
-The separate `.github/workflows/react.yml` runs locked installation, coverage,
-the shared reporter, a production build and Chromium tests, then uploads React
-reports and build artifacts. The Flutter workflow is retained.
+`.github/dependabot.yml` schedules weekly npm and GitHub Actions update PRs once
+merged into the repository's default branch; exact versions remain committed.
+The existing root `analysis_options.yaml` and Flutter CI check Dart with
+`flutter analyze`. React uses `eslint.config.js` with recommended JavaScript and
+React Hooks rules across application code, and JavaScript checks across tests and
+configuration. Generated builds, reports and dependencies are ignored. Run
+`npm run lint`; any error or warning fails the command.
+The foundation PR runs lint, React tests and build in `.github/workflows/react.yml`;
+the third PR expands that workflow with coverage and browser checks.
 
-## Limits
-
-This is a React web prototype, matching the current Flutter prototype's scope.
-It is not React Native. Notifications, voice reminders, cloud sync, caregiver
-permissions and external sharing remain unavailable. Low supply is a recorded
-value, not an automatically decremented inventory. Only Taken/Skipped are
-recorded; no automatic Missed-dose rule is invented. Allergies and medication
-changes are not tracked. Archive/restore preserves dose history.
-
-Core workflows work without a network once the app is loaded. Offline startup
-and reload are not guaranteed: no service worker is installed. Browser storage
-can be cleared by the browser and is unencrypted; use sample data only. There
-is no automatic migration or shared database between Flutter and React.
-
-Relative text sizes respect browser text preferences and zoom. Automated checks
-cover Chromium, not Safari/Firefox, native VoiceOver/TalkBack, real devices, or
-a complete accessibility audit. Line coverage does not prove visual or clinical
-correctness. Flutter tests/builds were not rerun because the Flutter SDK is not
-installed in this workspace; its application sources and tests are unchanged.
-
-See [the small PR sequence](../docs/REACT_PR_PLAN.md) for staged publishing.
+Prototype only: use sample information. Browser storage is unencrypted. Notifications,
+cloud sync, external sharing and caregiver access are unavailable. Multiple simultaneous
+tabs are not supported; use one tab to avoid competing writes. Offline-capable storage
+does not mean the app shell is installable or available offline after a fresh reload.
