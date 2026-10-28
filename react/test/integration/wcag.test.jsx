@@ -1,62 +1,58 @@
-import { act, fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, expect, it, vi } from 'vitest';
-import App from '../../src/App';
-import { HeaderClock } from '../../src/components';
-import { fresh, med } from '../support/fixtures';
+import { fresh, medicine } from '../support/fixtures';
+import { renderApp } from '../support/render';
 
 afterEach(() => vi.useRealTimers());
 
 it('keeps the day current while clock updates are paused and resumes the display', () => {
   vi.useFakeTimers();
-  let time = new Date(2026, 9, 8, 23, 59);
-  const onDayChange = vi.fn();
-  render(<HeaderClock now={() => time} onDayChange={onDayChange} locale="en-GB" hour12={false} />);
+  let date = new Date(2026, 9, 8, 23, 59);
+  const store = fresh({ clock: () => date });
+  renderApp(store);
+  const before = date.toISOString();
   fireEvent.click(screen.getByRole('button', { name: 'Pause clock updates' }));
-  time = new Date(2026, 9, 9, 0, 1);
+  date = new Date(2026, 9, 9, 0, 1);
   act(() => vi.advanceTimersByTime(2000));
-  expect(screen.getByLabelText('Paused time: 23:59')).toBeVisible();
-  expect(onDayChange).toHaveBeenLastCalledWith('2026-10-09');
-  expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true');
-  fireEvent.click(screen.getByRole('button'));
-  act(() => vi.advanceTimersByTime(1000));
-  expect(screen.getByLabelText('Current time: 00:01')).toBeVisible();
+  expect(screen.getByLabelText(/Paused time:/)).toHaveAttribute('datetime', before);
+  expect(store.day).toBe('2026-10-09');
+  expect(screen.getByText(/Your daily routine/).querySelector('time')).toHaveAttribute('datetime', '2026-10-09');
+  expect(screen.getByRole('button', { name: 'Pause clock updates' })).toHaveAttribute('aria-pressed', 'true');
+  fireEvent.click(screen.getByRole('button', { name: 'Pause clock updates' }));
+  expect(screen.getByLabelText(/Current time:/)).toHaveAttribute('datetime', date.toISOString());
 });
 
-it('keeps Undo and removed-history focus on surviving controls and announces corrections', async () => {
+it('keeps Undo focus on surviving controls and preserves the newer history removal recovery', async () => {
   const store = fresh();
-  store.put(med);
-  window.history.replaceState(null, '', '/#/dose/1/08:00');
+  store.put(medicine);
   const user = userEvent.setup();
-  render(<App store={store} />);
+  renderApp(store, '/dose/1/08:00');
   await user.click(screen.getByRole('button', { name: 'Mark Taken' }));
   await user.click(screen.getByRole('button', { name: 'Undo last change' }));
   expect(screen.getByRole('button', { name: 'Mark Taken' })).toHaveFocus();
   await user.click(screen.getByRole('button', { name: 'Mark Taken' }));
-  window.location.hash = '#/history';
-  const heading = await screen.findByRole('heading', { name: 'Dose history', level: 1 });
-  const entry = screen.getByRole('region', { name: store.doseLabel(store.doseKey(med, '08:00')) });
+  await user.click(screen.getByRole('link', { name: 'History', exact: true }));
+  const entry = screen.getByRole('article', { name: store.doseLabel(store.doseKey(medicine, '08:00')) });
   await user.click(within(entry).getByRole('button', { name: 'Due' }));
-  expect(heading).toHaveFocus();
-  expect(screen.getByRole('status')).toHaveTextContent(`${store.doseLabel(store.doseKey(med, '08:00'))}: Due`);
-  expect(fresh({ storage: store.storage }).history(30)).toEqual([]);
+  expect(screen.getByRole('button', { name: 'Undo last removal' })).toHaveFocus();
+  expect(screen.getByRole('status')).toHaveTextContent('Record cleared');
+  expect(fresh().history(30)).toEqual([]);
 });
 
-it('exposes required fields, keeps invalid drafts and allows keyboard error recovery', async () => {
-  window.history.replaceState(null, '', '/#/medicines/new');
+it('exposes required fields, focuses invalid input and preserves unsaved drafts', async () => {
   const store = fresh();
   const user = userEvent.setup();
-  render(<App store={store} />);
+  renderApp(store, '/medicines/new');
   await user.click(screen.getByRole('button', { name: 'Review medicine' }));
-  expect(screen.getByRole('alert')).toHaveFocus();
-  await user.tab();
-  expect(screen.getByRole('link', { name: 'Enter a medicine name' })).toHaveFocus();
-  await user.keyboard('{Enter}');
-  const name = screen.getByLabelText('Medicine name');
+  const name = screen.getByLabelText('Medicine name', { exact: true });
   expect(name).toHaveFocus();
   expect(name).toBeRequired();
-  expect(name).toHaveAccessibleDescription('Enter a medicine name');
+  expect(name).toHaveAccessibleDescription('Please enter a medicine name');
   expect(screen.getByLabelText('Instructions (optional)')).not.toBeRequired();
-  await user.type(name, med.name);
+  await user.type(name, medicine.name);
+  await user.click(screen.getByRole('button', { name: 'Review medicine' }));
+  expect(screen.getByLabelText('Strength / dosage', { exact: true })).toHaveFocus();
+  expect(name).toHaveValue(medicine.name);
   expect(store.active).toEqual([]);
 });
