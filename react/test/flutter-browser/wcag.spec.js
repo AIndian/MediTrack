@@ -39,15 +39,14 @@ async function fill(page, name, value) {
 }
 async function tabTo(page, role, name) {
   const target = page.getByRole(role, { name, exact: true });
+  if (await target.and(page.locator(':focus')).count()) return;
   for (let count = 0; count < 60; count++) {
     await page.keyboard.press('Tab');
-    if (await target.count()) {
-      try {
-        await expect(target).toBeFocused({ timeout: 500 });
-        return;
-      } catch {
-        /* Continue traversal. */
-      }
+    try {
+      await expect(target).toBeFocused({ timeout: 500 });
+      return;
+    } catch {
+      /* Wait for Flutter focus and scroll updates even when semantics are clipped. */
     }
   }
   throw new Error(`Keyboard could not reach ${name}`);
