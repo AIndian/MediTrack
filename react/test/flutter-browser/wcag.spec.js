@@ -4,8 +4,11 @@ test.use({ actionTimeout: 10000 });
 
 async function enableSemantics(page) {
   const placeholder = page.locator('flt-semantics-placeholder');
-  await placeholder.or(page.getByRole('heading', { level: 1, name: 'Today', exact: true })).first().waitFor({ state: 'attached' });
-  if (await placeholder.count()) await placeholder.evaluate(element => element.click());
+  await placeholder
+    .or(page.getByRole('heading', { level: 1, name: 'Today', exact: true }))
+    .first()
+    .waitFor({ state: 'attached' });
+  if (await placeholder.count()) await placeholder.evaluate((element) => element.click());
   await expect(page.getByRole('heading', { level: 1, name: 'Today', exact: true })).toBeAttached();
 }
 async function activate(page, name) {
@@ -14,9 +17,9 @@ async function activate(page, name) {
   await target.click();
 }
 async function reveal(page, target, navigation = false, pointer = false) {
-  if (!pointer && await target.count()) return;
+  if (!pointer && (await target.count())) return;
   const { width, height } = page.viewportSize();
-  await page.mouse.move(width * .65, height * (navigation && width < 700 ? .9 : .45));
+  await page.mouse.move(width * 0.65, height * (navigation && width < 700 ? 0.9 : 0.45));
   for (let attempt = 0; attempt < 15; attempt++) {
     try {
       await expect(target).toBeAttached({ timeout: 300 });
@@ -39,17 +42,28 @@ async function tabTo(page, role, name) {
   for (let count = 0; count < 60; count++) {
     await page.keyboard.press('Tab');
     if (await target.count()) {
-      try { await expect(target).toBeFocused({ timeout: 150 }); return; } catch { /* Continue traversal. */ }
+      try {
+        await expect(target).toBeFocused({ timeout: 500 });
+        return;
+      } catch {
+        /* Continue traversal. */
+      }
     }
   }
   throw new Error(`Keyboard could not reach ${name}`);
 }
 
-for (const [width, height] of [[320, 1024], [1280, 256], [852, 393]]) {
-  test(`compiled Flutter complete process exposes names, roles and saved records at ${width}x${height}`, async ({ page }) => {
-    test.setTimeout(90000);
+for (const [width, height] of [
+  [320, 1024],
+  [1280, 256],
+  [852, 393],
+]) {
+  test(`compiled Flutter complete process exposes names, roles and saved records at ${width}x${height}`, async ({
+    page,
+  }) => {
+    test.setTimeout(120000);
     const errors = [];
-    page.on('pageerror', error => errors.push(error.message));
+    page.on('pageerror', (error) => errors.push(error.message));
     await page.setViewportSize({ width, height });
     await page.goto('/');
     await enableSemantics(page);

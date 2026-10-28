@@ -1,6 +1,6 @@
 # WCAG 2.1 Level AA checklist
 
-Scope: all screens and complete medicine, dose, history, symptom, summary and settings processes in `react/src/` and `lib/`, including the React and Flutter web hosts. Baseline: `8c267ef`. Assessment date: 2026-10-27.
+Scope: all screens and complete medicine, dose, history, symptom, summary and settings processes in `react/src/` and `lib/`, including the React and Flutter web hosts. Implementation baseline: `8c267ef`; integrated with main `972bcb7` for the pull request. Assessment date: 2026-10-27.
 
 Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA includes every A and AA criterion below. Each criterion has its own `a11y(SC)` commit covering both implementations; existing behavior and non-applicability receive evidence-only commits. No unnecessary feature is added for absent media, sensors, authentication or personal-profile fields.
 
@@ -36,7 +36,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.3.1 | Three Flashes or Below Threshold | A | [x] No flashing media, strobes or flashing animations. | [x] No flashing media or effects; normal Material transitions. | Source review of CSS/widgets/assets; no flashing content introduced. |
 | 2.4.1 | Bypass Blocks | A | [x] Existing skip link focuses main; native main/nav landmarks. | [x] Shared page skip action focuses/scrolls heading; individual semantic text nodes preserve reading order. | Keyboard skip tests; screen-reader landmark/heading review pending. |
 | 2.4.2 | Page Titled | A | [x] Page effect sets descriptive document title on every route. | [x] Shared page now sets platform/browser Title and route-name semantics. | Final route-title assertions across screens. |
-| 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; Undo restores focus; removed history entry returns focus to heading. | [x] Widget-order shell/page traversal, page-heading focus, Undo return focus and a persistent focused history result after removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
+| 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; dose Undo restores focus; history removal focuses persistent Undo, and its reversal focuses the result. | [x] Widget-order shell/page traversal, page-heading focus, Undo return focus and a persistent focused history result after removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
 | 2.4.4 | Link Purpose (In Context) | A | [x] Open links include medicine/time; other links describe destinations. | [x] Open actions use medicine/time; Back and destination labels remain descriptive. | Accessible-name and workflow assertions. |
 | 2.4.5 | Multiple Ways | AA | [x] Main navigation plus contextual Today/history, Medicines/detail, and More/summary/symptom routes. | [x] Main destinations plus contextual Today history/symptom/summary actions. | Forms/review are process steps; final workflows cover alternate entry routes. |
 | 2.4.6 | Headings and Labels | AA | [x] One page h1, descriptive section headings and explicit labels. | [x] Page/section heading levels and wrapping, programmatic field labels. | Final DOM/semantics assertions; human heading review pending. |
@@ -51,10 +51,10 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 3.2.2 | On Input | A | [x] Inputs update drafts/preferences; review/save is explicit. | [x] Same; selecting severity/range changes only local content. | Final tests assert drafts do not save before confirmation. |
 | 3.2.3 | Consistent Navigation | AA | [x] Today, Medicines, History, More retain order/labels on every primary page. | [x] Same destination order across navigation rail and bottom navigation. | Final navigation/orientation tests. |
 | 3.2.4 | Consistent Identification | AA | [x] Shared Field, DoseControls, Status and medicine/action labels. | [x] Shared design widgets, badge and DoseControls with matching action names. | Review shared components and complete-process tests. |
-| 3.3.1 | Error Identification | A | [x] Existing focused error summary links to aria-invalid/described fields. | [x] Validation focuses/scrolls first invalid field; native errors remain programmatic. | Existing validation tests plus final focus/error integration cases. |
+| 3.3.1 | Error Identification | A | [x] Validation focuses the first invalid field; aria-invalid and associated field-specific errors describe corrections. | [x] Validation focuses/scrolls first invalid field; native errors remain programmatic. | Existing validation tests plus final focus/error integration cases. |
 | 3.3.2 | Labels or Instructions | A | [x] Required semantics and visible required/optional, time-format and prescription instructions. | [x] Wrapping visible labels, required instructions and numeric supply keyboard. | Final label/required and invalid-input assertions. |
 | 3.3.3 | Error Suggestion | AA | [x] Existing field-specific messages include valid time examples and supply bounds. | [x] Replace generic required errors with field-specific correction suggestions. | Final invalid name/strength/time/supply tests preserve entered values. |
-| 3.3.4 | Error Prevention (Legal, Financial, Data) | AA | [x] Medicine review/edit before save; archive/restore and dose Undo/history correction are reversible. | [x] Wait for persistence before leaving review; global storage-error announcement covers pushed routes; same review/reversible actions. | Final persistence-failure/review and undo/correction tests. No irreversible delete or legal/financial submission. |
+| 3.3.4 | Error Prevention (Legal, Financial, Data) | AA | [x] Medicine review/edit before save; archive/restore and dose/history Undo are reversible; saved-data Reset requires confirmation and offers a JSON backup. | [x] Wait for persistence before leaving review; global storage-error announcement covers pushed routes; same review/reversible actions. | Review, reset confirmation, failed-save recovery and dose/history reversibility tests; no legal/financial submissions. |
 | 4.1.1 | Parsing | A | [x] Valid React host and native form relationships; no duplicate authored IDs. | [x] Valid English HTML host; semantics emitted by Flutter. | Final duplicate-ID/label-reference browser assertions; current W3C 2.1 erratum treats Parsing as always satisfied. |
 | 4.1.2 | Name, Role, Value | A | [x] Native elements expose state, required/invalid values, progress and selected nav. | [x] Native Material roles, selected destinations and labeled inputs; native slider uses merged semantics, web uses labeled percentage buttons. | Final role/name/state assertions; native AT interpretation remains manual. |
 | 4.1.3 | Status Messages | AA | [x] Persistent history feedback survives removed entries; archive state now announced; existing dose/symptom/error regions. | [x] Live symptom success/failure, history correction and archive state; global errors reach every page. | Final live-region, persistence and mutation tests; actual spoken delivery requires human AT review. |
@@ -82,11 +82,11 @@ Local Windows run, pinned Flutter 3.47.5 / Dart 3.13.4, Node 22.22.2, Playwright
 
 | Check | Result |
 |---|---|
-| React unit/widget/integration | 39 passed |
-| React browser E2E | 17 passed; includes axe A/AA rules and spacing overrides on all core routes |
+| React unit/widget/integration | 53 passed |
+| React browser E2E | 39 passed across phone/tablet/desktop; includes axe A/AA rules and spacing overrides on all core routes |
 | Flutter unit/widget/integration | 25 passed; analysis and formatting clean |
 | Compiled Flutter browser E2E | 4 passed; three complete-process viewport cases plus keyboard-only medicine entry |
 | Production web builds | React and Flutter passed |
-| Application line coverage | React 234/234 (100%); Flutter 709/725 (97.79%) |
+| Application line coverage | React 312/312 (100%); Flutter 709/725 (97.79%) |
 
-Commands: `npm run verify` in `react/`, `python tool/verify.py --web` at repository root, then `npm run test:e2e:flutter` in `react/`. See [Testing](TESTING.md) for scope and interpretation. Flutter web tests enable the engine's semantics layer and exercise real browser storage; they do not run VoiceOver, NVDA or TalkBack. The open human release gates above still apply.
+Commands: `npm run verify` in `react/` (format, lint, coverage, production build and E2E), `python tool/verify.py --web` at repository root, then `npm run test:e2e:flutter` in `react/`. See [Testing](TESTING.md) for scope and interpretation. Flutter web tests enable the engine's semantics layer and exercise real browser storage; they do not run VoiceOver, NVDA or TalkBack. The open human release gates above still apply.

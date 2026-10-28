@@ -45,7 +45,7 @@ GitHub CI executes the same verification command and uploads coverage and the we
 
 ## WCAG integration and end-to-end checks
 
-The [complete WCAG 2.1 AA checklist](WCAG-2.1-AA.md) maps all 50 A/AA criteria to React and Dart evidence. Every criterion has an individual commit; criteria already supported or not applicable have evidence-only commits. Corrective commits precede the last two test commits.
+The [complete WCAG 2.1 AA checklist](WCAG-2.1-AA.md) maps all 50 A/AA criteria to React and Dart evidence. Every criterion has an individual commit; criteria already supported or not applicable have evidence-only commits. Integration and E2E additions follow the criterion commits; pull request preparation preserves the newer mainline React implementation.
 
 From `react/`:
 
@@ -56,7 +56,7 @@ npm run verify
 npm run test:integration
 ```
 
-React verification runs 39 unit/widget/integration tests, enforces coverage, checks the report tooling, builds the release and runs 17 Chromium E2E tests. Browser checks cover all routes at six viewport sizes and both text scales, 320px reflow, a 256px-high landscape viewport, WCAG spacing overrides, axe A/AA rule tags, error recovery, a complete keyboard medicine/dose/history process, pointer cancellation, forced-color focus and local persistence. Axe checks are automation evidence, not conformance certification.
+React verification runs 53 unit/component/integration tests, enforces coverage, checks the report tooling, builds the release and runs 39 Chromium E2E tests across phone, tablet and desktop projects. Browser checks cover all routes with enlarged text on phone/tablet/desktop, 320px reflow, WCAG spacing overrides, axe A/AA rule tags, error recovery, a complete keyboard medicine/dose/history process, pointer cancellation, forced-color focus and local persistence. Axe checks are automation evidence, not conformance certification.
 
 From the repository root, run Flutter analysis, all 25 unit/widget/integration tests, coverage and the production web build:
 

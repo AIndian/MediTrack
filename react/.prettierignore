@@ -6,3 +6,7 @@ test-results/
 package-lock.json
 .env*
 *.local
+
+reports/
+playwright-flutter-report/
+test-results-flutter/
