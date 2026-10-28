@@ -203,9 +203,10 @@ class _AppPageState extends State<AppPage> {
                           builder: (context, constraints) {
                             final brand = Row(
                               children: [
-                                if (Navigator.canPop(context))
-                                  BackButton(
+                                if (ModalRoute.canPopOf(context) ?? false)
+                                  TextButton(
                                     onPressed: () => Navigator.pop(context),
+                                    child: const Text('Back'),
                                   ),
                                 const Icon(
                                   Icons.health_and_safety_outlined,
