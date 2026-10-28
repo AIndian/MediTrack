@@ -27,7 +27,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 1.4.10 | Reflow | AA | [x] Wrapping brand/controls and flexible grid; no fixed page heights. | [x] Scroll header with content, wrap external field labels and bound scrollable mobile navigation. | Final matrix at 320px width / 256px height, 200% text and 400% zoom equivalent. |
 | 1.4.11 | Non-text Contrast | AA | [x] Input outlines, focus rings and active borders exceed 3:1 against adjacent light surfaces. | [x] Pin outline/outlineVariant and enabled field border; selected navigation has dark border. | Ratio assertions; decorative card borders are not control boundaries. |
 | 1.4.12 | Text Spacing | AA | [x] No fixed text-box heights; long badge text wraps under spacing overrides. | [x] External labels and multiline errors; native Text respects system font settings. | Browser spacing override suite; Flutter web semantics/CSS cannot restyle canvas text, so native spacing equivalence needs human review. |
-| 1.4.13 | Content on Hover or Focus | AA | [x] N/A: no custom hover/focus popovers; content is always available. | [x] No custom hover popovers; BackButton uses platform tooltip behavior. | Keyboard/hover inspection; platform tooltip Escape/hover behavior remains a manual release check. |
+| 1.4.13 | Content on Hover or Focus | AA | [x] N/A: no custom hover/focus popovers; content is always available. | [x] No custom hover/focus popovers; Back is now a stable visible text button without a tooltip. | Keyboard/hover source inspection; native platform hover behavior remains a human release check. |
 | 2.1.1 | Keyboard | A | [x] Native links, buttons, fields, selects and keyboard-adjustable range. | [x] Material controls; explicit text-size buttons provide keyboard/pointer alternative to slider gestures. | Final keyboard workflows and Flutter focus traversal tests. |
 | 2.1.2 | No Keyboard Trap | A | [x] No custom key suppression or modal focus traps. | [x] Standard Navigator/Material controls; Tab/Shift+Tab and Escape for dropdown. | Final bidirectional keyboard tests; native external-keyboard check pending. |
 | 2.1.4 | Character Key Shortcuts | A | [x] N/A: no unmodified character shortcuts. | [x] N/A: no unmodified character shortcuts. | Source review of keyboard handlers. |
@@ -36,7 +36,7 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 | 2.3.1 | Three Flashes or Below Threshold | A | [x] No flashing media, strobes or flashing animations. | [x] No flashing media or effects; normal Material transitions. | Source review of CSS/widgets/assets; no flashing content introduced. |
 | 2.4.1 | Bypass Blocks | A | [x] Existing skip link focuses main; native main/nav landmarks. | [x] Shared page skip action focuses/scrolls heading; individual semantic text nodes preserve reading order. | Keyboard skip tests; screen-reader landmark/heading review pending. |
 | 2.4.2 | Page Titled | A | [x] Page effect sets descriptive document title on every route. | [x] Shared page now sets platform/browser Title and route-name semantics. | Final route-title assertions across screens. |
-| 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; Undo restores focus; removed history entry returns focus to heading. | [x] Widget-order page traversal, page-heading focus, Undo return focus and a persistent focused history result after removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
+| 2.4.3 | Focus Order | A | [x] Page headings focus on navigation; Undo restores focus; removed history entry returns focus to heading. | [x] Widget-order shell/page traversal, page-heading focus, Undo return focus and a persistent focused history result after removal. | Final focus/keyboard integration checks; hardware focus-return review pending. |
 | 2.4.4 | Link Purpose (In Context) | A | [x] Open links include medicine/time; other links describe destinations. | [x] Open actions use medicine/time; Back and destination labels remain descriptive. | Accessible-name and workflow assertions. |
 | 2.4.5 | Multiple Ways | AA | [x] Main navigation plus contextual Today/history, Medicines/detail, and More/summary/symptom routes. | [x] Main destinations plus contextual Today history/symptom/summary actions. | Forms/review are process steps; final workflows cover alternate entry routes. |
 | 2.4.6 | Headings and Labels | AA | [x] One page h1, descriptive section headings and explicit labels. | [x] Page/section heading levels and wrapping, programmatic field labels. | Final DOM/semantics assertions; human heading review pending. |
@@ -63,9 +63,9 @@ Source: [W3C WCAG 2.1 Recommendation](https://www.w3.org/TR/WCAG21/). Level AA i
 
 Integration and E2E suites are added in the final commits, after the criterion commits. Tests use fictional local data. Automated checks cannot establish full WCAG conformance.
 
-- [ ] Execute React unit/integration and browser suites, production build and coverage checks.
-- [ ] Execute Flutter analysis, unit/widget/integration checks and web build.
-- [ ] Execute Flutter browser E2E against the compiled web application.
+- [x] Execute React unit/integration and browser suites, production build and coverage checks.
+- [x] Execute Flutter analysis, unit/widget/integration checks and web build.
+- [x] Execute Flutter browser E2E against the compiled web application.
 - [ ] Human review: NVDA + Chrome/Firefox; VoiceOver + Safari/iOS; TalkBack + Android. Complete every process with keyboard only and screen reader; verify route, error and status announcements, focus return, headings and field names.
 - [ ] Human review: all screens at 200% text, 400% browser zoom / 320 CSS px width, 256 CSS px height, both orientations, OS high contrast, and WCAG spacing overrides (line 1.5, paragraph 2, letter .12, word .16 em). Confirm readable content and operable controls without clipping or two-dimensional scrolling.
 - [ ] Native device checks: OS text scaling, orientation, external keyboard/switch input, target contrast, text spacing equivalence and platform tooltips. Record platform/browser/AT versions and any failures before claiming conformance.
@@ -75,3 +75,18 @@ No legal or formal conformance claim is made until these manual checks and all f
 ## Flutter web compatibility
 
 The pinned Flutter 3.47.5 engine places a slider label on its wrapper while leaving the underlying browser range input unnamed. Flutter web therefore uses the same five labeled percentage buttons as the native app; native platforms retain the Material slider with merged semantics. This is a local compatibility fallback, not an SDK upgrade. [Flutter's web accessibility version notes](https://docs.flutter.dev/ui/accessibility/web-accessibility) describe enhanced slider semantics in 3.50 and later. Reassess the fallback when upgrading the pinned SDK.
+
+## Executed results (2026-10-27)
+
+Local Windows run, pinned Flutter 3.47.5 / Dart 3.13.4, Node 22.22.2, Playwright 1.64.1 / Chromium:
+
+| Check | Result |
+|---|---|
+| React unit/widget/integration | 39 passed |
+| React browser E2E | 17 passed; includes axe A/AA rules and spacing overrides on all core routes |
+| Flutter unit/widget/integration | 25 passed; analysis and formatting clean |
+| Compiled Flutter browser E2E | 4 passed; three complete-process viewport cases plus keyboard-only medicine entry |
+| Production web builds | React and Flutter passed |
+| Application line coverage | React 234/234 (100%); Flutter 709/725 (97.79%) |
+
+Commands: `npm run verify` in `react/`, `python tool/verify.py --web` at repository root, then `npm run test:e2e:flutter` in `react/`. See [Testing](TESTING.md) for scope and interpretation. Flutter web tests enable the engine's semantics layer and exercise real browser storage; they do not run VoiceOver, NVDA or TalkBack. The open human release gates above still apply.

@@ -14,6 +14,8 @@
     "test:unit": "vitest run test/unit",
     "test:widget": "vitest run test/widget",
     "test:browser": "playwright test",
+    "test:integration": "vitest run test/integration",
+    "test:e2e:flutter": "playwright test -c playwright.flutter.config.js",
     "coverage": "vitest run --coverage",
     "verify": "npm run coverage && python ../tool/coverage_report.py --react && python -m unittest discover -s test/tools -p *_test.py && npm run build && npm run test:browser"
   },
@@ -23,6 +25,7 @@
     "react-router-dom": "7.18.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@playwright/test": "1.64.1",
     "@testing-library/jest-dom": "7.0.1",
     "@testing-library/react": "16.3.3",

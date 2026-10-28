@@ -3,4 +3,6 @@ dist/
 coverage/
 reports/
 test-results/
+test-results-flutter/
 playwright-report/
+playwright-flutter-report/

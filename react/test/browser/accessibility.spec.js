@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import { med } from '../support/fixtures';
 import { storageKey } from '../../src/store';
 
-for (const [width, height] of [[393, 852], [852, 393], [834, 1194], [1194, 834]]) {
+for (const [width, height] of [[320, 1024], [1280, 256], [393, 852], [852, 393], [834, 1194], [1194, 834]]) {
   for (const textScale of [1, 2]) {
     test(`core screens reflow at ${width}×${height}, ${textScale * 100}% text`, async ({ page }) => {
       await page.setViewportSize({ width, height });
