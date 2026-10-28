@@ -105,9 +105,6 @@ class _MedicineFormState extends State<MedicineForm> {
                     (first.widget as TextFormField).controller!,
                   );
                   fieldFocus[index].requestFocus();
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    if (mounted) Scrollable.ensureVisible(first.context);
-                  });
                   return;
                 }
                 final m = Medicine(
