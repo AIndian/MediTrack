@@ -115,7 +115,8 @@ class MediTrack extends StatelessWidget {
                         padding: const EdgeInsets.all(12),
                         child: Text(
                           store.error!,
-                          style: const TextStyle(color: Color(0xffA52B3C)),
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: const Color(0xffA52B3C)),
                         ),
                       ),
                     ),
