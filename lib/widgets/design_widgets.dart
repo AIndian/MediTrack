@@ -176,165 +176,170 @@ class _AppPageState extends State<AppPage> {
             explicitChildNodes: true,
             child: ListView(
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: focusContent,
-                        child: const Text('Skip to content'),
-                      ),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        border: Border(
-                          bottom: BorderSide(color: Color(0xffD5E3E0)),
+                Semantics(
+                  explicitChildNodes: true,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: focusContent,
+                          child: const Text('Skip to content'),
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 11,
-                      ),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          final brand = Row(
-                            children: [
-                              if (Navigator.canPop(context))
-                                BackButton(
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              const Icon(
-                                Icons.health_and_safety_outlined,
-                                color: Color(0xff075E64),
-                                size: 26,
-                              ),
-                              const SizedBox(width: 8),
-                              const Expanded(
-                                child: Text(
-                                  'MediTrack',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                          if (constraints.maxWidth <
-                              MediaQuery.textScalerOf(context).scale(310)) {
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const Align(
-                                  alignment: Alignment.topRight,
-                                  child: HeaderClock(),
-                                ),
-                                const SizedBox(height: 8),
-                                brand,
-                              ],
-                            );
-                          }
-                          return Row(
-                            children: [
-                              Expanded(child: brand),
-                              const SizedBox(width: 12),
-                              const Flexible(child: HeaderClock()),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                    Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1120),
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          border: Border(
+                            bottom: BorderSide(color: Color(0xffD5E3E0)),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 11,
+                        ),
                         child: LayoutBuilder(
                           builder: (context, constraints) {
-                            final wide =
-                                constraints.maxWidth >= 700 &&
-                                MediaQuery.textScalerOf(context).scale(1) < 1.5;
-                            return Padding(
-                              padding: EdgeInsets.all(wide ? 32 : 20),
-                              child: Column(
+                            final brand = Row(
+                              children: [
+                                if (Navigator.canPop(context))
+                                  BackButton(
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                const Icon(
+                                  Icons.health_and_safety_outlined,
+                                  color: Color(0xff075E64),
+                                  size: 26,
+                                ),
+                                const SizedBox(width: 8),
+                                const Expanded(
+                                  child: Text(
+                                    'MediTrack',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                            if (constraints.maxWidth <
+                                MediaQuery.textScalerOf(context).scale(310)) {
+                              return Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  Focus(
-                                    key: contentKey,
-                                    focusNode: contentFocus,
-                                    autofocus: true,
-                                    child: Builder(
-                                      builder: (context) => Container(
-                                        decoration: BoxDecoration(
-                                          border: Focus.of(context).hasFocus
-                                              ? Border.all(
-                                                  color: const Color(
-                                                    0xff703DB2,
-                                                  ),
-                                                  width: 3,
-                                                )
-                                              : null,
-                                        ),
-                                        child: Semantics(
-                                          container: true,
-                                          namesRoute: true,
-                                          headingLevel: 1,
-                                          child: Text(
-                                            title,
-                                            style: const TextStyle(
-                                              fontSize: 32,
-                                              height: 1.5,
-                                              fontWeight: FontWeight.w700,
-                                              letterSpacing: -1,
+                                  const Align(
+                                    alignment: Alignment.topRight,
+                                    child: HeaderClock(),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  brand,
+                                ],
+                              );
+                            }
+                            return Row(
+                              children: [
+                                Expanded(child: brand),
+                                const SizedBox(width: 12),
+                                const Flexible(child: HeaderClock()),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 1120),
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              final wide =
+                                  constraints.maxWidth >= 700 &&
+                                  MediaQuery.textScalerOf(context).scale(1) <
+                                      1.5;
+                              return Padding(
+                                padding: EdgeInsets.all(wide ? 32 : 20),
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Focus(
+                                      key: contentKey,
+                                      focusNode: contentFocus,
+                                      autofocus: true,
+                                      child: Builder(
+                                        builder: (context) => Container(
+                                          decoration: BoxDecoration(
+                                            border: Focus.of(context).hasFocus
+                                                ? Border.all(
+                                                    color: const Color(
+                                                      0xff703DB2,
+                                                    ),
+                                                    width: 3,
+                                                  )
+                                                : null,
+                                          ),
+                                          child: Semantics(
+                                            container: true,
+                                            namesRoute: true,
+                                            headingLevel: 1,
+                                            child: Text(
+                                              title,
+                                              style: const TextStyle(
+                                                fontSize: 32,
+                                                height: 1.5,
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: -1,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Text(
-                                    subtitles[title] ?? '',
-                                    style: const TextStyle(
-                                      color: Color(0xff52686C),
+                                    Text(
+                                      subtitles[title] ?? '',
+                                      style: const TextStyle(
+                                        color: Color(0xff52686C),
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  if (wide && side.isNotEmpty)
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 6,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: children,
+                                    const SizedBox(height: 24),
+                                    if (wide && side.isNotEmpty)
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            flex: 6,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: children,
+                                            ),
                                           ),
-                                        ),
-                                        const SizedBox(width: 24),
-                                        Expanded(
-                                          flex: 4,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.stretch,
-                                            children: side,
+                                          const SizedBox(width: 24),
+                                          Expanded(
+                                            flex: 4,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              children: side,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  else ...[
-                                    ...children,
-                                    ...side,
+                                        ],
+                                      )
+                                    else ...[
+                                      ...children,
+                                      ...side,
+                                    ],
                                   ],
-                                ],
-                              ),
-                            );
-                          },
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
