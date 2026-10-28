@@ -19,7 +19,9 @@
     "test:watch": "vitest",
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write . --ignore-path ../.gitignore --ignore-path .prettierignore",
-    "format:check": "prettier --check . --ignore-path ../.gitignore --ignore-path .prettierignore"
+    "format:check": "prettier --check . --ignore-path ../.gitignore --ignore-path .prettierignore",
+    "test:integration": "vitest run test/integration",
+    "test:e2e:flutter": "playwright test -c playwright.flutter.config.js"
   },
   "dependencies": {
     "react": "19.3.1",

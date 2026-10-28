@@ -22,6 +22,6 @@ it('continues to saved details after a Review write failure is successfully retr
   storage.setItem.mockImplementation(() => {});
   await user.click(screen.getByRole('button', { name: 'Retry saving' }));
   expect(await screen.findByRole('heading', { level: 1, name: 'Medicine details' })).toHaveFocus();
-  expect(screen.getByRole('status')).toHaveTextContent('Changes saved on this device.');
+  expect(screen.getByText('Changes saved on this device.')).toHaveAttribute('role', 'status');
   expect(JSON.parse(storage.setItem.mock.lastCall[1]).medicines).toEqual([medicine]);
 });

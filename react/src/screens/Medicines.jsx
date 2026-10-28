@@ -44,7 +44,9 @@ export function MedicineDetails() {
         <p>{medicine.instructions || 'None entered'}</p>
         <h2>Schedule</h2>
         <p>Daily at {medicine.times.join(', ')}</p>
-        <p className="badge">{medicine.archived ? 'Archived — no longer scheduled' : 'Active'}</p>
+        <p className="badge" role="status">
+          {medicine.archived ? 'Archived — no longer scheduled' : 'Active'}
+        </p>
       </div>
       <section className="card">
         <h2>Refill details</h2>

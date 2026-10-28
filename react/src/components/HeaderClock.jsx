@@ -20,10 +20,24 @@ export function useCurrentTime(now) {
 }
 
 export function HeaderClock({ date }) {
-  const time = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
+  const [pausedDate, setPausedDate] = useState(null);
+  const displayedDate = pausedDate ?? date;
+  const time = displayedDate.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' });
   return (
-    <time className="header-clock" dateTime={date.toISOString()} aria-label={`Current time: ${time}`}>
-      {time}
-    </time>
+    <div className="header-clock">
+      <time
+        dateTime={displayedDate.toISOString()}
+        aria-label={`${pausedDate ? 'Paused time' : 'Current time'}: ${time}`}
+      >
+        {time}
+      </time>
+      <button
+        className="secondary"
+        aria-pressed={Boolean(pausedDate)}
+        onClick={() => setPausedDate((previous) => (previous ? null : date))}
+      >
+        Pause clock updates
+      </button>
+    </div>
   );
 }

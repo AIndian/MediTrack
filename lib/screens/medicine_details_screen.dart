@@ -17,12 +17,18 @@ class Details extends StatelessWidget {
         panel([
           medicineHeading(m),
           const SizedBox(height: 16),
-          const Text('Instructions you entered'),
+          heading('Instructions you entered'),
           Text(m.instructions.isEmpty ? 'None entered' : m.instructions),
           const SizedBox(height: 16),
           heading('Schedule'),
           Text('Daily at ${m.times.join(', ')}'),
-          Text(m.archived ? 'Archived — no longer scheduled' : 'Active'),
+          Semantics(
+            container: true,
+            liveRegion: true,
+            child: Text(
+              m.archived ? 'Archived — no longer scheduled' : 'Active',
+            ),
+          ),
         ]),
         panel([
           heading('Refill details'),

@@ -48,6 +48,9 @@ class _HomeState extends State<Home> {
             backgroundColor: i == tab ? const Color(0xffE8F3F1) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(11),
+              side: i == tab
+                  ? const BorderSide(color: Color(0xff075E64), width: 2)
+                  : BorderSide.none,
             ),
           ),
           child: Column(
@@ -66,63 +69,65 @@ class _HomeState extends State<Home> {
           ),
         ),
       );
-      return Scaffold(
-        body: SafeArea(
-          child: Row(
-            children: [
-              if (wide)
-                SizedBox(
-                  width: 205,
-                  child: ColoredBox(
-                    color: Colors.white,
-                    child: ListView(
-                      padding: const EdgeInsets.all(16),
-                      children: [
-                        for (int i = 0; i < 4; i++)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: destination(i),
-                          ),
-                        const Text('Your routine,\nat your pace.'),
-                      ],
+      return FocusTraversalGroup(
+        policy: WidgetOrderTraversalPolicy(),
+        child: Scaffold(
+          body: SafeArea(
+            child: Row(
+              children: [
+                if (wide)
+                  SizedBox(
+                    width: 205,
+                    child: ColoredBox(
+                      color: Colors.white,
+                      child: ListView(
+                        padding: const EdgeInsets.all(16),
+                        children: [
+                          for (int i = 0; i < 4; i++)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 10),
+                              child: destination(i),
+                            ),
+                          const Text('Your routine,\nat your pace.'),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              Expanded(
-                child: Column(
-                  children: [
-                    if (s.error != null)
-                      Semantics(liveRegion: true, child: Text(s.error!)),
-                    Expanded(child: pages[tab]),
-                  ],
-                ),
-              ),
-            ],
+                Expanded(child: pages[tab]),
+              ],
+            ),
           ),
-        ),
-        bottomNavigationBar: wide
-            ? null
-            : SafeArea(
-                child: Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
-                  child: LayoutBuilder(
-                    builder: (context, c) => Wrap(
-                      spacing: 3,
-                      runSpacing: 3,
-                      children: [
-                        for (int i = 0; i < 4; i++)
-                          SizedBox(
-                            width:
-                                (c.maxWidth - (large ? 3 : 9)) /
-                                (large ? 2 : 4),
-                            child: destination(i),
+          bottomNavigationBar: wide
+              ? null
+              : SafeArea(
+                  child: Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+                    child: ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: MediaQuery.sizeOf(context).height * .35,
+                      ),
+                      child: SingleChildScrollView(
+                        child: LayoutBuilder(
+                          builder: (context, c) => Wrap(
+                            spacing: 3,
+                            runSpacing: 3,
+                            children: [
+                              for (int i = 0; i < 4; i++)
+                                SizedBox(
+                                  width:
+                                      (c.maxWidth - (large ? 3 : 9)) /
+                                      (large ? 2 : 4),
+                                  child: destination(i),
+                                ),
+                            ],
                           ),
-                      ],
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+        ),
       );
     },
   );

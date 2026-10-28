@@ -29,5 +29,5 @@ it('updates a dose without rendering the header, while preserving text-size and 
   date = new Date(2026, 9, 8, 12, 1);
   act(() => window.dispatchEvent(new Event('focus')));
   expect(HeaderClock).toHaveBeenCalledTimes(initial + 2);
-  expect(document.querySelector('.header-clock')).toHaveAttribute('datetime', date.toISOString());
+  expect(document.querySelector('.header-clock time')).toHaveAttribute('datetime', date.toISOString());
 });

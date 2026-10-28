@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useStore } from '../StoreContext';
 
 export function DoseControls({ doseKey }) {
   const { store, readOnly } = useStore();
   const [previous, setPrevious] = useState(null);
   const [message, setMessage] = useState('');
+  const takenButton = useRef(null);
   function record(value) {
     setPrevious(store.status(doseKey));
     const saved = store.record(doseKey, value);
@@ -13,7 +14,7 @@ export function DoseControls({ doseKey }) {
   return (
     <div className="dose-controls">
       <p className={`badge ${store.status(doseKey).toLowerCase()}`}>Status: {store.status(doseKey)}</p>
-      <button disabled={readOnly} onClick={() => record('Taken')}>
+      <button ref={takenButton} disabled={readOnly} onClick={() => record('Taken')}>
         Mark Taken
       </button>
       <button disabled={readOnly} className="secondary" onClick={() => record('Skipped')}>
@@ -27,6 +28,7 @@ export function DoseControls({ doseKey }) {
             const saved = store.record(doseKey, previous);
             setMessage(saved ? 'Last change undone.' : 'Last change undone in this tab. Saving has failed.');
             setPrevious(null);
+            takenButton.current.focus();
           }}
         >
           Undo last change

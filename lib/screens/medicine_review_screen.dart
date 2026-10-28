@@ -17,9 +17,10 @@ class Review extends StatelessWidget {
       Text('${medicine.supply} doses recorded'),
     ]),
     const Text('Check these details against your prescription before saving.'),
-    action('Save medicine', () {
+    action('Save medicine', () async {
       store.put(medicine);
-      Navigator.pop(context, true);
+      await store.pending;
+      if (context.mounted && store.error == null) Navigator.pop(context, true);
     }),
     OutlinedButton(
       onPressed: () => Navigator.pop(context),

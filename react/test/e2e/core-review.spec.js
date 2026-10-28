@@ -110,6 +110,8 @@ test('localizes dates and aligns visual navigation with the tab sequence', async
     if (testInfo.project.name === 'phone') expect(nav.y + nav.height).toBeLessThanOrEqual(main.y + 1);
     else expect(nav.x + nav.width).toBeLessThanOrEqual(main.x + 1);
     await page.getByRole('link', { name: 'MediTrack home' }).focus();
+    await page.keyboard.press('Tab');
+    await expect(page.getByRole('button', { name: 'Pause clock updates' })).toBeFocused();
     for (const name of ['Today', 'Medicines', 'History', 'More', 'Add medicine']) {
       await page.keyboard.press('Tab');
       await expect(page.getByRole('link', { name, exact: true })).toBeFocused();

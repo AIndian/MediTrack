@@ -23,6 +23,7 @@ export function Symptoms() {
   }
   return (
     <Page title="Symptoms" backTo="/settings">
+      <p>Symptom is required. Notes are optional.</p>
       <form noValidate onSubmit={submit}>
         <fieldset disabled={readOnly}>
           <legend>Record a symptom</legend>

@@ -77,7 +77,10 @@ function MedicineEditor({ medicine }) {
   }
   return (
     <Page title={medicine ? 'Edit medicine' : 'Add medicine'} backTo={backTo}>
-      <p>Copy details from your prescription label. Times use the 24-hour clock.</p>
+      <p>
+        Copy details from your prescription label. Times use the 24-hour clock. All fields except Instructions are
+        required.
+      </p>
       <form noValidate onSubmit={review}>
         <fieldset disabled={readOnly}>
           <legend>Medicine information</legend>
