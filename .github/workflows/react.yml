@@ -1,0 +1,82 @@
+name: React checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: react-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: React verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: react
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '22.22.2'
+          cache: npm
+          cache-dependency-path: react/package-lock.json
+      - name: Install locked dependencies and enforce supported engines
+        run: npm ci --engine-strict
+      - name: Check formatting
+        run: npm run format:check
+      - name: Lint without warnings
+        run: npm run lint
+      - name: Unit and component tests with 60% coverage gate
+        id: coverage
+        run: npm run test:coverage
+      - name: Build production app
+        id: build
+        run: npm run build
+      - name: Install the locked Chromium browser and system packages
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Browser and accessibility checks
+        id: browser
+        run: npm run test:e2e
+      - name: Require complete reports and build output
+        run: |
+          test -s coverage/index.html
+          test -s coverage/lcov.info
+          test -s coverage/coverage-summary.json
+          test -s playwright-report/index.html
+          test -s dist/index.html
+      - name: Upload React coverage
+        if: ${{ !cancelled() && (steps.coverage.outcome == 'success' || hashFiles('react/coverage/**') != '') }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: react-coverage
+          path: react/coverage/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload browser reports and screenshots
+        if: ${{ !cancelled() && (steps.browser.outcome == 'success' || hashFiles('react/playwright-report/**', 'react/test-results/**') != '') }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: react-browser-checks
+          path: |
+            react/playwright-report/
+            react/test-results/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Upload React web build
+        if: ${{ !cancelled() && steps.build.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: meditrack-react-web
+          path: react/dist/
+          if-no-files-found: error
+          retention-days: 14

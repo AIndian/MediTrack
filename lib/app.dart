@@ -11,9 +11,22 @@ class MediTrack extends StatelessWidget {
     listenable: store,
     builder: (context, _) => MaterialApp(
       title: 'MediTrack',
+      locale: const Locale('en'),
+      supportedLocales: const [Locale('en')],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
+        focusColor: const Color(0xffDCCAF5),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            minimumSize: const WidgetStatePropertyAll(Size(48, 48)),
+            side: WidgetStateProperty.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xff703DB2), width: 3)
+                  : null,
+            ),
+          ),
+        ),
         scaffoldBackgroundColor: const Color(0xffF6FAF9),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff075E64))
             .copyWith(
@@ -21,7 +34,13 @@ class MediTrack extends StatelessWidget {
               onPrimary: Colors.white,
               surface: Colors.white,
               onSurface: const Color(0xff183B42),
+              onSurfaceVariant: const Color(0xff52686C),
+              error: const Color(0xffA52B3C),
+              onError: Colors.white,
+              errorContainer: const Color(0xffFDE8EA),
+              onErrorContainer: const Color(0xffA52B3C),
               outline: const Color(0xff687F82),
+              outlineVariant: const Color(0xff687F82),
             ),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(fontSize: 16, height: 1.5),
@@ -30,6 +49,11 @@ class MediTrack extends StatelessWidget {
         ),
         filledButtonTheme: FilledButtonThemeData(
           style: FilledButton.styleFrom(
+            side: WidgetStateBorderSide.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xffDCCAF5), width: 3)
+                  : BorderSide.none,
+            ),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -39,6 +63,11 @@ class MediTrack extends StatelessWidget {
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
+            side: WidgetStateBorderSide.resolveWith(
+              (states) => states.contains(WidgetState.focused)
+                  ? const BorderSide(color: Color(0xff703DB2), width: 3)
+                  : const BorderSide(color: Color(0xff687F82)),
+            ),
             minimumSize: const Size(56, 56),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
             shape: RoundedRectangleBorder(
@@ -47,22 +76,56 @@ class MediTrack extends StatelessWidget {
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
+          errorMaxLines: 6,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
+            borderSide: BorderSide(color: Color(0xff703DB2), width: 3),
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(11)),
           ),
           filled: true,
           fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(11)),
+            borderSide: BorderSide(color: Color(0xff687F82)),
+          ),
         ),
       ),
       builder: (context, child) => MediaQuery(
         data: MediaQuery.of(context).copyWith(
-          textScaler: TextScaler.linear(
-            MediaQuery.textScalerOf(context)
-                .scale(1)
-                .clamp(store.textScale, 10.0),
-          ),
+          textScaler:
+              MediaQuery.textScalerOf(context).scale(16) >= 16 * store.textScale
+              ? MediaQuery.textScalerOf(context)
+              : TextScaler.linear(store.textScale),
         ),
-        child: child!,
+        child: Column(
+          children: [
+            if (store.error != null)
+              SafeArea(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxHeight: MediaQuery.sizeOf(context).height * .3,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Semantics(
+                      container: true,
+                      liveRegion: true,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          store.error!,
+                          style: Theme.of(context).textTheme.bodyMedium!
+                              .copyWith(color: const Color(0xffA52B3C)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            Expanded(child: child!),
+          ],
+        ),
       ),
       home: Home(store: store),
     ),
