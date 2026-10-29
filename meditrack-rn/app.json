@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "MediTrack",
+    "slug": "meditrack-rn",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "../assets/icons/app_icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "../assets/icons/app_icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "../assets/icons/app_icon.png"
+    },
+    "plugins": ["expo-font"]
+  }
+}
