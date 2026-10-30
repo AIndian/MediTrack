@@ -13,7 +13,8 @@
       "adaptiveIcon": {
         "foregroundImage": "../assets/icons/app_icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.eugemass.meditrackrn"
     },
     "web": {
       "favicon": "../assets/icons/app_icon.png"
@@ -21,6 +22,11 @@
     "plugins": [
       "expo-font",
       "expo-status-bar"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a702daa7-b47b-4512-a6e9-5006e20327bf"
+      }
+    }
   }
 }
