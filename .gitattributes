@@ -1,3 +1,13 @@
+* text=auto
+*.dart text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
 # Prettier uses LF on every platform, including fresh Windows checkouts.
 /react/** text=auto eol=lf
 /desktop/** text=auto eol=lf
+*.png binary
+*.jar binary
+# Keep the copied source references byte-identical, including original line endings.
+docs/design/reference/** -text
