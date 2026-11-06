@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../StoreContext';
 
-export function StorageNotice() {
+export function StorageNotice({
+  resetMessage = 'Reset all MediTrack React data in this browser? This permanently deletes the saved records. Download a backup first.',
+}) {
   const { store, error, readOnly } = useStore();
   const [downloadError, setDownloadError] = useState('');
   const [confirmation, setConfirmation] = useState(null);
@@ -57,12 +59,7 @@ export function StorageNotice() {
             <button
               disabled={!canRecover}
               onClick={() => {
-                if (
-                  window.confirm(
-                    'Reset all MediTrack React data in this browser? This permanently deletes the saved records. Download a backup first.',
-                  ) &&
-                  store.reset(true)
-                ) {
+                if (window.confirm(resetMessage) && store.reset(true)) {
                   document.getElementById('main')?.focus();
                 }
               }}

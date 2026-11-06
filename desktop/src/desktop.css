@@ -1,0 +1,141 @@
+.desktop-app {
+  min-height: 100vh;
+  font-size: calc(1.125rem * var(--text-scale));
+}
+.brand small {
+  font-size: 0.65em;
+  display: block;
+  color: #52686c;
+  font-weight: 500;
+}
+.desktop-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 1rem clamp(1rem, 3vw, 3rem);
+  border-bottom: 1px solid #8baba5;
+  background: #e8f3f1;
+}
+.desktop-toolbar button,
+.app-header button {
+  min-height: 3rem;
+}
+.draft-status {
+  margin-left: auto;
+  color: #36565a;
+}
+.desktop-app .app-layout {
+  max-width: 100rem;
+  grid-template-columns: minmax(14rem, 9em) minmax(0, 1fr);
+}
+.desktop-app .primary-nav {
+  border-right: 1px solid #8baba5;
+}
+.desktop-app .primary-nav a {
+  text-align: left;
+  border-left: 4px solid transparent;
+}
+.desktop-app .primary-nav a.active {
+  border-left-color: #075e64;
+}
+.medicine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1rem;
+}
+.medicine-grid .card {
+  margin: 0;
+}
+.desktop-app main > form {
+  max-width: 48rem;
+}
+.desktop-app main > button,
+.desktop-app main > .button {
+  width: auto;
+  display: inline-flex;
+  margin-right: 0.8rem;
+}
+.desktop-app[data-large='true'] .app-layout {
+  grid-template-columns: 1fr;
+}
+.desktop-app[data-large='true'] .primary-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13em), 1fr));
+  border-bottom: 1px solid #8baba5;
+}
+.desktop-app[data-large='true'] .primary-nav p {
+  display: none;
+}
+dialog {
+  width: min(50rem, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  padding: 1.5rem;
+  border: 2px solid #075e64;
+  border-radius: 1rem;
+  color: #183b42;
+  background: white;
+}
+dialog::backdrop {
+  background: #183b4280;
+}
+dialog table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+dialog th,
+dialog td {
+  text-align: left;
+  padding: 0.7rem;
+  border-bottom: 1px solid #8baba5;
+}
+dialog h2:focus {
+  outline: 3px solid #7a4b00;
+  outline-offset: 4px;
+}
+kbd {
+  font: inherit;
+  padding: 0.1rem 0.25rem;
+}
+@media (max-width: 1000px) {
+  .desktop-app .app-layout {
+    grid-template-columns: 1fr;
+  }
+  .desktop-app .primary-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #8baba5;
+  }
+  .desktop-app .primary-nav p {
+    display: none;
+  }
+  .draft-status {
+    width: 100%;
+    margin: 0;
+  }
+}
+@media (forced-colors: active) {
+  button,
+  .button,
+  .card,
+  dialog,
+  .primary-nav a {
+    border: 2px solid ButtonText;
+  }
+  :focus-visible,
+  dialog h2:focus {
+    outline: 3px solid Highlight;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation: none !important;
+    transition: none !important;
+  }
+}

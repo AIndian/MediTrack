@@ -169,7 +169,7 @@ export function Settings() {
           onChange={(e) => store.setTextScale(Number(e.target.value))}
         />
         <p>100% · 125% · 150% · 175% · 200%</p>
-        <p>Your browser’s larger text setting still applies.</p>
+        <p>Window zoom still applies.</p>
       </section>
       <Link className="button secondary" to="/symptoms">
         Symptoms
@@ -179,7 +179,7 @@ export function Settings() {
       </Link>
       <section className="card">
         <h2>Reminders</h2>
-        <p>Reminders are off. Browser and spoken notifications are unavailable.</p>
+        <p>Reminders are off. Desktop and spoken notifications are unavailable.</p>
       </section>
       <section className="card">
         <h2>Privacy & sharing</h2>

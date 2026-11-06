@@ -1,0 +1,28 @@
+{
+  "name": "meditrack-desktop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MediTrack Electron desktop prototype",
+  "author": "MediTrack Group 1",
+  "license": "MIT",
+  "main": "electron/main.cjs",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
+  "scripts": {
+    "build": "node ../react/node_modules/vite/bin/vite.js build --config vite.config.mjs --configLoader native",
+    "start": "npm run build && electron .",
+    "preview": "node ../react/node_modules/vite/bin/vite.js preview --config vite.config.mjs --configLoader native --host 127.0.0.1 --port 4175 --strictPort",
+    "test:unit": "node --test test/unit/*.test.cjs",
+    "test:e2e": "node ../react/node_modules/@playwright/test/cli.js test --config playwright.config.mjs",
+    "test": "npm run test:unit && npm run build && npm run test:e2e",
+    "package": "npm run build && node scripts/package.cjs",
+    "lint": "node ../react/node_modules/eslint/bin/eslint.js . --max-warnings 0",
+    "format": "node ../react/node_modules/prettier/bin/prettier.cjs --write .",
+    "format:check": "node ../react/node_modules/prettier/bin/prettier.cjs --check ."
+  },
+  "devDependencies": {
+    "electron": "45.2.3",
+    "@electron/packager": "20.3.0"
+  }
+}

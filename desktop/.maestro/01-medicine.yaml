@@ -1,0 +1,24 @@
+url: ${BASE_URL}
+name: Medicine validation, review, and persistent save
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: desktop-new
+- tapOn:
+    id: medicine-name
+- pressKey: Enter
+- assertVisible: Please enter a medicine name
+- takeScreenshot: 01-validation
+- inputText: Maestro sample medicine
+- tapOn:
+    id: medicine-strength
+- inputText: 5 mg
+- pressKey: Enter
+- assertVisible: Review medicine
+- assertVisible: Maestro sample medicine
+- takeScreenshot: 01-review
+- tapOn: Save medicine
+- assertVisible: Medicine details
+- assertVisible: Maestro sample medicine
+- takeScreenshot: 01-saved

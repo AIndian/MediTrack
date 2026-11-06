@@ -1,0 +1,32 @@
+url: ${BASE_URL}
+name: Appointment summary reflects recorded doses
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: desktop-new
+- tapOn:
+    id: medicine-name
+- inputText: Maestro summary sample
+- tapOn:
+    id: medicine-strength
+- inputText: 5 mg
+- pressKey: Enter
+- tapOn: Save medicine
+- tapOn:
+    id: nav-today
+- scrollUntilVisible:
+    element:
+      text: Mark Taken
+    direction: DOWN
+- tapOn: Mark Taken
+- tapOn:
+    id: desktop-summary
+- assertVisible: 1 recorded Taken.*0 recorded Skipped
+- assertVisible: Maestro summary sample.*
+- takeScreenshot: 04-summary
+- tapOn:
+    id: date-range
+- tapOn: Last 30 days
+- assertVisible: Current schedule estimate.*30 doses.*
+- takeScreenshot: 04-thirty-day-summary
