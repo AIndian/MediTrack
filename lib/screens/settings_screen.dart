@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../state/app_store.dart';
 import '../widgets/design_widgets.dart';
@@ -18,17 +19,32 @@ class Settings extends StatelessWidget {
       onChanged: store.setLargeText,
     ),
     Text('Text size: ${(store.textScale * 100).round()}%'),
-    Semantics(
-      label: 'Text size',
-      child: Slider(
-        value: store.textScale,
-        min: 1.0,
-        max: 2.0,
-        divisions: 4,
-        label: '${(store.textScale * 100).round()}%',
-        semanticFormatterCallback: (value) => '${(value * 100).round()}%',
-        onChanged: store.setTextScale,
+    // shortcut: Flutter 3.47 web sliders omit input labels; restore after upgrading to 3.50+.
+    if (!kIsWeb)
+      MergeSemantics(
+        child: Semantics(
+          label: 'Text size',
+          child: Slider(
+            value: store.textScale,
+            min: 1.0,
+            max: 2.0,
+            divisions: 4,
+            label: '${(store.textScale * 100).round()}%',
+            semanticFormatterCallback: (value) => '${(value * 100).round()}%',
+            onChanged: store.setTextScale,
+          ),
+        ),
       ),
+    Wrap(
+      spacing: 8,
+      runSpacing: 8,
+      children: [
+        for (final scale in AppStore.textScales)
+          OutlinedButton(
+            onPressed: () => store.setTextScale(scale),
+            child: Text('Set text size to ${(scale * 100).round()}%'),
+          ),
+      ],
     ),
     const Text('100% · 125% · 150% · 175% · 200%'),
     const Text('Your device’s larger text setting still applies.'),

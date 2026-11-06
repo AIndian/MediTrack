@@ -14,6 +14,7 @@ class HeaderClock extends StatefulWidget {
 class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
   late TimeOfDay _time;
   late final Timer _timer;
+  bool _paused = false;
 
   TimeOfDay _readTime() =>
       TimeOfDay.fromDateTime(widget.now?.call() ?? DateTime.now());
@@ -30,7 +31,7 @@ class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
 
   void _refresh() {
     final time = _readTime();
-    if (time != _time) {
+    if (!_paused && time != _time) {
       setState(() => _time = time);
     }
   }
@@ -56,19 +57,36 @@ class _HeaderClockState extends State<HeaderClock> with WidgetsBindingObserver {
       alwaysUse24HourFormat: MediaQuery.alwaysUse24HourFormatOf(context),
     );
     // Readable on demand without announcing every minute to screen readers.
-    return Semantics(
-      label: 'Current time: $formatted',
-      excludeSemantics: true,
-      child: Text(
-        formatted,
-        textAlign: TextAlign.right,
-        style: const TextStyle(
-          fontSize: 16,
-          height: 1.5,
-          fontWeight: FontWeight.w600,
-          color: Color(0xff075E64),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Semantics(
+          container: true,
+          label: '${_paused ? 'Paused time' : 'Current time'}: $formatted',
+          excludeSemantics: true,
+          child: Text(
+            formatted,
+            textAlign: TextAlign.right,
+            style: const TextStyle(
+              fontSize: 16,
+              height: 1.5,
+              fontWeight: FontWeight.w600,
+              color: Color(0xff075E64),
+            ),
+          ),
         ),
-      ),
+        TextButton(
+          onPressed: () => setState(() {
+            _paused = !_paused;
+            if (!_paused) _time = _readTime();
+          }),
+          child: Text(
+            _paused ? 'Resume clock updates' : 'Pause clock updates',
+            textAlign: TextAlign.right,
+          ),
+        ),
+      ],
     );
   }
 }

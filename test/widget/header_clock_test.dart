@@ -69,7 +69,7 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    expect(find.byType(BackButton), findsOneWidget);
+    expect(find.widgetWithText(TextButton, 'Back'), findsOneWidget);
     expect(find.byType(HeaderClock), findsOneWidget);
     expect(tester.getTopRight(find.byType(HeaderClock)).dx, closeTo(373, 1));
     expect(

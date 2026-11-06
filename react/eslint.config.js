@@ -4,7 +4,16 @@ import hooks from 'eslint-plugin-react-hooks';
 import globals from 'globals';
 
 export default defineConfig([
-  globalIgnores(['node_modules/**', 'dist/**', 'coverage/**', 'playwright-report/**', 'test-results/**']),
+  globalIgnores([
+    'node_modules/**',
+    'dist/**',
+    'coverage/**',
+    'playwright-report/**',
+    'test-results/**',
+    'reports/**',
+    'playwright-flutter-report/**',
+    'test-results-flutter/**',
+  ]),
   {
     files: ['**/*.{js,jsx}'],
     extends: [js.configs.recommended],

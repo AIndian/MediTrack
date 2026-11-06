@@ -87,10 +87,13 @@ class Today extends StatelessWidget {
           heading('Your day, at a glance'),
           Text('$taken of ${slots.length} doses recorded Taken'),
           const SizedBox(height: 12),
-          LinearProgressIndicator(
-            value: slots.isEmpty ? 0 : taken / slots.length,
-            minHeight: 12,
-            semanticsLabel: 'Doses recorded today',
+          Semantics(
+            container: true,
+            child: LinearProgressIndicator(
+              value: slots.isEmpty ? 0 : taken / slots.length,
+              minHeight: 12,
+              semanticsLabel: 'Doses recorded today',
+            ),
           ),
           action(
             'View dose history',

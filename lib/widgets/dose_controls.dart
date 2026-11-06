@@ -13,6 +13,13 @@ class DoseControls extends StatefulWidget {
 
 class _DoseControlsState extends State<DoseControls> {
   String? previous;
+  final takenFocus = FocusNode();
+  @override
+  void dispose() {
+    takenFocus.dispose();
+    super.dispose();
+  }
+
   void record(String status) {
     setState(() => previous = widget.store.status(widget.doseKey));
     widget.store.record(widget.doseKey, status);
@@ -22,7 +29,14 @@ class _DoseControlsState extends State<DoseControls> {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      action('Mark Taken', () => record('Taken')),
+      Padding(
+        padding: const EdgeInsets.only(top: 12),
+        child: FilledButton(
+          focusNode: takenFocus,
+          onPressed: () => record('Taken'),
+          child: const Text('Mark Taken'),
+        ),
+      ),
       Padding(
         padding: const EdgeInsets.only(top: 12),
         child: OutlinedButton(
@@ -34,6 +48,7 @@ class _DoseControlsState extends State<DoseControls> {
         action('Undo last change', () {
           widget.store.record(widget.doseKey, previous!);
           setState(() => previous = null);
+          takenFocus.requestFocus();
         }),
     ],
   );

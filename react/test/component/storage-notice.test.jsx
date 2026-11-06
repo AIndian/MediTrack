@@ -12,7 +12,11 @@ afterEach(() => {
 });
 
 function renderNotice(store) {
-  return render(<StoreContext.Provider value={store}><StorageNotice /></StoreContext.Provider>);
+  return render(
+    <StoreContext.Provider value={store}>
+      <StorageNotice />
+    </StoreContext.Provider>,
+  );
 }
 
 it('downloads the exact original JSON without changing the corrupt record', async () => {
@@ -22,10 +26,13 @@ it('downloads the exact original JSON without changing the corrupt record', asyn
   const store = fresh();
   const create = vi.fn(() => 'blob:backup');
   const revoke = vi.fn();
-  vi.stubGlobal('URL', class extends URL {
-    static createObjectURL = create;
-    static revokeObjectURL = revoke;
-  });
+  vi.stubGlobal(
+    'URL',
+    class extends URL {
+      static createObjectURL = create;
+      static revokeObjectURL = revoke;
+    },
+  );
   const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(function () {
     expect(this.download).toBe('meditrack-react-backup.json');
     expect(this.getAttribute('href')).toBe('blob:backup');
@@ -65,9 +72,14 @@ it('keeps data when reset is canceled, then exits read-only mode after confirmat
 
 it('explains a download failure while preserving saved data', async () => {
   localStorage.setItem(storageKey, '{bad');
-  vi.stubGlobal('URL', class extends URL {
-    static createObjectURL() { throw new Error('unavailable'); }
-  });
+  vi.stubGlobal(
+    'URL',
+    class extends URL {
+      static createObjectURL() {
+        throw new Error('unavailable');
+      }
+    },
+  );
   const user = userEvent.setup();
   renderNotice(fresh());
   await user.click(screen.getByRole('button', { name: 'Download saved JSON' }));
@@ -76,7 +88,13 @@ it('explains a download failure while preserving saved data', async () => {
 });
 
 it('disables reset and download if storage is inaccessible', () => {
-  const store = fresh({ storage: { getItem: () => { throw new Error('blocked'); } } });
+  const store = fresh({
+    storage: {
+      getItem: () => {
+        throw new Error('blocked');
+      },
+    },
+  });
   renderNotice(store);
   expect(screen.getByRole('button', { name: 'Download saved JSON' })).toBeDisabled();
   expect(screen.getByRole('button', { name: 'Reset saved data' })).toBeDisabled();
@@ -85,7 +103,14 @@ it('disables reset and download if storage is inaccessible', () => {
 
 it('surfaces a failed reset and keeps the recovery controls available', async () => {
   vi.spyOn(window, 'confirm').mockReturnValue(true);
-  const store = fresh({ storage: { getItem: () => '{bad', removeItem: () => { throw new Error('blocked'); } } });
+  const store = fresh({
+    storage: {
+      getItem: () => '{bad',
+      removeItem: () => {
+        throw new Error('blocked');
+      },
+    },
+  });
   const user = userEvent.setup();
   renderNotice(store);
   await user.click(screen.getByRole('button', { name: 'Reset saved data' }));
@@ -94,7 +119,12 @@ it('surfaces a failed reset and keeps the recovery controls available', async ()
 });
 
 it('retries a failed write from the shared notice', async () => {
-  const storage = { getItem: () => null, setItem: vi.fn(() => { throw new Error('full'); }) };
+  const storage = {
+    getItem: () => null,
+    setItem: vi.fn(() => {
+      throw new Error('full');
+    }),
+  };
   const store = fresh({ storage });
   store.put(medicine);
   const user = userEvent.setup();
@@ -106,7 +136,9 @@ it('retries a failed write from the shared notice', async () => {
   expect(screen.getByRole('status')).toHaveTextContent('Changes saved on this device.');
   expect(screen.getByRole('status')).toHaveFocus();
   expect(store.active).toEqual([medicine]);
-  storage.setItem.mockImplementation(() => { throw new Error('full again'); });
+  storage.setItem.mockImplementation(() => {
+    throw new Error('full again');
+  });
   act(() => store.setTextScale(1.25));
   storage.setItem.mockImplementation(() => {});
   await user.click(screen.getByRole('button', { name: 'Retry saving' }));

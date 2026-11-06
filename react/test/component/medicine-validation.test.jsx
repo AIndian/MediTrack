@@ -9,7 +9,13 @@ import { fresh } from '../support/fixtures';
 it('shows a duplicate-time field error and accepts trimmed supply before review and save', async () => {
   const store = fresh();
   const user = userEvent.setup();
-  render(<StoreContext.Provider value={store}><MemoryRouter initialEntries={['/medicines/new']}><App /></MemoryRouter></StoreContext.Provider>);
+  render(
+    <StoreContext.Provider value={store}>
+      <MemoryRouter initialEntries={['/medicines/new']}>
+        <App />
+      </MemoryRouter>
+    </StoreContext.Provider>,
+  );
   await user.type(screen.getByLabelText('Medicine name'), 'Sample medicine');
   await user.type(screen.getByLabelText('Strength / dosage'), '5 mg');
   await user.clear(screen.getByLabelText(/Daily times/));

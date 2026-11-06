@@ -28,7 +28,9 @@ it('keeps removal and Undo available in memory when persistence fails', async ()
   store.put(medicine);
   const key = store.doseKey(medicine, '08:00');
   store.record(key, 'Skipped');
-  storage.setItem.mockImplementation(() => { throw new Error('full'); });
+  storage.setItem.mockImplementation(() => {
+    throw new Error('full');
+  });
   const user = userEvent.setup();
   renderApp(store, '/history');
   await user.click(screen.getByRole('button', { name: 'Due', exact: true }));
