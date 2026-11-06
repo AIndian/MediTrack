@@ -1,0 +1,60 @@
+name: Desktop checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Windows Electron and Maestro
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '22.22.2'
+          cache: npm
+          cache-dependency-path: |
+            react/package-lock.json
+            desktop/package-lock.json
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Run all desktop and shared React checks
+        run: node desktop/run.mjs test
+      - name: Package portable Windows application
+        run: node desktop/run.mjs package
+      - name: Upload test reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: meditrack-desktop-test-evidence
+          path: |
+            desktop/reports/
+            desktop/playwright-report/
+            desktop/test-results/
+            react/coverage/
+            react/playwright-report/
+            react/test-results/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Upload portable Windows application
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: MediTrack-Windows-x64
+          path: desktop/release/MediTrack-win32-x64/
+          if-no-files-found: error
+          retention-days: 14

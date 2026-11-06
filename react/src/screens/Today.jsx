@@ -65,7 +65,7 @@ export function Today() {
           </div>
           <div className="card">
             <h2>Saved on this device</h2>
-            <p>Your records stay in this browser. Sync is off.</p>
+            <p>Your records stay on this device. Sync is off.</p>
           </div>
           <Link className="button secondary" to="/symptoms">
             Log symptom

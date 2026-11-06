@@ -1,0 +1,37 @@
+url: ${BASE_URL}
+name: Taken, Undo, Skip, and history correction
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: desktop-new
+- tapOn:
+    id: medicine-name
+- inputText: Maestro dose sample
+- tapOn:
+    id: medicine-strength
+- inputText: 5 mg
+- pressKey: Enter
+- tapOn: Save medicine
+- tapOn:
+    id: nav-today
+- scrollUntilVisible:
+    element:
+      text: Mark Taken
+    direction: DOWN
+- tapOn: Mark Taken
+- assertVisible: 'Status: Taken'
+- takeScreenshot: 02-taken
+- scrollUntilVisible:
+    element:
+      text: Undo last change
+    direction: DOWN
+- tapOn: Undo last change
+- assertVisible: 'Status: Due'
+- tapOn: Skip dose
+- assertVisible: 'Status: Skipped'
+- tapOn:
+    id: nav-history
+- tapOn: Taken
+- assertVisible: 'Status: Taken'
+- takeScreenshot: 02-corrected-history

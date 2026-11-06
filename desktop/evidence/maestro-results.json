@@ -1,0 +1,60 @@
+{
+  "framework": "Maestro 2.11.0",
+  "target": "Chromium desktop renderer",
+  "passed": 5,
+  "failed": 0,
+  "flows": [
+    {
+      "flow": "Appointment summary reflects recorded doses",
+      "status": "passed",
+      "commandsCompleted": 21,
+      "run": "2026-11-06_125923",
+      "screenshots": [
+        "chromium/04-summary.png",
+        "chromium/04-thirty-day-summary.png"
+      ]
+    },
+    {
+      "flow": "Medicine validation, review, and persistent save",
+      "status": "passed",
+      "commandsCompleted": 19,
+      "run": "2026-11-06_125923",
+      "screenshots": [
+        "chromium/01-review.png",
+        "chromium/01-saved.png",
+        "chromium/01-validation.png"
+      ]
+    },
+    {
+      "flow": "Save a symptom with severity and notes",
+      "status": "passed",
+      "commandsCompleted": 16,
+      "run": "2026-11-06_125923",
+      "screenshots": [
+        "chromium/03-symptom.png"
+      ]
+    },
+    {
+      "flow": "Search, shortcut help, and enlarged text navigation",
+      "status": "passed",
+      "commandsCompleted": 27,
+      "run": "2026-11-06_130331",
+      "screenshots": [
+        "chromium/05-large-text.png",
+        "chromium/05-search.png",
+        "chromium/05-shortcuts.png"
+      ],
+      "note": "Repeated after the enlarged navigation layout adjustment; passed."
+    },
+    {
+      "flow": "Taken, Undo, Skip, and history correction",
+      "status": "passed",
+      "commandsCompleted": 24,
+      "run": "2026-11-06_125923",
+      "screenshots": [
+        "chromium/02-corrected-history.png",
+        "chromium/02-taken.png"
+      ]
+    }
+  ]
+}

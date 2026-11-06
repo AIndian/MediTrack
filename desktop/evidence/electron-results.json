@@ -1,0 +1,100 @@
+{
+  "runStarted": "2026-11-06T20:03:07.103Z",
+  "passed": 5,
+  "failed": 0,
+  "flows": [
+    {
+      "flow": "1 medicine validation, native shortcuts, and persistence after restarting Electron",
+      "status": "passed",
+      "durationMs": 1438,
+      "accessibility": [
+        {
+          "state": "validation-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        },
+        {
+          "state": "review-axe",
+          "violations": 0,
+          "needsManualReview": 2
+        }
+      ],
+      "screenshots": [
+        "electron/medicine-validation.png",
+        "electron/medicine-review.png"
+      ]
+    },
+    {
+      "flow": "2 Taken, Undo, Skip and a persisted history correction",
+      "status": "passed",
+      "durationMs": 1040,
+      "accessibility": [
+        {
+          "state": "history-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        }
+      ],
+      "screenshots": [
+        "electron/dose-taken.png"
+      ]
+    },
+    {
+      "flow": "3 symptom data and dose totals reach the saved appointment summary",
+      "status": "passed",
+      "durationMs": 1175,
+      "accessibility": [
+        {
+          "state": "symptom-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        },
+        {
+          "state": "summary-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        }
+      ],
+      "screenshots": [
+        "electron/saved-symptom.png"
+      ]
+    },
+    {
+      "flow": "4 unsaved navigation and native window close keep the draft until explicit discard",
+      "status": "passed",
+      "durationMs": 1079,
+      "accessibility": [
+        {
+          "state": "draft-dialog-axe",
+          "violations": 0,
+          "needsManualReview": 0
+        }
+      ],
+      "screenshots": [
+        "electron/draft-protection.png",
+        "electron/recovered-save-retains-new-draft.png"
+      ]
+    },
+    {
+      "flow": "5 desktop keyboard, modal focus, 200 percent text and isolated renderer",
+      "status": "passed",
+      "durationMs": 1057,
+      "accessibility": [
+        {
+          "state": "shortcut-help-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        },
+        {
+          "state": "large-text-axe",
+          "violations": 0,
+          "needsManualReview": 1
+        }
+      ],
+      "screenshots": [
+        "electron/keyboard-shortcuts.png",
+        "electron/large-text-forced-colors.png"
+      ]
+    }
+  ]
+}
