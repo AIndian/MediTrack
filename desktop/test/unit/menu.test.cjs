@@ -33,6 +33,22 @@ test('desktop menu routes every custom command and retains native editing roles'
   ]);
   const keys = items.filter((item) => item.accelerator).map((item) => item.accelerator);
   assert.equal(new Set(keys).size, keys.length);
+  assert.deepEqual(
+    items.filter((item) => item.accelerator).map(({ id, accelerator }) => [id, accelerator]),
+    [
+      ['new', 'CmdOrCtrl+N'],
+      ['symptom', 'CmdOrCtrl+Shift+L'],
+      ['find', 'CmdOrCtrl+F'],
+      ['save', 'CmdOrCtrl+S'],
+      ['today', 'CmdOrCtrl+1'],
+      ['medicines', 'CmdOrCtrl+2'],
+      ['history', 'CmdOrCtrl+3'],
+      ['symptom', 'CmdOrCtrl+4'],
+      ['summary', 'CmdOrCtrl+5'],
+      ['settings', 'CmdOrCtrl+6'],
+      ['help', 'F1'],
+    ],
+  );
   for (const role of ['undo', 'redo', 'cut', 'copy', 'paste', 'selectAll', 'zoomIn', 'zoomOut', 'resetZoom', 'close'])
     assert(items.some((item) => item.role === role));
   items.find((item) => item.label === 'About MediTrack').click();

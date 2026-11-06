@@ -31,7 +31,7 @@ Use `node desktop/run.mjs package` to produce the portable application. The desk
 | Prepare an appointment summary | `04-summary.yaml`: recorded totals, medicine, 7/30-day range          | Confirm actual recorded dose and symptom data reach the summary                                              |
 | Accessible desktop navigation  | `05-accessibility.yaml`: search, shortcut help, 200% text, navigation | Focus order, modal containment/restoration, Escape, forced colors, text reflow, semantic accessibility scans |
 
-Native flow 4 additionally checks the unsaved-draft dialog, keeping a draft when the window is closed, and recovery from a simulated storage failure without losing a separate new draft. There are five native Electron flows and two native-menu unit tests. All shared React tests also run through the quick script.
+Native flow 4 additionally checks the unsaved-draft dialog, keeping a draft when the window is closed or reloaded, explicit discard on reload, and recovery from a simulated storage failure without losing a separate new draft. Flow 5 verifies that the reset confirmation identifies the desktop records and that canceling preserves them. There are five native Electron flows and two native-menu unit tests. All shared React tests also run through the quick script.
 
 Screenshots are captured during execution, not generated mockups. [Evidence and measured results](evidence/README.md) distinguish Maestro Chromium screenshots from native Electron renderer screenshots. Renderer screenshots do not include the operating system title bar or menu bar; menu definitions and callbacks are checked separately.
 

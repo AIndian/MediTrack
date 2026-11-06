@@ -1,12 +1,12 @@
 {
-  "runStarted": "2026-11-06T20:03:07.103Z",
+  "runStarted": "2026-11-06T20:14:56.573Z",
   "passed": 5,
   "failed": 0,
   "flows": [
     {
       "flow": "1 medicine validation, native shortcuts, and persistence after restarting Electron",
       "status": "passed",
-      "durationMs": 1438,
+      "durationMs": 1563,
       "accessibility": [
         {
           "state": "validation-axe",
@@ -27,7 +27,7 @@
     {
       "flow": "2 Taken, Undo, Skip and a persisted history correction",
       "status": "passed",
-      "durationMs": 1040,
+      "durationMs": 1041,
       "accessibility": [
         {
           "state": "history-axe",
@@ -42,7 +42,7 @@
     {
       "flow": "3 symptom data and dose totals reach the saved appointment summary",
       "status": "passed",
-      "durationMs": 1175,
+      "durationMs": 1172,
       "accessibility": [
         {
           "state": "symptom-axe",
@@ -62,7 +62,7 @@
     {
       "flow": "4 unsaved navigation and native window close keep the draft until explicit discard",
       "status": "passed",
-      "durationMs": 1079,
+      "durationMs": 1148,
       "accessibility": [
         {
           "state": "draft-dialog-axe",
@@ -78,7 +78,7 @@
     {
       "flow": "5 desktop keyboard, modal focus, 200 percent text and isolated renderer",
       "status": "passed",
-      "durationMs": 1057,
+      "durationMs": 1218,
       "accessibility": [
         {
           "state": "shortcut-help-axe",

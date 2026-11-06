@@ -1,4 +1,4 @@
-const { app, BrowserWindow, Menu, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, Menu, dialog } = require('electron');
 const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { createMenu } = require('./menu.cjs');
@@ -8,7 +8,6 @@ app.setPath('userData', process.env.MEDITRACK_USER_DATA || path.join(app.getPath
 const entry = path.join(__dirname, '..', 'dist', 'index.html');
 const entryURL = pathToFileURL(entry).href;
 let window;
-let dirty = false;
 
 if (!app.requestSingleInstanceLock()) app.quit();
 else {
@@ -18,14 +17,6 @@ else {
       window.show();
       window.focus();
     }
-  });
-  ipcMain.on('desktop:dirty', (event, value) => {
-    if (
-      event.sender === window?.webContents &&
-      event.senderFrame === window.webContents.mainFrame &&
-      typeof value === 'boolean'
-    )
-      dirty = value;
   });
   app
     .whenReady()
@@ -50,19 +41,19 @@ else {
         if (url.split('#')[0] !== entryURL) event.preventDefault();
       });
       window.webContents.session.setPermissionRequestHandler((_contents, _permission, callback) => callback(false));
-      window.on('close', (event) => {
-        if (!dirty) return;
+      window.webContents.on('will-prevent-unload', (event) => {
         const response = dialog.showMessageBoxSync(window, {
           type: 'warning',
           title: 'Unsaved changes',
           message: 'Leave without saving?',
           detail: 'Your draft or changes that could not be saved will be lost.',
-          buttons: ['Keep working', 'Discard and close'],
+          buttons: ['Keep working', 'Discard and leave'],
           defaultId: 0,
           cancelId: 0,
           noLink: true,
         });
-        if (response !== 1) event.preventDefault();
+        // Electron permits unloading only when this prevention event is canceled.
+        if (response === 1) event.preventDefault();
       });
       Menu.setApplicationMenu(
         Menu.buildFromTemplate(

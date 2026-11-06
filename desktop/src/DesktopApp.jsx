@@ -41,21 +41,16 @@ export default function DesktopApp() {
   const dirtyRef = useRef(false);
   const [dirty, setDirty] = useState(false);
   const [help, setHelp] = useState(false);
-  const setDraftDirty = useCallback(
-    (value) => {
-      dirtyRef.current = value;
-      setDirty(value);
-      window.mediTrackDesktop?.setDirty(value || Boolean(store.getSnapshot().error));
-    },
-    [store],
-  );
+  const setDraftDirty = useCallback((value) => {
+    dirtyRef.current = value;
+    setDirty(value);
+  }, []);
   useEffect(() => {
     let previous = store.getSnapshot();
     return store.subscribe(() => {
       const next = store.getSnapshot();
       // Submitted records live in the store; a failed write still keeps the native close warning active.
       if (next.medicines !== previous.medicines || next.symptoms !== previous.symptoms) setDraftDirty(false);
-      window.mediTrackDesktop?.setDirty(dirtyRef.current || Boolean(next.error));
       previous = next;
     });
   }, [store, setDraftDirty]);
@@ -72,9 +67,9 @@ export default function DesktopApp() {
   });
   useEffect(() => {
     const beforeUnload = (event) => {
-      if (!window.mediTrackDesktop && (dirtyRef.current || store.getSnapshot().error)) {
+      if (dirtyRef.current || store.getSnapshot().error) {
         event.preventDefault();
-        event.returnValue = '';
+        event.returnValue = false;
       }
     };
     window.addEventListener('beforeunload', beforeUnload);
@@ -180,7 +175,7 @@ export default function DesktopApp() {
           {dirty ? 'Unsaved draft' : error ? 'Saving needs attention' : 'Local records'}
         </span>
       </div>
-      <StorageNotice />
+      <StorageNotice resetMessage="Reset all MediTrack Desktop records on this device? This permanently deletes the saved records in this desktop app. Download a backup first." />
       <div className="app-layout">
         <nav className="primary-nav" aria-label="Main navigation">
           {destinations.map(([id, label, to]) => (

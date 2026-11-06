@@ -29,7 +29,7 @@ This command restores locked dependencies and runs, in order:
 3. Five native Electron E2E flows, including keyboard/focus checks, accessibility scans, save recovery, and persistence after restarting Electron.
 4. Five Maestro flows against the same desktop renderer in Chromium, with screenshots and an HTML report.
 
-The runner stops at the first failure and returns a nonzero exit code. It downloads Playwright Chromium and the checksum-verified Maestro 2.11.0 CLI on the first test run. Maestro may also download its Chromium driver/browser. Allow several minutes and internet access for setup. Native Electron windows appear briefly while tested; profiles use isolated temporary folders, not your normal records.
+The runner stops at the first failure and returns a nonzero exit code. Run one command at a time and close the app before testing or packaging. It downloads Playwright Chromium and the checksum-verified Maestro 2.11.0 CLI on the first test run. Maestro may also download its Chromium driver/browser. Allow several minutes and internet access for setup. Native Electron windows appear briefly while tested; profiles use isolated temporary folders, not your normal records.
 
 This command covers the desktop implementation and its shared React dependency. The separate Flutter implementation continues to use `python tool/verify.py --web` and its existing CI workflow.
 

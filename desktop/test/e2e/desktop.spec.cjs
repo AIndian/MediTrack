@@ -47,17 +47,22 @@ async function addMedicine(name = 'Desktop sample medicine') {
   await expect(page.getByRole('heading', { name: 'Medicine details', exact: true })).toBeFocused();
 }
 test.beforeEach(async () => {
+  app = null;
+  page = null;
   profile = await fs.mkdtemp(path.join(os.tmpdir(), 'meditrack-e2e-'));
   errors = [];
   await launch();
 });
 test.afterEach(async ({}, testInfo) => {
   if (app) {
-    if (!page.isClosed()) await shot(testInfo, 'final-state');
-    await app
-      .evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().forEach((window) => window.destroy()))
-      .catch(() => {});
-    await app.close().catch(() => {});
+    try {
+      if (page && !page.isClosed()) await shot(testInfo, 'final-state');
+    } finally {
+      await app
+        .evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows().forEach((window) => window.destroy()))
+        .catch(() => {});
+      await app.close().catch(() => {});
+    }
   }
   expect(errors).toEqual([]);
   // Test profiles are deliberately retained in the OS temp folder for failed-run diagnosis.
@@ -142,9 +147,16 @@ test('4 unsaved navigation and native window close keep the draft until explicit
   await page.keyboard.press('Escape');
   await expect(page.locator('#medicine-name')).toHaveValue('Unsaved draft');
   await app.evaluate(({ dialog, BrowserWindow }) => {
-    dialog.showMessageBoxSync = () => 0;
+    globalThis.unloadPrompts = 0;
+    dialog.showMessageBoxSync = () => {
+      globalThis.unloadPrompts++;
+      return 0;
+    };
     BrowserWindow.getAllWindows()[0].close();
   });
+  await expect.poll(() => app.evaluate(() => globalThis.unloadPrompts)).toBe(1);
+  await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.reload());
+  await expect.poll(() => app.evaluate(() => globalThis.unloadPrompts)).toBe(2);
   await expect(page.locator('#medicine-name')).toHaveValue('Unsaved draft');
   await page.locator('#nav-today').click();
   await page.getByRole('button', { name: 'Discard draft', exact: true }).click();
@@ -175,6 +187,11 @@ test('4 unsaved navigation and native window close keep the draft until explicit
   await page.keyboard.press('Escape');
   await expect(page.locator('#symptom-name')).toHaveValue('Separate unsaved draft');
   await shot(testInfo, 'recovered-save-retains-new-draft');
+  await app.evaluate(({ dialog, BrowserWindow }) => {
+    dialog.showMessageBoxSync = () => 1;
+    BrowserWindow.getAllWindows()[0].webContents.reload();
+  });
+  await expect(page.locator('#symptom-name')).toHaveValue('');
 });
 
 test('5 desktop keyboard, modal focus, 200 percent text and isolated renderer', async ({}, testInfo) => {
@@ -209,4 +226,15 @@ test('5 desktop keyboard, modal focus, 200 percent text and isolated renderer', 
   await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
   await page.locator('#desktop-new').focus();
   await shot(testInfo, 'large-text-forced-colors');
+  await page.evaluate(() => localStorage.setItem('meditrack.react.v1', '{bad'));
+  await page.reload();
+  await page.evaluate(() => {
+    window.confirm = (message) => {
+      window.resetConfirmation = message;
+      return false;
+    };
+  });
+  await page.getByRole('button', { name: 'Reset saved data', exact: true }).click();
+  expect(await page.evaluate(() => window.resetConfirmation)).toContain('MediTrack Desktop records on this device');
+  expect(await page.evaluate(() => localStorage.getItem('meditrack.react.v1'))).toBe('{bad');
 });

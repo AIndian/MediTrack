@@ -8,7 +8,4 @@ contextBridge.exposeInMainWorld('mediTrackDesktop', {
     ipcRenderer.on('desktop:command', listener);
     return () => ipcRenderer.removeListener('desktop:command', listener);
   },
-  setDirty(value) {
-    if (typeof value === 'boolean') ipcRenderer.send('desktop:dirty', value);
-  },
 });

@@ -12,7 +12,7 @@ Captured on Windows x64 on November 6, 2026, using fictional medicine and sympto
 | Native Electron E2E flows | 5 passed |
 | Maestro Chromium flows | 5 passed |
 | Axe scans within native flows | 8 scans, zero automated violations |
-| Shared React coverage | 100% lines/statements/functions; 96.89% branches |
+| Shared React coverage | 100% lines/statements/functions; 96.91% branches |
 | Desktop/shared formatting, lint and production builds | Passed |
 | Portable Windows application | Built; packaged startup and Ctrl+N smoke check passed |
 
@@ -38,7 +38,7 @@ Maestro 2.11.0 ran the five YAML definitions at a 1440 × 1100 browser window. S
 
 ## Native Electron screenshots
 
-Playwright launched Electron 45.2.3 with isolated temporary profiles. Screenshots capture the Electron renderer; they exclude the operating system title bar and native menu. Menu definitions, accelerator bindings and callbacks have separate tests. Native window-close confirmation is tested by supplying the Keep working response to Electron's dialog API.
+Playwright launched Electron 45.2.3 with isolated temporary profiles. Screenshots capture the Electron renderer; they exclude the operating system title bar and native menu. Menu definitions, exact accelerator bindings and callbacks have separate tests. Native close and reload confirmation are tested by supplying Keep working and Discard responses to Electron's dialog API. The reset test intercepts the renderer confirmation, checks that it names the desktop records, and cancels deletion.
 
 | State | Evidence |
 | --- | --- |
