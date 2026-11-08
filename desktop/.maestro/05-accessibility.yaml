@@ -1,0 +1,39 @@
+url: ${BASE_URL}
+name: Search, shortcut help, and enlarged text navigation
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: desktop-new
+- tapOn:
+    id: medicine-name
+- inputText: Maestro searchable sample
+- tapOn:
+    id: medicine-strength
+- inputText: 5 mg
+- pressKey: Enter
+- tapOn: Save medicine
+- tapOn:
+    id: nav-medicines
+- tapOn:
+    id: medicine-search
+- inputText: no match
+- assertVisible: No medicines match. Try another name.
+- eraseText
+- inputText: searchable
+- assertVisible: Maestro searchable sample
+- takeScreenshot: 05-search
+- tapOn:
+    id: desktop-help
+- assertVisible:
+    id: desktop-dialog-title
+    text: Keyboard shortcuts
+- takeScreenshot: 05-shortcuts
+- tapOn: Close
+- tapOn:
+    id: nav-settings
+- tapOn: Larger text.*
+- tapOn:
+    id: nav-today
+- assertVisible: Today
+- takeScreenshot: 05-large-text

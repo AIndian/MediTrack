@@ -10,6 +10,22 @@ A self-contained Flutter prototype for managing medicines, recording doses and s
 
 ## Start here
 
+### Electron desktop app
+
+The desktop implementation is organized in [`desktop/`](desktop/README.md), with native menus, a toolbar, keyboard shortcuts, medicine search, and desktop accessibility checks. It reuses the React application logic.
+
+Install Node.js **22.22.2**; testing also needs **Java 17+**. From the repository root:
+
+```sh
+node desktop/run.mjs start   # install, build, and open the desktop app
+node desktop/run.mjs test    # all desktop/shared React tests, including Electron and Maestro Chromium E2E
+node desktop/run.mjs package # create a portable desktop build
+```
+
+See the [desktop submission](desktop/SUBMISSION.md) and [test screenshots](desktop/evidence/README.md). Flutter setup and verification follow below.
+
+### Flutter app
+
 Install **Flutter 3.47.5** (includes Dart 3.13.4), Git, and Python 3.10 or newer. The exact Flutter version is recorded in `.flutter-version`; dependencies are pinned in `pubspec.lock`. Add Flutter's `bin` directory to your PATH. Chrome is the simplest way to try the app; no Android SDK or Xcode is needed for the web version.
 
 After cloning this repository, open its root folder (the one containing `pubspec.yaml`):

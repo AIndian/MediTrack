@@ -1,0 +1,26 @@
+url: ${BASE_URL}
+name: Save a symptom with severity and notes
+---
+- launchApp:
+    clearState: true
+- tapOn:
+    id: desktop-symptom
+- tapOn:
+    id: symptom-name
+- inputText: Maestro tiredness sample
+- tapOn:
+    id: severity
+- tapOn: Moderate
+- tapOn:
+    id: notes
+- inputText: Fictional note for the desktop submission.
+- tapOn:
+    id: symptom-name
+- pressKey: Enter
+- scrollUntilVisible:
+    element:
+      text: Symptom saved on this device.
+    direction: DOWN
+- assertVisible: Maestro tiredness sample
+- assertVisible: Fictional note for the desktop submission.
+- takeScreenshot: 03-symptom
