@@ -22,7 +22,7 @@
     "format:check": "node ../react/node_modules/prettier/bin/prettier.cjs --check ."
   },
   "devDependencies": {
-    "electron": "45.2.3",
+    "electron": "45.3.2",
     "@electron/packager": "20.3.0"
   }
 }
